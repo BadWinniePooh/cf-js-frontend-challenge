@@ -1,0 +1,287 @@
+/* =============================================================
+   CodeFreeze Board — Design System
+   Organised by Atomic Design: Atoms → Molecules → Organisms → Templates
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   ATOMS — the smallest indivisible building blocks
+   ------------------------------------------------------------- */
+
+/* Color design tokens (CSS custom properties) */
+:root {
+    --color-background:   #f8f9fa;
+    --color-column-bg:    #f4f5f7;
+    --color-column-border:#dfe1e6;
+    --color-card-bg:      #ffffff;
+    --color-shadow:       rgba(0, 0, 0, 0.1);
+}
+
+/* Typography tokens and base body style */
+:root {
+    --font-family:     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+                       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-size-base:  16px;
+    --font-size-title: 16px;
+    --font-color-base: #172b4d;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size:   var(--font-size-base);
+    color:       var(--font-color-base);
+}
+
+.cfb-column__title {
+    font-size:  var(--font-size-title);
+    color:      var(--font-color-base);
+    margin:     0 0 12px 0;
+}
+
+/* Tag atom — a small coloured badge */
+.cfb-tag {
+    display:          inline-block;
+    padding:          2px 8px;
+    border-radius:    12px;
+    font-size:        12px;
+    font-weight:      500;
+    border:           1px solid var(--color-column-border);
+    background-color: var(--color-card-bg);
+    color:            var(--font-color-base);
+}
+
+.cfb-tag--red {
+    background-color: #ffebe9;
+    border-color:     #ffaba5;
+    color:            #cf1322;
+}
+
+.cfb-tag--orange {
+    background-color: #fff7e6;
+    border-color:     #ffd591;
+    color:            #d46b08;
+}
+
+.cfb-tag--green {
+    background-color: #f6ffed;
+    border-color:     #b7eb8f;
+    color:            #389e0d;
+}
+
+.cfb-tag--blue {
+    background-color: #e6f7ff;
+    border-color:     #91d5ff;
+    color:            #096dd9;
+}
+
+.cfb-tag--purple {
+    background-color: #f9f0ff;
+    border-color:     #d3adf7;
+    color:            #531dab;
+}
+
+/* -------------------------------------------------------------
+   MOLECULES — atoms combined into reusable UI patterns
+   ------------------------------------------------------------- */
+
+/* Navigation bar */
+.cfb-navigation {
+    display:          flex;
+    justify-content:  flex-end;
+    align-items:      center;
+    padding:          16px 20px;
+    background-color: var(--color-card-bg);
+    box-shadow:       0 1px 2px var(--color-shadow);
+    margin-bottom:    20px;
+}
+
+/* User identity block */
+.cfb-user {
+    display:     flex;
+    align-items: center;
+    gap:         12px;
+}
+
+.cfb-user__avatar {
+    width:            40px;
+    height:           40px;
+    border-radius:    50%;
+    background-color: #e1e4e8;
+    display:          flex;
+    align-items:      center;
+    justify-content:  center;
+    font-weight:      bold;
+    color:            #586069;
+    font-size:        18px;
+}
+
+.cfb-user__name {
+    font-size: var(--font-size-base);
+    color:     var(--font-color-base);
+}
+
+/* Card molecule */
+.cfb-card {
+    display:          block;
+    background-color: var(--color-card-bg);
+    border-radius:    4px;
+    padding:          12px;
+    margin-bottom:    8px;
+    box-shadow:       0 1px 2px var(--color-shadow);
+}
+
+.cfb-card--travel {
+    background-color: #f0f7ff;
+    border-left:      4px solid #1890ff;
+}
+
+.cfb-card__header {
+    display:       flex;
+    justify-content: space-between;
+    align-items:   flex-start;
+    margin-bottom: 8px;
+}
+
+.cfb-card__title {
+    font-weight:  500;
+    flex:         1;
+    margin-right: 8px;
+}
+
+.cfb-card__tags {
+    display:   flex;
+    flex-wrap: wrap;
+    gap:       4px;
+}
+
+.cfb-card__menu {
+    width:         24px;
+    height:        24px;
+    padding:       0;
+    border:        none;
+    cursor:        pointer;
+    display:       flex;
+    align-items:   center;
+    justify-content: center;
+    border-radius: 4px;
+    transition:    background-color 0.2s;
+    flex-shrink:   0;
+    background:    transparent;
+}
+
+.cfb-card__menu:hover {
+    background-color: var(--color-column-bg);
+}
+
+.cfb-card__menu-icon {
+    position: relative;
+    width:    16px;
+    height:   18px;
+}
+
+.cfb-card__menu-icon::before,
+.cfb-card__menu-icon::after {
+    content:          '';
+    position:         absolute;
+    left:             0;
+    width:            100%;
+    height:           2px;
+    background-color: var(--font-color-base);
+    border-radius:    1px;
+}
+
+.cfb-card__menu-icon::before {
+    top:        4px;
+    box-shadow: 0 4px 0 var(--font-color-base);
+}
+
+.cfb-card__menu-icon::after {
+    bottom: 4px;
+}
+
+/* Column molecule */
+.cfb-column {
+    display:          flex;
+    flex-direction:   column;
+    min-width:        300px;
+    max-width:        300px;
+    background-color: var(--color-column-bg);
+    border-radius:    8px;
+    padding:          12px;
+    border:           1px solid var(--color-column-border);
+}
+
+/* Stacked avatars molecule */
+.cfb-avatars {
+    display:        flex;
+    flex-direction: row-reverse;
+    align-items:    center;
+    gap:            4px;
+    margin-top:     8px;
+}
+
+.cfb-avatar {
+    width:            24px;
+    height:           24px;
+    border-radius:    50%;
+    background-color: var(--color-column-bg);
+    display:          flex;
+    align-items:      center;
+    justify-content:  center;
+    font-size:        12px;
+    font-weight:      500;
+    color:            var(--font-color-base);
+    border:           2px solid var(--color-card-bg);
+}
+
+.cfb-avatar:not(:first-child) {
+    margin-left: -8px;
+}
+
+.cfb-avatar:hover {
+    z-index: 1;
+}
+
+/* -------------------------------------------------------------
+   ORGANISMS — complex sections built from molecules
+   ------------------------------------------------------------- */
+
+/* The board: a horizontal scrolling row of columns */
+.cfb-board {
+    display:           flex;
+    gap:               20px;
+    padding:           20px;
+    overflow-x:        auto;
+    min-height:        calc(100vh - 40px);
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior:   smooth;
+}
+
+@media (max-width: 768px) {
+    .cfb-board {
+        gap:              12px;
+        padding:          12px;
+        scroll-snap-type: x mandatory;
+    }
+
+    .cfb-column {
+        scroll-snap-align: start;
+        min-width:         280px;
+        max-width:         280px;
+    }
+}
+
+/* -------------------------------------------------------------
+   TEMPLATES — page-level layout
+   ------------------------------------------------------------- */
+
+body {
+    margin:           0;
+    padding:          0;
+    background-color: var(--color-background);
+}
+
+header {
+    position: sticky;
+    top:      0;
+    z-index:  10;
+}

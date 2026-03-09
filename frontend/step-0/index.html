@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--
+  Step 0 — The Static Board
+  ─────────────────────────
+  Goal: understand the board's anatomy before adding any behaviour.
+
+  Rules:
+    ✅ Semantic HTML5 elements
+    ✅ cfb- CSS classes from the design system (see styles.css)
+    ✅ Atomic Design structure: atoms → molecules → organisms → templates
+    ❌ No JavaScript whatsoever
+    ❌ No custom elements (no <cfb-*> tags)
+
+  Observe how the visual hierarchy maps to Atomic Design layers:
+    Atom     → <span class="cfb-tag">, <div class="cfb-avatar">
+    Molecule → <article class="cfb-card">, <section class="cfb-column">, <nav class="cfb-navigation">
+    Organism → <div class="cfb-board">
+    Template → <body> layout, sticky <header>
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFreeze 2026 — Step 0: Static Board</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     TEMPLATE: sticky page header
+     ═══════════════════════════════════════════════ -->
+<header>
+    <!-- MOLECULE: navigation bar -->
+    <nav class="cfb-navigation" aria-label="Site navigation">
+        <!-- MOLECULE: user identity block (avatar + name) -->
+        <div class="cfb-user">
+            <!-- ATOM: avatar chip -->
+            <div class="cfb-user__avatar" aria-hidden="true">AK</div>
+            <span class="cfb-user__name">Aino Korhonen</span>
+        </div>
+    </nav>
+</header>
+
+<!-- ═══════════════════════════════════════════════
+     ORGANISM: the conference board
+     A horizontal row of day-columns, each holding session cards.
+     ═══════════════════════════════════════════════ -->
+<main>
+    <div class="cfb-board" role="region" aria-label="CodeFreeze 2026 schedule">
+
+        <!-- ─────────────────────────────────────────
+             MOLECULE: Monday column
+             ───────────────────────────────────────── -->
+        <section class="cfb-column" role="region" aria-label="Monday">
+            <h2 class="cfb-column__title">Monday</h2>
+
+            <!-- MOLECULE: session card — travel colour variant -->
+            <article class="cfb-card cfb-card--travel" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Arrival &amp; Check-in, Levi</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <!-- ATOM: tags row -->
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--blue">Travel</span>
+                    <span class="cfb-tag cfb-tag--purple">Logistics</span>
+                </div>
+                <footer>
+                    <!-- MOLECULE: stacked attendee avatars -->
+                    <div class="cfb-avatars" aria-label="Attendees">
+                        <div class="cfb-avatar" aria-label="Sari Mäkinen">SM</div>
+                        <div class="cfb-avatar" aria-label="Mikko Virtanen">MV</div>
+                        <div class="cfb-avatar" aria-label="Aino Korhonen">AK</div>
+                    </div>
+                </footer>
+            </article>
+
+            <!-- MOLECULE: session card — default -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Welcome Dinner</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--green">Social</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Attendees">
+                        <div class="cfb-avatar" aria-label="Jukka Leinonen">JL</div>
+                        <div class="cfb-avatar" aria-label="Sari Mäkinen">SM</div>
+                        <div class="cfb-avatar" aria-label="Mikko Virtanen">MV</div>
+                        <div class="cfb-avatar" aria-label="Aino Korhonen">AK</div>
+                    </div>
+                </footer>
+            </article>
+        </section>
+
+        <!-- ─────────────────────────────────────────
+             MOLECULE: Tuesday column
+             ───────────────────────────────────────── -->
+        <section class="cfb-column" role="region" aria-label="Tuesday">
+            <h2 class="cfb-column__title">Tuesday</h2>
+
+            <!-- Step 1 -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Step 1 — Your First Board Atom: &lt;cfb-tag&gt;</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--red">Frontend</span>
+                    <span class="cfb-tag cfb-tag--blue">Atom</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Aino Korhonen">AK</div>
+                    </div>
+                </footer>
+            </article>
+
+            <!-- Step 2 -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Step 2 — The Session Card: &lt;cfb-session-card&gt;</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--red">Frontend</span>
+                    <span class="cfb-tag cfb-tag--purple">Molecule</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Jukka Leinonen">JL</div>
+                        <div class="cfb-avatar" aria-label="Mikko Virtanen">MV</div>
+                    </div>
+                </footer>
+            </article>
+
+            <!-- Step 3 -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Step 3 — Column Sorting: Pub/Sub</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--red">Frontend</span>
+                    <span class="cfb-tag cfb-tag--orange">Events</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Sari Mäkinen">SM</div>
+                    </div>
+                </footer>
+            </article>
+        </section>
+
+        <!-- ─────────────────────────────────────────
+             MOLECULE: Wednesday column
+             ───────────────────────────────────────── -->
+        <section class="cfb-column" role="region" aria-label="Wednesday">
+            <h2 class="cfb-column__title">Wednesday</h2>
+
+            <!-- Step 4 -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Step 4 — Load from IndexedDB</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--red">Frontend</span>
+                    <span class="cfb-tag cfb-tag--blue">Storage</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Jukka Leinonen">JL</div>
+                    </div>
+                </footer>
+            </article>
+
+            <!-- Step 5 -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Step 5 — Add a Session: HTML Form Elements</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--red">Frontend</span>
+                    <span class="cfb-tag cfb-tag--green">Forms</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Sari Mäkinen">SM</div>
+                        <div class="cfb-avatar" aria-label="Aino Korhonen">AK</div>
+                    </div>
+                </footer>
+            </article>
+
+            <!-- Step 6 -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Step 6 — &lt;cfb-session-type&gt;: Custom Form Element</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--red">Frontend</span>
+                    <span class="cfb-tag cfb-tag--green">Forms</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Mikko Virtanen">MV</div>
+                    </div>
+                </footer>
+            </article>
+        </section>
+
+        <!-- ─────────────────────────────────────────
+             MOLECULE: Thursday column
+             ───────────────────────────────────────── -->
+        <section class="cfb-column" role="region" aria-label="Thursday">
+            <h2 class="cfb-column__title">Thursday</h2>
+
+            <!-- Step 7 -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Step 7 — &lt;cfb-board-orchestrator&gt;: Flow Control</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--red">Frontend</span>
+                    <span class="cfb-tag cfb-tag--purple">Organism</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Mikko Virtanen">MV</div>
+                    </div>
+                </footer>
+            </article>
+
+            <!-- Step 8 -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Step 8 — &lt;cfb-timeline&gt;: SVG</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--red">Frontend</span>
+                    <span class="cfb-tag cfb-tag--green">Graphics</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Sari Mäkinen">SM</div>
+                        <div class="cfb-avatar" aria-label="Jukka Leinonen">JL</div>
+                    </div>
+                </footer>
+            </article>
+
+            <!-- Step 9 -->
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Step 9 — &lt;cfb-occupancy-chart&gt;: Canvas</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--red">Frontend</span>
+                    <span class="cfb-tag cfb-tag--green">Graphics</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Aino Korhonen">AK</div>
+                    </div>
+                </footer>
+            </article>
+        </section>
+
+        <!-- ─────────────────────────────────────────
+             MOLECULE: Friday column
+             ───────────────────────────────────────── -->
+        <section class="cfb-column" role="region" aria-label="Friday">
+            <h2 class="cfb-column__title">Friday</h2>
+
+            <article class="cfb-card" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Closing Keynote: What's Next?</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--purple">Keynote</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Speakers">
+                        <div class="cfb-avatar" aria-label="Aino Korhonen">AK</div>
+                    </div>
+                </footer>
+            </article>
+
+            <article class="cfb-card cfb-card--travel" role="article">
+                <header class="cfb-card__header">
+                    <span class="cfb-card__title">Departure from Levi</span>
+                    <button class="cfb-card__menu" aria-label="Card options">
+                        <span class="cfb-card__menu-icon"></span>
+                    </button>
+                </header>
+                <div class="cfb-card__tags">
+                    <span class="cfb-tag cfb-tag--blue">Travel</span>
+                </div>
+                <footer>
+                    <div class="cfb-avatars" aria-label="Attendees">
+                        <div class="cfb-avatar" aria-label="Jukka Leinonen">JL</div>
+                        <div class="cfb-avatar" aria-label="Sari Mäkinen">SM</div>
+                        <div class="cfb-avatar" aria-label="Mikko Virtanen">MV</div>
+                        <div class="cfb-avatar" aria-label="Aino Korhonen">AK</div>
+                    </div>
+                </footer>
+            </article>
+        </section>
+
+        <!-- ─────────────────────────────────────────
+             MOLECULE: Saturday column (no sessions)
+             ───────────────────────────────────────── -->
+        <section class="cfb-column" role="region" aria-label="Saturday">
+            <h2 class="cfb-column__title">Saturday</h2>
+        </section>
+
+        <!-- ─────────────────────────────────────────
+             MOLECULE: Sunday column (no sessions)
+             ───────────────────────────────────────── -->
+        <section class="cfb-column" role="region" aria-label="Sunday">
+            <h2 class="cfb-column__title">Sunday</h2>
+        </section>
+
+    </div>
+</main>
+
+</body>
+</html>
