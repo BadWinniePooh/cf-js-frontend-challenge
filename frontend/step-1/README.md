@@ -16,12 +16,12 @@ the little coloured badge you see on every session card.
 
 Create a `<cfb-tag>` custom element that:
 
-- [ ] Renders a styled badge using the existing `cfb-tag` CSS classes
-- [ ] Reads a `data-label` attribute and displays its value as the badge text
-- [ ] Reads a `data-color` attribute (`red | orange | green | blue | purple`)
+- [x] Renders a styled badge using the existing `cfb-tag` CSS classes
+- [x] Reads a `data-label` attribute and displays its value as the badge text
+- [x] Reads a `data-color` attribute (`red | orange | green | blue | purple`)
       and applies the matching `cfb-tag--{color}` CSS modifier class
-- [ ] Renders itself when connected to the DOM (`connectedCallback`)
-- [ ] Re-renders when either attribute changes after the element is already in
+- [x] Renders itself when connected to the DOM (`connectedCallback`)
+- [x] Re-renders when either attribute changes after the element is already in
       the DOM (`observedAttributes` + `attributeChangedCallback`)
 
 Once it works, open `index.html` and replace the placeholder `<span>` tags

@@ -1,5 +1,18 @@
 class CfbTag extends HTMLElement {
+    // Define which attributes to observe for changes
+    static get observedAttributes() {
+        return ['data-label', 'data-color'];
+    }
+
     connectedCallback() {
+        this.#render();
+    }
+
+    attributeChangedCallback() {
+        this.#render(); // re-render the component when observed attributes change
+    }
+
+    #render() {
         const tagLabel = this.dataset.label ?? 'Default';
         const tagColor = this.dataset.color;
 
