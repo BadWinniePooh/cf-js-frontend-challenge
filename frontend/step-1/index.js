@@ -5,4 +5,4 @@
 //
 // Once your file is ready, uncomment the line below:
 //
-// import './cfb-tag.js'
+import './cfb-tag.js'

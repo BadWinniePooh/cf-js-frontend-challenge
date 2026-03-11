@@ -1,0 +1,3 @@
+class CfbTag extends HTMLElement {
+    
+}
