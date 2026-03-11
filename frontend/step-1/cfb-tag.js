@@ -13,7 +13,10 @@ class CfbTag extends HTMLElement {
     }
 
     #render() {
-        const tagLabel = this.dataset.label ?? 'Default';
+        const tagLabel = this.dataset.count ? 
+            `${this.dataset.label} x${this.dataset.count}` 
+            : this.dataset.label 
+            ?? 'Default';
         const tagColor = this.dataset.color;
 
         const span = document.createElement('span');
