@@ -1,9 +1,14 @@
 class CfbTag extends HTMLElement {
     connectedCallback() {
+        const tagLabel = this.dataset.label ?? 'Default';
+        const tagColor = this.dataset.color;
+
         const span = document.createElement('span');
-        span.textContent = "Hello World";
+        span.textContent = tagLabel;
         span.classList.add('cfb-tag');
-        span.classList.add(`cfb-tag--blue`);
+        if (tagColor) {
+            span.classList.add(`cfb-tag--${tagColor}`);
+        }
         
         this.replaceChildren(span);
     }
