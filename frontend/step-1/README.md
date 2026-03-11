@@ -78,7 +78,7 @@ Should you finish early, here are some ideas to go deeper:
       the tag's styles so they can't be accidentally overridden from outside
 - [x] Support a `data-count` attribute that shows a small number badge next
       to the label (e.g. `Keynote ×3`)
-- [ ] Handle the case where `data-color` is absent or unknown — fall back
+- [x] Handle the case where `data-color` is absent or unknown — fall back
       to the default `cfb-tag` style gracefully
 
 ## Demos
