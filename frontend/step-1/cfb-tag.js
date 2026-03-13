@@ -13,20 +13,13 @@ class CfbTag extends HTMLElement {
     }
 
     #render() {
-        const tagLabel = this.dataset.count ? 
-            `${this.dataset.label} x${this.dataset.count}` 
-            : this.dataset.label 
-            ?? 'Default';
+        const tagLabel = this.dataset.label ?? 'Default';
         const tagColor = this.dataset.color;
-
-        const span = document.createElement('span');
-        span.textContent = tagLabel;
-        span.classList.add('cfb-tag');
-        if (tagColor) {
-            span.classList.add(`cfb-tag--${tagColor}`);
-        }
+        const tagCount = this.dataset.count ?
+            ` x${this.dataset.count}`
+            : '';
         
-        this.replaceChildren(span);
+        this.innerHTML = `<span class="cfb-tag${tagColor ? ` cfb-tag--${tagColor}` : ''}">${tagLabel}${tagCount}</span>`;
     }
 }
 

@@ -21,16 +21,7 @@ class CfbTag extends HTMLElement{
             ` x${this.dataset.count}`
             : '';
         
-        const span = document.createElement('span');
-        
-        span.textContent = tagLabel + tagCount;
-        span.classList.add('cfb-tag');
-        
-        if(tagColor){
-            span.classList.add(`cfb-tag--${tagColor}`);
-        }
-
-        this.replaceChildren(span);
+        this.innerHTML = `<span class="cfb-tag${tagColor ? ` cfb-tag--${tagColor}` : ''}">${tagLabel}${tagCount}</span>`;
     }
 }
 
