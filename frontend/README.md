@@ -97,7 +97,7 @@ Here's how each step maps to a layer:
 | Step | Title | Status |
 |------|-------|--------|
 | 0 | The Static Board | ✅ done |
-| 1 | `<cfb-tag>` — Basic Web Component | 🚧 ready |
+| 1 | `<cfb-tag>` — Basic Web Component |  ⬜ todo |
 | 2 | `<cfb-session-card>` — Composite Component | ⬜ todo |
 | 3 | Column Sorting — Pub/Sub | ⬜ todo |
 | 4 | Load from IndexedDB | ⬜ todo |
