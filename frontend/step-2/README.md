@@ -8,7 +8,7 @@ In this step you will build `<cfb-session-card>`: the full session card you see
 in every column of the CodeFreeze Board.
 
 ```html
-<cfb-session-card
+<cfb-session-card>
  // [data omitted, as that's for you to define]
 </cfb-session-card>
 ```
