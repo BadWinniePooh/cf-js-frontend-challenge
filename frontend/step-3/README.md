@@ -11,7 +11,7 @@ components (located with a specific css class); a schedule component reacts and 
 ```html
 <cfb-board-orchestrator>
     <cfb-session-generator></cfb-session-generator>
-    <cfb-schedule></cfb-schedule>
+    <cfb-schedule class="cfb-updates-schedule"></cfb-schedule>
 </cfb-board-orchestrator>
 ```
 
@@ -57,11 +57,12 @@ cfb-schedule
 
 ### `cfb-schedule`
 
-- [ ] Declare `data-sessions` in `observedAttributes`
-- [ ] In `attributeChangedCallback`: parse the JSON, group sessions by `day`,
-      render one column per day, one card per session
-- [ ] Show a "No sessions yet" placeholder until the first session arrives
-- [ ] Re-use `<cfb-session-card>` from Step 2 for sessions
+- [ ] This readily implemented for you, but please go through it, if you please. What it does is:
+- [x] Declares `data-sessions` in `observedAttributes`
+- [x] In `attributeChangedCallback`: parses the JSON, group sessions by `day`,
+      renders one column per day, one card per session
+- [x] Shows a "No sessions yet" placeholder until the first session arrives
+- [x] Re-uses `<cfb-session-card>` from Step 2 for sessions
 
 ## Constraints
 
