@@ -1,4 +1,4 @@
-class CfbTag extends HTMLElement {
+export class CfbTag extends HTMLElement {
     // Define which attributes to observe for changes
     static get observedAttributes() {
         return ['data-label', 'data-color'];
@@ -22,5 +22,3 @@ class CfbTag extends HTMLElement {
         this.innerHTML = `<span class="cfb-tag${tagColor ? ` cfb-tag--${tagColor}` : ''}">${tagLabel}${tagCount}</span>`;
     }
 }
-
-customElements.define('cfb-tag', CfbTag);

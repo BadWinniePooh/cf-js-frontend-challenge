@@ -93,14 +93,13 @@ customElements.define('cfb-session-card', CfbSessionCard)
 
 Should you finish early, here are some ideas to go deeper:
 
-- [ ] **Pass data in other ways** — figure out 2–3 alternative ways to get
+- [x] **Pass data in other ways** — figure out 2–3 alternative ways to get
       session data into the component
-- [ ] **Named slots** — try using `<template>` and `slot` elements for the inner structure.
+- [x] **Named slots** — try using `<template>` and `slot` elements for the inner structure.
       How does that affect the code? What do you learn from that?
-- [ ] **Travel variant** — support a `data-variant="travel"` attribute that
+- [x] **Travel variant** — support a `data-variant="travel"` attribute that
       applies the blue left-border card style (`cfb-card--travel`)
-- [ ] **Shadow DOM** — Learn about shadow dom vs. full dom (not sure of the naming here, please
-      correct me). 
+- [ ] **Shadow DOM** — Learn about shadow dom vs. full dom (not sure of the naming here, please correct me). 
 
 ## Demos
 
@@ -110,6 +109,7 @@ If you complete the challenge, share a short screen recording or a
 ## Issues
 
 If you get stuck, note down the problem here so we can discuss it together.
+- Shadow Dom, don't really understand whats going on with that and how to correctly use it...
 
 ---
 
