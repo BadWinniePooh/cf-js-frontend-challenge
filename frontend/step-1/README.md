@@ -45,13 +45,20 @@ Then import and register it from `index.js`:
 import './cfb-tag.js'
 ```
 
-Inside `cfb-tag.js`, define and register the element at the bottom of the file:
+Inside `cfb-tag.js`, define the element:
 
 ```js
 // cfb-tag.js
 class CfbTag extends HTMLElement {
     // ...
 }
+```
+
+Then import it and register the component in  `index.js`:
+
+```js
+// index.js
+import {CfbTag} from './cfb-tag.js'
 
 customElements.define('cfb-tag', CfbTag)
 ```
