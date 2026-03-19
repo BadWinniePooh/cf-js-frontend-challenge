@@ -111,6 +111,27 @@ Each step has its own folder (`step-0/`, `step-1/`, …) with a `README.md` that
 
 ---
 
+## Testing track
+
+Running alongside the component steps is a **companion testing track** — a series of challenges focused on testing the same components you build, using a real browser test runner instead of JSDOM.
+
+See [`PLAN-TEST.md`](./PLAN-TEST.md) for the full plan. The testing steps live in their own folders (`test-0/`, `test-1/`, …) and can be tackled in parallel with the component steps or as a separate session.
+
+| Test Step | Title | Mirrors |
+|-----------|-------|---------|
+| T-0 | Setup — Mocha + Web Test Runner | — |
+| T-1 | Atom Behaviour — `<cfb-tag>` | Step 1 |
+| T-2 | Molecule Behaviour — `<cfb-session-card>` | Step 2 |
+| T-3 | Pub/Sub — Events dispatched & handled | Step 3 |
+
+### Why test in a real browser?
+
+JSDOM does not support Custom Elements or Shadow DOM, so standard Jest setups simply cannot run these tests. `@web/test-runner` launches a real Chromium instance — the same engine your components run in — so `customElements.define()`, `connectedCallback`, and Shadow DOM all work exactly as in production.
+
+Start with **`test-0/`** to get the toolchain up and running (≈20 minutes), then pick up individual test steps as you finish the matching component step.
+
+---
+
 ## How to get started
 
 Each step folder is self-contained. For Step 0, which has no JavaScript, you can just open `index.html` directly in your browser. From Step 1 onwards, a local HTTP server avoids browser restrictions on ES modules loaded from `file://` URLs.
