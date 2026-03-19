@@ -110,6 +110,7 @@ If you complete the challenge, share a short screen recording or a
 
 If you get stuck, note down the problem here so we can discuss it together.
 - Shadow Dom, don't really understand whats going on with that and how to correctly use it...
+- Before we had aria labels on the speaker tags, I hope they will return, with the propose JSON structure they got lost.
 
 ---
 
