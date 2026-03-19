@@ -17,12 +17,11 @@ in every column of the CodeFreeze Board.
 
 Create a `<cfb-session-card>` custom element that:
 
-- [ ] Renders like in [the static html](../step-0/index.html)
-- [ ] Re-renders when any relevant attribute
-- [ ] Has internal data structure for the data
-- [ ] Renders itself when connected to the DOM (`connectedCallback`)
-- [ ] Re-renders when relevat data attributes changes
-- [ ] Then pass on the relevant data to the component from the outside
+- [x] Renders like in [the static html](../step-0/index.html)
+- [x] Re-renders when any relevant attribute changes
+- [x] Has internal data structure for the data
+- [x] Renders itself when connected to the DOM (`connectedCallback`)
+- [x] Then pass on the relevant data to the component from the outside
 
 The expected shape of the data structure is
 
