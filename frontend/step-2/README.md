@@ -106,6 +106,8 @@ Should you finish early, here are some ideas to go deeper:
 If you complete the challenge, share a short screen recording or a
 [CodePen](https://codepen.io) link here.
 
+- Status Step 2: [codepen.io/BadWinniePooh](http://codepen.io/BadWinniePooh/pen/WbGoObd)
+
 ## Issues
 
 If you get stuck, note down the problem here so we can discuss it together.
