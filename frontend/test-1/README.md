@@ -59,7 +59,7 @@ Same reason as above — nuking `body.innerHTML` removes WTR's injected scripts.
 
 ## What to build
 
-- [ ] Copy the `package.json`, `test/web-test-runner.config.mjs` from `test-0`
+- [x] Copy the `package.json`, `test/web-test-runner.config.mjs` from `test-0`
       (or share them — they're identical)
 - [ ] Create `test/helpers/fixture.js`
 - [ ] Register `<cfb-tag>` at the top of the test file

@@ -1,7 +1,7 @@
 export class CfbTag extends HTMLElement {
     // Define which attributes to observe for changes
     static get observedAttributes() {
-        return ['data-label', 'data-color'];
+        return ['data-label', 'data-color', 'data-count'];
     }
 
     connectedCallback() {
