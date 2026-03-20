@@ -45,19 +45,28 @@ describe('<cfb-tag>', () => {
       
       element.setAttribute('data-label', 'Updated');
 
-      expect(element.querySelector('.cfb-tag').textContent).to.equal('Updated');
+      await Promise.resolve(); // flush microtask queue — not required here, but a good habit
+
+      expect(element.textContent).to.equal('Updated');
     });
 
-    it('updates the color when the data-color attribute changes', async () => {
-      const element = await fixture('<cfb-tag></cfb-tag>');
-      element.setAttribute('data-color', 'blue');
+    const colors = ['red', 'orange', 'green', 'blue', 'purple'];
+    colors.forEach(color => {
+      it('updates the color when the data-color attribute changes', async () => {
+        const element = await fixture('<cfb-tag></cfb-tag>');
+        element.setAttribute('data-color', color);
 
-      expect(element.querySelector('.cfb-tag').classList.contains('cfb-tag--blue')).to.be.true;
+        await Promise.resolve(); // flush microtask queue — not required here, but a good habit
+
+        expect(element.querySelector('.cfb-tag').classList.contains(`cfb-tag--${color}`)).to.be.true;
+      });
     });
 
     it('updates the count when the data-count attribute changes', async () => {
       const element = await fixture('<cfb-tag></cfb-tag>');
       element.setAttribute('data-count', '10');
+
+      await Promise.resolve(); // flush microtask queue — not required here, but a good habit
 
       expect(element.querySelector('.cfb-tag').textContent).to.equal('Default x10');
     });

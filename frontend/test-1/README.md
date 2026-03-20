@@ -61,9 +61,9 @@ Same reason as above — nuking `body.innerHTML` removes WTR's injected scripts.
 
 - [x] Copy the `package.json`, `test/web-test-runner.config.mjs` from `test-0`
       (or share them — they're identical)
-- [ ] Create `test/helpers/fixture.js`
-- [ ] Register `<cfb-tag>` at the top of the test file
-- [ ] Write tests for rendering and attribute reactivity
+- [x] Create `test/helpers/fixture.js`
+- [x] Register `<cfb-tag>` at the top of the test file
+- [x] Write tests for rendering and attribute reactivity
 
 ## Constraints
 
@@ -197,9 +197,9 @@ describe('<cfb-tag>', () => {
 
 ## Extras
 
-- [ ] Parameterise the colour test: loop over `['red', 'orange', 'green', 'blue', 'purple']`
+- [x] Parameterise the colour test: loop over `['red', 'orange', 'green', 'blue', 'purple']`
       and assert each modifier class is applied correctly
-- [ ] Test that `data-count` shows a number badge when the attribute is set
+- [x] Test that `data-count` shows a number badge when the attribute is set
       (if you implemented that extra in Step 1)
 - [ ] Test with Shadow DOM: if your `<cfb-tag>` uses `attachShadow`, query into
       `el.shadowRoot` instead of `el`
@@ -210,6 +210,18 @@ describe('<cfb-tag>', () => {
 
 If you complete the challenge, share a short screen recording or paste your
 terminal output here.
+
+```
+❯ npm run test
+
+> cfb-test-1@1.0.0 test
+> web-test-runner "test/**/*.test.js" --node-resolve --config test/web-test-runner.config.mjs
+
+
+Chrome: |██████████████████████████████| 1/1 test files | 11 passed, 0 failed
+
+Finished running tests in 0.5s, all tests passed! 🎉
+```
 
 ## Issues
 
