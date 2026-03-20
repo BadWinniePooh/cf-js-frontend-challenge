@@ -39,14 +39,14 @@ having a tool that runs mocha and uses sinon and chai, is only a plus.
 
 ## What to build
 
-- [ ] Initialise an npm project in this folder
-- [ ] Install `@web/test-runner`, `@esm-bundle/chai`, and
+- [x] Initialise an npm project in this folder
+- [x] Install `@web/test-runner`, `@esm-bundle/chai`, and
       `@web/dev-server-import-maps` as dev dependencies
 - [x] Add test scripts to `package.json`
 - [x] Create `test/web-test-runner.config.mjs` with the import maps plugin
 - [x] Write a smoke test in `test/example/smoke.test.js` that fails
-- [ ] Run tests `npm run test` and `npm run test:manual`
-- [ ] Fix the test, run again
+- [x] Run tests `npm run test` and `npm run test:manual`
+- [x] Fix the test, run again
 
 ## Constraints
 
