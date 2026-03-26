@@ -47,16 +47,20 @@ export class CfbSessionGenerator extends HTMLElement {
             <button class="cfb-session-generator__btn">
                 + Add random session
             </button>
-        `
-        // TODO: Add event listener here for #onClick
+            <button class="cfb-session-clear__btn">
+                - Clear All Sessions
+            </button>
+        `;
+        this.querySelector('.cfb-session-generator__btn').addEventListener('click', this.#onClick);
+        this.querySelector('.cfb-session-clear__btn').addEventListener('click', this.#onClear);
     }
 
     disconnectedCallback() {
-        // TODO: remove event listener here
+        this.querySelector('.cfb-session-generator__btn').removeEventListener('click', this.#onClick);
+        this.querySelector('.cfb-session-clear__btn').removeEventListener('click', this.#onClear);
     }
 
     #onClick = () => {
-        console.log('When pressing this button, you should create a new session and dispatch a "sessionAdded" event with the new session data.')
         const session = {
             id:        crypto.randomUUID(),
             title:     pick(TITLES),
@@ -68,5 +72,10 @@ export class CfbSessionGenerator extends HTMLElement {
             ),
         }
         // TODO: Send the event to the orchestrator here.
+        this.dispatchEvent(new CustomEvent('sessionAdded', { detail: session, bubbles: true }));
+    }
+
+    #onClear = () => {
+        this.dispatchEvent(new CustomEvent('sessionsCleared', { bubbles: true }));
     }
 }

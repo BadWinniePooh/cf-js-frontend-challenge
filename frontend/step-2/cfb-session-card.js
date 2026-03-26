@@ -13,12 +13,12 @@ export class CfbSessionCard extends HTMLElement {
   }  
 
   #render(){
-    const session = JSON.parse(this.dataset.session);
+    const session = JSON.parse(this.dataset.sessionDetails);
     const title = session ? session.title : 'Session Title';
     const tags = session ? session.tags : [];
     const attendees = session ? session.attendees : [];
     const travel = this.dataset.variant === 'travel' ? 'cfb-card--travel' : '';
-   
+    
     this.innerHTML = 
       `<article class="cfb-card ${travel}" role="article">
         <header class="cfb-card__header">
@@ -32,7 +32,7 @@ export class CfbSessionCard extends HTMLElement {
         </div>
         <footer>
           <div class="cfb-avatars" aria-label="Speakers">
-            ${attendees.map(attendee => `<div class="cfb-avatar" aria-label="${attendee}">${attendee}</div>`).join('')}
+            ${attendees.map(attendee => `<div class="cfb-avatar" aria-label="${attendee.name}">${attendee.initials}</div>`).join('')}
           </div>
         </footer>
       </article>`;    

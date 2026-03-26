@@ -7,14 +7,31 @@ export class CfbBoardOrchestrator extends HTMLElement {
   }]
 
   connectedCallback() {
-    // TODO: Here you should add event listeners for the events you want to listen to.
-    // [code here]
-
-    // TODO: Add with initial data, to fake that there's something
-    // [code here]
+    if(this.#sessions.length > 0) {
+      // initial render with existing session(s)
+      this.#updateSchedule();
+    }
+    
+    this.addEventListener('sessionAdded', this.#onSessionAdded);
+    this.addEventListener('sessionsCleared', this.#onSessionsCleared);
   }
 
   disconnectedCallback() {
-    // TODO: Here you should remove event listeners you added in connectedCallback.
+    this.removeEventListener('sessionAdded', this.#onSessionAdded);
+    this.removeEventListener('sessionsCleared', this.#onSessionsCleared);
+  }
+
+  #onSessionAdded = (event) => {
+    this.#sessions.push(event.detail);
+    this.#updateSchedule();
+  }
+
+  #onSessionsCleared = () => {
+    this.#sessions = [];
+    this.#updateSchedule();
+  }
+
+  #updateSchedule() {
+    this.querySelector('cfb-schedule').setAttribute('data-sessions', JSON.stringify(this.#sessions));
   }
 }

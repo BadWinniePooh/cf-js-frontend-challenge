@@ -38,7 +38,6 @@ export class CfbSchedule extends HTMLElement {
                 `).join('')}
             </div>
         `
-        console.log('here')
     }
 
     #renderCard(session) {

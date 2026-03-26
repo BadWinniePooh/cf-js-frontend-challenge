@@ -40,24 +40,24 @@ cfb-schedule
 
 ### `cfb-session-generator`
 
-- [ ] Render an "Add random session" button on `connectedCallback`
-- [ ] On click, generate a random session object
+- [x] Render an "Add random session" button on `connectedCallback`
+- [x] On click, generate a random session object
       (`id`, `title`, `day`, `room`, `tags`, `attendees`)
-- [ ] Dispatch a `sessionAdded` `CustomEvent` with `bubbles: true` and the
+- [x] Dispatch a `sessionAdded` `CustomEvent` with `bubbles: true` and the
       session in `detail`
-- [ ] Remove the listener in `disconnectedCallback`
+- [x] Remove the listener in `disconnectedCallback`
 
 ### `cfb-board-orchestrator`
 
-- [ ] Listen for `sessionAdded` on itself (it bubbles up naturally)
-- [ ] Maintain an internal `#sessions` array
-- [ ] On each event: push the new session and update `data-sessions` on the
+- [x] Listen for `sessionAdded` on itself (it bubbles up naturally)
+- [x] Maintain an internal `#sessions` array
+- [x] On each event: push the new session and update `data-sessions` on the
       child `<cfb-schedule>` element with the full JSON array
-- [ ] Remove the listener in `disconnectedCallback`
+- [x] Remove the listener in `disconnectedCallback`
 
 ### `cfb-schedule`
 
-- [ ] This readily implemented for you, but please go through it, if you please. What it does is:
+- [x] This readily implemented for you, but please go through it, if you please. What it does is:
 - [x] Declares `data-sessions` in `observedAttributes`
 - [x] In `attributeChangedCallback`: parses the JSON, group sessions by `day`,
       renders one column per day, one card per session
@@ -134,7 +134,7 @@ attributeChangedCallback(name, _old, newValue) {
 
 Should you finish early, here are some ideas to go deeper:
 
-- [ ] Add a "Clear all" button that dispatches `sessionsCleared`; the
+- [x] Add a "Clear all" button that dispatches `sessionsCleared`; the
       orchestrator resets `#sessions` and pushes an empty array down
 - [ ] Animate new cards in with a CSS `@keyframes` slide-down triggered by
       adding a class right after insertion
@@ -147,6 +147,7 @@ Should you finish early, here are some ideas to go deeper:
 
 If you complete the challenge, share a short screen recording or a
 [CodePen](https://codepen.io) link here.
+https://codepen.io/BadWinniePooh/pen/WbGoObd
 
 ## Issues
 
