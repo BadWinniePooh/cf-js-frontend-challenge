@@ -8,12 +8,7 @@ export class CfbBoardOrchestrator extends HTMLElement {
   #sessionUpdateListeners = [];
 
   connectedCallback() {
-    this.#setupListeners();
-
-    if(this.#sessions.length > 0) {
-      // initial render with existing session(s)
-      this.#updateSchedule();
-    }
+    this.#updateSchedule();
     
     this.addEventListener('sessionAdded', this.#onSessionAdded);
     this.addEventListener('sessionsCleared', this.#onSessionsCleared);
@@ -34,20 +29,10 @@ export class CfbBoardOrchestrator extends HTMLElement {
     this.#updateSchedule();
   }
 
-  #setupListeners () {
-    // setup listeners for any child component that wants to be notified of schedule updates
-    const listeners = this.querySelectorAll('[listens-schedule-update]');
-    listeners.forEach(listener => {
-      if(!this.#sessionUpdateListeners.includes(listener)) {
-        this.#sessionUpdateListeners.push(listener);
-      }
-    });
-    // [Placeholder] setup listeners for any child component that wants to be notified of whatever
-  }
-
   #updateSchedule() {
-    this.#sessionUpdateListeners.forEach(listener => {
-      this.querySelector(listener.tagName.toLowerCase()).setAttribute('data-sessions', JSON.stringify(this.#sessions));
+    this.querySelectorAll('[listens-schedule-update]').forEach(listener => {
+      const tagName = listener.tagName.toLowerCase();
+      this.querySelector(tagName).setAttribute('data-sessions', JSON.stringify(this.#sessions));
     });
   }
 }
