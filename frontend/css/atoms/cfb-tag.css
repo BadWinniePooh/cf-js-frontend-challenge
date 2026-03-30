@@ -1,0 +1,46 @@
+/* =============================================================
+   Atom — <cfb-tag> / .cfb-tag
+   A small coloured badge used on session cards.
+   Colors: red | orange | green | blue | purple
+   ============================================================= */
+
+.cfb-tag {
+    display:          inline-block;
+    padding:          0.125rem var(--space-1);
+    border-radius:    0.75rem;
+    font-size:        var(--text-xs);
+    font-weight:      500;
+    border:           0.0625rem solid var(--cfb-border);
+    background-color: var(--cfb-bg-card);
+    color:            var(--cfb-text);
+}
+
+.cfb-tag--red {
+    background-color: #ffebe9;
+    border-color:     #ffaba5;
+    color:            #cf1322;
+}
+
+.cfb-tag--orange {
+    background-color: #fff7e6;
+    border-color:     #ffd591;
+    color:            #d46b08;
+}
+
+.cfb-tag--green {
+    background-color: #f6ffed;
+    border-color:     #b7eb8f;
+    color:            #389e0d;
+}
+
+.cfb-tag--blue {
+    background-color: #e6f7ff;
+    border-color:     #91d5ff;
+    color:            #096dd9;
+}
+
+.cfb-tag--purple {
+    background-color: #f9f0ff;
+    border-color:     #d3adf7;
+    color:            #531dab;
+}

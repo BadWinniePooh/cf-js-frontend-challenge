@@ -1,0 +1,21 @@
+/* =============================================================
+   Molecule — .cfb-column
+   A single day-column that holds a list of session cards.
+   ============================================================= */
+
+.cfb-column {
+    display:          flex;
+    flex-direction:   column;
+    flex:             1 1 13.75rem;
+    min-width:        13.75rem;
+    background-color: var(--cfb-bg-column);
+    border-radius:    var(--space-1);
+    padding:          var(--space-1) var(--space-1);
+    border:           0.0625rem solid var(--cfb-border);
+}
+
+.cfb-column__cards {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-1);
+}

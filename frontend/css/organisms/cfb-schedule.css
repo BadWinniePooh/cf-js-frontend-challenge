@@ -1,0 +1,16 @@
+/* =============================================================
+   Organism — <cfb-schedule>
+   The custom element that renders a dynamic board from data.
+   Used from Step 3 onwards.
+   ============================================================= */
+
+cfb-schedule {
+    display: block;
+    padding: var(--space-3);
+}
+
+.cfb-schedule__placeholder {
+    color:      var(--cfb-text-muted);
+    font-style: italic;
+    padding:    var(--space-5) 0;
+}

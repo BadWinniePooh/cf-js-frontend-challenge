@@ -83,7 +83,7 @@ it once at the top of your test file:
 
 ```js
 import { CfbTag } from '../../step-1/cfb-tag.js'
-import { expect } from '@esm-bundle/chai'
+import { expect } from 'chai'
 import { fixture, cleanup } from './helpers/fixture.js'
 
 if (!customElements.get('cfb-tag')) {
@@ -149,7 +149,7 @@ expect(el.textContent.trim()).to.equal('After')
 
 ```js
 import { CfbTag } from '../../step-1/cfb-tag.js'
-import { expect } from '@esm-bundle/chai'
+import { expect } from 'chai'
 import { fixture, cleanup } from './helpers/fixture.js'
 
 if (!customElements.get('cfb-tag')) {

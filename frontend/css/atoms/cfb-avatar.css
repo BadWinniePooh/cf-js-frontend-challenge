@@ -1,0 +1,35 @@
+/* =============================================================
+   Atom — .cfb-avatar / .cfb-avatars
+   Small circular attendee chip (1.5rem / 24px).
+   Stacked inside .cfb-avatars on session card footers.
+   ============================================================= */
+
+.cfb-avatars {
+    display:        flex;
+    flex-direction: row-reverse;
+    align-items:    center;
+    gap:            var(--space-half);
+    margin-top:     var(--space-1);
+}
+
+.cfb-avatar {
+    width:            1.5rem;
+    height:           1.5rem;
+    border-radius:    50%;
+    background-color: var(--cfb-avatar-bg);
+    display:          flex;
+    align-items:      center;
+    justify-content:  center;
+    font-size:        var(--text-xs);
+    font-weight:      500;
+    color:            var(--cfb-avatar-color);
+    border:           0.125rem solid var(--cfb-bg-card);
+}
+
+.cfb-avatar:not(:first-child) {
+    margin-left: calc(var(--space-1) * -1);
+}
+
+.cfb-avatar:hover {
+    z-index: 1;
+}

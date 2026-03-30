@@ -5,102 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeFreeze Board — Step 3: &lt;cfb-board-orchestrator&gt;</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../css/molecules/cfb-session-generator.css">
     <script type="module" src="index.js"></script>
     <style>
-        body { margin: 0; background: #f5f5f5; font-family: system-ui, sans-serif; }
-
-        /* ── Page header ─────────────────────────────────────────────────── */
-        .page-header {
-            background: #1a1a2e;
-            color: #fff;
-            padding: 16px 24px;
-        }
-        .page-header h1 { margin: 0 0 4px; font-size: 1.1rem; }
-        .page-header p  { margin: 0; font-size: .85rem; opacity: .7; }
-
-        cfb-board-orchestrator {
-            display: block;
-        }
-
-        /* ── Generator toolbar ───────────────────────────────────────────── */
-        cfb-session-generator {
-            display: block;
-            padding: 14px 24px;
-            background: #fff;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .cfb-session-generator__btn {
-            padding: 8px 18px;
-            background: #1a1a2e;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: .9rem;
-            cursor: pointer;
-            transition: opacity .15s;
-        }
-        .cfb-session-generator__btn:hover { opacity: .85; }
-
-        /* ── Board columns ───────────────────────────────────────────────── */
-        cfb-schedule { display: block; padding: 24px; }
-
-        .cfb-board {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .cfb-column {
-            flex: 1 1 220px;
-            min-width: 220px;
-            background: #ececec;
-            border-radius: 8px;
-            padding: 12px;
-        }
-
-        .cfb-column__heading {
-            font-size: .8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: .06em;
-            color: #555;
-            margin: 0 0 10px;
-        }
-
-        .cfb-column__cards { display: flex; flex-direction: column; gap: 10px; }
-
-        /* ── Session card ────────────────────────────────────────────────── */
-        .cfb-card {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            padding: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,.06);
-            animation: slide-in .2s ease-out;
-        }
-
-        @keyframes slide-in {
-            from { opacity: 0; transform: translateY(-6px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .cfb-card__header {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            margin-bottom: 8px;
-        }
-        .cfb-card__title { font-size: .9rem; font-weight: 600; }
-        .cfb-card__room  { font-size: .75rem; color: #888; }
-        .cfb-card__tags  { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-        .cfb-card__footer { display: flex; gap: 4px; flex-wrap: wrap; }
-
-        /* ── Placeholder ─────────────────────────────────────────────────── */
-        .cfb-schedule__placeholder {
-            color: #aaa;
-            font-style: italic;
-            padding: 40px 0;
+        body {
+            margin: 0;
+            background: #f5f5f5;
+            font-family: system-ui, sans-serif;
         }
     </style>
 </head>
