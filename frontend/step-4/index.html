@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFreeze Board — Step 4: Load from IndexedDB</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../css/molecules/cfb-session-generator.css">
+    <script type="module" src="index.js"></script>
+    <style>
+        body { margin: 0; background: #f5f5f5; font-family: system-ui, sans-serif; }
+    </style>
+</head>
+<body>
+
+<header class="page-header">
+    <h1>Step 4 — Load from IndexedDB</h1>
+    <p>Same orchestrator pipeline as Step 3 — initial sessions now come from a client-side database</p>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     Event flow — read these files in order:
+
+       session-store.js          — IDB wrapper (no UI, no events)
+       events.js                 — typed CustomEvent factories
+       cfb-session-loader.js     — reads IDB → fires sessionsLoaded ↑
+       cfb-session-generator.js  — click → fires cfb-session-created ↑
+       cfb-session-store.js      — catches cfb-session-created + cfb-session-removed
+                                   → mutates IDB → fires sessionsLoaded ↑
+       cfb-board-orchestrator.js — catches sessionsLoaded → pushes data-sessions ↓
+       cfb-schedule.js (step-3)  — observes data-sessions → re-renders
+
+     <cfb-session-store> wraps both the generator and the schedule so that
+     events from both (created ↑ and removed ↑) pass through it before
+     reaching the orchestrator.
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<cfb-board-orchestrator>
+
+    <cfb-session-loader></cfb-session-loader>
+
+    <cfb-session-store>
+        <cfb-session-generator></cfb-session-generator>
+        <cfb-schedule class="cfb-updates-schedule"></cfb-schedule>
+    </cfb-session-store>
+    
+</cfb-board-orchestrator>
+
+</body>
+</html>

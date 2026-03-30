@@ -1,0 +1,22 @@
+{
+  "id": "web-components-deep-dive",
+  "title": "Web Components Deep Dive",
+  "day": "Wednesday",
+  "room": "Track A",
+  "tags": [
+    {
+      "label": "Frontend",
+      "color": "green"
+    }
+  ],
+  "attendees": [
+    {
+      "name": "Alice Kent",
+      "initials": "AK"
+    },
+    {
+      "name": "James Smith",
+      "initials": "JS"
+    }
+  ]
+}
