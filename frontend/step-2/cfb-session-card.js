@@ -1,7 +1,11 @@
 export class CfbSessionCard extends HTMLElement {
 
   static get observedAttributes() {
-    return ['data-session'];
+    return ['data-session', 'data-session-details'];
+  }
+
+  static get definedAttributes(){
+    return {details: 'data-session-details'};
   }
 
   connectedCallback() {

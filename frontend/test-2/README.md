@@ -17,10 +17,10 @@ Behaviour tests survive refactors; snapshot tests don't.
 
 ## What to build
 
-- [ ] Copy `package.json` and `test/web-test-runner.config.mjs` from `test-1`
+- [x] Copy `package.json` and `test/web-test-runner.config.mjs` from `test-1`
   (or `test-0` — they're identical)
-- [ ] Copy `test/helpers/fixture.js` from `test-1`
-- [ ] Register `<cfb-tag>` (from `step-1`) and `<cfb-session-card>` (from `step-2`)
+- [x] Copy `test/helpers/fixture.js` from `test-1`
+- [x] Register `<cfb-tag>` (from `step-1`) and `<cfb-session-card>` (from `step-2`)
 - [ ] Write tests for title, tags, attendees, and attribute reactivity
 
 ## Constraints
