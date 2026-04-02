@@ -9,54 +9,24 @@ strings, you focus on **counts and presence**: how many tags were rendered, is
 the title in there, do the avatars match the attendee list? Tests written at
 this level survive component refactors; snapshot tests don't.
 
----
-
-## Read the component before you write the tests
-
-Open `step-2/cfb-session-card.js` and note two things before you start.
-
-### 1. The attribute name is `data-session-details`
-
-```js
-static definedAttributes = { details: 'data-session-details' }
-```
-
-Your fixture HTML must match:
-
-```js
-`<cfb-session-card data-session-details='${JSON.stringify(session)}'></cfb-session-card>`
-```
-
-### 2. The data shape for `attendees`
-
-The shape of the attendees is:
-
-```js
-attendees: [
-  { name: 'Alice Kent',   initials: 'AK' },
-  { name: 'James Smith',  initials: 'JS' },
-]
-```
-
-Getting either of these wrong causes a runtime error that looks like a test
-failure but is actually a data mismatch. Check the shape first.
+**Goal**: Test the composite `<cfb-session-card>` from Step 2 by verifying
+*how many* child elements are rendered — not their exact markup.
+Behaviour tests survive refactors; snapshot tests don't.
 
 ---
 
 ## What to build
 
 - [ ] Copy `package.json` and `test/web-test-runner.config.mjs` from `test-1`
-      (or `test-0` — they're identical)
+  (or `test-0` — they're identical)
 - [ ] Copy `test/helpers/fixture.js` from `test-1`
 - [ ] Register `<cfb-tag>` (from `step-1`) and `<cfb-session-card>` (from `step-2`)
-- [ ] Write tests for whatever you see fit
-- [ ] Document in result video/message what you tested and why
+- [ ] Write tests for title, tags, attendees, and attribute reactivity
 
 ## Constraints
 
 - No snapshot assertions — no `el.innerHTML ===`.
-- Count elements, check text, verify presence. 
-- Max **30 minutes**.
+- Count elements, check text, verify presence. Max **30 minutes**.
 
 ---
 
@@ -68,26 +38,16 @@ failure but is actually a data mismatch. Check the shape first.
 be registered before your tests run:
 
 ```js
+import { expect } from 'chai'
 import { CfbTag } from '../../step-1/cfb-tag.js'
 import { CfbSessionCard } from '../../step-2/cfb-session-card.js'
-import { expect } from '@esm-bundle/chai'
 import { fixture, cleanup } from './helpers/fixture.js'
 
-if (!customElements.get('cfb-tag')) {
-  customElements.define('cfb-tag', CfbTag)
-}
-if (!customElements.get(CfbSessionCard.elementName)) {
-  customElements.define(CfbSessionCard.elementName, CfbSessionCard)
-}
+customElements.define('cfb-tag', CfbTag)
+customElements.define('cfb-session-card', CfbSessionCard)
 ```
 
-`CfbSessionCard.elementName` is `'cfb-session-card'` — using the constant
-avoids a typo.
-
 ### Test data
-
-> AI did this - I always use builders with good defaults 
-> (Aki Salmi)
 
 Define a shared session constant at the top of the test file:
 
@@ -95,16 +55,19 @@ Define a shared session constant at the top of the test file:
 const SESSION = {
   title: 'Opening Keynote',
   tags: [
-    { label: 'Keynote',  color: 'blue'  },
+    { label: 'Keynote', color: 'blue' },
     { label: 'Frontend', color: 'green' },
   ],
   attendees: [
-    { name: 'Alice Kent',  initials: 'AK' },
+    { name: 'Alice Kent', initials: 'AK' },
     { name: 'James Smith', initials: 'JS' },
-    { name: 'Maria R',     initials: 'MR' },
+    { name: 'Maria R', initials: 'MR' },
   ],
 }
 ```
+
+⚠️ if you want to make the tests more robust, create a helper that randomizes the data
+and where you can define only the things you need for your tests. ⚠️
 
 ### Querying child elements
 
@@ -130,54 +93,28 @@ el.setAttribute(CfbSessionCard.definedAttributes.details, JSON.stringify(updated
 expect(el.querySelectorAll('cfb-tag').length).to.equal(1)
 ```
 
-### The test file
+### What to assert
 
-```js
-import { CfbTag } from '../../step-1/cfb-tag.js'
-import { CfbSessionCard } from '../../step-2/cfb-session-card.js'
-import { expect } from '@esm-bundle/chai'
-import { fixture, cleanup } from './helpers/fixture.js'
-
-if (!customElements.get('cfb-tag')) {
-  customElements.define('cfb-tag', CfbTag)
-}
-if (!customElements.get(CfbSessionCard.elementName)) {
-  customElements.define(CfbSessionCard.elementName, CfbSessionCard)
-}
-
-afterEach(cleanup)
-
-const SESSION = {
-  title: 'Opening Keynote',
-  tags: [
-    { label: 'Keynote',  color: 'blue'  },
-    { label: 'Frontend', color: 'green' },
-  ],
-  attendees: [
-    { name: 'Alice Kent',  initials: 'AK' },
-    { name: 'James Smith', initials: 'JS' },
-    { name: 'Maria R',     initials: 'MR' },
-  ],
-}
-
-const sessionHtml = (session = SESSION) =>
-  `<cfb-session-card data-session-details='${JSON.stringify(session)}'></cfb-session-card>`
-
-describe('<cfb-session-card>', () => {
-  // add tests here
-})
-```
+| Group      | What to verify                                                                                                               |
+|------------|------------------------------------------------------------------------------------------------------------------------------|
+| Title      | `textContent` includes the session title                                                                                     |
+| Tags       | One `<cfb-tag>` per entry in `tags`; zero tags when the array is empty; each tag receives the correct `data-color` attribute |
+| Attendees  | One `.cfb-avatar` chip per attendee in the `attendees` array                                                                 |
+| Reactivity | Replacing `data-session-details` updates the rendered tag count                                                              |
 
 ---
 
 ## Extras
 
 - [ ] Test that each avatar chip displays the attendee's initials as text
-- [ ] Instead of hard-coded test data, use a builder-like function for creating test case specific data.
 - [ ] Test graceful handling of malformed JSON in `data-session-details` — does
-      the component throw, or degrade quietly?
+  the component throw, or degrade quietly?
 - [ ] If you added Shadow DOM to `<cfb-session-card>`, query via
-      `el.shadowRoot.querySelectorAll(...)` instead
+  `el.shadowRoot.querySelectorAll(...)` instead
+- [ ] Consider how you could add contract test for the `SessionDetails` -shape
+
+Adding contract tests is another story, and there is another session on the 'extras',
+so focusing on that is not too important. But good to think how that could be done.
 
 ---
 
@@ -199,6 +136,8 @@ After completing this step you will have learned:
 - How to test a **molecule** by counting and querying its child elements
 - Why asserting "how many?" is more durable than asserting "what does it
   look like?" — counts survive markup refactors; snapshots don't
+- How tests can surface a bug (`connectedCallback` without a guard) that
+  manual testing in the browser missed
 - How to pass structured JSON data through a DOM attribute in test code
 - The difference between querying **light DOM** (via `el.querySelectorAll`)
   and **Shadow DOM** (via `el.shadowRoot.querySelectorAll`)

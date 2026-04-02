@@ -1,0 +1,29 @@
+/* =============================================================
+   Organism — .cfb-board
+   Horizontal scrolling row of day-columns.
+   ============================================================= */
+
+.cfb-board {
+    display:                    flex;
+    gap:                        var(--space-2);
+    padding:                    var(--space-3);
+    flex-wrap:                  wrap;
+    overflow-x:                 auto;
+    min-height:                 calc(100vh - var(--space-5));
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior:            smooth;
+}
+
+@media (max-width: 48rem) {
+    .cfb-board {
+        gap:              var(--space-1);
+        padding:          var(--space-1);
+        scroll-snap-type: x mandatory;
+    }
+
+    .cfb-column {
+        scroll-snap-align: start;
+        min-width:         17.5rem;
+        max-width:         17.5rem;
+    }
+}

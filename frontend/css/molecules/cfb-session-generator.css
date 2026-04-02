@@ -1,0 +1,27 @@
+/* ── <cfb-board-orchestrator> ──────────────────────────────────── */
+cfb-board-orchestrator {
+    display: block;
+}
+
+/* ── <cfb-session-generator> ──────────────────────────────────── */
+cfb-session-generator {
+    display:       block;
+    padding:       var(--space-2) var(--space-3);
+    background:    var(--cfb-bg-card);
+    border-bottom: 0.0625rem solid var(--cfb-border-card);
+}
+
+.cfb-session-generator__btn {
+    padding:       var(--space-1) var(--space-2);
+    background:    var(--cfb-bg-brand);
+    color:         var(--cfb-text-on-brand);
+    border:        none;
+    border-radius: 0.3125rem;
+    font-size:     0.9rem;
+    cursor:        pointer;
+    transition:    opacity 0.15s;
+}
+
+.cfb-session-generator__btn:hover {
+    opacity: 0.85;
+}

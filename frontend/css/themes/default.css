@@ -1,0 +1,72 @@
+/* =============================================================
+   Theme — Default (light)
+   Semantic tokens that map primitive values to role-based names.
+   Components reference only these --cfb-* tokens, never raw values.
+
+   ┌─ HOW TO BRAND ───────────────────────────────────────────┐
+   │  Replace this file's @import in css/styles.css with your  │
+   │  own theme file, or add it after styles.css to override:  │
+   │                                                            │
+   │  <link rel="stylesheet" href="../styles.css">             │
+   │  <link rel="stylesheet" href="../css/themes/brand.css">   │
+   │                                                            │
+   │  Your brand file only needs to redefine the tokens it     │
+   │  wants to change — the rest fall back to this file.       │
+   └────────────────────────────────────────────────────────────┘
+   ============================================================= */
+
+/* ── Light mode (default) ───────────────────────────────────── */
+:root {
+    /* Surfaces */
+    --cfb-bg-page:    var(--color-background);   /* page background   */
+    --cfb-bg-column:  var(--color-column-bg);    /* day-column fill   */
+    --cfb-bg-card:    var(--color-card-bg);      /* session card fill */
+    --cfb-bg-brand:   #1a1a2e;                   /* header / buttons  */
+
+    /* Text */
+    --cfb-text:         var(--font-color-base);  /* primary body text */
+    --cfb-text-muted:   #888888;                 /* room label, meta  */
+    --cfb-text-subtle:  #555555;                 /* column headings   */
+    --cfb-text-on-brand: #ffffff;                /* text on dark bg   */
+
+    /* Borders */
+    --cfb-border:      var(--color-column-border); /* column borders  */
+    --cfb-border-card: #e0e0e0;                    /* card borders    */
+
+    /* Shadows */
+    --cfb-shadow-nav:  0 0.0625rem 0.125rem rgba(0, 0, 0, 0.10);
+    --cfb-shadow-card: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.06);
+
+    /* Avatar chips */
+    --cfb-avatar-bg:    #e1e4e8;
+    --cfb-avatar-color: #586069;
+}
+
+/* ── Dark mode override ─────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Surfaces */
+        --cfb-bg-page:    #0d1117;
+        --cfb-bg-column:  #161b22;
+        --cfb-bg-card:    #21262d;
+        --cfb-bg-brand:   #161b22;
+
+        /* Text */
+        --cfb-text:         #e6edf3;
+        --cfb-text-muted:   #8b949e;
+        --cfb-text-subtle:  #8b949e;
+        --cfb-text-on-brand: #e6edf3;
+
+        /* Borders */
+        --cfb-border:      #30363d;
+        --cfb-border-card: #30363d;
+
+        /* Shadows */
+        --cfb-shadow-nav:  0 0.0625rem 0.125rem rgba(0, 0, 0, 0.40);
+        --cfb-shadow-card: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.30);
+
+        /* Avatar chips */
+        --cfb-avatar-bg:    #30363d;
+        --cfb-avatar-color: #8b949e;
+    }
+}

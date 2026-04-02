@@ -1,0 +1,109 @@
+/* __ <cfb-form> — add-session form ____________________________________ */
+
+.cfb-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cfb-form fieldset {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 0;
+}
+
+.cfb-form legend {
+    font-size: .78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #666;
+    padding: 0 6px;
+}
+
+/* __ Field rows ______________________________________________________ */
+
+.cfb-form__row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
+.cfb-form__row:last-child {
+    margin-bottom: 0;
+}
+
+.cfb-form__label {
+    font-size: .83rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.cfb-form__label--required::after {
+    content: ' *';
+    color: #cf1322;
+}
+
+/* __ Inputs __________________________________________________________ */
+
+.cfb-form__input,
+.cfb-form__select {
+    padding: 7px 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: .88rem;
+    font-family: inherit;
+    background: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.cfb-form__input:focus,
+.cfb-form__select:focus {
+    outline: none;
+    border-color: #1a1a2e;
+    box-shadow: 0 0 0 2px rgba(26, 26, 46, .1);
+}
+
+.cfb-form__input:user-invalid,
+.cfb-form__select:user-invalid {
+    border-color: #cf1322;
+}
+
+/* __ Radio group _____________________________________________________ */
+
+.cfb-form__radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 2px;
+}
+
+.cfb-form__radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .85rem;
+    cursor: pointer;
+}
+
+/* __ Submit __________________________________________________________ */
+
+.cfb-form__submit {
+    padding: 9px 22px;
+    background: #1a1a2e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: .9rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity .15s;
+    align-self: flex-start;
+}
+
+.cfb-form__submit:hover {
+    opacity: .85;
+}

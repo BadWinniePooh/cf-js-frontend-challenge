@@ -1,0 +1,27 @@
+/* =============================================================
+   Atom — Typography
+   Base body type and column heading variants.
+   ============================================================= */
+
+body {
+    font-family: var(--font-family);
+    font-size:   var(--text-base);
+    color:       var(--cfb-text);
+}
+
+/* Day-column heading — used in Step 0 static board */
+.cfb-column__title {
+    font-size: var(--text-base);
+    color:     var(--cfb-text);
+    margin:    0 0 var(--space-1) 0;
+}
+
+/* Day-column heading — used by <cfb-schedule> in Step 3+ */
+.cfb-column__heading {
+    font-size:      0.8rem;
+    font-weight:    700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color:          var(--cfb-text-subtle);
+    margin:         0 0 var(--space-1) 0;
+}

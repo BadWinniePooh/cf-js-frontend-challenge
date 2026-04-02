@@ -8,12 +8,13 @@ on HTML strings or implementation details — it is to verify observable DOM
 behaviour: the text that appears, the CSS classes that are applied, and how the
 element reacts when its attributes change.
 
+**Goal**: Test the rendered output and attribute-reactivity of the `<cfb-tag>`
+atom from Step 1, focusing on observable DOM behaviour — not implementation
+details.
+
 ---
 
 ## The `fixture` helper
-
-> This is what AI did, it can be helpful, though I never used a `fixture` like this. 
-> (Aki Salmi)
 
 Mounting a custom element inside a test requires a bit of ceremony. You need a
 container node that is actually attached to the live `document`, because Custom
@@ -57,10 +58,10 @@ Same reason as above — nuking `body.innerHTML` removes WTR's injected scripts.
 
 ---
 
-## What to build
+## What to test
 
 - [x] Copy the `package.json`, `test/web-test-runner.config.mjs` from `test-0`
-      (or share them — they're identical)
+  (or share them — they're identical)
 - [x] Create `test/helpers/fixture.js`
 - [x] Register `<cfb-tag>` at the top of the test file
 - [x] Write tests for rendering and attribute reactivity
@@ -83,18 +84,11 @@ it once at the top of your test file:
 
 ```js
 import { CfbTag } from '../../step-1/cfb-tag.js'
-import { expect } from '@esm-bundle/chai'
+import { expect } from 'chai'
 import { fixture, cleanup } from './helpers/fixture.js'
 
-if (!customElements.get('cfb-tag')) {
-  customElements.define('cfb-tag', CfbTag)
-}
-
-afterEach(cleanup)
+customElements.define('cfb-tag', CfbTag)
 ```
-
-The `if (!customElements.get(...))` guard prevents a `NotSupportedError` if the
-test file is somehow loaded twice.
 
 ### Where does the CSS class actually land?
 
@@ -110,27 +104,14 @@ Use a query instead:
 
 ```js
 // correct
-expect(el.querySelector('.cfb-tag--green')).to.not.be.null
+expect(el.querySelector('.cfb-tag--green'))// add rest here
 
-// or equivalently
+// or equivalently, but bit worse, because it get's to inner element type (span)
 expect(el.querySelector('span').classList.contains('cfb-tag--green')).to.be.true
 ```
 
 This is a good example of why you should read the implementation *once* before
 writing the tests — not to copy it, but to know where in the DOM to look.
-
-### No `connectedCallback`?
-
-You might notice that `cfb-tag.js` has no `connectedCallback`. The element
-renders entirely inside `attributeChangedCallback`. That means:
-
-- When the HTML parser encounters `<cfb-tag data-label="X">`, it creates the
-  element and calls `attributeChangedCallback` for each attribute **before**
-  the element is connected to the DOM.
-- By the time `fixture()` resolves, both callbacks have already fired and the
-  inner `<span>` is there.
-- If you create a `<cfb-tag>` with **no attributes** and append it, nothing
-  renders — worth a test!
 
 ### Flushing attribute changes
 
@@ -145,64 +126,24 @@ await Promise.resolve() // flush microtask queue — not required here, but a go
 expect(el.textContent.trim()).to.equal('After')
 ```
 
-### The test file
+### What to assert
 
-```js
-import { CfbTag } from '../../step-1/cfb-tag.js'
-import { expect } from '@esm-bundle/chai'
-import { fixture, cleanup } from './helpers/fixture.js'
-
-if (!customElements.get('cfb-tag')) {
-  customElements.define('cfb-tag', CfbTag)
-}
-
-afterEach(cleanup)
-
-describe('<cfb-tag>', () => {
-  describe('rendering', () => {
-    it('displays the label text', async () => {
-      const el = await fixture('<cfb-tag data-label="Keynote" data-color="blue"></cfb-tag>')
-      expect(el.textContent.trim()).to.equal('Keynote')
-    })
-
-    it('applies the colour modifier class to the inner span', async () => {
-      const el = await fixture('<cfb-tag data-label="Workshop" data-color="green"></cfb-tag>')
-      expect(el.querySelector('.cfb-tag--green')).to.not.be.null
-    })
-
-    it('renders nothing visible when no attributes are given', async () => {
-      const el = await fixture('<cfb-tag></cfb-tag>')
-      expect(el.querySelector('span')).to.be.null
-    })
-  })
-
-  describe('attribute reactivity', () => {
-    it('updates the label when data-label changes', async () => {
-      const el = await fixture('<cfb-tag data-label="Before" data-color="blue"></cfb-tag>')
-      el.setAttribute('data-label', 'After')
-      expect(el.textContent.trim()).to.equal('After')
-    })
-
-    it('swaps the colour class when data-color changes', async () => {
-      const el = await fixture('<cfb-tag data-label="X" data-color="blue"></cfb-tag>')
-      el.setAttribute('data-color', 'red')
-      expect(el.querySelector('.cfb-tag--red')).to.not.be.null
-      expect(el.querySelector('.cfb-tag--blue')).to.be.null
-    })
-  })
-})
-```
+| Group                | What to verify                                                                                                                                                 |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rendering            | `textContent` shows the `data-label` value; the `cfb-tag--{color}` class is present on the inner element; element renders nothing when no attributes are given |
+| Attribute reactivity | Changing `data-label` updates the displayed text; changing `data-color` swaps the modifier class                                                               |
 
 ---
 
 ## Extras
 
 - [x] Parameterise the colour test: loop over `['red', 'orange', 'green', 'blue', 'purple']`
-      and assert each modifier class is applied correctly
+  and assert each modifier class is applied correctly
 - [x] Test that `data-count` shows a number badge when the attribute is set
-      (if you implemented that extra in Step 1)
+  (if you implemented that extra in Step 1)
 - [ ] Test with Shadow DOM: if your `<cfb-tag>` uses `attachShadow`, query into
-      `el.shadowRoot` instead of `el`
+  `el.shadowRoot` instead of `el`
+- [ ] Run tests with manual flag, opening Browser to see the tests running
 
 ---
 

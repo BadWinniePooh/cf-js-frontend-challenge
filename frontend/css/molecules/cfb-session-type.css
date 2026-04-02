@@ -1,0 +1,50 @@
+/* __ <cfb-session-type> — tile picker _________________________________ */
+
+cfb-session-type {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cfb-session-type__tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 14px;
+    min-width: 76px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color .12s, background .12s, color .12s;
+    font-family: inherit;
+}
+
+.cfb-session-type__tile:hover {
+    border-color: #1a1a2e;
+    background: #f5f5f5;
+}
+
+.cfb-session-type__tile:focus-visible {
+    outline: 2px solid #1a1a2e;
+    outline-offset: 2px;
+}
+
+.cfb-session-type__tile.selected,
+.cfb-session-type__tile[aria-selected="true"] {
+    border-color: #1a1a2e;
+    background: #1a1a2e;
+    color: #fff;
+}
+
+.cfb-session-type__emoji {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.cfb-session-type__label {
+    font-size: .72rem;
+    font-weight: 600;
+    white-space: nowrap;
+}

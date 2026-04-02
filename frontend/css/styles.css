@@ -1,0 +1,31 @@
+/* =============================================================
+   CodeFreeze Board — Design System
+   Atomic Design: Tokens → Theme → Atoms → Molecules → Organisms → Templates
+
+   Import this file as the single stylesheet entry point.
+   Each partial is self-contained; import order matters for cascade.
+   ============================================================= */
+
+/* 0. Primitive tokens ──────────────────────────────────────── */
+@import './tokens.css';
+
+/* 1. Theme  (swap this file for branding / white-labelling) ── */
+@import './themes/default.css';
+
+/* 2. Atoms ──────────────────────────────────────────────────── */
+@import './atoms/typography.css';
+@import './atoms/cfb-tag.css';
+@import './atoms/cfb-avatar.css';
+
+/* 3. Molecules ──────────────────────────────────────────────── */
+@import './molecules/cfb-navigation.css';
+@import './molecules/cfb-card.css';
+@import './molecules/cfb-column.css';
+@import './molecules/cfb-session-generator.css';
+
+/* 4. Organisms ──────────────────────────────────────────────── */
+@import './organisms/cfb-board.css';
+@import './organisms/cfb-schedule.css';
+
+/* 5. Templates ──────────────────────────────────────────────── */
+@import './templates/page.css';

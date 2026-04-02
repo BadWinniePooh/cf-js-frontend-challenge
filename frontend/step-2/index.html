@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeFreeze Board — Step 1: &lt;cfb-tag&gt;</title>
+    <title>CodeFreeze Board — Step 2: &lt;cfb-session-card&gt;</title>
     <link rel="stylesheet" href="../styles.css">
     <script type="module" src="index.js"></script>
 </head>
 <body>
 
+<header class="page-header">
+    <h1>Step 2 — <code>&lt;cfb-session-card&gt;</code></h1>
+    <p>Composing a molecule from smaller atoms</p>
+</header>
+
 <!-- ═══════════════════════════════════════════════════════════
-     Use this area to test your <cfb-tag> component.
+     Use this area to test your <cfb-session-card> component.
 
-     Once you have implemented cfb-tag.js and registered it in
-     index.js, replace the <span> placeholders below with your
-     custom elements, e.g.:
+     Once you have implemented cfb-session-card.js and registered
+     it in index.js, try passing session data via a JSON attribute:
 
-       <cfb-tag data-label="Keynote" data-color="blue"></cfb-tag>
+       <cfb-session-card data-session='{"title":"Opening Keynote",
+         "tags":[{"label":"Keynote","color":"blue"}],
+         "attendees":["AK","JS"]}'>
+       </cfb-session-card>
 
      ═══════════════════════════════════════════════════════════ -->
 

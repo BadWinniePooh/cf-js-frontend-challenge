@@ -1,0 +1,39 @@
+/* =============================================================
+   Molecule — .cfb-navigation + .cfb-user
+   Sticky top navigation bar with user identity block.
+   ============================================================= */
+
+.cfb-navigation {
+    display:          flex;
+    justify-content:  flex-end;
+    align-items:      center;
+    padding:          var(--space-2) var(--space-3);
+    background-color: var(--cfb-bg-card);
+    box-shadow:       var(--cfb-shadow-nav);
+    margin-bottom:    var(--space-3);
+}
+
+.cfb-user {
+    display:     flex;
+    align-items: center;
+    gap:         var(--space-1) var(--space-1);
+}
+
+/* Large avatar in the nav bar (2.5rem / 40px) */
+.cfb-user__avatar {
+    width:            2.5rem;
+    height:           2.5rem;
+    border-radius:    50%;
+    background-color: var(--cfb-avatar-bg);
+    display:          flex;
+    align-items:      center;
+    justify-content:  center;
+    font-weight:      bold;
+    color:            var(--cfb-avatar-color);
+    font-size:        var(--text-lg);
+}
+
+.cfb-user__name {
+    font-size: var(--text-base);
+    color:     var(--cfb-text);
+}

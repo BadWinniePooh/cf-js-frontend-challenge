@@ -1,11 +1,9 @@
+import { expect } from 'chai'
+
 import { CfbTag } from '../../step-1/cfb-tag.js'
-import { expect } from '@esm-bundle/chai'
 import { fixture, cleanup } from './helpers/fixture.js'
 
-if (!customElements.get('cfb-tag')) {
-  customElements.define('cfb-tag', CfbTag)
-}
-
+customElements.define('cfb-tag', CfbTag)
 afterEach(cleanup)
 
 describe('<cfb-tag>', () => {

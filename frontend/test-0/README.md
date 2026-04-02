@@ -61,7 +61,7 @@ having a tool that runs mocha and uses sinon and chai, is only a plus.
 
 ```bash
 npm init -y
-npm install --save-dev @web/test-runner @esm-bundle/chai
+npm install --save-dev @web/test-runner chai
 npm install --save-dev @web/dev-server-import-maps
 ```
 
@@ -91,7 +91,7 @@ Add these scripts to `package.json`:
 | `npm run test:specific` | Run only files matching a pattern, e.g. `PATTERN=cfb-tag npm run test:specific` |
 
 The `--node-resolve` flag lets the runner resolve bare `import` specifiers
-(like `@esm-bundle/chai`) from `node_modules`, just like a bundler would.
+(like `chai`) from `node_modules`, just like a bundler would.
 
 ### The config file
 
@@ -176,7 +176,7 @@ Create `test/example/smoke.test.js`. Keep it trivially simple — the goal is
 only to verify the toolchain works end-to-end. Run it and see it fail:
 
 ```js
-import { expect } from '@esm-bundle/chai'
+import { expect } from 'chai'
 
 describe('smoke', () => {
   it('true is true', () => {
@@ -236,7 +236,7 @@ After completing this step you will have learned:
   Playwright — and when you would bring Playwright back
 - How **import maps** let you swap a real module for a test fake without
   touching component code — a clean browser-native alternative to `jest.mock()`
-- The role of `@esm-bundle/chai` — Chai compiled as an ES module so it loads
+- The role of `chai` — Chai compiled as an ES module so it loads
   directly in the browser without a build step
 - Mocha's `describe` / `it` structure running **inside** a browser context
 - The four `npm` scripts and when to reach for each one
