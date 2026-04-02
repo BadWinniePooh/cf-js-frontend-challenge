@@ -82,8 +82,21 @@ const DB_VERSION = 1;
 // TODO: Implement the needed functions for IndexedDB here
 
 export async function getAllSessions() {
-  return SEED_SESSIONS;
-  // TODO: Implement this function to retrieve all sessions from the 'sessions' object store
+  const db = await openDb();
+
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("sessions", "readonly");
+    const store = transaction.objectStore("sessions");
+    const request = store.getAll();
+
+    request.onsuccess = (event) => {
+      resolve(event.target.result);
+    };
+
+    request.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
 }
 
 export async function deleteSession(id) {
@@ -91,11 +104,24 @@ export async function deleteSession(id) {
 }
 
 export async function saveSessions(sessions) {
-  // TODO: Implement this function to save a session to the 'sessions' object store
+  const db = await openDb();
+
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("sessions", "readwrite");
+    const store = transaction.objectStore("sessions");
+    sessions.forEach((session) => {
+      store.add(session);
+    });
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = (event) => reject(event.target.error);
+  });
 }
 
 export async function seedIfEmpty() {
-  // TODO: Implement this function to check if the 'sessions' object store is empty and, if so, populate it with SEED_SESSIONS
+  const sessions = await getAllSessions();
+  if (sessions.length === 0) {
+    await saveSessions(SEED_SESSIONS);
+  }
 }
 
 let dbPromise = null;
@@ -122,4 +148,3 @@ function openDb() {
 
   return dbPromise;
 }
-

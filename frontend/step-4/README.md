@@ -33,8 +33,8 @@ render(sessions)
 
 - [x] `openDb()` — open (or create) a database named `cfb-db` at version 1
 - [x] On `onupgradeneeded`: create a `sessions` object store keyed on `id`
-- [ ] `saveSessions(sessions[])` — write (or overwrite) a batch of sessions
-- [ ] `getAllSessions()` — return all sessions as an array
+- [x] `saveSessions(sessions[])` — write (or overwrite) a batch of sessions
+- [x] `getAllSessions()` — return all sessions as an array
 
 ### `index.js` — Application bootstrap
 
