@@ -38,17 +38,17 @@ render(sessions)
 
 ### `index.js` — Application bootstrap
 
-- [ ] On page load, check how many sessions are already in the DB
-- [ ] If none exist, seed the store with at least 5 conference sessions
+- [x] On page load, check how many sessions are already in the DB
+- [x] If none exist, seed the store with at least 5 conference sessions
       (fields: `id`, `title`, `day`, `room`, `tags`, `attendees`)
-- [ ] Call `getAllSessions()` and pass the result to a `render()` function
-- [ ] `render()` groups sessions by day, creates one `.cfb-column` per day
+- [x] Call `getAllSessions()` and pass the result to a `render()` function
+- [x] `render()` groups sessions by day, creates one `.cfb-column` per day
       and one `<cfb-session-card>` per session inside it
 
 ### `index.html`
 
-- [ ] A board container (`<div id="board">`) where `render()` injects columns
-- [ ] Import `index.js` as a `type="module"` script
+- [x] A board container (`<div id="board">`) where `render()` injects columns
+- [x] Import `index.js` as a `type="module"` script
 
 ---
 
