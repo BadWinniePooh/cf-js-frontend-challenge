@@ -90,6 +90,21 @@ describe("<cfb-session-card>", () => {
       const attendeeEls = el.querySelectorAll(".cfb-avatar");
       expect(attendeeEls.length).to.equal(updated.attendees.length);
     });
+
+    it("renders one avatar chip per attendee", async () => {
+      expect(el.querySelectorAll(".cfb-avatar").length).to.equal(
+        SESSION.attendees.length,
+      );
+    });
+
+    SESSION.attendees.forEach(({ name, initials }) => {
+      it(`displays initials "${initials}" for attendee ${name}`, async () => {
+        const avatars = Array.from(el.querySelectorAll(".cfb-avatar"));
+        const match = avatars.find((a) => a.textContent === initials);
+        expect(match, `expected an avatar chip with text "${initials}"`).to
+          .exist;
+      });
+    });
   });
 
   describe("data-session-details reactivity", () => {});

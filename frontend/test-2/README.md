@@ -21,7 +21,7 @@ Behaviour tests survive refactors; snapshot tests don't.
   (or `test-0` — they're identical)
 - [x] Copy `test/helpers/fixture.js` from `test-1`
 - [x] Register `<cfb-tag>` (from `step-1`) and `<cfb-session-card>` (from `step-2`)
-- [ ] Write tests for title, tags, attendees, and attribute reactivity
+- [x] Write tests for title, tags, attendees, and attribute reactivity
 
 ## Constraints
 
@@ -106,7 +106,7 @@ expect(el.querySelectorAll('cfb-tag').length).to.equal(1)
 
 ## Extras
 
-- [ ] Test that each avatar chip displays the attendee's initials as text
+- [x] Test that each avatar chip displays the attendee's initials as text
 - [ ] Test graceful handling of malformed JSON in `data-session-details` — does
   the component throw, or degrade quietly?
 - [ ] If you added Shadow DOM to `<cfb-session-card>`, query via
