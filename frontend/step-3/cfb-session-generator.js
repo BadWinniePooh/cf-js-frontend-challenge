@@ -1,3 +1,5 @@
+import { EventTypes } from "../step-4/events.js";
+
 const TITLES = [
   "Opening Keynote",
   "Web Components Deep Dive",
@@ -84,7 +86,7 @@ export class CfbSessionGenerator extends HTMLElement {
     };
     // TODO: Send the event to the orchestrator here.
     this.dispatchEvent(
-      new CustomEvent("sessionAdded", { detail: session, bubbles: true }),
+      new CustomEvent(EventTypes.SESSION_CREATED, { detail: session, bubbles: true }),
     );
   };
 
