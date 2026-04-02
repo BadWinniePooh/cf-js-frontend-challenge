@@ -111,7 +111,7 @@ expect(el.querySelectorAll('cfb-tag').length).to.equal(1)
   the component throw, or degrade quietly?
 - [ ] If you added Shadow DOM to `<cfb-session-card>`, query via
   `el.shadowRoot.querySelectorAll(...)` instead
-- [ ] Consider how you could add contract test for the `SessionDetails` -shape
+- [x] Consider how you could add contract test for the `SessionDetails` -shape
 
 Adding contract tests is another story, and there is another session on the 'extras',
 so focusing on that is not too important. But good to think how that could be done.

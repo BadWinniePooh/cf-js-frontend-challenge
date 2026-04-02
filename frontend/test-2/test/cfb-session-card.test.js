@@ -2,6 +2,7 @@ import { CfbTag } from "../../step-1/cfb-tag.js";
 import { CfbSessionCard } from "../../step-2/cfb-session-card.js";
 import { expect } from "chai";
 import { fixture, cleanup } from "./helpers/fixture.js";
+import { validateSessionDetails } from "./helpers/session-details-contract.js";
 //import { sessionDetails } from '../../step-2/builds-session-details.js'
 //import { Randomizer } from './helpers/randomizer.js'
 
@@ -107,5 +108,42 @@ describe("<cfb-session-card>", () => {
     });
   });
 
-  describe("data-session-details reactivity", () => {});
+  describe("SessionDetails contract", () => {
+    it("validates a correct SessionDetails object", () => {
+      expect(validateSessionDetails(SESSION)).to.be.empty;
+    });
+
+    it("detects missing title", () => {
+      const invalid = { ...SESSION, title: "" };
+      const errors = validateSessionDetails(invalid);
+      expect(errors).to.include("Title must be a non-empty string");
+    });
+
+    it("detects non-array tags", () => {
+      const invalid = { ...SESSION, tags: "not an array" };
+      const errors = validateSessionDetails(invalid);
+      expect(errors).to.include("Tags must be an array");
+    });
+
+    it("detects non-array attendees", () => {
+      const invalid = { ...SESSION, attendees: "not an array" };
+      const errors = validateSessionDetails(invalid);
+      expect(errors).to.include("Attendees must be an array");
+    });
+
+    it("detects invalid tag objects", () => {
+      const invalid = { ...SESSION, tags: [{ label: "", color: "" }] };
+      const errors = validateSessionDetails(invalid);
+      expect(errors).to.include("Tag at index 0 must have a non-empty string label");
+      expect(errors).to.include("Tag at index 0 must have a non-empty string color");
+    });
+
+    it("detects invalid attendee objects", () => {
+      const invalid = { ...SESSION, attendees: [{ name: "", initials: "" }] };
+      const errors = validateSessionDetails(invalid);
+      expect(errors).to.include("Attendee at index 0 must have a non-empty string name");
+      expect(errors).to.include("Attendee at index 0 must have a non-empty string initials");
+    });
+
+  });
 });
