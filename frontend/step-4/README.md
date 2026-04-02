@@ -32,7 +32,7 @@ render(sessions)
 ### `session-store.js` — Promise-based IDB wrapper
 
 - [x] `openDb()` — open (or create) a database named `cfb-db` at version 1
-- [ ] On `onupgradeneeded`: create a `sessions` object store keyed on `id`
+- [x] On `onupgradeneeded`: create a `sessions` object store keyed on `id`
 - [ ] `saveSessions(sessions[])` — write (or overwrite) a batch of sessions
 - [ ] `getAllSessions()` — return all sessions as an array
 
