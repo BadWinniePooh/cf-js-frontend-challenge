@@ -68,7 +68,29 @@ describe("<cfb-session-card>", () => {
     });
   });
 
-  describe("attendees", () => {});
+  describe("attendees", () => {
+    it("renders the attendees", async () => {
+      const attendeeEls = el.querySelectorAll(".cfb-avatar");
+      expect(attendeeEls.length).to.equal(SESSION.attendees.length);
+    });
+    it("updates the attendees when data-session-details changes", async () => {
+      const updated = {
+        ...SESSION,
+        attendees: [
+          ...SESSION.attendees,
+          { name: "New Attendee", initials: "NA" },
+        ],
+      };
+
+      el.setAttribute(
+        CfbSessionCard.definedAttributes.details,
+        JSON.stringify(updated),
+      );
+
+      const attendeeEls = el.querySelectorAll(".cfb-avatar");
+      expect(attendeeEls.length).to.equal(updated.attendees.length);
+    });
+  });
 
   describe("data-session-details reactivity", () => {});
 });
