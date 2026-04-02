@@ -82,3 +82,20 @@ export const DB_NAME = 'cfb-local-db'
 const DB_VERSION = 1
 
 // TODO: Implement the needed functions for IndexedDB here
+
+export async function getAllSessions() {
+    return SEED_SESSIONS;
+    // TODO: Implement this function to retrieve all sessions from the 'sessions' object store
+}
+
+export async function deleteSession(id) {
+    // TODO: Implement this function to delete a session by its ID from the 'sessions' object store
+}
+
+export async function saveSessions(sessions) {
+    // TODO: Implement this function to save a session to the 'sessions' object store
+}
+
+export async function seedIfEmpty() {
+    // TODO: Implement this function to check if the 'sessions' object store is empty and, if so, populate it with SEED_SESSIONS
+}
