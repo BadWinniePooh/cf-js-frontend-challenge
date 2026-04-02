@@ -79,8 +79,6 @@ const SEED_SESSIONS = [
 export const DB_NAME = "cfb-local-db";
 const DB_VERSION = 1;
 
-// TODO: Implement the needed functions for IndexedDB here
-
 export async function getAllSessions() {
   const db = await openDb();
 
@@ -100,7 +98,21 @@ export async function getAllSessions() {
 }
 
 export async function deleteSession(id) {
-  // TODO: Implement this function to delete a session by its ID from the 'sessions' object store
+  const db = await openDb();
+
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("sessions", "readwrite");
+    const store = transaction.objectStore("sessions");
+    const request = store.delete(id);
+
+    request.onsuccess = () => {
+      resolve();
+    };
+
+    request.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
 }
 
 export async function saveSessions(sessions) {
