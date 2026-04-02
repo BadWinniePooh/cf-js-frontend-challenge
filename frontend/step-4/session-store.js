@@ -97,3 +97,22 @@ export async function saveSessions(sessions) {
 export async function seedIfEmpty() {
   // TODO: Implement this function to check if the 'sessions' object store is empty and, if so, populate it with SEED_SESSIONS
 }
+
+let dbPromise = null;
+
+function openDb() {
+  // already open, return the existing promise
+  if (dbPromise) return dbPromise;
+
+  dbPromise = new Promise((resolve, _) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+    request.onsuccess = (event) => {
+      const db = event.target.result;
+      resolve(db);
+    };
+  });
+
+  return dbPromise;
+}
+
