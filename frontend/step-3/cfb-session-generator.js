@@ -1,4 +1,5 @@
 import { EventTypes } from "../step-4/events.js";
+import { getAllSessions } from '../step-4/session-store.js'
 
 const TITLES = [
   "Opening Keynote",
@@ -84,14 +85,19 @@ export class CfbSessionGenerator extends HTMLElement {
         (v, i, a) => a.indexOf(v) === i, // deduplicate
       ),
     };
-    // TODO: Send the event to the orchestrator here.
+    
     this.dispatchEvent(
       new CustomEvent(EventTypes.SESSION_CREATED, { detail: session, bubbles: true }),
     );
   };
 
-  #onClear = () => {
-    this.dispatchEvent(new CustomEvent("sessionsCleared", { bubbles: true }));
+  #onClear = async () => {
+    let sessions = await getAllSessions();
+    sessions.forEach(session => {
+      this.dispatchEvent(new CustomEvent(EventTypes.SESSION_REMOVED, {
+        bubbles: true,
+        detail: { sessionId: session.id },
+      }))
+    });
   };
-  // TODO: Send the event to the orchestrator here.
 }
