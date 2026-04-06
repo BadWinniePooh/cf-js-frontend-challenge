@@ -13,7 +13,7 @@ The challenge is to verify the *contracts* between them:
 **Goal**: Test the custom event flow from Step 3 — verify that
 `<cfb-session-generator>` fires the right event, that
 `<cfb-board-orchestrator>` accumulates sessions and pushes them down, and
-that `<cfb-schedule>` renders correctly from its `data-sessions` attribute (this
+that `<cfb-schedule>` renders correctly from its `data-sessions` attribute (this 
 test case is already provided for reference).
 
 ```
@@ -35,8 +35,8 @@ cfb-schedule  re-renders session cards
 
 - [ ] Write `test/cfb-session-generator.test.js` — publisher contract
 - [ ] Write `test/cfb-board-orchestrator.test.js` — orchestrator contract
-- [ ] Consider how to verify that the data sent by the random generator
-  provides valid and sound data.
+- [ ] Consider how to verify that the data sent by the random generator 
+      provides valid and sound data.
 
 ### Two sides of every event
 
@@ -117,7 +117,7 @@ expect(sessions.some(s => s.id === 's1')).to.be.true
 - [ ] Test the `detail` shape against the session schema from `test-2/contracts/`
 - [ ] Test that a disconnected orchestrator no longer responds to events
 - [ ] How did the contract change now? Day/Room became optional parameters for the session
-  How should that change things?
+      How should that change things?
 
 ---
 

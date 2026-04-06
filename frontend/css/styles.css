@@ -22,6 +22,9 @@
 @import './molecules/cfb-card.css';
 @import './molecules/cfb-column.css';
 @import './molecules/cfb-session-generator.css';
+@import './molecules/cfb-add-session-form.css';
+@import './molecules/cfb-session-type.css';
+@import './molecules/cfb-card-flip.css';
 
 /* 4. Organisms ──────────────────────────────────────────────── */
 @import './organisms/cfb-board.css';

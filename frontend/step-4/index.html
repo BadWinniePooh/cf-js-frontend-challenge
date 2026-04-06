@@ -23,12 +23,12 @@
 
        session-store.js          — IDB wrapper (no UI, no events)
        events.js                 — typed CustomEvent factories
-       cfb-session-loader.js     — reads IDB → fires sessionsLoaded ↑
-       cfb-session-generator.js  — click → fires cfb-session-created ↑
+       cfb-session-loader.js     — seeds data on IndexedDB, if it's empty
+       cfb-session-generator.js  — from step-3
        cfb-session-store.js      — catches cfb-session-created + cfb-session-removed
                                    → mutates IDB → fires sessionsLoaded ↑
-       cfb-board-orchestrator.js — catches sessionsLoaded → pushes data-sessions ↓
-       cfb-schedule.js (step-3)  — observes data-sessions → re-renders
+       cfb-board-orchestrator.js — catches sessionsLoaded, etc. → pushes data-sessions ↓
+       cfb-schedule.js (step-3)  — from step-3
 
      <cfb-session-store> wraps both the generator and the schedule so that
      events from both (created ↑ and removed ↑) pass through it before
@@ -40,7 +40,7 @@
 
     <cfb-session-store>
         <cfb-session-generator></cfb-session-generator>
-        <cfb-schedule class="cfb-updates-schedule"></cfb-schedule>
+        <cfb-schedule class="listens-schedule-updates"></cfb-schedule>
     </cfb-session-store>
     
 </cfb-board-orchestrator>

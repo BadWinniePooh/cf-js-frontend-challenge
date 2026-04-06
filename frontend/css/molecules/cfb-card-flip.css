@@ -1,0 +1,215 @@
+/* =============================================================
+   Card Flip — external styles for elements that live in the
+   *light* DOM alongside <cfb-flip-card>.
+
+   The flip animation itself (perspective, transform-style,
+   rotateY, backface-visibility, :host transitions) is
+   encapsulated inside <cfb-flip-card>'s Shadow DOM.
+   ============================================================= */
+
+/* ── Backdrop (appended to document.body by cfb-flip-card) ──── */
+.cfb-card-flip__backdrop {
+    position:   fixed;
+    inset:      0;
+    z-index:    199;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.35s, backdrop-filter 0.35s;
+}
+
+.cfb-card-flip__backdrop.is-visible {
+    background:      rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+}
+
+/* =============================================================
+   Edit form — lives in the "back" slot of <cfb-flip-card>
+   ============================================================= */
+
+cfb-edit-session-form {
+    display: block;
+    height:  100%;
+}
+
+.cfb-edit-form {
+    display:        flex;
+    flex-direction: column;
+    height:         100%;
+    background:     var(--cfb-bg-card);
+    border-radius:  0.5rem;
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.cfb-edit-form__header {
+    padding:       var(--space-2) var(--space-3);
+    border-bottom: 0.0625rem solid var(--cfb-border-card);
+    flex-shrink:   0;
+}
+
+.cfb-edit-form__title {
+    margin:      0;
+    font-size:   var(--text-base);
+    font-weight: 600;
+    color:       var(--cfb-text);
+}
+
+/* ── Scrollable body ─────────────────────────────────────────── */
+.cfb-edit-form__body {
+    flex:           1 1 auto;
+    overflow-y:     auto;
+    padding:        var(--space-2) var(--space-3);
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-half);
+}
+
+/* ── Labels ──────────────────────────────────────────────────── */
+.cfb-edit-form__label {
+    display:     block;
+    font-size:   var(--text-sm);
+    font-weight: 500;
+    color:       var(--cfb-text);
+    margin-top:  var(--space-1);
+}
+
+.cfb-edit-form__label:first-child { margin-top: 0; }
+
+.cfb-edit-form__label[data-required]::after {
+    content: " *";
+    color:   #d73a49;
+}
+
+/* ── Inputs & selects ────────────────────────────────────────── */
+.cfb-edit-form__input {
+    display:       block;
+    width:         100%;
+    box-sizing:    border-box;
+    padding:       var(--space-half) var(--space-1);
+    border:        0.0625rem solid var(--cfb-border-card);
+    border-radius: 0.25rem;
+    font-size:     var(--text-sm);
+    font-family:   inherit;
+    background:    var(--cfb-bg-page);
+    color:         var(--cfb-text);
+    transition:    border-color 0.12s;
+}
+
+.cfb-edit-form__input:focus {
+    outline:        2px solid var(--cfb-bg-brand);
+    outline-offset: 1px;
+    border-color:   var(--cfb-bg-brand);
+}
+
+.cfb-edit-form__input:user-invalid {
+    border-color: #d73a49;
+}
+
+/* ── Day + time side by side ─────────────────────────────────── */
+.cfb-edit-form__row {
+    display:               grid;
+    grid-template-columns: 1fr 1fr;
+    gap:                   var(--space-1);
+}
+
+/* ── Radio group ─────────────────────────────────────────────── */
+.cfb-edit-form__radio-group {
+    border:        0.0625rem solid var(--cfb-border-card);
+    border-radius: 0.25rem;
+    padding:       var(--space-1) var(--space-2);
+    margin:        var(--space-half) 0 0;
+}
+
+.cfb-edit-form__radio-group legend {
+    font-size:   var(--text-sm);
+    font-weight: 600;
+    color:       var(--cfb-text-subtle);
+    padding:     0 var(--space-half);
+}
+
+.cfb-edit-form__radio-row {
+    display:    flex;
+    flex-wrap:  wrap;
+    gap:        var(--space-half) var(--space-2);
+    margin-top: var(--space-half);
+}
+
+.cfb-edit-form__radio {
+    display:     flex;
+    align-items: center;
+    gap:         var(--space-half);
+    font-size:   var(--text-sm);
+    color:       var(--cfb-text);
+    cursor:      pointer;
+}
+
+.cfb-edit-form__radio input[type="radio"] {
+    accent-color: var(--cfb-bg-brand);
+    cursor:       pointer;
+}
+
+/* ── Tag chip × button ───────────────────────────────────────── */
+.cfb-edit-form__chip {
+    display:     inline-flex;
+    align-items: center;
+    gap:         0.2em;
+}
+
+.cfb-edit-form__tag-remove {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    background:      none;
+    border:          none;
+    padding:         0 0 0 0.15em;
+    font-size:       0.85em;
+    line-height:     1;
+    cursor:          pointer;
+    color:           inherit;
+    opacity:         0.6;
+    border-radius:   50%;
+    transition:      opacity 0.1s, background 0.1s;
+}
+
+.cfb-edit-form__tag-remove:hover {
+    opacity:    1;
+    background: rgba(0, 0, 0, 0.12);
+}
+
+/* ── Action row ──────────────────────────────────────────────── */
+.cfb-edit-form__actions {
+    display:         flex;
+    justify-content: flex-end;
+    gap:             var(--space-1);
+    padding:         var(--space-2) var(--space-3);
+    border-top:      0.0625rem solid var(--cfb-border-card);
+    flex-shrink:     0;
+}
+
+.cfb-edit-form__cancel {
+    padding:       var(--space-1) var(--space-2);
+    background:    none;
+    color:         var(--cfb-text-muted);
+    border:        0.0625rem solid var(--cfb-border-card);
+    border-radius: 0.3125rem;
+    font-size:     var(--text-sm);
+    cursor:        pointer;
+    transition:    background 0.1s, color 0.1s;
+}
+
+.cfb-edit-form__cancel:hover {
+    background: var(--cfb-bg-column);
+    color:      var(--cfb-text);
+}
+
+.cfb-edit-form__save {
+    padding:       var(--space-1) var(--space-2);
+    background:    var(--cfb-bg-brand);
+    color:         var(--cfb-text-on-brand);
+    border:        none;
+    border-radius: 0.3125rem;
+    font-size:     var(--text-sm);
+    font-weight:   600;
+    cursor:        pointer;
+    transition:    opacity 0.15s;
+}
+
+.cfb-edit-form__save:hover { opacity: 0.85; }

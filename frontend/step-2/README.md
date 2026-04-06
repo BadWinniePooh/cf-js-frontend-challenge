@@ -31,7 +31,7 @@ The expected shape of the data structure is
   "tags": [
     { "label": "Keynote", "color": "blue" }
   ],
-  "attendees": ["AK", "JS"]
+  "attendees": [{"name":"Aino Korhonen","initials":"AK"}, {"name":"Jess Smith","initials":"JS"}]
 }
 ```
 
@@ -99,8 +99,7 @@ Should you finish early, here are some ideas to go deeper:
       How does that affect the code? What do you learn from that?
 - [ ] **Travel variant** — support a `data-variant="travel"` attribute that
       applies the blue left-border card style (`cfb-card--travel`)
-- [ ] **Shadow DOM** — Learn about shadow dom vs. full dom (not sure of the naming here, please
-      correct me). 
+- [ ] **Shadow DOM** — Learn about shadow dom vs. full dom
 
 ## Demos
 

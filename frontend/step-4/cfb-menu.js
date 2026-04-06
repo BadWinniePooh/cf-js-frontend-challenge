@@ -1,4 +1,3 @@
-
 // This is a Molecule, a new construct to have a behavior of opening/closing a dropdown.
 export class CfbMenu extends HTMLElement {
   static elementName = 'cfb-menu'
@@ -38,7 +37,7 @@ export class CfbMenu extends HTMLElement {
   }
 
   #openMenu() {
-    this.withMenuAndDropdown(( menu, dropdown ) => {
+    this.withMenuAndDropdown((menu, dropdown) => {
       dropdown.hidden = false
       this.querySelector('.cfb-card__menu').setAttribute('aria-expanded', 'true')
       document.addEventListener('click', this.#handleOutsideClick)
@@ -46,7 +45,7 @@ export class CfbMenu extends HTMLElement {
   }
 
   #closeMenu() {
-    this.withMenuAndDropdown(( menu, dropdown ) => {
+    this.withMenuAndDropdown((menu, dropdown) => {
       dropdown.hidden = true
       menu.setAttribute('aria-expanded', 'false')
       document.removeEventListener('click', this.#handleOutsideClick)

@@ -32,7 +32,7 @@ export class CfbSessionCard extends HTMLElement {
       .map(attendee => `<div class="cfb-avatar" aria-label="${attendee.name}">${attendee.initials}</div>`)
 
     this.innerHTML =
-      `<article class="cfb-card cfb-card--travel" role="article">
+      `<article class="cfb-card" role="article">
         <header class="cfb-card__header">
           <span class="cfb-card__title">${sessionDetails.title}</span>
           <cfb-menu>
