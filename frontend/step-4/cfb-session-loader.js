@@ -26,6 +26,7 @@ const SEED_SESSIONS = [
       { initials: 'AK', name: 'Alice Kent' },
       { initials: 'JS', name: 'James Smith' },
     ],
+    sessionType: 'Keynote',
   },
   {
     id: 'cf25-2',
@@ -40,6 +41,7 @@ const SEED_SESSIONS = [
       { initials: 'TL', name: 'Thomas Lee' },
       { initials: 'PK', name: 'Priya Kapoor' },
     ],
+    sessionType: 'Workshop',
   },
   {
     id: 'cf25-3',
@@ -52,6 +54,7 @@ const SEED_SESSIONS = [
       { initials: 'HV', name: 'Henry Vance' },
       { initials: 'JO', name: 'Julia Owen' },
     ],
+    sessionType: 'Talk',
   },
   {
     id: 'cf25-4',
@@ -65,6 +68,7 @@ const SEED_SESSIONS = [
     attendees: [
       { initials: 'MR', name: 'Maria Rodriguez' },
     ],
+    sessionType: 'Talk',
   },
   {
     id: 'cf25-5',

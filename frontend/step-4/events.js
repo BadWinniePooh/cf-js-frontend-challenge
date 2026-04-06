@@ -15,5 +15,5 @@ export const cfbSessionRemoved = sessionId => new CustomEvent(EventTypes.SESSION
 export const cfbSessionsLoadedToIDB = () => new CustomEvent(EventTypes.SESSION_LOADED_TO_IDB, {
   bubbles: true,
   composed: true,
-  detail: null
+  detail: { _type: EventTypes.SESSION_LOADED_TO_IDB },
 })

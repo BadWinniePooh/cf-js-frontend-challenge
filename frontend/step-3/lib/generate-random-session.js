@@ -12,6 +12,7 @@ const TITLES = [
 ]
 const DAYS = ['Wednesday', 'Thursday', 'Friday']
 const ROOMS = ['Main Hall', 'Track A', 'Track B', 'Workshop Room']
+const SESSION_TYPES = ['Keynote', 'Talk', 'Workshop', 'Lightning Talk', 'Demo', 'Panel']
 const TAGS = [
   { label: 'Keynote', color: 'blue' },
   { label: 'Frontend', color: 'green' },
@@ -45,5 +46,6 @@ export function generateRandomSession() {
     attendees: [pick(INITIALS_AND_NAMES), pick(INITIALS_AND_NAMES)].filter(
       (v, i, a) => a.indexOf(v) === i   // deduplicate
     ),
+    sessionType: pick(SESSION_TYPES),
   }
 }

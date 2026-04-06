@@ -1,4 +1,12 @@
 import { cfbSessionRemoved } from './events.js'
+import getSessionTypeClass from './lib/session-types.js'
+
+function escapeAttr(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/"/g, '&quot;')
+}
 
 // The change from step 2:
 //   - The hamburger menu is now a custom element, and the card now has a dropdown menu.
@@ -31,10 +39,24 @@ export class CfbSessionCard extends HTMLElement {
     const avatars = sessionDetails.attendees
       .map(attendee => `<div class="cfb-avatar" aria-label="${attendee.name}">${attendee.initials}</div>`)
 
+    const sessionType = sessionDetails.sessionType?.trim() ?? ''
+    const hasSessionType = Boolean(sessionType)
+    const articleClasses = [
+      'cfb-card',
+      hasSessionType && 'cfb-card--session-type',
+      getSessionTypeClass(sessionType)
+    ].filter(Boolean).join(' ')
+
+    const articleAria = hasSessionType
+      ? ` aria-label="${escapeAttr(`${sessionDetails.title}. Session type: ${sessionType}.`)}"`
+      : ''
+
+    const titleAriaHidden = hasSessionType ? ' aria-hidden="true"' : ''
+
     this.innerHTML =
-      `<article class="cfb-card" role="article">
+      `<article class="${articleClasses}"${articleAria} role="article">
         <header class="cfb-card__header">
-          <span class="cfb-card__title">${sessionDetails.title}</span>
+          <span class="cfb-card__title"${titleAriaHidden}><span class="cfb-card__title-text">${sessionDetails.title}</span></span>
           <cfb-menu>
             <button class="cfb-card__dropdown-item" role="menuitem" data-action="edit">Edit</button>
             <button class="cfb-card__dropdown-item cfb-card__dropdown-item--danger" role="menuitem" data-action="remove">Remove</button>
@@ -51,8 +73,15 @@ export class CfbSessionCard extends HTMLElement {
         </footer>
       </article>`
 
+    if (hasSessionType) {
+      // OMG this is nice.
+      this.querySelector('article.cfb-card').style.setProperty(
+        '--cfb-session-type-suffix',
+        JSON.stringify(` (${sessionType})`),
+      )
+    }
+
     this.querySelector('[data-action="remove"]').addEventListener('click', () => {
-      // TODO: you might want to test this.
       this.dispatchEvent(cfbSessionRemoved(this.#sessionDetails.id))
     })
   }

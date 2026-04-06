@@ -144,7 +144,7 @@ function getAllSessions() {
 
 ### Session shape
 
-see [build-session-details.js](../step-2/builds-session-details.js)
+see [build-session-details.js](../step-2/lib/builds-session-details.js)
 
 ---
 
