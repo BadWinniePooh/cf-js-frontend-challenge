@@ -81,8 +81,7 @@ export class CfbSessionCard extends HTMLElement {
     </cfb-flip-card>`
 
     this.querySelector('[data-action="edit"]').addEventListener('click', () => {
-      // ✨ Populate the `cfb-edit-session-form` with the current session details.`
-      // [ Code Here ]
+      this.querySelector('cfb-edit-session-form').populate(this.#sessionDetails)
       this.querySelector('cfb-flip-card').flip()
     })
 
@@ -96,8 +95,7 @@ export class CfbSessionCard extends HTMLElement {
   #onEditSaved = (evt) => {
     // ✨ if saved, unflitp, and then dispatch the `evt`
     this.querySelector('cfb-flip-card').unflip(() => {
-      // ✨ reset the form here --> Implement a `reset()` method on the form element.
-      // [ Code Here ]
+      this.querySelector('cfb-edit-session-form').reset()
       this.dispatchEvent(evt.detail.sessionUpdatedEvent)
     })
   }
@@ -105,8 +103,7 @@ export class CfbSessionCard extends HTMLElement {
   #onEditCancelled = () => {
     // ✨ if edit cancelled, just reset the form after unflipping.
     this.querySelector('cfb-flip-card').unflip(() => {
-      // ✨ reset the form here --> Implement a `reset()` method on the form element.
-      // [ Code Here ]
+      this.querySelector('cfb-edit-session-form').reset()
     })
   }
 }
