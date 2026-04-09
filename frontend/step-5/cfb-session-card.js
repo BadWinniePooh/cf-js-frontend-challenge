@@ -23,7 +23,8 @@ export class CfbSessionCard extends HTMLElement {
   }
 
   connectedCallback() {
-    // ✨ add event listeners here for Editing etc.
+    this.addEventListener('cfb-session-updated', this.#onEditSaved);
+    this.addEventListener('cfb-edit-cancelled', this.#onEditCancelled);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -35,7 +36,8 @@ export class CfbSessionCard extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // ✨ remove event listeners here for Editing etc.
+    this.removeEventListener('cfb-session-updated', this.#onEditSaved);
+    this.removeEventListener('cfb-edit-cancelled', this.#onEditCancelled);
   }
 
   // ── Render ────────────────────────────────────────────────────
@@ -93,15 +95,20 @@ export class CfbSessionCard extends HTMLElement {
   // ── Edit outcome handlers ─────────────────────────────────────
 
   #onEditSaved = (evt) => {
-    // ✨ if saved, unflitp, and then dispatch the `evt`
+    if (evt.target === this) return // outbound re-dispatch — let it bubble to the store
+    evt.stopPropagation()
     this.querySelector('cfb-flip-card').unflip(() => {
-      this.querySelector('cfb-edit-session-form').reset()
-      this.dispatchEvent(evt.detail.sessionUpdatedEvent)
+      this.#sessionDetails = evt.detail
+      this.#render(this.#sessionDetails)
+      this.dispatchEvent(new CustomEvent(evt.type, {
+        bubbles: true,
+        composed: true,
+        detail: evt.detail,
+      }))
     })
   }
 
   #onEditCancelled = () => {
-    // ✨ if edit cancelled, just reset the form after unflipping.
     this.querySelector('cfb-flip-card').unflip(() => {
       this.querySelector('cfb-edit-session-form').reset()
     })
