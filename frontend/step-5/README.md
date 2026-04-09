@@ -179,14 +179,14 @@ for layout and behavior, split it. Keep data/event contracts shared instead
 
 ### Core form extras
 
-- [ ] Add an 'Edit form' functionality on the Menu.
+- [x] Add an 'Edit form' functionality on the Menu.
   The work is mostly done in the `cfb-session-card.js` and `cfb-edit-session-form.js`
-- [ ] See how the `cfb-flip-card` uses `slot`s for the animation purpose of a flip
-- [ ] populate the edit form with the data from the session.
-- [ ] **Distinct update event**: edit flow dispatches `cfb-session-updated`
+- [x] See how the `cfb-flip-card` uses `slot`s for the animation purpose of a flip
+- [x] populate the edit form with the data from the session.
+- [x] **Distinct update event**: edit flow dispatches `cfb-session-updated`
   (`EventTypes.SESSION_UPDATED`); `<cfb-session-store>` in step-5 handles it
   alongside `cfb-session-created`, then broadcasts `sessionsLoaded` as before.
-- [ ] Preserve update semantics by keeping the original session `id` on edit
+- [x] Preserve update semantics by keeping the original session `id` on edit
   (IndexedDB `put()` upserts by key).
 
 ---
