@@ -1,65 +1,70 @@
-import { cfbSessionUpdated } from './events.js'
-import { isKnownTag, labelToColor } from './lib/label-to-color.js'
+import { cfbSessionUpdated } from "./events.js";
+import { isKnownTag, labelToColor } from "./lib/label-to-color.js";
 
 function parseSpeaker(raw) {
-    const name = raw.trim()
-    if (!name) return []
-    const initials = name.split(/\s+/).map(p => p[0]?.toUpperCase() ?? '').join('')
-    return [{ initials, name }]
+  const name = raw.trim();
+  if (!name) return [];
+  const initials = name
+    .split(/\s+/)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("");
+  return [{ initials, name }];
 }
 
 export class CfbEditSessionForm extends HTMLElement {
-    static elementName = 'cfb-edit-session-form'
+  static elementName = "cfb-edit-session-form";
 
-    #session = null
+  #session = null;
 
-    connectedCallback() {
-        this.#render()
-        this.addEventListener('submit',     this.#onSubmit)
-        // ✨ Add event listeners here
-    }
+  connectedCallback() {
+    this.#render();
+    this.addEventListener("submit", this.#onSubmit);
+    // ✨ Add event listeners here
+  }
 
-    disconnectedCallback() {
-        this.removeEventListener('submit', this.#onSubmit)
-        // ✨ remove event listeners here
-    }
+  disconnectedCallback() {
+    this.removeEventListener("submit", this.#onSubmit);
+    // ✨ remove event listeners here
+  }
 
-    // Called by cfb-session-card before it triggers the flip.
-    populate(session) {
-        // ✨ This can be a way to add session information to the form.
-        // [ Code here ]
-    }
+  // Called by cfb-session-card before it triggers the flip.
+  populate(session) {
+    // ✨ This can be a way to add session information to the form.
+    // [ Code here ]
+  }
 
-    // Called by cfb-session-card after the flip-back completes.
-    reset() {
-        this.querySelector('form')?.reset()
-        // ✨ Reset all the details here
-        // [ Code here ]
-    }
+  // Called by cfb-session-card after the flip-back completes.
+  reset() {
+    this.querySelector("form")?.reset();
+    // ✨ Reset all the details here
+    // [ Code here ]
+  }
 
-    // ── DOM helpers ───────────────────────────────────────────────
+  // ── DOM helpers ───────────────────────────────────────────────
 
-    // ── Submit / cancel ───────────────────────────────────────────
+  // ── Submit / cancel ───────────────────────────────────────────
 
-    #onSubmit = (evt) => {
-        evt.preventDefault()
-        evt.stopPropagation()
+  #onSubmit = (evt) => {
+    evt.preventDefault();
+    evt.stopPropagation();
 
-        const form = this.querySelector('form')
-        // ✨ make use of FormData, check validity, etc.
-        // [ Code here ]
-        // Important: don't forget to dispatch the session updated event!'
-    }
+    const form = this.querySelector("form");
+    // ✨ make use of FormData, check validity, etc.
+    // [ Code here ]
+    // Important: don't forget to dispatch the session updated event!'
+  };
 
-    #onCancel = () => {
-        // ✅ Because of the 'flip', a cancel event must be dispatched so the card can flip back.
-        this.dispatchEvent(new CustomEvent('cfb-edit-cancelled', { bubbles: true }))
-    }
+  #onCancel = () => {
+    // ✅ Because of the 'flip', a cancel event must be dispatched so the card can flip back.
+    this.dispatchEvent(
+      new CustomEvent("cfb-edit-cancelled", { bubbles: true }),
+    );
+  };
 
-    // ── Template ──────────────────────────────────────────────────
+  // ── Template ──────────────────────────────────────────────────
 
-    #render() {
-        this.innerHTML = `
+  #render() {
+    this.innerHTML = `
             <form class="cfb-edit-form">
                 <header class="cfb-edit-form__header">
                     <h3 class="cfb-edit-form__title">Edit Session</h3>
@@ -74,6 +79,6 @@ export class CfbEditSessionForm extends HTMLElement {
                     <button type="submit" class="cfb-edit-form__save">Save changes</button>
                 </footer>
             </form>
-        `
-    }
+        `;
+  }
 }
