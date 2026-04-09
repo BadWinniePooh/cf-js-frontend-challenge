@@ -64,11 +64,11 @@ user fills in the form and presses "Add session"
 
 ### `index.html`
 
-- [ ] Replace `<cfb-session-generator>` with `<cfb-add-session-form>` — nothing else changes
+- [x] Replace `<cfb-session-generator>` with `<cfb-add-session-form>` — nothing else changes - NOTE: was already present
 
 ### `index.js`
 
-- [ ] Import and register `CfbAddSessionForm`; remove the `CfbSessionGenerator` import
+- [x] Import and register `CfbAddSessionForm`; remove the `CfbSessionGenerator` import - NOTE: was already present
 
 ---
 
