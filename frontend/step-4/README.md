@@ -4,51 +4,94 @@ In the previous steps you composed components and wired them together with
 events. All data was hardcoded. Now you will replace hardcoded HTML with data
 that lives in the browser's own database — **IndexedDB**.
 
+**Learning Goal**: Implement your first IndexedDB store, and integrate that into 
+the current flow.
+
 ---
 
 ## The data flow
 
+Legend:
+✅: This is already provided
+🚧: Partly done, part of this exercise
+✨: New features, core of the exercise
+
 ```
-page load
+✅ index.html
+    page load
     │
     ▼
-index.js
-    checks if sessions exist in IndexedDB
-    if empty → seeds with SEED_SESSIONS (optional)
+✅ index.js 
+    Initializes the app
     │
     ▼
-getAllSessions()   ← reads from IndexedDB
-    │
+✨ cfb-session-loader.js 
+    [This mimics a call to backend to fetch data, and stores them to IndexedDB]
+    On page load, seeds IndexedDB with SEED_SESSIONS, if IndexedDB is empty
+    (this mimics a http fetch to a backend) 
+           |
+           ▼
+          ✨ session-store.js ✨
+          Stores data to session-store. 
+    And dispatches an event saying 'all data is loaded into IndexedDB'
+    |
     ▼
-render(sessions)
-    groups by day → builds column HTML
-    inserts <cfb-session-card> per session
+🚧 cfb-board-orchestrator 
+    informs all children that have 'listens-schedule-updates' that 
+    'now there is new data in IndexedDb'.
+    Does not read IndexedDB / pass the data down - that will be done
+    by the components directly.
+    │  attribute change goes DOWN
+    ▼
+🚧 cfb-schedule 
+    observedAttributes → data-latest-updated-at
+    → ✨ Reads data from IndexedDB 
+    → ✅ re-renders session cards
+  
+-- When generating a session ( Extras step 1) --
+  
+✅ cfb-session-generator ✅
+    dispatches sessionCreated {bubbles:true}
+    │ bubbles UP
+    ▼
+✨cfb-session-store ✨ 
+    listens to the sessionCreated event
+    → Updates the session to IndexedDB
+    → Dispatches an event UP
+    │ bubbles UP
+    ▼
+✅ cfb-board-orchestrator ✅ (same as above)
+    informs all children that have 'listens-schedule-updates' of 'data-updated-at'
+    │  attribute change goes DOWN
+    │  
+    ▼
+cfb-schedule 🚧. (same as above)
 ```
 
 ---
 
 ## What to build
 
-### `session-store.js` — Promise-based IDB wrapper
+### ✨ `session-store.js` — Promise-based IDB wrapper 
+
+This is the main part of this exercise. The goal is to learn how to write an IndexedDB connection 
 
 - [x] `openDb()` — open (or create) a database named `cfb-db` at version 1
 - [x] On `onupgradeneeded`: create a `sessions` object store keyed on `id`
 - [x] `saveSessions(sessions[])` — write (or overwrite) a batch of sessions
 - [x] `getAllSessions()` — return all sessions as an array
 
-### `index.js` — Application bootstrap
+### 🚧 `cfb-session-loader.js` — Organism
 
-- [x] On page load, check how many sessions are already in the DB
-- [x] If none exist, seed the store with at least 5 conference sessions
-      (fields: `id`, `title`, `day`, `room`, `tags`, `attendees`)
-- [x] Call `getAllSessions()` and pass the result to a `render()` function
-- [x] `render()` groups sessions by day, creates one `.cfb-column` per day
-      and one `<cfb-session-card>` per session inside it
+- [ ] when attached to dom, seed the IndexedDB with initial data (if it has no data)
+- [ ] Dispatches an event to inform that 'there is data in IndexedDB'
 
-### `index.html`
+### 🚧 `cfb-board-orchestrator.js` — Organism
 
-- [x] A board container (`<div id="board">`) where `render()` injects columns
-- [x] Import `index.js` as a `type="module"` script
+- [ ] when attached to dom, register event listeners
+- [ ] listen to 'there is data in IndexedDB'
+- [ ] informs the relevant children that 'btw, new data in IndexedDB'
+  - Might use a `data-latest-updated-at` attribure with timestamp
 
 ---
 
@@ -101,49 +144,70 @@ function getAllSessions() {
 
 ### Session shape
 
-```js
-{
-    id:        'cf25-1',
-    title:     'Opening Keynote',
-    day:       'Wednesday',
-    room:      'Main Hall',
-    tags:      [{ label: 'Keynote', color: 'blue' }],
-    attendees: [{ initials: 'AK', name: 'Alice Kent' }],
-}
-```
+see [build-session-details.js](../step-2/lib/builds-session-details.js)
 
 ---
 
 ## Extras
 
+- [ ] When adding a session with the 'Add random session' button, make sure that that gets
+      stored in indexedDB.
 - [ ] Wrap the IndexedDB API in a small Promise-based helper module
       (`session-store.js`) so `index.js` never touches raw IDB callbacks
 - [ ] Add a `day` index and use `getSessionsByDay(day)` to load sessions per
       column instead of loading everything and filtering in JS
 - [ ] Use a cursor with a `direction` parameter to iterate sessions in
       alphabetical title order
-- [x] **Remove a session from IndexedDB** *(already implemented)*
+- [ ] **Remove a session from IndexedDB** *(already implemented)*
       Each session card has a `⋯` menu with a **Remove** button. Clicking it
-      fires a `cfb-session-removed` event (defined in `events.js`) that bubbles
+      fires a `cfb-session-removed` event (defined in [events.js](./events.js)) that bubbles
       up to `<cfb-session-store>`. The store deletes the entry from IDB via
-      `deleteSession(id)`, re-reads the full list, and fires `sessionsLoaded` —
-      the same path used for initial load and adding sessions. Refresh the page
-      and the removed session stays gone.
+      `deleteSession(id)` (which you need to implement), re-reads the full list, and fires `sessionsLoaded` —
+      the same path used for initial load and adding sessions. 
+      Refresh the page and the removed session stays gone.
       Key files: `cfb-session-card.js`, `events.js`, `cfb-session-store.js`,
       `session-store.js` (`deleteSession`).
 
----
+### Data flow of remove session
 
-## Learning goals
-
-- Opening and versioning an IndexedDB database (`onupgradeneeded`)
-- `IDBObjectStore` — `put`, `getAll`, cursor iteration
-- `IDBIndex` for filtered queries
-- Wrapping callback-style async in `Promise`
-- Bridging async storage to synchronous component rendering
+✅ cfb-menu (open menu)
+    page load
+    │
+    ▼
+✅ cfb-session-card (press 'remove' button')
+    create new event
+    │    │
+    │    ▼
+    │    ✅ events.js
+    │        create the new event
+    ▼
+🚧 cfb-session-store
+    deletes session from session store
+    │    │
+    │    ▼
+    │    ✅ session-store
+    │        remove session from IndexedDB
+    And dispatches an event up the chain
+    ▼
+✅ cfb-board-orchestrator 
+    
 
 ---
 
 ## Issues / notes
 
 If you get stuck, note down the problem here so we can discuss it together.
+
+### End result
+
+After completing this step you will have learned:
+
+- How to work with IndexedDb: 
+  - Opening and versioning an IndexedDB database (`onupgradeneeded`)
+  - `IDBObjectStore` — `put`, `getAll`, cursor iteration
+- Wrapping callback-style async in `Promise`
+- Bridging async storage to synchronous component rendering
+- How to orchestrate messages between 'sibling' DOM elements through an ancestor
+  - using events and 
+  - attributes
+- How to inform all the child elements that 'new data is available in IndexedDb'

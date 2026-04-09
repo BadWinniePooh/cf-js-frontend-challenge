@@ -1,0 +1,306 @@
+/* ── <cfb-add-session-form> ──────────────────────────────────── */
+cfb-add-session-form {
+    display: contents; /* invisible host — trigger is fixed, dialog is in the layer */
+}
+
+/* ── Trigger button — fixed top-right corner ─────────────────── */
+.cfb-add-session-form__trigger {
+    position:      fixed;
+    top:           var(--space-2);
+    right:         var(--space-3);
+    z-index:       100;
+    padding:       var(--space-1) var(--space-2);
+    background:    var(--cfb-bg-brand);
+    color:         var(--cfb-text-on-brand);
+    border:        none;
+    border-radius: 0.375rem;
+    font-size:     var(--text-sm);
+    font-weight:   600;
+    cursor:        pointer;
+    transition:    opacity 0.15s, transform 0.1s;
+    box-shadow:    var(--cfb-shadow-nav);
+}
+
+.cfb-add-session-form__trigger:hover {
+    opacity:   0.88;
+    transform: translateY(-1px);
+}
+
+/* ── Dialog backdrop ─────────────────────────────────────────── */
+.cfb-add-session-form__dialog {
+    padding:       0;
+    border:        none;
+    border-radius: 0.5rem;
+    box-shadow:    0 8px 32px rgba(0, 0, 0, 0.22);
+    background:    transparent;
+    max-width:     28rem;
+    width:         calc(100% - var(--space-4));
+    max-height:    90dvh;
+    overflow:      visible;
+}
+
+.cfb-add-session-form__dialog::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+}
+
+/* ── Card inside the dialog ──────────────────────────────────── */
+.cfb-add-session-form__card {
+    background:    var(--cfb-bg-card);
+    border-radius: 0.5rem;
+    display:       flex;
+    flex-direction: column;
+    max-height:    90dvh;
+    overflow:      hidden;
+}
+
+/* ── Dialog header ───────────────────────────────────────────── */
+.cfb-add-session-form__header {
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+    padding:         var(--space-2) var(--space-3);
+    border-bottom:   0.0625rem solid var(--cfb-border-card);
+    flex-shrink:     0;
+}
+
+.cfb-add-session-form__title {
+    margin:      0;
+    font-size:   var(--text-base);
+    font-weight: 600;
+    color:       var(--cfb-text);
+}
+
+.cfb-add-session-form__close {
+    background:    none;
+    border:        none;
+    font-size:     1rem;
+    color:         var(--cfb-text-muted);
+    cursor:        pointer;
+    padding:       var(--space-half);
+    border-radius: 0.25rem;
+    line-height:   1;
+    transition:    color 0.1s, background 0.1s;
+}
+
+.cfb-add-session-form__close:hover {
+    color:      var(--cfb-text);
+    background: var(--cfb-bg-column);
+}
+
+/* ── Scrollable form body ────────────────────────────────────── */
+.cfb-add-session-form__form {
+    padding:    var(--space-2) var(--space-3);
+    overflow-y: auto;
+    display:    flex;
+    flex-direction: column;
+    gap:        var(--space-2);
+}
+
+/* ── Fieldset groups ─────────────────────────────────────────── */
+.cfb-add-session-form__group {
+    border:        0.0625rem solid var(--cfb-border-card);
+    border-radius: 0.375rem;
+    padding:       var(--space-2);
+    margin:        0;
+}
+
+.cfb-add-session-form__group legend {
+    font-weight: 600;
+    font-size:   var(--text-sm);
+    color:       var(--cfb-text-subtle);
+    padding:     0 var(--space-half);
+}
+
+/* ── Labels — stacked above their control ────────────────────── */
+.cfb-add-session-form__group label:not(.cfb-add-session-form__radio) {
+    display:       block;
+    font-size:     var(--text-sm);
+    color:         var(--cfb-text);
+    margin-top:    var(--space-1);
+    margin-bottom: var(--space-half);
+}
+
+/* Remove extra top margin from the very first label in a fieldset */
+.cfb-add-session-form__group label:not(.cfb-add-session-form__radio):first-of-type {
+    margin-top: var(--space-half);
+}
+
+/* Asterisk on required-field labels */
+.cfb-add-session-form__group label[data-required]::after {
+    content: " *";
+    color:   #d73a49;
+}
+
+/* ── Text inputs, time, selects — full width ─────────────────── */
+.cfb-add-session-form__group input[type="text"],
+.cfb-add-session-form__group input[type="time"],
+.cfb-add-session-form__group select {
+    display:     block;
+    width:       100%;
+    box-sizing:  border-box;
+    padding:     var(--space-half) var(--space-1);
+    border:      0.0625rem solid var(--cfb-border-card);
+    border-radius: 0.25rem;
+    font-size:   var(--text-sm);
+    font-family: inherit;
+    background:  var(--cfb-bg-page);
+    color:       var(--cfb-text);
+    transition:  border-color 0.12s;
+}
+
+.cfb-add-session-form__group input:focus,
+.cfb-add-session-form__group select:focus {
+    outline:        2px solid var(--cfb-bg-brand);
+    outline-offset: 1px;
+    border-color:   var(--cfb-bg-brand);
+}
+
+/* Red border only after user interaction */
+.cfb-add-session-form__group input:user-invalid,
+.cfb-add-session-form__group select:user-invalid {
+    border-color: #d73a49;
+}
+
+/* Fallback for browsers without :user-invalid */
+.cfb-add-session-form--submitted .cfb-add-session-form__group input:invalid,
+.cfb-add-session-form--submitted .cfb-add-session-form__group select:invalid {
+    border-color: #d73a49;
+}
+
+/* ── Radio labels ────────────────────────────────────────────── */
+.cfb-add-session-form__radio {
+    display:       flex;
+    align-items:   center;
+    gap:           var(--space-half);
+    font-size:     var(--text-sm);
+    color:         var(--cfb-text);
+    cursor:        pointer;
+    margin-top:    var(--space-half);
+    padding:       var(--space-half);
+    border-radius: 0.25rem;
+    transition:    background 0.1s;
+}
+
+.cfb-add-session-form__radio:hover {
+    background: var(--cfb-bg-column);
+}
+
+.cfb-add-session-form__radio input[type="radio"] {
+    width:        auto;
+    margin:       0;
+    cursor:       pointer;
+    accent-color: var(--cfb-bg-brand);
+}
+
+/* ── Tag picker ──────────────────────────────────────────────── */
+.cfb-add-session-form__tag-picker {
+    display:       flex;
+    flex-wrap:     wrap;
+    align-items:   center;
+    gap:           var(--space-half);
+    padding:       var(--space-half) var(--space-1);
+    border:        0.0625rem solid var(--cfb-border-card);
+    border-radius: 0.25rem;
+    background:    var(--cfb-bg-page);
+    cursor:        text;
+    transition:    border-color 0.12s;
+}
+
+.cfb-add-session-form__tag-picker:focus-within {
+    outline:        2px solid var(--cfb-bg-brand);
+    outline-offset: 1px;
+    border-color:   var(--cfb-bg-brand);
+}
+
+/* Chips row — wraps naturally inside the picker */
+.cfb-add-session-form__tag-chips {
+    display:    contents; /* chips flow directly into the picker flex container */
+}
+
+/* The text input inside the picker — grows to fill remaining space */
+.cfb-add-session-form__tag-input {
+    flex:        1 1 8rem;
+    min-width:   6rem;
+    border:      none !important;
+    outline:     none !important;
+    padding:     0 !important;
+    background:  transparent !important;
+    font-size:   var(--text-sm);
+    font-family: inherit;
+    color:       var(--cfb-text);
+}
+
+.cfb-add-session-form__tag-input::placeholder {
+    color: var(--cfb-text-muted);
+}
+
+/* × button inside each chip */
+.cfb-add-session-form__chip {
+    display:     inline-flex;
+    align-items: center;
+    gap:         0.2em;
+}
+
+.cfb-add-session-form__tag-remove {
+    display:       inline-flex;
+    align-items:   center;
+    justify-content: center;
+    background:    none;
+    border:        none;
+    padding:       0 0 0 0.15em;
+    font-size:     0.85em;
+    line-height:   1;
+    cursor:        pointer;
+    color:         inherit;
+    opacity:       0.6;
+    border-radius: 50%;
+    transition:    opacity 0.1s, background 0.1s;
+}
+
+.cfb-add-session-form__tag-remove:hover {
+    opacity:    1;
+    background: rgba(0, 0, 0, 0.12);
+}
+
+/* ── Action row (Cancel / Submit) ────────────────────────────── */
+.cfb-add-session-form__actions {
+    display:         flex;
+    justify-content: flex-end;
+    gap:             var(--space-1);
+    padding-top:     var(--space-1);
+    border-top:      0.0625rem solid var(--cfb-border-card);
+    flex-shrink:     0;
+}
+
+.cfb-add-session-form__cancel {
+    padding:       var(--space-1) var(--space-2);
+    background:    none;
+    color:         var(--cfb-text-muted);
+    border:        0.0625rem solid var(--cfb-border-card);
+    border-radius: 0.3125rem;
+    font-size:     var(--text-sm);
+    cursor:        pointer;
+    transition:    background 0.1s, color 0.1s;
+}
+
+.cfb-add-session-form__cancel:hover {
+    background: var(--cfb-bg-column);
+    color:      var(--cfb-text);
+}
+
+.cfb-add-session-form__submit {
+    padding:       var(--space-1) var(--space-2);
+    background:    var(--cfb-bg-brand);
+    color:         var(--cfb-text-on-brand);
+    border:        none;
+    border-radius: 0.3125rem;
+    font-size:     var(--text-sm);
+    font-weight:   600;
+    cursor:        pointer;
+    transition:    opacity 0.15s;
+}
+
+.cfb-add-session-form__submit:hover {
+    opacity: 0.85;
+}

@@ -17,37 +17,42 @@ components (located with a specific css class); a schedule component reacts and 
 
 ## The data flow
 
+Legend:
+✨: New features, core of the exercise
+🚧: Partly done, part of this exercise
+✅: This is already provided
+
 ```
 [Add random session button click]
         │
         ▼
-cfb-session-generator
-  dispatches sessionAdded {bubbles:true}
+✨ cfb-session-generator
+  dispatches sessionCreated {bubbles:true}
   detail: { session: { id, title, day, tags, attendees } }
         │  bubbles UP
         ▼
-cfb-board-orchestrator
+🚧 cfb-board-orchestrator
   adds session to #sessions array
   sets data-sessions='[…]' on <cfb-schedule>
         │  attribute change goes DOWN
         ▼
-cfb-schedule
+✅ cfb-schedule
   observedAttributes → data-sessions
   parses JSON → re-renders session cards
 ```
 
 ## What to build
 
-### `cfb-session-generator`
+### ✨ `cfb-session-generator`
 
 - [x] Render an "Add random session" button on `connectedCallback`
 - [x] On click, generate a random session object
-      (`id`, `title`, `day`, `room`, `tags`, `attendees`)
+      (`id`, `title`, `day`, `room`, `tags`, `attendees`) (you can use 
+       [lib/generate-random-session.js](./lib/generate-random-session.js))
 - [x] Dispatch a `sessionAdded` `CustomEvent` with `bubbles: true` and the
       session in `detail`
-- [x] Remove the listener in `disconnectedCallback`
 
-### `cfb-board-orchestrator`
+### 🚧 `cfb-board-orchestrator`
 
 - [x] Listen for `sessionAdded` on itself (it bubbles up naturally)
 - [x] Maintain an internal `#sessions` array
@@ -55,7 +60,7 @@ cfb-schedule
       child `<cfb-schedule>` element with the full JSON array
 - [x] Remove the listener in `disconnectedCallback`
 
-### `cfb-schedule`
+### ✅ `cfb-schedule`
 
 - [x] This readily implemented for you, but please go through it, if you please. What it does is:
 - [x] Declares `data-sessions` in `observedAttributes`
@@ -71,6 +76,17 @@ cfb-schedule
 - Do **not** spend more than 30 minutes on the challenge.
 
 ## Tips
+
+### addEventListener & removeEventListener
+
+These two HtmlElement methods are crucial for this exercise. These provides a way to 
+send a message from an HtmlElement to any of the ancestor HtmlElements, as long as 
+there is an element in the hierarcy that has registered an event listener (with 
+`addEventListener`) with the same event name/type - well, string.
+
+And for not letting event listeners to stay in the memory, you have to remember to 
+remove the event listeners at the end of component lifecycle. But sometimes, you might 
+need to remove (and readd) event listeners in attributeChangedCallback, too.
 
 ### Events travel in one direction — and that is the point
 
@@ -98,22 +114,29 @@ connectedCallback()    { this.addEventListener('sessionAdded', this.#onSessionAd
 disconnectedCallback() { this.removeEventListener('sessionAdded', this.#onSessionAdded) }
 ```
 
+The other way to make sure `this` is bound correctly in the event handler is to `bind` the 
+eventHandler explicitly. If you ever encounter an issue that '#sessions' not found on 'undefined',
+the problem most likely lies in `this`.
+
+```js
+class X extends HTMLElement{
+  connectedCallback()    { this.addEventListener('sessionAdded', this.#onSessionAdded.bind(this)) }
+  disconnectedCallback() { this.removeEventListener('sessionAdded', this.#onSessionAdded.bind(this)) }
+  
+  onSessionAdded(e) {
+    this.#sessions.push(e.detail.session)
+    this.#updateSchedule()
+  }
+}
+```
+
 ### Generating a random session
 
 Keep a small pool of titles, days, rooms and tags and pick randomly:
 
-```js
-const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
+For this exercise, there is [a small helper](./lib/generate-random-session.js) 
+to create a random session
 
-const session = {
-    id: crypto.randomUUID(),
-    title: pick(TITLES),
-    day:   pick(DAYS),
-    room:  pick(ROOMS),
-    tags:  [pick(TAGS)],
-    attendees: [pick(INITIALS), pick(INITIALS)],
-}
-```
 
 ### Rendering a JSON attribute
 
@@ -123,9 +146,10 @@ const session = {
 static get observedAttributes() { return ['data-sessions'] }
 
 attributeChangedCallback(name, _old, newValue) {
+    if (_old === newValue) return
     if (name === 'data-sessions') {
-        const sessions = JSON.parse(newValue ?? '[]')
-        this.#render(sessions)
+        this.#sessions = JSON.parse(newValue ?? '[]')
+        this.#render()
     }
 }
 ```

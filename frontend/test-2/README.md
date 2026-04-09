@@ -113,8 +113,8 @@ expect(el.querySelectorAll('cfb-tag').length).to.equal(1)
   `el.shadowRoot.querySelectorAll(...)` instead
 - [x] Consider how you could add contract test for the `SessionDetails` -shape
 
-Adding contract tests is another story, and there is another session on the 'extras',
-so focusing on that is not too important. But good to think how that could be done.
+Adding contract tests is another story, and there is another session on the 'extras', 
+so focusing on that is not too important. But good to think how that could be done. 
 
 ---
 
