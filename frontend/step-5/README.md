@@ -43,7 +43,7 @@ user fills in the form and presses "Add session"
 
 - [x] Renders a button to open the form
 - [x] when pressing button, opens a `dialog` component (and supports closing it)
-- [ ] Render a `<form>` with these fields inside `connectedCallback`
+- [x] Render a `<form>` with these fields inside `connectedCallback`
   - **Title** — `<input type="text">`, `required`, `minlength="5"`
   - **Day** — `<select>` (Wednesday / Thursday / Friday), `required`
   - **Room** — `<input type="text">` with a `<datalist>`, `required`
@@ -52,9 +52,9 @@ user fills in the form and presses "Add session"
     The UI can show selected tags as chips; submit value is serialized as one
     comma-separated string for `FormData`.
   - **Speaker** — `<input type="text">` (optional)
-- [ ] Group related fields into `<fieldset>` + `<legend>` blocks
-- [ ] Listen for `submit` in `connectedCallback`; remove the listener in `disconnectedCallback`
-- [ ] On submit:
+- [x] Group related fields into `<fieldset>` + `<legend>` blocks
+- [x] Listen for `submit` in `connectedCallback`; remove the listener in `disconnectedCallback`
+- [x] On submit:
   1. `evt.preventDefault()` to stay on the page
   2. `form.checkValidity()` + `form.reportValidity()` if invalid
   3. `new FormData(form)` — read every field with `data.get('field-name')`
