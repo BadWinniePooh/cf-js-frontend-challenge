@@ -1,4 +1,4 @@
-import { roomRegistry } from './room-registry.js';
+import { roomRegistry } from './room-registry.js'
 
 // Legacy-style service that talks directly to the global registry.
 export class RoomService {
@@ -10,17 +10,17 @@ export class RoomService {
         timeSlot,
         status: 'REJECTED',
         reason: 'Room not available',
-      };
+      }
     }
 
-    roomRegistry.reserve(roomId, timeSlot);
+    roomRegistry.reserve(roomId, timeSlot)
 
     return {
       sessionId,
       roomId,
       timeSlot,
       status: 'ACCEPTED',
-    };
+    }
   }
 }
 

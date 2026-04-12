@@ -1,0 +1,49 @@
+{
+  "sessions": [
+    {
+      "start": "09:00",
+      "length": 45,
+      "title": "Setup Your Test Environment",
+      "speaker": "Dave Langr",
+      "room": "Room A",
+      "track": "testing",
+      "type": "workshop"
+    },
+    {
+      "start": "10:00",
+      "length": 60,
+      "title": "Finding Seams",
+      "speaker": "Eve Feathers",
+      "room": "Room B",
+      "track": "tdd",
+      "type": "talk"
+    },
+    {
+      "start": "11:15",
+      "length": 60,
+      "title": "Dependency Injection Without a Framework",
+      "speaker": "Sean Lobby",
+      "room": "Room A",
+      "track": "refactoring",
+      "type": "talk"
+    },
+    {
+      "start": "12:15",
+      "length": 60,
+      "title": "Lunch Break",
+      "speaker": null,
+      "room": "Lobby",
+      "track": "all",
+      "type": "break"
+    },
+    {
+      "start": "13:15",
+      "length": 90,
+      "title": "Mob Programming Session",
+      "speaker": "Alice Liddell",
+      "room": "Main Hall",
+      "track": "tdd",
+      "type": "workshop"
+    }
+  ]
+}

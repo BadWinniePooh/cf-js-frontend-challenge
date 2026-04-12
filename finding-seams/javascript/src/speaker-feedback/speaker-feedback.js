@@ -1,10 +1,10 @@
-import {FeedbackSensor} from './feedback-sensor.js'
+import { FeedbackSensor } from './feedback-sensor.js'
 
 export class SpeakerFeedbackService {
+  #sensor
+  #alertThreshold = 2.2
   constructor() {
-    this._sensor = new FeedbackSensor()
-    this._alertThreshold = 2.5
-    this._bookAgainThreshold = 4.2
+    this.#sensor = new FeedbackSensor()
   }
 
   /**
@@ -15,7 +15,7 @@ export class SpeakerFeedbackService {
    * { status: 'ALERT' | 'BOOK_AGAIN' | 'OK', averageScore: number | null }
    */
   evaluateSpeaker() {
-    const scores = this._sensor.readScores()
+    const scores = this.#sensor.readScores()
 
     if (!scores || scores.length === 0) {
       return {
@@ -25,7 +25,7 @@ export class SpeakerFeedbackService {
     }
 
     const validScores = scores.filter(
-      (score) => typeof score === 'number' && score >= 1 && score <= 5,
+      score => typeof score === 'number' && score >= 1 && score <= 5,
     )
 
     if (validScores.length === 0) {
@@ -38,16 +38,9 @@ export class SpeakerFeedbackService {
     const sum = validScores.reduce((acc, value) => acc + value, 0)
     const average = sum / validScores.length
 
-    if (average < this._alertThreshold) {
+    if (average < this.#alertThreshold) {
       return {
         status: 'ALERT',
-        averageScore: average,
-      }
-    }
-
-    if (average >= this._bookAgainThreshold) {
-      return {
-        status: 'BOOK_AGAIN',
         averageScore: average,
       }
     }

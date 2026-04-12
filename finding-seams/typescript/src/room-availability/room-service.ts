@@ -1,20 +1,25 @@
-import { roomRegistry } from './room-registry.js';
+import type { TimeSlot } from './room-registry.js'
+import { roomRegistry } from './room-registry.js'
 
-type PlacementResult = {
-  sessionId: string;
-  roomId: string;
-  timeSlot: string | number;
-  status: 'ACCEPTED' | 'REJECTED';
-  reason?: string;
+type AcceptedResult = {
+  sessionId: number
+  roomId: string
+  timeSlot: TimeSlot
+  status: 'ACCEPTED'
 };
+type ErrorResult = {
+  sessionId: number
+  roomId: string
+  timeSlot: TimeSlot
+  status: 'REJECTED'
+  reason: string
+};
+export type PlaceSessionResult = AcceptedResult | ErrorResult
 
 // Legacy-style service that talks directly to the global registry.
 export class RoomService {
-  placeSessionInRoom(
-    sessionId: string,
-    roomId: string,
-    timeSlot: string | number,
-  ): PlacementResult {
+
+  placeSessionInRoom(sessionId: number, roomId: string, timeSlot: TimeSlot): PlaceSessionResult {
     if (!roomRegistry.isAvailable(roomId, timeSlot)) {
       return {
         sessionId,
@@ -22,16 +27,16 @@ export class RoomService {
         timeSlot,
         status: 'REJECTED',
         reason: 'Room not available',
-      };
+      }
     }
 
-    roomRegistry.reserve(roomId, timeSlot);
+    roomRegistry.reserve(roomId, timeSlot)
 
     return {
       sessionId,
       roomId,
       timeSlot,
       status: 'ACCEPTED',
-    };
+    }
   }
 }

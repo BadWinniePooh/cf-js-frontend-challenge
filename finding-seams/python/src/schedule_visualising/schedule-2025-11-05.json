@@ -1,0 +1,49 @@
+{
+  "sessions": [
+    {
+      "start": "09:30",
+      "length": 90,
+      "title": "Approval Testing Deep Dive",
+      "speaker": "Frank Approvius",
+      "room": "Main Hall",
+      "track": "testing",
+      "type": "workshop"
+    },
+    {
+      "start": "11:15",
+      "length": 45,
+      "title": "Strangler Fig in the Wild",
+      "speaker": "Carol Beck",
+      "room": "Room B",
+      "track": "refactoring",
+      "type": "talk"
+    },
+    {
+      "start": "12:00",
+      "length": 60,
+      "title": "Lunch Break",
+      "speaker": null,
+      "room": "Lobby",
+      "track": "all",
+      "type": "break"
+    },
+    {
+      "start": "13:00",
+      "length": 60,
+      "title": "Outside-In TDD",
+      "speaker": "Eve Feathers",
+      "room": "Room A",
+      "track": "tdd",
+      "type": "talk"
+    },
+    {
+      "start": "14:15",
+      "length": 30,
+      "title": "Closing Keynote",
+      "speaker": "Alice Liddell",
+      "room": "Main Hall",
+      "track": "all",
+      "type": "talk"
+    }
+  ]
+}
