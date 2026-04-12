@@ -341,7 +341,21 @@ $RECYCLE.BIN/
 
 # Custom exceptions
 
-ai-*-plan.md
 
 !.idea/jsLinters/
 !.idea/jsLinters/eslint.xml
+
+*.code-workspace
+
+# Python (finding-seams exercise)
+**/python/.venv/
+**/python/.pytest_cache/
+**/python/**/__pycache__/
+
+# Kotlin / Gradle (finding-seams)
+**/kotlin/.gradle/
+**/kotlin/build/
+
+# .NET (finding-seams)
+**/csharp/**/bin/
+**/csharp/**/obj/
