@@ -8,7 +8,7 @@ public class BadgePrinterTest
     [Fact(Skip = "Exercise: finding seams — enable when working on badge printing")]
     public void Prints_a_badge()
     {
-        var badgeDispenser = new BadgePrinting();
+        var badgeDispenser = new BadgePrinter();
 
         var badge = badgeDispenser.CreateBadge("Test person", "they/them");
 
@@ -20,7 +20,7 @@ public class BadgePrinterTest
     [Fact(Skip = "Exercise: finding seams — enable when working on badge printing")]
     public void Prints_second_badge()
     {
-        var badgeDispenser = new BadgePrinting();
+        var badgeDispenser = new BadgePrinter();
 
         var badge = badgeDispenser.CreateBadge("Test person", "they/them");
 

@@ -6,7 +6,7 @@ namespace FindingSeams.Tests;
 public class ReminderSenderTest
 {
     /// <summary>Same wall-clock pressure as Mocha’s default 2000 ms test timeout.</summary>
-    [Fact]
+    [Fact(Skip = "Exercise: finding seams — enable when working on reminder sender")]
     public async Task Sends_reminders_qyuickly()
     {
         var reminderSender = new ReminderSender();
