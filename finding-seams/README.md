@@ -5,9 +5,9 @@ Imagine the background for each of the assignments is this:
 > You need to change behavior of the system, but the system has no tests. In order to be safe, and sure,
   you want to add tests around the functions you are about to change. This is your starting point.
 
-Take the learnings from [How to Test Anything](../01-how-to-test-anything), and ask the questions we learned: 
+Take the learnings from [How to Test Anything](../how-to-test-anything), and ask the questions we learned: 
 
-![How to Test Anything](../01-how-to-test-anything/images/questions.png)
+![How to Test Anything](../how-to-test-anything/images/how-to-test-anything-visual.png)
 
 Each exercise starts from code that is hard to test and refactor. The goal is to learn to experience the legacy code dilemma:
 
@@ -95,5 +95,3 @@ And tips for refactorings:
    - "Extract something somewhere" and make the easy test
 
 ..and so on and so forth.
-
-"Extract something somewhere and"
