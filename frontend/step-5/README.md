@@ -11,6 +11,11 @@ event on submit. Maybe use a `dialog` HTML element for the actual form.
 
 ## The data flow
 
+Legend:
+✅: This is already provided
+🚧: Partly done, part of this exercise
+✨: New features, core of the exercise
+
 ```
 user fills in the form and presses "Add session"
     │
@@ -39,7 +44,7 @@ user fills in the form and presses "Add session"
 
 ## What to build
 
-### `cfb-add-session-form.js` — new custom element
+### ✨ `cfb-add-session-form.js` — new custom element
 
 - [x] Renders a button to open the form
 - [x] when pressing button, opens a `dialog` component (and supports closing it)
@@ -62,11 +67,11 @@ user fills in the form and presses "Add session"
   5. `this.dispatchEvent(cfbSessionCreated(session))` — same event shape as before
   6. `form.reset()` to clear the fields
 
-### `index.html`
+### 🚧 `index.html`
 
 - [ ] Replace `<cfb-session-generator>` with `<cfb-add-session-form>` — nothing else changes
 
-### `index.js`
+### 🚧 `index.js`
 
 - [ ] Import and register `CfbAddSessionForm`; remove the `CfbSessionGenerator` import
 
