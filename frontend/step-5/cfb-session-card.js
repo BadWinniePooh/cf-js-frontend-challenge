@@ -74,6 +74,7 @@ export class CfbSessionCard extends HTMLElement {
           </cfb-menu>
         </header>
         <div class="cfb-card__tags"> ${tags.join('')} </div>
+        <div> ${sessionType} </div>
         <footer>
           <div class="cfb-avatars" aria-label="Attendees"> ${avatars.join('')} </div>
         </footer>

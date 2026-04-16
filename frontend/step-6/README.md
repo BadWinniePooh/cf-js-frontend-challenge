@@ -64,8 +64,8 @@ Ask AI to provide the css classes to take.
 - [x] Create `<cfb-session-type>` with `static formAssociated = true`
 - [x] Call `this.attachInternals()` in the constructor and store internals
 - [x] Render selectable tiles (Talk / Workshop / Keynote / Lightning Talk)
-- [ ] Keep selected value in component state and reflect it in the UI
-- [ ] On selection, call `internals.setFormValue(selectedValue)`
+- [x] Keep selected value in component state and reflect it in the UI
+- [x] On selection, call `internals.setFormValue(selectedValue)`
 - [ ] Handle validation:
     1. if `required` and empty -> `setValidity({ valueMissing: true }, 'Please select a session type.')`
     2. if valid -> `setValidity({})`
@@ -73,13 +73,13 @@ Ask AI to provide the css classes to take.
 
 ### 🚧 `cfb-add-session-form.js`
 
-- [ ] Replace session-type radio inputs with `<cfb-session-type name="session-type" required>`
-- [ ] Keep submit flow unchanged: `checkValidity` / `reportValidity` / `FormData`
+- [x] Replace session-type radio inputs with `<cfb-session-type name="session-type" required>`
+- [x] Keep submit flow unchanged: `checkValidity` / `reportValidity` / `FormData`
 
 ### 🚧 `cfb-edit-session-form.js`
 
-- [ ] Replace session-type radio inputs with `<cfb-session-type name="session-type" required>`
-- [ ] Ensure existing session type is preselected when editing
+- [x] Replace session-type radio inputs with `<cfb-session-type name="session-type" required>`
+- [x] Ensure existing session type is preselected when editing
 
 ### 🚧 `index.js` and `index.html`
 
