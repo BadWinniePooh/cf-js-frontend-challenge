@@ -49,15 +49,21 @@ AI imported wrong / non existent files in index.js -> './cfb-add-session-form.js
 Remediation:
 import from previous step || might be that I should've copied them...
 
+### Render selectable tiles (Talk / Workshop / Keynote / Lightning Talk)
+Finding:
+missing css instructions
+Remediation:
+Ask AI to provide the css classes to take.
+
 
 
 ## What to build
 
 ### ✨ `cfb-session-type.js` — new custom element
 
-- [ ] Create `<cfb-session-type>` with `static formAssociated = true`
-- [ ] Call `this.attachInternals()` in the constructor and store internals
-- [ ] Render selectable tiles (Talk / Workshop / Keynote / Lightning Talk)
+- [x] Create `<cfb-session-type>` with `static formAssociated = true`
+- [x] Call `this.attachInternals()` in the constructor and store internals
+- [x] Render selectable tiles (Talk / Workshop / Keynote / Lightning Talk)
 - [ ] Keep selected value in component state and reflect it in the UI
 - [ ] On selection, call `internals.setFormValue(selectedValue)`
 - [ ] Handle validation:
