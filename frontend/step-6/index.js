@@ -9,8 +9,8 @@ import { CfbSessionStore }      from '../step-5/cfb-session-store.js'
 import { CfbFlipCard }          from '../step-5/cfb-flip-card.js'
 import { CfbSessionCard }       from '../step-5/cfb-session-card.js'
 import { CfbSessionType }       from './cfb-session-type.js'
-import { CfbAddSessionForm }    from './cfb-add-session-form.js'
-import { CfbEditSessionForm }   from './cfb-edit-session-form.js'
+import { CfbAddSessionForm }    from '../step-5/cfb-add-session-form.js'
+import { CfbEditSessionForm }   from '../step-5/cfb-edit-session-form.js'
 
 customElements.define(CfbSessionType.elementName,      CfbSessionType)
 customElements.define('cfb-tag',                       CfbTag)

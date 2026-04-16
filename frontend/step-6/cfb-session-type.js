@@ -3,5 +3,7 @@
 // constraint validation (required + native reportValidity).
 
 export class CfbSessionType extends HTMLElement {
+  static elementName = 'cfb-session-type'
+  
   // TODO: This is your magic
 }

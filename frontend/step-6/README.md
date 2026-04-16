@@ -41,6 +41,16 @@ user opens add/edit form and selects session type tile
 
 ---
 
+## Findings
+
+### wrong imports
+Finding:
+AI imported wrong / non existent files in index.js -> './cfb-add-session-form.js' and './cfb-edit-session-form.js'
+Remediation:
+import from previous step
+
+
+
 ## What to build
 
 ### ✨ `cfb-session-type.js` — new custom element
