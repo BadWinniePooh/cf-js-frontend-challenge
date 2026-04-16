@@ -40,9 +40,8 @@ export function sessionFormFields(idPrefix, cssPrefix) {
     <fieldset class="${p}__fieldset">
       <legend class="${p}__legend">Session type</legend>
       ${SESSION_TYPES.map((t, i) => `
-        <label class="${p}__radio-label">
-          <cfb-session-type name="session-type" value="${t.toLowerCase()}" required></cfb-session-type>  
-        </label>`).join('')}
+          <cfb-session-type name="session-type" value="${t.toLowerCase()}" required></cfb-session-type>
+        `).join('')}
     </fieldset>
 
     <div class="${p}__field">

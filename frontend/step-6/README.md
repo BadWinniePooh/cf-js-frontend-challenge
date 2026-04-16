@@ -66,10 +66,11 @@ Ask AI to provide the css classes to take.
 - [x] Render selectable tiles (Talk / Workshop / Keynote / Lightning Talk)
 - [x] Keep selected value in component state and reflect it in the UI
 - [x] On selection, call `internals.setFormValue(selectedValue)`
-- [ ] Handle validation:
+- [x] Handle validation:
     1. if `required` and empty -> `setValidity({ valueMissing: true }, 'Please select a session type.')`
     2. if valid -> `setValidity({})`
     3. call `reportValidity()` when appropriate (e.g. submit path)
+    -- I believe 3 is already handled by the parent forms and cascades down.
 
 ### 🚧 `cfb-add-session-form.js`
 
