@@ -1,0 +1,5 @@
+badge_printing
+reminder_sender
+room_availability
+schedule_visualising
+speaker_feedback

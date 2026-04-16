@@ -1,0 +1,67 @@
+{
+  "sessions": [
+    {
+      "start": "09:00",
+      "length": 60,
+      "title": "Keynote: The Future of Testing",
+      "speaker": "Alice Liddell",
+      "room": "Main Hall",
+      "track": "all",
+      "type": "talk"
+    },
+    {
+      "start": "10:30",
+      "length": 90,
+      "title": "How to Test Anything",
+      "speaker": "Sean Lobby",
+      "room": "Room A",
+      "track": "testing",
+      "type": "talk"
+    },
+    {
+      "start": "12:00",
+      "length": 60,
+      "title": "Lunch Break",
+      "speaker": null,
+      "room": "Lobby",
+      "track": "all",
+      "type": "break"
+    },
+    {
+      "start": "13:00",
+      "length": 60,
+      "title": "TDD in Legacy Code",
+      "speaker": "Carol Beck",
+      "room": "Room B",
+      "track": "tdd",
+      "type": "talk"
+    },
+    {
+      "start": "14:15",
+      "length": 45,
+      "title": "Approval Testing 101",
+      "speaker": "Dave Langr",
+      "room": "Room A",
+      "track": "testing",
+      "type": "workshop"
+    },
+    {
+      "start": "15:30",
+      "length": 15,
+      "title": "Coffee Break",
+      "speaker": null,
+      "room": "Lobby",
+      "track": "all",
+      "type": "break"
+    },
+    {
+      "start": "15:45",
+      "length": 60,
+      "title": "Characterisation Tests in Practice",
+      "speaker": "Eve Feathers",
+      "room": "Room B",
+      "track": "refactoring",
+      "type": "talk"
+    }
+  ]
+}

@@ -7,7 +7,7 @@ export class SpeakerApiClient {
       id,
       name: `Speaker ${id}`,
       bio: `Bio for speaker ${id}`,
-    };
+    }
   }
 
   async fetchTalksBySpeaker(id) {
@@ -16,7 +16,7 @@ export class SpeakerApiClient {
       { id: `${id}-1`, title: 'Opening Keynote', cancelled: false, attendees: 250 },
       { id: `${id}-2`, title: 'Cancelled Talk', cancelled: true, attendees: 0 },
       { id: `${id}-3`, title: 'Popular Session', cancelled: false, attendees: 400 },
-    ];
+    ]
   }
 }
 

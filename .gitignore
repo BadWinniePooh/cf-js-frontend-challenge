@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij+all,visualstudiocode,osx,windows,linux,yarn,npm,node
 
 ### Intellij+all ###
+.idea
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
@@ -341,7 +342,22 @@ $RECYCLE.BIN/
 
 # Custom exceptions
 
-ai-*-plan.md
 
 !.idea/jsLinters/
 !.idea/jsLinters/eslint.xml
+
+*.code-workspace
+
+# Python (finding-seams exercise)
+**/python/.venv/
+**/python/.pytest_cache/
+**/python/**/__pycache__/
+
+# Kotlin / Gradle (finding-seams)
+**/kotlin/.gradle/
+**/kotlin/build/
+
+# .NET (finding-seams)
+*.sln.DotSettings.user
+**/csharp/**/bin/
+**/csharp/**/obj/
