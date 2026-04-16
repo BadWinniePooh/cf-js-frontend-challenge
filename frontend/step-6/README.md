@@ -47,7 +47,7 @@ user opens add/edit form and selects session type tile
 Finding:
 AI imported wrong / non existent files in index.js -> './cfb-add-session-form.js' and './cfb-edit-session-form.js'
 Remediation:
-import from previous step
+import from previous step || might be that I should've copied them...
 
 
 
@@ -77,8 +77,8 @@ import from previous step
 
 ### 🚧 `index.js` and `index.html`
 
-- [ ] Register/import the new element in step 6
-- [ ] Keep board wiring and store flow unchanged from step 5
+- [x] Register/import the new element in step 6
+- [x] Keep board wiring and store flow unchanged from step 5
 
 ---
 
