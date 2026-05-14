@@ -18,7 +18,7 @@ export class SignupHandler {
     }
     const user = this.#userRepository.findById(userId)
     if (!user) {
-      throw new Error('User not found')
+      throw new Error('Attendee not found')
     }
     session.attend(user.id)
 

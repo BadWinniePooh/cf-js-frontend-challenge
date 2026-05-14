@@ -9,38 +9,51 @@ describe('acceptance test', () => {
   let sessionRepository
   let userRepository
   let signupHandler
-  let session
-  let userId
+  let aRandomUserId
+  let existingSession
 
   beforeEach(() => {
     sessionRepository = new SessionRepository()
-    session = new Session(v4())
-    sessionRepository.addSession(session)
     userRepository = new UserRepository()
     signupHandler = new SignupHandler(sessionRepository, userRepository)
-    userId = v4()
+    aRandomUserId = v4()
+    existingSession = new Session(v4())
   })
 
   it('when everything is fine', () => {
-    signupHandler.signUpUserToSession(userId, session.id)
+    // Setup Data to database
+    sessionRepository.addSession(existingSession)
+    userRepository.addUser(aRandomUserId)
 
-    const sessionFromRepo = sessionRepository.findById(session.id)
+    // Act
+    signupHandler.signUpUserToSession(aRandomUserId, existingSession.id)
 
-    expect(sessionFromRepo.getAttendees()).to.deep.equal([userId])
+    // Assert the direct sife-effect
+    const sessionFromRepo = sessionRepository.findById(existingSession.id)
+    expect(sessionFromRepo.getAttendees()).to.deep.equal([aRandomUserId])
   })
 
   describe('when done with the exercise - these do not throw exceptions but the interface is something different', () => {
 
-    it('fails when user not found ', () => {
-      const nonExistingUserId = 'test-user'
-      const fn = () => signupHandler.signUpUserToSession(nonExistingUserId, session.id)
+    it('fails when reading from UserDb fails ', () => {
+      sessionRepository.addSession(existingSession)
+      const fetchingUserFromDbFails = 'this-id-simulates-exception-on-db-read'
+      const fn = () => signupHandler.signUpUserToSession(fetchingUserFromDbFails, existingSession.id)
 
-      expect(fn).to.throw('User does not exist')
+      expect(fn).to.throw('Db error: connection failed')
+    })
+
+    it('fails when user not found ', () => {
+      sessionRepository.addSession(existingSession)
+      const attendeeNotFound = 'any-user-not-in-repository'
+      const fn = () => signupHandler.signUpUserToSession(attendeeNotFound, existingSession.id)
+
+      expect(fn).to.throw('Attendee not found')
     })
 
     it('fails when session not found ', () => {
       const nonExistingSessionId = v4()
-      const fn = () => signupHandler.signUpUserToSession(userId, nonExistingSessionId)
+      const fn = () => signupHandler.signUpUserToSession(aRandomUserId, nonExistingSessionId)
 
       expect(fn).to.throw('Session not found')
     })
@@ -48,7 +61,7 @@ describe('acceptance test', () => {
     it('fails when sessionRepository fails to fetch', () => {
       const sessionIdThatFetchingFailsInRepository = 'test-session'
 
-      const fn = () => signupHandler.signUpUserToSession(userId, sessionIdThatFetchingFailsInRepository)
+      const fn = () => signupHandler.signUpUserToSession(aRandomUserId, sessionIdThatFetchingFailsInRepository)
 
       expect(fn).to.throw('Error in retrieving session')
     })
@@ -56,8 +69,9 @@ describe('acceptance test', () => {
     it('fails when saving fails', () => {
       const sessionWhereSavingFailsInRepository = new Session('test-session-save-fails')
       sessionRepository.addSession(sessionWhereSavingFailsInRepository)
+      userRepository.addUser(aRandomUserId)
 
-      const fn = () => signupHandler.signUpUserToSession(userId, sessionWhereSavingFailsInRepository.id)
+      const fn = () => signupHandler.signUpUserToSession(aRandomUserId, sessionWhereSavingFailsInRepository.id)
 
       expect(fn).to.throw('Error on save')
     })

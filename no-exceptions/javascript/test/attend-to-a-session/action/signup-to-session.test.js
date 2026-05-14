@@ -41,7 +41,7 @@ describe('Session object', () => {
 
       const fn = () => signupHandler.signUpUserToSession(userId, sessionId)
 
-      expect(fn).to.throw('User not found')
+      expect(fn).to.throw('Attendee not found')
       expect(sessionRepository.save).to.not.have.been.called
     })
 
