@@ -4,7 +4,7 @@
 // Four things are new:
 //   1. <cfb-session-loader>     — poplulates IDB with seed data (if IDB is empty)
 //   2. <cfb-session-store>      — catches cfb-session-created + cfb-session-removed
-//                                 → mutates IDB → fires sessionsLoaded
+//                                 → mutates IDB → fires cfbSessionsLoadedToIDB (cfb-sessions-loaded-to-idb)
 //   3. <cfb-session-card>       — Implements a 'menu' behavior for the session card
 //   4. <cfb-menu>               — fires cfb-session-removed using step-4 events.js
 

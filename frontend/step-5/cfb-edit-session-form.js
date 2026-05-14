@@ -1,4 +1,4 @@
-import { cfbSessionUpdated } from './events.js'
+import { cfbSessionUpdated } from './lib/events.js'
 import { isKnownTag, labelToColor } from './lib/label-to-color.js'
 
 function parseSpeaker(raw) {

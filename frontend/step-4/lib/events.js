@@ -1,4 +1,4 @@
-export {cfbSessionCreated} from '../step-3/events.js'
+export {cfbSessionCreated} from '../../step-3/lib/events.js'
 
 export const EventTypes = {
   SESSION_CREATED: 'cfb-session-created',

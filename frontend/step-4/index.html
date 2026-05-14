@@ -26,8 +26,8 @@
        cfb-session-loader.js     — seeds data on IndexedDB, if it's empty
        cfb-session-generator.js  — from step-3
        cfb-session-store.js      — catches cfb-session-created + cfb-session-removed
-                                   → mutates IDB → fires sessionsLoaded ↑
-       cfb-board-orchestrator.js — catches sessionsLoaded, etc. → pushes data-sessions ↓
+                                   → mutates IDB → fires cfbSessionsLoadedToIDB() ↑
+       cfb-board-orchestrator.js — catches cfb-sessions-loaded-to-idb → sets data-latest-updated-at ↓
        cfb-schedule.js (step-3)  — from step-3
 
      <cfb-session-store> wraps both the generator and the schedule so that

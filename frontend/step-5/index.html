@@ -22,20 +22,21 @@
 
        cfb-add-session-form.js   — form submit → FormData → fires cfb-session-created ↑
        cfb-session-store.js      — catches cfb-session-created + cfb-session-updated
-                                   + cfb-session-removed
-                                   → mutates IDB → fires sessionsLoaded ↑
-       cfb-board-orchestrator.js — catches sessionsLoaded → pushes data-sessions ↓
-       cfb-schedule.js (step-3)  — observes data-sessions → re-renders
+                                   + cfb-session-removed → mutates IDB
+                                   → fires cfb-sessions-loaded-to-idb ↑
+       cfb-board-orchestrator.js — catches cfb-sessions-loaded-to-idb
+                                   → sets data-latest-updated-at on .listens-schedule-updates
+       cfb-schedule.js (step-4)  — observes data-latest-updated-at → getAllSessions() → re-renders
 
-     The only change from Step 4: <cfb-session-generator> is replaced by
-     <cfb-add-session-form>. Everything else is identical.
+     Change from Step 4: <cfb-session-generator> is replaced by <cfb-add-session-form>.
+     Loader + store + orchestrator + schedule pattern matches Step 4.
      ═══════════════════════════════════════════════════════════════════════════ -->
 <cfb-board-orchestrator>
 
     <cfb-session-loader></cfb-session-loader>
 
     <cfb-session-store>
-        <cfb-add-session-form></cfb-add-session-form>
+        <cfb-session-generator></cfb-session-generator>
         <cfb-schedule class="listens-schedule-updates"></cfb-schedule>
     </cfb-session-store>
 

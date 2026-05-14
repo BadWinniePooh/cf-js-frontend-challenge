@@ -1,4 +1,4 @@
-import { EventTypes, cfbSessionsLoadedToIDB } from './events.js'
+import { EventTypes, cfbSessionsLoadedToIDB } from './lib/events.js'
 import { saveSessions, deleteSession, getAllSessions, updateSession } from '../step-4/session-store.js'
 
 // Step 5 variant: same as Step 4, plus explicit handling of SESSION_UPDATED
@@ -7,6 +7,8 @@ import { saveSessions, deleteSession, getAllSessions, updateSession } from '../s
 // Both mutation handlers end in saveSessions + sessionsLoaded — the
 // orchestrator still only listens for sessionsLoaded.
 export class CfbSessionStore extends HTMLElement {
+    static elementName = 'cfb-session-store'
+
     connectedCallback() {
         this.addEventListener(EventTypes.SESSION_CREATED,  this.#onSessionCreated)
         this.addEventListener(EventTypes.SESSION_UPDATED,  this.#onSessionUpdated)

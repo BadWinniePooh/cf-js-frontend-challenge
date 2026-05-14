@@ -1,193 +1,244 @@
 # Step 3 — `<cfb-board-orchestrator>` · Pub/Sub
 
-In Step 2 you composed atoms into a molecule. Now it is time to make components
-**talk to each other without knowing about each other**.
+In Step 2 you rendered one **molecule** (`<cfb-session-card>`) from session data. Now the board becomes **live**: a 
+control can announce “new session” and **other** components update — **without** importing each other’s classes.
 
-This step introduces the **orchestrator / mediator** pattern using plain DOM
-events. A generator button fires an event **up** through the DOM tree; an
-orchestrator catches it in the middle and pushes state **down** to all relevant 
-components (located with a specific css class); a schedule component reacts and re-renders.
+This step is about **events bubbling up** and **state pushed down** through attributes. The exact event name, payload 
+shape, and wiring live in **Concepts** and **`events.js`** — after you’ve done **Connections** — so your first guesses 
+in the learning log stay honest.
 
-```html
-<cfb-board-orchestrator>
-    <cfb-session-generator></cfb-session-generator>
-    <cfb-schedule class="cfb-updates-schedule"></cfb-schedule>
-</cfb-board-orchestrator>
+> **Before you start:** branch, HTTP server, clean console — see [getting-started.md](./getting-started.md).
+
+### Async / solo
+
+These challenges are written for **async, often solo** work. Use [your Step 3 learning log](./learning-log.md), a short message to 
+your facilitator or team, or a brief sync when the README says “pair.” **Short timeboxes** matter more than the format.
+
+---
+
+## Learning goal
+
+By the end of this step, you can:
+
+- Dispatch a **`CustomEvent`** that **bubbles** so a deep child can signal an ancestor **without imports**.
+- Implement an **orchestrator** that listens on itself, keeps **`#sessions`**, and pushes **`data-sessions`** down to `<cfb-schedule>`.
+- Explain why **`observedAttributes` + `attributeChangedCallback`** act like simple **parent → child** data binding for the schedule.
+
+---
+
+## 1) Connections
+
+Do these **in order**; capture answers in [your Step 3 learning log](./learning-log.md).
+
+1. **Solo, ~2 min — How does the button reach the board?**  
+   [How does the button reach the board?](./learning-log.md#step-3-connections-how-notify) *(Revisit in Conclusions.)*
+
+2. **Solo, ~3 min — Bridge from Step 2**  
+   [Bridge from Step 2](./learning-log.md#step-3-bridge-step-2): single card vs dynamic list.
+
+3. **Optional pair / async, ~3 min**  
+   [Surprise / compare](./learning-log.md#step-3-connections-surprise).
+
+4. **Solo, ~2 min — Topic link**  
+   [Topic link](./learning-log.md#step-3-topic-link): **A** or **B**.
+
+---
+
+## 2) Concepts
+
+### Events up, state down
+
+- **Up:** a component calls **`dispatchEvent`** on itself. With **`bubbles: true`**, the event walks toward `document`;
+  **ancestors** can listen (including your orchestrator).
+- **Down:** the orchestrator updates **`data-sessions`** on `<cfb-schedule>`. The schedule declares **`observedAttributes`** 
+  and **re-renders** when that attribute changes — no direct reference to child card internals. (this is already 
+  implemented)
+
+Neither the generator nor the schedule needs to **`import`** the orchestrator’s class. The **DOM tree** is the wiring.
+
+### `sessionDetails` and `cfb-session-created`
+
+This repo uses **`events.js`**:
+
+- Event **type** (code wins): **`cfb-session-created`** (`EventTypes.SESSION_CREATED`).
+- **`cfbSessionCreated(data)`** builds a **`CustomEvent`** whose **`detail`** merges **`sessionDetails(data)`** from 
+  [`../step-2/lib/builds-session-details.js`](../step-2/lib/builds-session-details.js) with a **`_type`** field so the orchestrator can verify the payload.
+
+The generator calls **`cfbSessionCreated(...)`** with the object from [`lib/generate-random-session.js`](./lib/generate-random-session.js). Shape 
+includes **`id`**, **`title`**, **`day`**, **`room`**, **`tags`**, **`attendees`**, etc. — normalized through **`sessionDetails`**.
+
+### End-to-end flow (reference)
+
+Legend: ✨ you implement / finish · 🚧 partly provided · ✅ read & trace
+
 ```
-
-## The data flow
-
-Legend:
-✨: New features, core of the exercise
-🚧: Partly done, part of this exercise
-✅: This is already provided
-
-```
-[Add random session button click]
+[Click “Add random session”]
         │
         ▼
 ✨ cfb-session-generator
-  dispatches sessionCreated {bubbles:true}
-  detail: { session: { id, title, day, tags, attendees } }
+  dispatches cfb-session-created { bubbles: true, composed: true }
+  detail: sessionDetails(session) + _type
         │  bubbles UP
         ▼
 🚧 cfb-board-orchestrator
-  adds session to #sessions array
-  sets data-sessions='[…]' on <cfb-schedule>
-        │  attribute change goes DOWN
+  listens for cfb-session-created
+  pushes session into #sessions
+  sets data-sessions='[…]' on <cfb-schedule class="cfb-updates-schedule">
+        │  attribute goes DOWN
         ▼
 ✅ cfb-schedule
   observedAttributes → data-sessions
-  parses JSON → re-renders session cards
+  parses JSON → groups by day → renders <cfb-session-card> per session
 ```
 
-## What to build
+### Orchestrator role
 
-### ✨ `cfb-session-generator`
+- **One job:** coordinate — merge incoming sessions and **fan out** list state to schedule element(s) via **attributes**.
+- **Not** the generator’s job to find the schedule; **not** the schedule’s job to listen for button clicks.
 
-- [ ] Render an "Add random session" button on `connectedCallback`
-- [ ] On click, generate a random session object
-      (`id`, `title`, `day`, `room`, `tags`, `attendees`) (you can use 
-       [lib/generate-random-session.js](./lib/generate-random-session.js))
-- [ ] Dispatch a `sessionAdded` `CustomEvent` with `bubbles: true` and the
-      session in `detail`
+### Listener hygiene
 
-### 🚧 `cfb-board-orchestrator`
+Use a **stable** function reference for **`addEventListener`** / **`removeEventListener`** (e.g. a **bound** method or 
+a **class field arrow**). Remove listeners in **`disconnectedCallback`** to avoid leaks.
 
-- [ ] Listen for `sessionAdded` on itself (it bubbles up naturally)
-- [x] Maintain an internal `#sessions` array (it starts with one item)
-- [ ] On each event: push the new session and update `data-sessions` on the
-      child `<cfb-schedule>` element with the full JSON array
-- [ ] Remove the listener in `disconnectedCallback`
+---
 
-### ✅ `cfb-schedule`
+### One-minute review (~1 min)
 
-- [ ] This readily implemented for you, but please go through it, if you please. What it does is:
-- [x] Declares `data-sessions` in `observedAttributes`
-- [x] In `attributeChangedCallback`: parses the JSON, group sessions by `day`,
-      renders one column per day, one card per session
-- [x] Shows a "No sessions yet" placeholder until the first session arrives
-- [x] Re-uses `<cfb-session-card>` from Step 2 for sessions
+After reading the sections above, complete [One-minute review](./learning-log.md#step-3-concepts-one-minute) in your learning log.
 
-## Constraints
+---
 
-- Use only HTML, JavaScript and (optionally) CSS.
-- Do **not** use any frameworks or libraries.
-- Do **not** spend more than 30 minutes on the challenge.
+### Concept check
+
+Do **two** short activities in your [learning log](./learning-log.md). 
+
+1. **Mini quiz** — Open [Mini quiz](./learning-log.md#step-3-concept-quiz) and answer the three questions there *before* 
+   you rely on copy-paste from the source files.
+2. **Flow sketch** — Then open [Flow sketch](./learning-log.md#step-3-concept-flow-sketch) and draw the four-step pipeline
+   (boxes + arrow labels). Paper is fine; paste a photo or ASCII into the log if you like.
+
+When both are done, move on to **Concrete practice**.
+
+---
+
+## 3) Concrete practice
+
+### Files to work in
+
+| File                                                       | Role                                                                                                  |
+|------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| [`cfb-session-generator.js`](./cfb-session-generator.js)   | Button → **`cfbSessionCreated`** with random session data                                             |
+| [`cfb-board-orchestrator.js`](./cfb-board-orchestrator.js) | Listen · maintain **`#sessions`** · **`setAttribute('data-sessions', …)`** on `.cfb-updates-schedule` |
+| [`cfb-schedule.js`](./cfb-schedule.js)                     | **Read** implementation: **`data-sessions`**, grouping, cards                                         |
+
+Also scan [`events.js`](./events.js) and [`index.js`](./index.js) for registration order (`cfb-tag` / **`cfb-session-card`** before cards render).
+
+Build so you can **show**:
+
+- [ ] **`cfb-session-generator`**: button in **`connectedCallback`**; click builds a session (use **`generateRandomSession`**) 
+      and dispatches **`cfbSessionCreated(...)`** from **`events.js`** (not a hand-rolled string event type unless you 
+      match **`events.js`**).
+- [ ] **`cfb-board-orchestrator`**: register a listener on **self** for **`EventTypes.SESSION_CREATED`** (event string 
+      **`cfb-session-created`**); on each event, append to **`#sessions`** and set **`data-sessions`** on 
+      **`querySelectorAll('.cfb-updates-schedule')`**.
+- [ ] **Remove** the same listener in **`disconnectedCallback`**.
+- [ ] **`cfb-schedule`**: trace **`observedAttributes`**, **`attributeChangedCallback`**, **`#render`**, and how it emits
+      **`<cfb-session-card data-session-details='…'>`**.
+
+**Constraints**
+
+- HTML, JavaScript, and (optionally) CSS only — no frameworks.
+- Aim for about **30–45 minutes** on the core challenge.
+
+**Definition of done**
+
+- Clicking **Add random session** adds a visible card (or updates the list) **without** any component **`import`**ing another’s class for wiring.
+- **`data-sessions`** on `<cfb-schedule>` updates and the schedule re-renders.
+- You can name the event type **`cfb-session-created`** and point to **`sessionDetails`** / **`events.js`** in one sentence.
+
+In [Question for your facilitator](./learning-log.md#step-3-concrete-facilitator-question), ask one real question and capture the answer.
+
+---
+
+## 4) Conclusions
+
+### 1) Quick check
+
+Answer in [your learning log — Quick check](./learning-log.md#step-3-conclusions-quick-check):
+
+- Where is **`cfb-session-created`** defined, and who **dispatches** it?
+- In one line: what travels **up** vs **down** in this step?
+
+### 2) Loop back
+
+Update [How does the button reach the board?](./learning-log.md#step-3-loop-back-notify).
+
+### 3) Key takeaway (journey hub)
+
+Add **one or two sentences** in the [journey hub `learning-log.md`](../learning-log.md#step-3-key-takeaway).
+
+---
+
+### Demos / issues
+
+- Share a short screen recording or a [CodePen](https://codepen.io) link if you want feedback.
+- If you get stuck, note it in your learning log or ping your facilitator.
+
+---
 
 ## Tips
 
-### addEventListener & removeEventListener
-
-These two HtmlElement methods are crucial for this exercise. These provides a way to 
-send a message from an HtmlElement to any of the ancestor HtmlElements, as long as 
-there is an element in the hierarcy that has registered an event listener (with 
-`addEventListener`) with the same event name/type - well, string.
-
-And for not letting event listeners to stay in the memory, you have to remember to 
-remove the event listeners at the end of component lifecycle. But sometimes, you might 
-need to remove (and readd) event listeners in attributeChangedCallback, too.
-
-### Events travel in one direction — and that is the point
-
-`cfb-session-generator` dispatches with `bubbles: true`. It does not import
-`cfb-board-orchestrator`; it does not know an orchestrator exists. The
-orchestrator is just an ancestor that happens to be listening.
-
-Likewise, the orchestrator does not import `cfb-schedule`. It just looks for
-a child matching `querySelector('.cfb-updates-schedule')` and sets an attribute on it.
-
-Neither publisher nor subscriber needs to know the other's class name.
-
 ### Stable listener references
 
-Arrow-function class fields give you a stable reference to pass to both
-`addEventListener` and `removeEventListener`:
-
 ```js
-#onSessionAdded = (e) => {
-    this.#sessions.push(e.detail.session)
-    this.#updateSchedule()
+#onSessionCreated = (e) => { /* update #sessions, push data-sessions */ }
+
+connectedCallback() {
+  this.addEventListener(EventTypes.SESSION_CREATED, this.#onSessionCreated)
 }
-
-connectedCallback()    { this.addEventListener('sessionAdded', this.#onSessionAdded) }
-disconnectedCallback() { this.removeEventListener('sessionAdded', this.#onSessionAdded) }
-```
-
-The other way to make sure `this` is bound correctly in the event handler is to `bind` the 
-eventHandler explicitly. If you ever encounter an issue that '#sessions' not found on 'undefined',
-the problem most likely lies in `this`.
-
-```js
-class X extends HTMLElement{
-  connectedCallback()    { this.addEventListener('sessionAdded', this.#onSessionAdded.bind(this)) }
-  disconnectedCallback() { this.removeEventListener('sessionAdded', this.#onSessionAdded.bind(this)) }
-  
-  onSessionAdded(e) {
-    this.#sessions.push(e.detail.session)
-    this.#updateSchedule()
-  }
+disconnectedCallback() {
+  this.removeEventListener(EventTypes.SESSION_CREATED, this.#onSessionCreated)
 }
 ```
 
-### Generating a random session
+If you use **`.bind(this)`**, you must **remove** the **same** function reference — otherwise **`removeEventListener`** won’t match.
 
-Keep a small pool of titles, days, rooms and tags and pick randomly:
+Curious why? See **Extras** at the end of this README — optional self-study on **`this`** binding.
 
-For this exercise, there is [a small helper](./lib/generate-random-session.js) 
-to create a random session
+### Schedule attribute
 
-
-### Rendering a JSON attribute
-
-`cfb-schedule` only needs to react to one attribute:
+`cfb-schedule` listens for **`data-sessions`** — a **JSON array** of session objects (each compatible with **`sessionDetails`** / card **`data-session-details`**).
 
 ```js
 static get observedAttributes() { return ['data-sessions'] }
 
 attributeChangedCallback(name, _old, newValue) {
-    if (_old === newValue) return
-    if (name === 'data-sessions') {
-        this.#sessions = JSON.parse(newValue ?? '[]')
-        this.#render()
-    }
+  if (name === 'data-sessions') {
+    this.#sessions = JSON.parse(newValue ?? '[]')
+    this.#render()
+  }
 }
 ```
 
+---
+
 ## Extras
 
-Should you finish early, here are some ideas to go deeper:
+If you finish early:
 
-- [ ] Add a "Clear all" button that dispatches `sessionsCleared`; the
-      orchestrator resets `#sessions` and pushes an empty array down
-- [ ] Animate new cards in with a CSS `@keyframes` slide-down triggered by
-      adding a class right after insertion
-- [ ] Show a live session count somewhere outside the orchestrator — it only
-      needs to listen for `sessionAdded` events too
-- [ ] Compare this pattern with the Step 10 version: what does IndexedDB buy
-      you that an in-memory array cannot?
-
-## Demos
-
-If you complete the challenge, share a short screen recording or a
-[CodePen](https://codepen.io) link here.
-
-## Issues
-
-If you get stuck, note down the problem here so we can discuss it together.
+- [ ] Dispatch **`sessionsCleared`** (or similar); orchestrator resets **`#sessions`** and pushes **`[]`** down.
+- [ ] Animate new cards with **`@keyframes`** when a card appears.
+- [ ] A small **session count** badge elsewhere: listen for **`cfb-session-created`** without importing the orchestrator.
+- [ ] Compare this in-memory list with **Step 4** (IndexedDB): what does persistence buy you?
+- [ ] **Self-study (optional, not part of this step’s scope):** Dig into how **`this`** is bound in JavaScript — plain functions vs **arrow functions**, **`.bind(this)`**, and object methods. It explains why **`removeEventListener`** must receive the **same** function reference you passed to **`addEventListener`** ([listener hygiene above](#stable-listener-references)). [MDN: `this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is a solid starting point.
 
 ---
 
-### End result
+### End result (skills you can demonstrate)
 
-After completing this step you will have learned:
-
-- How `CustomEvent` with `bubbles: true` lets a child signal an ancestor
-  **without importing it**
-- The **orchestrator / mediator** pattern: one parent coordinates many
-  children that never talk to each other directly
-- How `observedAttributes` + `attributeChangedCallback` act as a simple
-  **data-binding** mechanism from parent to child
-- The asymmetry of events: they travel **up** via bubbling; state travels
-  **down** via attributes
-- Why removing listeners in `disconnectedCallback` prevents memory leaks
+- **`CustomEvent`** + **`cfb-session-created`** with **`bubbles: true`** / **`composed: true`**
+- **Orchestrator / mediator** — coordinate without coupling class names
+- **Push state down** via **`data-sessions`** + **`attributeChangedCallback`**
+- **Clean teardown** — **`removeEventListener`** in **`disconnectedCallback`**
+- **`sessionDetails`** as the shared session shape from **`events.js`**

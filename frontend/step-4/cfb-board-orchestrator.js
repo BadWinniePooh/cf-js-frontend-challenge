@@ -1,41 +1,23 @@
 // The change from step 3:
 // ✨ - The orchestrator no longer has inner state - it only listens to events and passes them on.
-import { EventTypes } from './events.js'
+import { EventTypes } from './lib/events.js'
 
 export class CfbBoardOrchestrator extends HTMLElement {
-  // 🔥: remove this
-  #sessions = [{
-    'title': 'Opening Keynote',
-    'day': 'Wednesday',
-    'tags': [{ 'label': 'Keynote', 'color': 'blue' }],
-    'attendees': [{ 'name': 'Aino Korhonen', 'initials': 'AK' }, { 'name': 'Jukka Leinonen', 'initials': 'JL' }]
-  }]
 
   connectedCallback() {
-    // 🔥: We want to remove this behavior ... and
-    this.addEventListener(EventTypes.SESSION_CREATED, this.#addSession)
-    this.#updateChildren()
-    // ✨ instead let the children to read directly from IndexedDB by updating 'data-latest-updated-at'
+    this.addEventListener(EventTypes.SESSION_LOADED_TO_IDB, this.#onSessionsLoaded)
   }
 
   disconnectedCallback() {
-    // 🔥: We want to remove this behavior ... and
-    this.removeEventListener(EventTypes.SESSION_CREATED, this.#addSession)
-    // ✨ remove the other listener
+    this.removeEventListener(EventTypes.SESSION_LOADED_TO_IDB, this.#onSessionsLoaded)
   }
 
-  // 🔥: burn this
-  #addSession(evt) {
-    if (evt.detail._type !== EventTypes.SESSION_CREATED) return
-    this.#sessions = [...this.#sessions, evt.detail]
-    this.#updateChildren()
-  }
-
-  // 🔥: burn this
-  #updateChildren() {
-    this.querySelectorAll('.cfb-updates-schedule').forEach(schedule => {
-      schedule.setAttribute('data-sessions', JSON.stringify(this.#sessions))
+  #onSessionsLoaded(e) {
+    // 🚧 Instead of passing the data around, we just inform the elements that they need to update.
+    // ✨ Here: you should update the data-latest-updated-at attribute on all cfb-updates-schedule elements.
+    const now = Date.now()
+    this.querySelectorAll('.listens-schedule-updates').forEach(schedule => {
+      schedule.setAttribute('data-latest-updated-at', now)
     })
   }
-
 }

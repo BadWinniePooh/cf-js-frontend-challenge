@@ -1,4 +1,4 @@
-import { cfbSessionCreated } from './events.js'
+import { cfbSessionCreated } from './lib/events.js'
 import { sessionDetails } from '../step-2/lib/builds-session-details.js'
 import { isKnownTag, KNOWN_TAGS, labelToColor } from './lib/label-to-color.js'
 
@@ -33,6 +33,7 @@ export class CfbAddSessionForm extends HTMLElement {
         this.#dialog().removeEventListener('close', this.#onDialogClose)
         // ✨ Remove event listeners here,
     }
+
     // ── DOM helpers ───────────────────────────────────────────────
 
     #dialog    = () => this.querySelector('dialog')
@@ -74,7 +75,7 @@ export class CfbAddSessionForm extends HTMLElement {
                 <div class="cfb-add-session-form__card">
                     <p>Add Form here</p>
                 </div>
-            </dialog>   
+            </dialog>
         `
     }
 }

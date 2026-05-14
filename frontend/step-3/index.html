@@ -22,7 +22,7 @@
      ORCHESTRATOR
      Read through the three source files in this order:
 
-       cfb-session-generator.js   — fires sessionAdded {bubbles:true}
+       cfb-session-generator.js   — dispatches cfb-session-created { bubbles: true, composed: true }
        cfb-board-orchestrator.js  — catches it, maintains #sessions, pushes down
        cfb-schedule.js            — observes data-sessions, parses, re-renders
 

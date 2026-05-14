@@ -4,22 +4,16 @@ export class CfbSchedule extends HTMLElement {
   // 🚧: Change this to not to listen to 'data-sessions' but 'data-latest-updated-at' instead.'
   #sessions = []
 
+  static elementName = 'cfb-schedule'
+  static definedAttributes = { latestUpdatedAt: 'data-latest-updated-at' }
+
+
   static get observedAttributes() {
-    // 🚧: instead of 'data-sessions' , observe the data attribute orchestrator uses to inform of 'new data available'
-    return ['data-sessions']
+    return [CfbSchedule.definedAttributes.latestUpdatedAt]
   }
 
   connectedCallback() {
     this.#render()
-  }
-
-  attributeChangedCallback(name, _old, newValue) {
-    // 🔥: remove this if-statement
-    if (name === 'data-sessions') {
-      this.#sessions = JSON.parse(newValue ?? '[]')
-      this.#render()
-    }
-    // ✨: instead - read `this.#sessions` from IndexedDB
   }
 
   async attributeChangedCallback(name, oldValue, newValue) {

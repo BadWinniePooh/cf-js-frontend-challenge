@@ -18,11 +18,11 @@
      Use this area to test your <cfb-session-card> component.
 
      Once you have implemented cfb-session-card.js and registered
-     it in index.js, try passing session data via a JSON attribute:
+     it in index.js, pass session data via data-session-details (rich attendees):
 
-       <cfb-session-card data-session='{"title":"Opening Keynote",
+       <cfb-session-card data-session-details='{"title":"Opening Keynote",
          "tags":[{"label":"Keynote","color":"blue"}],
-         "attendees":["AK","JS"]}'>
+         "attendees":[{"name":"Aino Korhonen","initials":"AK"},{"name":"Jess Smith","initials":"JS"}]}'>
        </cfb-session-card>
 
      ═══════════════════════════════════════════════════════════ -->

@@ -1,4 +1,4 @@
-import { cfbSessionCreated } from './events.js'
+import { cfbSessionCreated } from './lib/events.js'
 import { generateRandomSession } from './lib/generate-random-session.js'
 
 export class CfbSessionGenerator extends HTMLElement {
