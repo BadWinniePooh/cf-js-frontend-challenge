@@ -8,12 +8,10 @@
     <script type="importmap">
         {
           "imports": {
-            "msw": "https://esm.sh/msw",
-            "msw/browser": "https://esm.sh/msw/browser",
-            "msw-": "./node_modules/msw/lib/core/index.mjs",
-            "msw/browser-": "./node_modules/msw/lib/browser/index.mjs",
+            "msw": "./node_modules/msw/lib/core/index.mjs",
+            "msw/browser": "./node_modules/msw/lib/browser/index.mjs",
 
-            "document": "this is also needed for msw mocking",
+            "document": "this is also needed for msw mocking, but these must be through ESM.sh",
             "@mswjs/interceptors/WebSocket": "https://esm.sh/@mswjs/interceptors/WebSocket",
             "@mswjs/interceptors": "https://esm.sh/@mswjs/interceptors",
             "outvariant": "https://esm.sh/outvariant",

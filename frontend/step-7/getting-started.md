@@ -41,6 +41,9 @@ Leave **MSW** commented out in [`index.js`](./index.js) (as in this repo by defa
 
 ### Option B — MSW in the browser (no backend process)
 
+This is a bit messy - because now the app requires some node modules installed, so you need to start by making a 
+package.json file, and all relevant dependencies.
+
 1. In **`frontend/step-7/`**, install MSW (use **`npm`** or **`yarn`** — a lockfile may already exist):
 
    ```bash

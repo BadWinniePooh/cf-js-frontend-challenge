@@ -1,50 +1,27 @@
 const DEFAULT_BASE_URL = 'http://localhost:3001'
 
-function trimTrailingSlash(url) {
-  return String(url).replace(/\/+$/, '')
-}
-
 function createBackendApi(baseUrl) {
-  const normalizedBaseUrl = trimTrailingSlash(baseUrl)
-
-  async function fetchJson(path) {
-    const res = await fetch(`${normalizedBaseUrl}${path}`)
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    return res.json()
-  }
-
-  async function sendJson(method, path, payload) {
-    const res = await fetch(`${normalizedBaseUrl}${path}`, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-    if (!res.ok) throw new Error(`${method} failed: HTTP ${res.status}`)
-  }
-
   return {
     getSchedule(eventId) {
-      return fetchJson(`/api/schedule/${eventId}`)
+      throw new Error('Not implemented')
     },
     getSessions(eventId) {
-      return fetchJson(`/api/sessions/${eventId}`)
+      throw new Error('Not implemented')
     },
     putSession(eventId, sessionId, payload) {
-      return sendJson('PUT', `/api/sessions/${eventId}/${sessionId}`, payload)
+      throw new Error('Not implemented')
     },
     patchSession(eventId, sessionId, payload) {
-      return sendJson('PATCH', `/api/sessions/${eventId}/${sessionId}`, payload)
+      throw new Error('Not implemented')
     },
   }
 }
 
 let backendApi = createBackendApi(DEFAULT_BASE_URL)
 
-export function configureBackendApi({ baseUrl }) {
-  backendApi = createBackendApi(baseUrl ?? DEFAULT_BASE_URL)
-  return backendApi
-}
-
+// With ESM, this works basically like a singleton. And, because of we do testing with web-test-runner,
+// there is an easy way to now fake the backend API for testing purposes. We do that easily by using
+// importMaps. But that's a topic for 'test-7'
 export function getBackendApi() {
   return backendApi
 }

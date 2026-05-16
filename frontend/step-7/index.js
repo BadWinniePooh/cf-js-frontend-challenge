@@ -5,11 +5,10 @@
  * This is Important!
  *  If you want to try to use MSW instead of the step-7-be backend,
  *  you can uncomment the following lines and comment out the configureBackendApi line.
+ *  Also read the 'getting-started.md' for more details on MSW.
  */
-// Start MSW before any component fires a fetch so the first request is
-// already intercepted. Remove this block when connecting to a real backend.
-import { worker } from './mocks/browser.js'
-await worker().start({ onUnhandledRequest: 'warn' })
+// import { worker } from './mocks/browser.js'
+// await worker().start({ onUnhandledRequest: 'warn' })
 
 
 import { CfbTag } from '../step-1/cfb-tag.js'

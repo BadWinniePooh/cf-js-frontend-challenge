@@ -24,7 +24,7 @@ By the end of this step, you can:
   (with **`res.ok`** / **`try`/`catch`** hygiene).
 - Trace **`<cfb-board-orchestrator>`** waiting for **`scheduleLoaded`** **and** **`sessionsLoaded`** before bumping
   **`data-latest-updated-at`** on **`.listens-schedule-updates`**.
-- Describe how **MSW** intercepts **`fetch`** while **loader** files stay free of **`import 'msw'`**.
+- Extra: Describe how **MSW** intercepts **`fetch`** while **loader** files stay free of **`import 'msw'`**.
 - Optional: relate **`sessionsBackendUpdated`** / **`.listens-session-reloads`** in this repo to “refresh sessions only”
   after a successful **PUT**/**PATCH**.
 
@@ -52,6 +52,8 @@ Do these **in order**; capture answers in [your Step 7 learning log](./learning-
 
 ### `fetch` and errors
 
+when fetching data from backend, there are 2 things to await for: first the fetch, then the JSON parsing. 
+
 - Check **`res.ok`** (or **`res.status`**) before **`res.json()`** — otherwise you parse **HTML error pages** as 
   JSON and get confusing exceptions.
 - Centralising **`fetch`** in **`backend-api.js`** keeps URLs, **`baseUrl`**, and JSON parsing in **one** place; 
@@ -60,16 +62,36 @@ Do these **in order**; capture answers in [your Step 7 learning log](./learning-
 
 ### Loader vs schedule
 
-| Piece                                           | Responsibility                                                                                                                                                                 |
-|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`<cfb-schedule-loader>`**                     | Side effects: HTTP read, write **schedule** stores, **`textContent`** or **`data-state`** status, **`dispatchEvent`** on success or **`loaderError`** on failure.              |
-| **`<cfb-session-loader>`**                      | Side effects: HTTP read, write **sessions** stores, **`textContent`** or **`data-state`** status, **`dispatchEvent`** on success or **`loaderError`** on failure.              |
-| **`<cfb-schedule>`** (from Step 4 in this repo) | Display: when **`data-latest-updated-at`** changes, **re-read** IndexedDB for **`data-event-id`** and render cards — it does **not** call **`fetch`** itself in this pipeline. |
+This is following already established patterns in earlier steps. We split the responsibility of loading data from displaying it.
+And because the loaders and schedule are not descendants, we use an orchestrator to coordinate the two.
+
+```html
+<cfb-board-orchestrator>
+    <div class="loader-status">
+        <cfb-schedule-loader data-event-id="codefreeze-2025"> </cfb-schedule-loader>
+        <cfb-session-loader class="listens-session-reloads" data-event-id="codefreeze-2025"> </cfb-session-loader>
+    </div>
+    <!--[...omitted for brevity]-->
+    <cfb-updates-sessions class="listens-event-changes" data-event-id="codefreeze-2025"> <!-- cfb-session-store earlier -->
+        <cfb-add-session-form></cfb-add-session-form>
+        <cfb-schedule class="listens-schedule-updates" data-event-id="codefreeze-2025">
+        </cfb-schedule>
+    </cfb-updates-sessions>
+</cfb-board-orchestrator>
+
+```
+
+| Piece                                                    | Responsibility                                                         |
+|----------------------------------------------------------|------------------------------------------------------------------------|
+| ✨ [`<cfb-schedule-loader>`](./cfb-schedule-loader.js)    | make an HTTP call, write to IDB, dispatch event on success             |
+| ✨ [`<cfb-session-loader>`](./cfb-session-loader.js)      | make an HTTP call, write to IDB, dispatch event on success             |
+| ✅ [`<cfb-schedule>`](../step-4/cfb-schedule.js) (Step-4) | same as before - isn't it beautiful that these changes have no effect? |
 
 ### Events up, attribute down (again)
 
 - Loaders dispatch **`scheduleLoaded`** and **`sessionsLoaded`** with **`bubbles: true`** (and **`composed: true`**) so
-  **`<cfb-board-orchestrator>`** can listen on **self** and **not** import loader classes.
+  **`<cfb-board-orchestrator>`** can listen on **self** and **not** import loader classes. The change is that it's not listening
+  to 'SESSION_LOADED_TO_IDB', but a new event type.
 - When **both** have fired for the **same** **`eventId`**, the orchestrator sets **`data-latest-updated-at`** on elements
   matching **`.listens-schedule-updates`** — a **pull** trigger for the schedule.
 - Use **stable** listener references and **`removeEventListener`** in **`disconnectedCallback`** on the orchestrator.
@@ -250,6 +272,10 @@ If you finish early:
 - [ ] **`http.get`** **`passthrough`** for one **`eventId`** so it hits a real server; keep others mocked.
 - [ ] Return **500** from one handler; prove **`loaderError`** surfaces in the UI.
 - [ ] Cache **`updatedAt`** in IDB and **skip** **`fetch`** when data is fresher than **60** seconds.
+-
+  We also learn of a mockServiceWorker (MSW) that intercepts **`fetch`** and **responds** with **JSON** data. This is useful
+  sometimes for frontend development, but especially useful in testing -> that's another learning goal altogether.
+
 
 ---
 

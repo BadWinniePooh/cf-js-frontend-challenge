@@ -1,23 +1,17 @@
-import { saveSessions } from './lib/store/session-store.js'
 import { getBackendApi } from './lib/api/backend-api.js'
 
 export class CfbSessionLoader extends HTMLElement {
     static get observedAttributes() {
-        return ['data-event-id', 'data-reload-token']
+        return []
     }
 
     connectedCallback() {
-        const eventId = this.dataset.eventId
-        if (eventId) this.#load(eventId)
+        this.#setStatus('initialized', `fetching sessions for "${this.dataset.eventId}"…`)
+        // TODO: Load sessions for initial eventId
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'data-event-id' && newValue && newValue !== oldValue) {
-            this.#load(newValue)
-        }
-        if (name === 'data-reload-token' && newValue && newValue !== oldValue && this.dataset.eventId) {
-            this.#load(this.dataset.eventId)
-        }
+        // TODO: Load sessions if eventId changes, or when orchestrator says 'reload'
     }
 
     async #load(eventId) {
@@ -25,15 +19,9 @@ export class CfbSessionLoader extends HTMLElement {
 
         try {
             const sessions = await getBackendApi().getSessions(eventId)
-            // TODO? AkS: Does this violate one write operation per operation?
-            await saveSessions(sessions)
-            this.#setStatus('done', `${sessions.length} sessions stored`)
-
-            this.dispatchEvent(new CustomEvent('sessionsLoaded', {
-                bubbles: true,
-                composed: true,
-                detail: { eventId, updatedAt: Date.now() },
-            }))
+            // TODO: here, read json,
+            // TODO: store to IDB,
+            // TODO: and send an event up the DOM
         } catch (err) {
             this.#setStatus('error', `failed: ${err.message}`)
 
@@ -46,6 +34,7 @@ export class CfbSessionLoader extends HTMLElement {
     }
 
     #setStatus(state, message) {
+        // small helper method for UI to see what's happening
         this.dataset.state = state
         this.textContent = `[session-loader] ${message}`
     }

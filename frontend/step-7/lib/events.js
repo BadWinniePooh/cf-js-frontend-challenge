@@ -1,21 +1,26 @@
 import {
   cfbSessionCreated,
   cfbSessionRemoved,
-  cfbSessionsLoadedToIDB,
-  EventTypes as Step4EventTypes,
-} from '../../step-4/lib/events.js'
-import { sessionDetails } from '../../step-2/lib/builds-session-details.js'
+  EventTypes as Step5EventTypes,
+} from '../../step-5/lib/events.js'
 
-export { cfbSessionCreated, cfbSessionRemoved, cfbSessionsLoadedToIDB }
+export { cfbSessionCreated, cfbSessionRemoved }
 
 export const EventTypes = {
-  ...Step4EventTypes,
+  ...Step5EventTypes,
   SESSION_UPDATED: 'cfb-session-updated',
-} 
+  SCHEDULE_LOADED: 'cfb-schedule-loaded',
+  SESSIONS_LOADED: 'cfb-sessions-loaded',
+}
 
-export const cfbSessionUpdated = session =>
-  new CustomEvent(EventTypes.SESSION_UPDATED, {
-    bubbles: true,
-    composed: true,
-    detail: { ...sessionDetails(session), _type: EventTypes.SESSION_UPDATED },
-  })
+export const cfbScheduleLoaded = session => {
+  throw new Error('Not implemented')
+}
+
+export const cfbSessionsLoaded = session => {
+  throw new Error('Not implemented')
+}
+
+export const cfbSessionStored = session => {
+  throw new Error('Not implemented')
+}

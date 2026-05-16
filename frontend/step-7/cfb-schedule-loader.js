@@ -9,14 +9,11 @@ export class CfbScheduleLoader extends HTMLElement {
   }
 
   connectedCallback() {
-    const eventId = this.dataset.eventId
-    if (eventId) this.#load(eventId)
+    this.#setStatus('initialized', `fetching schedule for "${this.dataset.eventId}"…`)
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === 'data-event-id' && newValue && newValue !== oldValue) {
-      this.#load(newValue)
-    }
+    // TODO: Load schedule if eventId changes
   }
 
   async #load(eventId) {
@@ -24,15 +21,11 @@ export class CfbScheduleLoader extends HTMLElement {
 
     try {
       const schedule = await getBackendApi().getSchedule(eventId)
-      // TODO? AkS: Does this violate one write operation per operation?
-      await scheduleStore.saveSchedule(schedule)
-      this.#setStatus('done', `schedule ready — ${schedule.name}`)
 
-      this.dispatchEvent(new CustomEvent('scheduleLoaded', {
-        bubbles: true,
-        composed: true,
-        detail: { eventId, updatedAt: Date.now() },
-      }))
+      // TODO: here, read json,
+      // TODO: store to IDB,
+      // TODO: and send an event up the DOM
+
     } catch (err) {
       this.#setStatus('error', `failed: ${err.message}`)
 
@@ -45,6 +38,7 @@ export class CfbScheduleLoader extends HTMLElement {
   }
 
   #setStatus(state, message) {
+    // small helper method for UI to see what's happening
     this.dataset.state = state
     this.textContent = `[schedule-loader] ${message}`
   }
