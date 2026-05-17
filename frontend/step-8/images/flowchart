@@ -1,0 +1,19 @@
+flowchart TB
+  subgraph store [cfb-session-store-updates]
+    SL[cfb-session-loader]
+    LIVE[cfb-live-session-updates]
+  end
+
+  SL -->|sessionsFetched| store
+  LIVE -->|liveSessionUpdated / liveSessionRemoved| store
+  store -->|save to IDB| IDB[(IndexedDB)]
+  store -->|sessionsLoaded| ORCH[cfb-board-orchestrator]
+  ORCH --> SCHED[cfb-schedule]
+
+  FORM[cfb-add-session-form] --> US[cfb-updates-sessions]
+  US -->|PUT/PATCH backend| API
+  US -->|sessionsBackendUpdated| ORCH
+  ORCH -->|reload| SL
+
+  BTN[cfb-initiate-a-random-session-creation] -->|POST /random| API
+  API -->|WebSocket push| LIVE
