@@ -42,6 +42,21 @@ test('decodes URL params', () => {
   assert.deepEqual(result.params, { eventId: 'devdays 2025' })
 })
 
+test('supports DELETE route helper', () => {
+  const router = new Router()
+  const deleteHandler = () => {}
+  router.delete('/api/sessions/:eventId/:sessionId', deleteHandler)
+
+  const result = router.resolve('DELETE', '/api/sessions/codefreeze-2025/cf25-1')
+
+  assert.equal(result.status, 'matched')
+  assert.equal(result.handler, deleteHandler)
+  assert.deepEqual(result.params, {
+    eventId: 'codefreeze-2025',
+    sessionId: 'cf25-1'
+  })
+})
+
 test('supports PUT and PATCH route helpers', () => {
   const router = new Router()
   const putHandler = () => {}

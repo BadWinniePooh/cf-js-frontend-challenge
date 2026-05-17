@@ -5,16 +5,14 @@ In Step 5 you built add/edit forms with **native** controls and **`FormData`**. 
 submit path, validation, and **`cfb-session-created`** / update pipeline stay intact.
 
 The field must still **`name="session-type"`**, honour **`required`**, show up in **`FormData`**, and work in **both**
-add and edit dialogs — without a **hidden** native radio as a cheat; the value is carried through **`ElementInternals`
-**.
+add and edit dialogs — without a **hidden** native radio as a cheat; the value is carried through **`ElementInternals`**.
 
 > **Before you start:** branch, HTTP server, console clean — see [getting-started.md](./getting-started.md).
 
 ### Async / solo
 
 These challenges are written for **async, often solo** work. Use [your Step 6 learning log](./learning-log.md), a short
-message to your facilitator or team, or a brief sync when the README says “compare.” **Short timeboxes** matter more
-than
+message to your facilitator or team, or a brief sync when the README says “compare.” **Short timeboxes** matter more than
 the format.
 
 ---
@@ -25,11 +23,9 @@ By the end of this step, you can:
 
 - Build **`<cfb-session-type>`** with **`static formAssociated = true`** and **`attachInternals()`** so it participates
   in **parent** **`<form>`** lifecycle and **`FormData`**.
-- Drive **`required`** / **`valueMissing`** through **`setValidity`** and surface errors with **`reportValidity`** in
-  line
+- Drive **`required`** / **`valueMissing`** through **`setValidity`** and surface errors with **`reportValidity`** in line
   with the parent form’s **`checkValidity()`** / **`reportValidity()`** flow.
-- **Preselect** session type in **edit** (attribute or property) and clear correctly on **reset** / *
-  *`formResetCallback`**.
+- **Preselect** session type in **edit** (attribute or property) and clear correctly on **reset** / **`formResetCallback`**.
 - Explain how **one** swapped field keeps Step 5’s **store → schedule** behaviour unchanged.
 
 ---
@@ -39,8 +35,7 @@ By the end of this step, you can:
 Do these **in order**; capture answers in [your Step 6 learning log](./learning-log.md).
 
 1. **Solo, ~2 min — Think → ink (FormData guess)**  
-   [FormData guess](./learning-log.md#step-6-connections-formdata-guess) *(revisit
-   in [Loop back](./learning-log.md#step-6-loop-back-formdata-guess)).*
+   [FormData guess](./learning-log.md#step-6-connections-formdata-guess) *(revisit in [Loop back](./learning-log.md#step-6-loop-back-formdata-guess)).*
 
 2. **Solo, ~3 min — Bridge from Step 5**  
    [Bridge from Step 5](./learning-log.md#step-6-bridge-step-5).
@@ -99,7 +94,6 @@ For built-in browser validation, you must use **`setValidity`** and **`reportVal
 ### End-to-end flow (reference)
 
 Legend:
-
 - ✅ This is already provided
 - 🚧 Partly done, part of this exercise
 - ✨ New features, core of the exercise
@@ -312,8 +306,7 @@ If you finish early:
 
 - [ ] React to **`required`** dynamically in **`attributeChangedCallback`** and re-sync validity.
 - [ ] Custom validation copy via **`setValidity`** for more than **`valueMissing`**.
-- [ ] **Keyboard**: **`tabIndex`**, **arrow** keys between tiles, **Enter** / **Space** to select; expose *
-  *`aria-selected`** / roles appropriately.
+- [ ] **Keyboard**: **`tabIndex`**, **arrow** keys between tiles, **Enter** / **Space** to select; expose **`aria-selected`** / roles appropriately.
 - [ ] Extract **tags** UI into its own form-associated or composite control and compare coupling trade-offs.
 - [ ] Add lightweight tests for keyboard + validation (see other steps’ test folders for patterns).
 

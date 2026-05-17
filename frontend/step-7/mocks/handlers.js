@@ -152,4 +152,14 @@ export const handlers = root => [
         await timeout(500)
         return HttpResponse.json(sessions)
     }),
+
+    http.delete(`${root}/api/sessions/:eventId/:sessionId`, async ({ params }) => {
+        const sessions = SESSIONS[params.eventId]
+        if (!sessions) return new HttpResponse(null, { status: 404 })
+        const idx = sessions.findIndex((s) => s.id === params.sessionId)
+        if (idx < 0) return new HttpResponse(null, { status: 404 })
+        sessions.splice(idx, 1)
+        await timeout(200)
+        return new HttpResponse(null, { status: 204 })
+    }),
 ]

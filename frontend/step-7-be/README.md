@@ -13,6 +13,7 @@ Tiny Node backend for Step 7. Uses built-in `node:http` only (no framework).
 - `GET /api/sessions/:eventId`
 - `PUT /api/sessions/:eventId/:sessionId` (create or replace one full session)
 - `PATCH /api/sessions/:eventId/:sessionId` (partial update for an existing session)
+- `DELETE /api/sessions/:eventId/:sessionId` (remove an existing session)
 
 Unknown `eventId` returns `404`.
 

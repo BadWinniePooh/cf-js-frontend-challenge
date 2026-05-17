@@ -17,6 +17,10 @@ export class Router {
     this.#addRoute('PATCH', pathPattern, handler)
   }
 
+  delete(pathPattern, handler) {
+    this.#addRoute('DELETE', pathPattern, handler)
+  }
+
   resolve(method, pathname) {
     const matchedRoute = this.#routes.find((route) => {
       if (route.method !== method) return false

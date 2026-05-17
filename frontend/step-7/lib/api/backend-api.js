@@ -14,6 +14,9 @@ function createBackendApi(baseUrl) {
     patchSession(eventId, sessionId, payload) {
       throw new Error('Not implemented')
     },
+    async deleteSession(eventId, sessionId) {
+      throw new Error('Not implemented')
+    },
   }
 }
 

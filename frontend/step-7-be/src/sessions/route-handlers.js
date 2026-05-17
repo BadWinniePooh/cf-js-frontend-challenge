@@ -1,6 +1,6 @@
 import { sessions } from '../fake-data/sessions.js'
 import { schedules } from '../fake-data/schedules.js'
-import { json, readJsonBody } from '../http-utils.js'
+import { json, readJsonBody, sendNoContent } from '../http-utils.js'
 
 export async function updateSessionDetails(req, res, { params }) {
   const eventId = params.eventId
@@ -71,4 +71,22 @@ export async function addNewSession(req, res, { params }) {
   }
 
   json(res, 200, session)
+}
+
+export async function handleDeleteSession(req, res, { params }) {
+  const eventId = params.eventId
+  const sessionId = params.sessionId
+  if (!sessions[eventId] || !schedules[eventId]) {
+    json(res, 404, { error: `Unknown eventId "${eventId}"` })
+    return
+  }
+
+  const existingIdx = sessions[eventId].findIndex((s) => s.id === sessionId)
+  if (existingIdx < 0) {
+    json(res, 404, { error: `Unknown sessionId "${sessionId}" for event "${eventId}"` })
+    return
+  }
+
+  sessions[eventId].splice(existingIdx, 1)
+  sendNoContent(res)
 }

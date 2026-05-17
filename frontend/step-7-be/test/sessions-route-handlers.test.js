@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { EventEmitter } from 'node:events'
 import {
+  handleDeleteSession,
   handleGetSessions,
   updateSessionDetails,
   addNewSession
@@ -18,6 +19,7 @@ function createFakeRes() {
       this.headers = headers
     },
     end(payload) {
+      this.rawBody = payload ?? null
       this.body = payload ? JSON.parse(payload) : null
     }
   }
@@ -96,6 +98,47 @@ test('handlePatchSession updates existing session fields', async () => {
   } finally {
     existing.room = oldRoom
   }
+})
+
+test('handleDeleteSession removes existing session', async () => {
+  const eventId = 'codefreeze-2025'
+  const sessionId = 'cf25-test-delete'
+  sessions[eventId].push({
+    id: sessionId,
+    eventId,
+    title: 'To Delete',
+    day: 'Friday',
+    room: 'TBD',
+    tags: [],
+    attendees: []
+  })
+  const before = sessions[eventId].length
+  const req = {}
+  const res = createFakeRes()
+
+  try {
+    await handleDeleteSession(req, res, { params: { eventId, sessionId } })
+
+    assert.equal(res.statusCode, 204)
+    assert.equal(res.rawBody, null)
+    assert.equal(sessions[eventId].length, before - 1)
+    assert.equal(sessions[eventId].some((s) => s.id === sessionId), false)
+  } finally {
+    const idx = sessions[eventId].findIndex((s) => s.id === sessionId)
+    if (idx >= 0) sessions[eventId].splice(idx, 1)
+  }
+})
+
+test('handleDeleteSession returns 404 for unknown session', async () => {
+  const req = {}
+  const res = createFakeRes()
+
+  await handleDeleteSession(req, res, {
+    params: { eventId: 'codefreeze-2025', sessionId: 'missing-id' }
+  })
+
+  assert.equal(res.statusCode, 404)
+  assert.match(res.body.error, /Unknown sessionId/)
 })
 
 test('handlePatchSession returns 404 for unknown session', async () => {
