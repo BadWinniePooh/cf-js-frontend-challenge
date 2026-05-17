@@ -6,7 +6,7 @@ cfb-add-session-form {
 /* ── Trigger button — fixed top-right corner ─────────────────── */
 .cfb-add-session-form__trigger {
     position:      fixed;
-    top:           var(--space-2);
+    top:           calc(var(--cfb-step-nav-block-size, 0px) + var(--space-2));
     right:         var(--space-3);
     z-index:       100;
     padding:       var(--space-1) var(--space-2);

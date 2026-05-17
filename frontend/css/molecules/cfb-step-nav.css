@@ -1,0 +1,141 @@
+/* =============================================================
+   Molecule — Step navigation (weekly challenge)
+   Prev/next links + checkbox-driven “all steps” menu (no JS).
+   ============================================================= */
+
+.cfb-step-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    box-sizing: border-box;
+    padding: var(--space-1) var(--space-3);
+    background: var(--cfb-bg-brand);
+    color: var(--cfb-text-on-brand);
+    border-bottom: 1px solid color-mix(in srgb, var(--cfb-text-on-brand) 15%, transparent);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    font-family: system-ui, sans-serif;
+}
+
+/* Used by fixed UI (e.g. add-session trigger) to sit below the step bar */
+:root {
+    --cfb-step-nav-block-size: 0px;
+}
+
+body:has(> .cfb-step-nav) {
+    --cfb-step-nav-block-size: 2.75rem;
+}
+
+.cfb-step-nav__arrow {
+    flex: 0 0 auto;
+    min-width: 5.5rem;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.cfb-step-nav__arrow:hover {
+    text-decoration: underline;
+}
+
+.cfb-step-nav__arrow--next {
+    text-align: right;
+}
+
+.cfb-step-nav__arrow[aria-disabled="true"] {
+    opacity: 0.35;
+    pointer-events: none;
+    text-decoration: none;
+}
+
+.cfb-step-nav__center {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.cfb-step-nav__toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.cfb-step-nav__menu-btn {
+    display: inline-block;
+    cursor: pointer;
+    padding: 6px 14px;
+    border: 1px solid color-mix(in srgb, var(--cfb-text-on-brand) 35%, transparent);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    user-select: none;
+}
+
+.cfb-step-nav__menu-btn:hover {
+    background: color-mix(in srgb, var(--cfb-text-on-brand) 12%, transparent);
+}
+
+.cfb-step-nav__dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 16rem;
+    max-height: min(70vh, 24rem);
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px 0;
+    list-style: none;
+    background: #fff;
+    color: #1a1a2e;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    z-index: 30;
+}
+
+.cfb-step-nav__toggle:checked ~ .cfb-step-nav__dropdown {
+    display: block;
+}
+
+.cfb-step-nav__toggle:focus-visible ~ .cfb-step-nav__menu-btn {
+    outline: 2px solid var(--cfb-text-on-brand);
+    outline-offset: 2px;
+}
+
+.cfb-step-nav__dropdown a {
+    display: block;
+    padding: 8px 16px;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.cfb-step-nav__dropdown a:hover {
+    background: #f0f0f5;
+}
+
+.cfb-step-nav__dropdown a[aria-current="page"] {
+    font-weight: 600;
+    background: #e8eaf6;
+}
+
+@media (max-width: 480px) {
+    .cfb-step-nav__arrow {
+        min-width: 4rem;
+        font-size: 0.8rem;
+    }
+
+    .cfb-step-nav__menu-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+}
