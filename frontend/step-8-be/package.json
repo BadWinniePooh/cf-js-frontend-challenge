@@ -1,0 +1,12 @@
+{
+  "name": "cfb-step-8-be",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test test/**/*.test.js"
+  },
+  "dependencies": {
+    "ws": "^8.19.0"
+  }
+}
