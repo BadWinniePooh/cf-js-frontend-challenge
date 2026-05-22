@@ -13,7 +13,9 @@ export class CfbScheduleLoader extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    // TODO: Load schedule if eventId changes
+    if (name === 'data-event-id' && newValue && newValue !== oldValue) {
+      this.#load(newValue)
+    }
   }
 
   async #load(eventId) {
