@@ -1,4 +1,5 @@
 import { getBackendApi } from './lib/api/backend-api.js'
+import { saveSessions } from './lib/store/session-store.js'
 
 export class CfbSessionLoader extends HTMLElement {
     static get observedAttributes() {
@@ -31,7 +32,7 @@ export class CfbSessionLoader extends HTMLElement {
             const sessionsWithId = sessions.map(session => ({ ...session, eventId })) 
             
             // save sessions to IndexedDB
-            await sessionStore.saveSessions(sessionsWithId)
+            await saveSessions(sessionsWithId)
 
             // send event with session details for other components to consume
             this.dispatchEvent(new CustomEvent('sessionsLoaded', {
