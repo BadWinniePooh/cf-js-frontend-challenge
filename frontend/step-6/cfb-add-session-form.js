@@ -1,4 +1,4 @@
-import { cfbSessionCreated } from "../step-5/events.js";
+import { cfbSessionCreated } from "../step-5/lib/events.js";
 import { sessionDetails } from "../step-2/lib/builds-session-details.js";
 import { labelToColor } from "../step-5/lib/label-to-color.js";
 import { parseSpeakers } from "../step-5/lib/speaker.js";

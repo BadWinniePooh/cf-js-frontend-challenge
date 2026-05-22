@@ -1,4 +1,4 @@
-import { cfbSessionStored, EventTypes } from './lib/events.js'
+import { cfbSessionUpdated, EventTypes } from './lib/events.js'
 
 export class CfbUpdatesSessions extends HTMLElement {
   connectedCallback() {
@@ -32,6 +32,6 @@ export class CfbUpdatesSessions extends HTMLElement {
   }
 
   #notifySaved(eventId) {
-    this.dispatchEvent(cfbSessionStored({ eventId, updatedAt: Date.now() }))
+    this.dispatchEvent(cfbSessionUpdated({ eventId, updatedAt: Date.now() }))
   }
 }

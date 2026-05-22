@@ -1,5 +1,5 @@
 import { sessionDetails } from "../step-2/lib/builds-session-details.js";
-import { cfbSessionUpdated } from "../step-5/events.js";
+import { cfbSessionUpdated } from "../step-5/lib/events.js";
 import { labelToColor } from "../step-5/lib/label-to-color.js";
 import { parseSpeakers, speakersToString } from "../step-5/lib/speaker.js";
 import { TagChipController } from "../step-5/lib/tag-chips.js";

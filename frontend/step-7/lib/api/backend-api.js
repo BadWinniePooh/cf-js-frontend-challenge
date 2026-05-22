@@ -28,3 +28,7 @@ let backendApi = createBackendApi(DEFAULT_BASE_URL)
 export function getBackendApi() {
   return backendApi
 }
+
+export function configureBackendApi(baseUrl) {
+  backendApi = createBackendApi(baseUrl)
+}

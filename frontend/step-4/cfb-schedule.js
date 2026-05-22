@@ -3,6 +3,8 @@ import { getAllSessions } from './session-store.js'
 export class CfbSchedule extends HTMLElement {
   #sessions = []
 
+  static elementName = "cfb-schedule"
+
   static get observedAttributes() {
     return ['data-latest-updated-at']
   }

@@ -4,8 +4,8 @@ import { json, sendNoContent } from './http-utils.js'
 import {
   handleDeleteSession,
   handleGetSessions,
-  handlePatchSession,
-  handlePutSession
+  updateSessionDetails,
+  addNewSession
 } from './sessions/route-handlers.js'
 import { handleGetSchedule } from './schedules/route-handlers.js'
 
@@ -15,8 +15,8 @@ const router = new Router()
 
 router.get('/api/schedule/:eventId', handleGetSchedule)
 router.get('/api/sessions/:eventId', handleGetSessions)
-router.put('/api/sessions/:eventId/:sessionId', handlePutSession)
-router.patch('/api/sessions/:eventId/:sessionId', handlePatchSession)
+router.put('/api/sessions/:eventId/:sessionId', addNewSession)
+router.patch('/api/sessions/:eventId/:sessionId', updateSessionDetails)
 router.delete('/api/sessions/:eventId/:sessionId', handleDeleteSession)
 
 const server = createServer((req, res) => {

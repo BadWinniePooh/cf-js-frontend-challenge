@@ -446,7 +446,7 @@ const SEED_SESSIONS = [
   },
 ]
 
-// ── step-5/events.js ─────────────────────────────────────────────────────────
+// ── step-5/lib/events.js ─────────────────────────────────────────────────────────
 // [codepen-bundle] duplicate skipped: cfbSessionCreated, cfbSessionRemoved, cfbSessionsLoadedToIDB (already in scope)
 // EventTypes defined here as the full superset of step-3 and step-4 versions.
 
