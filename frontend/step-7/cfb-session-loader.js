@@ -2,7 +2,7 @@ import { getBackendApi } from './lib/api/backend-api.js'
 
 export class CfbSessionLoader extends HTMLElement {
     static get observedAttributes() {
-        return []
+        return ['data-event-id', 'data-reload-token']
     }
 
     connectedCallback() {
@@ -11,7 +11,13 @@ export class CfbSessionLoader extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        // TODO: Load sessions if eventId changes, or when orchestrator says 'reload'
+        if (newValue === oldValue) return
+
+        if (name === 'data-event-id' && newValue) {
+            this.#load(newValue)
+        } else if (name === 'data-reload-token' && newValue) {
+            this.#load(this.dataset.eventId)
+        }
     }
 
     async #load(eventId) {
