@@ -1,4 +1,4 @@
-import { sessionDetails } from '../step-2/lib/builds-session-details.js'
+import { sessionDetails } from '../../step-2/lib/builds-session-details.js'
 
 export const EventTypes = {
   SESSION_CREATED: 'cfb-session-created',

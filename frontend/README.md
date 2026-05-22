@@ -109,6 +109,11 @@ Here's how each step maps to a layer:
 
 Each step has its own folder (`step-0/`, `step-1/`, …) with a `README.md` that describes the goal, deliverables, constraints, and optional extras for fast finishers.
 
+### Learning logs
+
+- [`learning-log.md`](./learning-log.md) in `frontend/` is the **hub**: a short **key takeaway** per step plus links to every detailed log.
+- Each `step-N/` folder has its own `learning-log.md` for longer notes and session prompts.
+
 ---
 
 ## Testing track

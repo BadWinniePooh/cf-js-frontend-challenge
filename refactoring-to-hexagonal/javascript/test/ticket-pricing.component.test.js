@@ -12,12 +12,12 @@ describe('ticket-pricing', () => {
     connection = created.connection;
   });
 
-  it('calculates price for regular ticket with early bird discount and dips', async () => {
+  it('this is your first test case!', async () => {
     const response = await request(app)
       .get('/prices')
-      .query({type: 'regular', date: '2024-01-15', dips: 3});
+      .query({whatever: 'you want'});
 
     expect(response.status).to.equal(200);
-    expect(response.body).to.eql({cost: 70});
+    expect(response.body).to.eql({you: 'can', return: 'any', what: 'you want!'});
   }).timeout(10000);
 });

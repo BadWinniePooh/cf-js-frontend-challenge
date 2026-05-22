@@ -1,4 +1,4 @@
-import { cfbSessionRemoved } from './events.js'
+import { cfbSessionRemoved } from './lib/events.js'
 import getSessionTypeClass from '../step-4/lib/session-types.js'
 
 // Single responsibility: know about sessions.

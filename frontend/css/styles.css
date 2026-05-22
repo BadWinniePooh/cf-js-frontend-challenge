@@ -19,6 +19,7 @@
 
 /* 3. Molecules ──────────────────────────────────────────────── */
 @import './molecules/cfb-navigation.css';
+@import './molecules/cfb-step-nav.css';
 @import './molecules/cfb-card.css';
 @import './molecules/cfb-column.css';
 @import './molecules/cfb-session-generator.css';

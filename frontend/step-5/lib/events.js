@@ -3,8 +3,8 @@ import {
   cfbSessionRemoved,
   cfbSessionsLoadedToIDB,
   EventTypes as Step4EventTypes,
-} from '../step-4/events.js'
-import { sessionDetails } from '../step-2/lib/builds-session-details.js'
+} from '../../step-4/lib/events.js'
+import { sessionDetails } from '../../step-2/lib/builds-session-details.js'
 
 export { cfbSessionCreated, cfbSessionRemoved, cfbSessionsLoadedToIDB }
 

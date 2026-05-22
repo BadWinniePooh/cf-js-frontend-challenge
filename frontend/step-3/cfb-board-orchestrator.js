@@ -1,3 +1,5 @@
+import { EventTypes } from './lib/events.js'
+
 export class CfbBoardOrchestrator extends HTMLElement {
   #sessions = [{
     'title': 'Opening Keynote',

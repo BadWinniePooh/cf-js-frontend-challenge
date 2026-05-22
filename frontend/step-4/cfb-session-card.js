@@ -1,4 +1,4 @@
-import { cfbSessionRemoved } from './events.js'
+import { cfbSessionRemoved } from './lib/events.js'
 import getSessionTypeClass from './lib/session-types.js'
 
 function escapeAttr(s) {

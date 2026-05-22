@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFreeze Board — Step 8: Live Updates</title>
+    <link rel="stylesheet" href="../styles.css">
+
+    <script type="module" src="index.js"></script>
+
+    <style>
+        /* ── Layout ─────────────────────────────────────────────────────── */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .controls label {
+            font-size: .85rem;
+            color: #555;
+        }
+
+        .controls button {
+            padding: 6px 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+            font-size: .85rem;
+        }
+
+        .controls button.active,
+        .controls button:hover {
+            background: #1a1a2e;
+            color: #fff;
+            border-color: #1a1a2e;
+        }
+
+        cfb-initiate-a-random-session-creation button {
+            margin-top: 8px;
+            padding: 6px 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+            font-size: .85rem;
+        }
+
+        cfb-initiate-a-random-session-creation button:hover {
+            background: #1a1a2e;
+            color: #fff;
+            border-color: #1a1a2e;
+        }
+
+        /* ── Loader status pills ────────────────────────────────────────── */
+        .loader-status {
+            display: flex;
+            gap: 12px;
+            padding: 12px 24px;
+            background: #fafafa;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        cfb-schedule-loader,
+        cfb-session-loader,
+        cfb-live-session-updates {
+            display: block;
+            font-size: .75rem;
+            font-family: monospace;
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #555;
+        }
+
+        cfb-schedule-loader[data-state="loading"],
+        cfb-session-loader[data-state="loading"],
+        cfb-live-session-updates[data-state="connecting"] {
+            border-color: #f0a500;
+            background: #fffbeb;
+            color: #7a5200;
+        }
+
+        cfb-schedule-loader[data-state="done"],
+        cfb-session-loader[data-state="done"],
+        cfb-live-session-updates[data-state="open"] {
+            border-color: #2e7d32;
+            background: #f1f8e9;
+            color: #1b5e20;
+        }
+
+        cfb-schedule-loader[data-state="error"],
+        cfb-session-loader[data-state="error"],
+        cfb-live-session-updates[data-state="error"],
+        cfb-live-session-updates[data-state="closed"] {
+            border-color: #c62828;
+            background: #ffebee;
+            color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+<nav class="cfb-step-nav" aria-label="Weekly challenge steps">
+    <a class="cfb-step-nav__arrow" href="../step-7/index.html" rel="prev">← Step 7</a>
+    <div class="cfb-step-nav__center">
+        <input type="checkbox" id="cfb-step-nav-menu-8" class="cfb-step-nav__toggle">
+        <label for="cfb-step-nav-menu-8" class="cfb-step-nav__menu-btn">☰ All steps</label>
+        <ul class="cfb-step-nav__dropdown">
+            <li><a href="../step-0/index.html">Step 0 — Static Board</a></li>
+            <li><a href="../step-1/index.html">Step 1 — &lt;cfb-tag&gt;</a></li>
+            <li><a href="../step-2/index.html">Step 2 — Session card</a></li>
+            <li><a href="../step-3/index.html">Step 3 — Orchestrator</a></li>
+            <li><a href="../step-4/index.html">Step 4 — IndexedDB</a></li>
+            <li><a href="../step-5/index.html">Step 5 — Add session form</a></li>
+            <li><a href="../step-6/index.html">Step 6 — Session type</a></li>
+            <li><a href="../step-7/index.html">Step 7 — Load from backend</a></li>
+            <li><a href="../step-8/index.html" aria-current="page">Step 8 — Live updates</a></li>
+        </ul>
+    </div>
+    <span class="cfb-step-nav__arrow cfb-step-nav__arrow--next" aria-disabled="true">→</span>
+</nav>
+
+<header class="page-header">
+    <h1>Step 8 — Live Updates</h1>
+    <p>fetch + WebSocket → IndexedDB → orchestrate → render</p>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     CONTROLS
+     Click a button to swap the active event ID. Both loaders will re-fetch
+     in parallel; the orchestrator bumps cfb-schedule only after both complete.
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="controls">
+    <label>Load a conference:</label>
+    <button data-load-event="codefreeze-2025" class="active">CodeFreeze 2025</button>
+    <button data-load-event="devdays-2025">DevDays 2025</button>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ORCHESTRATOR
+     This is the component tree you are building. Read through the source files:
+
+       cfb-board-orchestrator.js        — coordinates without fetching
+       cfb-schedule-loader.js           — fetches schedule metadata
+       cfb-session-store-updates.js     — writes session data to IndexedDB
+       cfb-session-loader.js            — fetches sessions (no IDB)
+       cfb-live-session-updates.js      — WebSocket push → store events
+       cfb-initiate-a-random-session-creation.js — POST random session
+       cfb-updates-sessions.js          — form add/edit/remove → backend
+       cfb-schedule.js                  — reads IndexedDB and renders
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<cfb-board-orchestrator>
+
+    <div class="loader-status">
+        <cfb-schedule-loader data-event-id="codefreeze-2025">
+        </cfb-schedule-loader>
+
+        <cfb-session-store-updates>
+            <cfb-session-loader class="listens-session-reloads" data-event-id="codefreeze-2025">
+            </cfb-session-loader>
+            <!-- As seen, now there's two components that would update data to IDB -> what if
+              -- The responsibility of storing to IDB would be moved from 'cfb-session-loader' to
+              -- 'cfb-live-session-updates'. Then just adding another component that is responsible
+              -- for live updates, would have everything in order.
+              -- And we know how data can be passed between components using events and attributes.
+              -->
+            <cfb-live-session-updates data-event-id="codefreeze-2025" data-url="ws://localhost:3001/ws/sessions">
+            </cfb-live-session-updates>
+        </cfb-session-store-updates>
+    </div>
+
+
+    <cfb-header class="listens-event-changes" data-event-id="codefreeze-2025">
+        <cfb-initiate-a-random-session-creation data-event-id="codefreeze-2025">
+        </cfb-initiate-a-random-session-creation>
+    </cfb-header>
+
+    <cfb-updates-sessions class="listens-event-changes" data-event-id="codefreeze-2025">
+        <cfb-add-session-form></cfb-add-session-form>
+        <cfb-schedule class="listens-schedule-updates" data-event-id="codefreeze-2025">
+        </cfb-schedule>
+    </cfb-updates-sessions>
+</cfb-board-orchestrator>
+
+</body>
+</html>
