@@ -22,11 +22,24 @@ export class CfbScheduleLoader extends HTMLElement {
     this.#setStatus('loading', `fetching schedule for "${eventId}"…`)
 
     try {
+      // read schedule from backend API
       const schedule = await getBackendApi().getSchedule(eventId)
 
-      // TODO: here, read json,
-      // TODO: store to IDB,
-      // TODO: and send an event up the DOM
+      // merge eventId into schedule
+      const scheduleWithId = { ...schedule, eventId }
+
+      // save schedule to IndexedDB
+      await scheduleStore.saveSchedule(scheduleWithId)
+
+      // send event with schedule details for other components to consume
+      this.dispatchEvent(new CustomEvent('scheduleLoaded', {
+        bubbles: true,
+        composed: true,
+        detail: { schedule: scheduleWithId },
+      }))
+
+      // update status for UI
+      this.#setStatus('loaded', `schedule ready for "${eventId}"`)
 
     } catch (err) {
       this.#setStatus('error', `failed: ${err.message}`)
