@@ -23,10 +23,10 @@ loaders **`fetch`**, MSW (if enabled) answers, or IndexedDB is read? Number them
 
 | order | situation                       |
 |-------|---------------------------------|
-|       | **`cfb-schedule`** paints cards |
-|       | loaders **`fetch`**,            |
-|       | MSW (if enabled) answers        |
-|       | IndexedDB is read               |
+| 4     | **`cfb-schedule`** paints cards |
+| 1     | loaders **`fetch`**,            |
+| 3     | MSW (if enabled) answers        |
+| 2     | IndexedDB is read               |
 
 
 _(You will [loop back](#step-7-loop-back-first-fetch) in Conclusions.)_
@@ -44,7 +44,8 @@ Step 4–6 already wrote sessions to **IndexedDB** and refreshed **`cfb-schedule
 **What is new** when data comes from **`fetch`** + a small API layer instead of only in-page events? Two bullets: 
 one **similarity** (what stays the same), one **difference** (what’s new).
 
-> 
+> - **Similarity:** Both are asynchronous and non-blocking.
+> - **Difference:** Fetch requires network communication (HTTP request to a different server), whereas in-page events are part of the DOM and work within the client.
 
 ---
 
@@ -59,7 +60,7 @@ _~3 minutes._
 **If you compare later:** where will you look first when a loader shows **error** — **Console**, **Network**, or 
 **Application → IndexedDB**?
 
-> 
+> Look first at DevTools Console. CORS — always forget, always need to research how to set up correctly.
 
 ---
 
@@ -72,7 +73,7 @@ _Solo, ~2 minutes. Answer **A** or **B** — not both._
 **A)** Name one tool or pattern (Postman, contract tests, OpenAPI, …) teams use when the backend is **late**. 
 One line: how does MSW relate?
 
-> 
+> OpenAPI to define and share contract for API endpoints and data structures. MSW mocks the contract enabling the frontend to implement "full" functionality without waiting for the real backend.
 
 **B)** In one sentence: why might you **not** want **`import { worker } from 'msw/…'`** inside **`cfb-session-loader.js`**?
 
