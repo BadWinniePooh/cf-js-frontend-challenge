@@ -7,7 +7,7 @@ export class CfbSessionLoader extends HTMLElement {
 
     connectedCallback() {
         this.#setStatus('initialized', `fetching sessions for "${this.dataset.eventId}"…`)
-        // TODO: Load sessions for initial eventId
+        this.#load(this.dataset.eventId)
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
