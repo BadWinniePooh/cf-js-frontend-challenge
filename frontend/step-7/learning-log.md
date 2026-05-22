@@ -151,7 +151,7 @@ Ask **one** question about **`fetch`**, **MSW**, **loader vs orchestrator respon
 
 **My question**
 
-> 
+> I was not able to get MSW up and running. Maybe I skipped some docu in the Readme(?) but I would like to know what is missing and how to set it up?
 
 **Facilitator reply / notes**
 
@@ -167,7 +167,7 @@ _~4 minutes._
 
 1. Point to the file(s) where **`GET /api/schedule/:eventId`** and **`GET /api/sessions/:eventId`** are defined for **local mocking** — or the real server routes if you used **`step-7-be`**.
 
-   > 
+   > step-7-be/[schedules/sessions]/route-handlers.js
 
 2. In one line: what is the **single attribute** the orchestrator writes so **`cfb-schedule`** knows to **re-pull** sessions from IndexedDB?
 
