@@ -92,7 +92,8 @@ _After reading the README Concepts sections — ~1 minute._
 1. **`res.ok`** — in one line, what do you do when it is **`false`**?
 2. Loader vs schedule: who should **own** **`fetch`**, and who should **own** “paint cards from IDB”?
 
-> 
+> 1. Check response status code and act accordingly (surface error state, dispatch `loaderError`).
+> 2. Loader owns fetch; schedule owns paint.
 
 ---
 
@@ -105,16 +106,16 @@ _Answer **from memory first** (~4 minutes). Then peek at the README or [`cfb-boa
 1. Which **two** **`CustomEvent`** **type strings** (event names) must the orchestrator treat as “initial load pair 
    complete” before it bumps **`data-latest-updated-at`** on **`.listens-schedule-updates`**?
 
-   > 
+   > `scheduleLoaded` and `sessionsLoaded`
 
 2. Why do the loaders use **`bubbles: true`** (and **`composed: true`** in this repo) on those events?
 
-   > 
+   > So events can travel up, allowing an ancestor to listen on itself without importing or directly referring loader classes.
 
 3. What does **`attributeChangedCallback`** on **`cfb-schedule`** **not** receive from the parent — i.e. what does the
    schedule still have to **read** itself after the attribute changes?
 
-   > 
+   > It does not receive actual session / schedule data. Schedule must still read sessions from indexedDB itself -> pull trigger.
 
 ---
 
@@ -130,7 +131,13 @@ Draw **six boxes** in a row. Example chain (yours can merge “parallel loaders�
 
 Add **one short label** on each **arrow** (e.g. **`scheduleLoaded`**, **`data-latest-updated-at`**).
 
-> 
+> ```
+> [data-event-id set] --attributeChangedCallback--> [loaders fetch (parallel)]
+>     --res.json()--> [IDB writes (schedule-store + session-store)]
+>     --dispatch scheduleLoaded/sessionsLoaded--> [orchestrator (both received)]
+>     --sets data-latest-updated-at--> [cfb-schedule attributeChangedCallback]
+>     --reads IDB--> [cards rendered]
+> ```
 
 ---
 
