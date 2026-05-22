@@ -2,6 +2,8 @@ import { EventTypes as CfbEventTypes } from './lib/events.js'
 
 export class CfbBoardOrchestrator extends HTMLElement {
 
+    #loaded = new Set()
+
     connectedCallback() {
         this.addEventListener('scheduleLoaded', this.#onLoaderDone)
         this.addEventListener('sessionsLoaded', this.#onLoaderDone)
@@ -15,15 +17,21 @@ export class CfbBoardOrchestrator extends HTMLElement {
     }
 
     #onLoaderDone = (e) => {
-        // TODO: When both loaders have succeeded, we can update the UI.
+        this.#loaded.add(e.type)
+
+        if (this.#loaded.has('scheduleLoaded') && this.#loaded.has('sessionsLoaded')) {
+            this.#loaded.clear()
+            const ts = Date.now().toString()
+            this.querySelectorAll('.listens-schedule-updates').forEach(el => {
+                el.dataset.latestUpdatedAt = ts
+            })
+        }
     }
 
     #onSessionUpdated = (e) => {
-        // TODO: when session is updated, we need to update the UI.
-
-        // Now the backend has updated a session, we need to refresh the UI.
-        // And that should make the UI to fetch the latest session data - now for simplicity could
-        // retrieve all the sessions through cfb-session-loader.
-        // To do that, use the familiar pattern of triggering an action in a child component
+        const ts = Date.now().toString()
+        this.querySelectorAll('.listens-session-reloads').forEach(el => {
+            el.dataset.reloadToken = ts
+        })
     }
 }
