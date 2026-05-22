@@ -1,4 +1,5 @@
 import { cfbSessionUpdated, EventTypes } from './lib/events.js'
+import { getBackendApi } from './lib/api/backend-api.js'
 
 export class CfbUpdatesSessions extends HTMLElement {
   connectedCallback() {
@@ -17,7 +18,7 @@ export class CfbUpdatesSessions extends HTMLElement {
     e.stopPropagation()
 
     const session = e.detail
-    // TODO: Call backendApi to save session
+    await getBackendApi().putSession(eventId, session.id, session)
     this.#notifySaved(eventId)
   }
 
@@ -27,7 +28,7 @@ export class CfbUpdatesSessions extends HTMLElement {
     e.stopPropagation()
 
     const session = e.detail
-    // TODO: Call backendApi to update session
+    await getBackendApi().patchSession(eventId, session.id, session)
     this.#notifySaved(eventId)
   }
 

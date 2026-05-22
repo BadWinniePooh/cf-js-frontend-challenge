@@ -2,20 +2,40 @@ const DEFAULT_BASE_URL = 'http://localhost:3001'
 
 function createBackendApi(baseUrl) {
   return {
-    getSchedule(eventId) {
-      throw new Error('Not implemented')
+    async getSchedule(eventId) {
+      const res = await fetch(`${baseUrl}/api/schedule/${encodeURIComponent(eventId)}`)
+      if (!res.ok) throw new Error(`Failed to fetch schedule: ${res.status}`)
+      return res.json()
     },
-    getSessions(eventId) {
-      throw new Error('Not implemented')
+    async getSessions(eventId) {
+      const res = await fetch(`${baseUrl}/api/sessions/${encodeURIComponent(eventId)}`)
+      if (!res.ok) throw new Error(`Failed to fetch sessions: ${res.status}`)
+      return res.json()
     },
-    putSession(eventId, sessionId, payload) {
-      throw new Error('Not implemented')
+    async putSession(eventId, sessionId, payload) {
+      const res = await fetch(`${baseUrl}/api/sessions/${encodeURIComponent(eventId)}/${encodeURIComponent(sessionId)}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) throw new Error(`Failed to update session: ${res.status}`)
+      return res.json()
     },
-    patchSession(eventId, sessionId, payload) {
-      throw new Error('Not implemented')
+    async patchSession(eventId, sessionId, payload) {
+      const res = await fetch(`${baseUrl}/api/sessions/${encodeURIComponent(eventId)}/${encodeURIComponent(sessionId)}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) throw new Error(`Failed to patch session: ${res.status}`)
+      return res.json()
     },
     async deleteSession(eventId, sessionId) {
-      throw new Error('Not implemented')
+      const res = await fetch(`${baseUrl}/api/sessions/${encodeURIComponent(eventId)}/${encodeURIComponent(sessionId)}`, {
+        method: 'DELETE',
+      })
+      if (!res.ok) throw new Error(`Failed to delete session: ${res.status}`)
+      return res.json()
     },
   }
 }
@@ -29,6 +49,6 @@ export function getBackendApi() {
   return backendApi
 }
 
-export function configureBackendApi(baseUrl) {
-  backendApi = createBackendApi(baseUrl)
+export function configureBackendApi(input) {
+  backendApi = createBackendApi(input.baseUrl)
 }
