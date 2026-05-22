@@ -24,10 +24,24 @@ export class CfbSessionLoader extends HTMLElement {
         this.#setStatus('loading', `fetching sessions for "${eventId}"…`)
 
         try {
+            // read session from backend API
             const sessions = await getBackendApi().getSessions(eventId)
-            // TODO: here, read json,
-            // TODO: store to IDB,
-            // TODO: and send an event up the DOM
+            
+            // merge eventId into each session
+            const sessionsWithId = sessions.map(session => ({ ...session, eventId })) 
+            
+            // save sessions to IndexedDB
+            await sessionStore.saveSessions(sessionsWithId)
+
+            // send event with session details for other components to consume
+            this.dispatchEvent(new CustomEvent('sessionsLoaded', {
+                bubbles: true,
+                composed: true,
+                detail: { sessions: sessionsWithId },
+            }))
+
+            // update status for UI
+            this.#setStatus('loaded', `sessions ready for "${eventId}"`)
         } catch (err) {
             this.#setStatus('error', `failed: ${err.message}`)
 
