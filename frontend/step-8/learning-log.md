@@ -38,8 +38,8 @@ Step 7’s **`<cfb-session-loader>`** both **fetched** and **wrote** IndexedDB.
 
 **Two bullets:**
 
-1. **What moves** in Step 8 — who writes session IDB now?
-2. **What stays the same** for **`cfb-updates-sessions`** and the add/edit form?
+1. **Why this might be a design smell**? 
+2. **How would you change it**? 
 
 >
 
@@ -66,13 +66,12 @@ mostly **push**, **poll**, or **both**?
 
 _Solo, ~2 minutes. Answer **A** or **B** — not both._
 
-**A)** Why does the WebSocket URL include **`eventId`** (`/ws/sessions/codefreeze-2025`) instead of one global 
-feed for all conferences?
+**A)** How can you make sure you only listen to the relevant stream of events (of relevant conference)?
 
 >
 
-**B)** In one sentence: what goes wrong if **`cfb-live-session-updates`** imports **`saveSessions`** directly instead 
-of dispatching an event to the store wrapper?
+**B)** In one sentence: what is WebSocket and why do we use it? (wrong answers is also good - we'll get back
+to this at the end of the step) 
 
 >
 

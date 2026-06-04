@@ -54,17 +54,18 @@ Do these **in order**; capture answers in [your Step 8 learning log](./learning-
 
 ## 2) Concepts
 
-### Pull vs push in this app
+### Pull vs push of Data
 
-| Path | Trigger | Network | Who writes sessions IDB | Schedule refresh |
-|------|---------|---------|---------------------------|------------------|
-| **Initial load** | `data-event-id` / page load | `GET` sessions | **`<cfb-session-store-updates>`** (via **`sessionsFetched`**) | **`sessionsLoaded`** + **`scheduleLoaded`** |
-| **Form add / edit / remove** | User form or card menu | `PUT` / `PATCH` / `DELETE` | Loader refetch → store (via **`sessionsBackendUpdated`**) | Same orchestrator path |
-| **Live / random** | WebSocket message or colleague’s POST | WebSocket / `POST …/random` | **Store** (via **`liveSession*`** events) | **`sessionsLoaded`** only |
+Data is served to the frontend in two ways: **fetch** and **listen**. This means that either the frontend
+ - **fetches** data from the backend, or
+ - **listens** to a **WebSocket** feed - and the backend pushes messages to frontend whenever relevand data changes.
 
-**`<cfb-updates-sessions>`** stays on the **HTTP** row only. That is intentional: you can add real-time features **without** rewriting the form layer.
+In this app, we already have implemented the **fetch** path, and we have the backend implementation for **push**. So
+now we need to implement the fronted part for WebSockets.
 
 ### WebSocket lifecycle
+
+In this exercise, your job is to implement the 
 
 - **`new WebSocket(url)`** — URL includes **`eventId`**: `ws://localhost:3001/ws/sessions/codefreeze-2025`.
 - **`open`** — connection accepted; show status in the UI (`data-state="open"`).
@@ -90,38 +91,73 @@ Step 7 waited for **both** **`scheduleLoaded`** and **`sessionsLoaded`** before 
 a **solo** **`sessionsLoaded`** (live push or session reload) should still bump **`data-latest-updated-at`** on 
 **`.listens-schedule-updates`**. See [`cfb-board-orchestrator.js`](./cfb-board-orchestrator.js).
 
+
 ### End-to-end flow (reference)
 
-Legend: ✨ new / changed in Step 8 · ✅ unchanged from earlier steps
+Legend: 
+- ✨ new / changed in Step 8 · 
+- ✅ unchanged from earlier steps
 
 ```
-                    ┌── cfb-schedule-loader → schedule IDB → scheduleLoaded
-                    │
-User / event switch ┤
-                    │
-                    └── cfb-session-store-updates
-                              ▲
-                              │ sessionsFetched (bulk)
-                         ✨ cfb-session-loader (fetch only)
-                              ▲
-                              │ liveSessionUpdated / liveSessionRemoved
-                         ✨ cfb-live-session-updates ← WebSocket
-                              ▲
-                         POST /random (cfb-initiate-a-random-session-creation)
-                              │
-                         step-8-be broadcast
+                         ┌────────────┐
+                         │ Page load  │
+                         └─────┬──┬───┘
+              on page load,   │  │   connect to WebSocket
+              it loads data   │  │   on page load
+                              ▼  ▼
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │              ✨ cfb-session-store-updates                                │
+  │  ┌──────────────────────────┐    ┌──────────────────────────────────┐  │
+  │  │ ✨ cfb-session-loader     │    │ ✨ cfb-live-session-updates       │  │
+  │  │    (fetch only)           │    │    (WebSocket listen only)       │  │
+  │  └────────────┬─────────────┘    └──────────────────┬───────────────┘  │
+  │               │ sessionsFetched                       │ liveSessionUpdated│
+  │               │                                       │ liveSessionRemoved│
+  │               └──────────────────┬────────────────────┘                  │
+  │                                  ▼                                       │
+  │                         saveSessions / upsert / delete                 │
+  └──────────────────────────────────┬───────────────────────────────────────┘
+                                     │
+                                     ▼
+                            ┌────────────────┐
+                            │   IndexedDB    │
+                            └────────┬───────┘
+                                     │ sessionsLoaded (bubbles)
+                                     ▼
+                         ┌───────────────────────┐
+                         │ cfb-board-orchestrator│
+                         └───────────┬───────────┘
+                                     │ data-latest-updated-at
+                                     ▼
+                            ┌────────────────┐
+                            │  cfb-schedule  │  ✅ read IDB → render cards
+                            └────────────────┘
 
-        store → sessionsLoaded (bubbles)
-                    ▼
-        🚧 cfb-board-orchestrator → data-latest-updated-at
-                    ▼
-        ✅ cfb-schedule (read IDB, render cards)
 
-        ✅ cfb-updates-sessions ← form / remove → HTTP only → sessionsBackendUpdated → reload loader
+  PULL — form add / edit / remove (✅ cfb-updates-sessions unchanged)
+
+  cfb-add-session-form ──► cfb-updates-sessions ──PUT/PATCH/DELETE──► API (step-8-be)
+                                    │
+                                    │ sessionsBackendUpdated
+                                    ▼
+                         cfb-board-orchestrator ──reload──► cfb-session-loader
+                                                              (back into store ↑)
+
+
+  PUSH — random session (simulates another user)
+
+  cfb-initiate-a-random-session-creation ──POST /random──► API (step-8-be)
+                                                              │
+                                                              │ WebSocket push
+                                                              ▼
+                                              cfb-live-session-updates
+                                                              │
+                                                              └──► store ↑
 ```
 
-A visual version lives in [`images/flowchart`](./images/flowchart) if your facilitator shared one.
+A Mermaid version lives in [`images/flowchart`](./images/flowchart).
 
+---
 ---
 
 ### One-minute review (~1 min)

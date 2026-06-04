@@ -50,6 +50,20 @@ Do these **in order**; capture answers in [your Step 7 learning log](./learning-
 
 ## 2) Concepts
 
+### Fetching datd from the backend.
+
+Earlier, we often used to use libraries like **`axios`** to make HTTP requests. Nowadays the **browser** has a built-in
+**`fetch`** function that's **much** easier to use. In this exercise we'll use **`fetch`** to load data from the backend.
+
+To do that, we have an empty **[`backend-api.js`](./lib/api/backend-api.js)** file that we'll implement in this step.
+
+### Backend API and dependency injection.
+
+If this would be a backend code, we'd want to inject the fetch into the components where it's used because that would
+be an easy way to pass the fetch to the the component for easy testing. But in frontend code, when we test the component
+using web-test-runner, we're running the tests in the real browser, and then we can use the browser's own 'dependency' 
+injection mechanism, called ImportMaps. But that's a topic of testing, here I hope you just trust me.
+
 ### `fetch` and errors
 
 when fetching data from backend, there are 2 things to await for: first the fetch, then the JSON parsing. 
@@ -106,7 +120,10 @@ And because the loaders and schedule are not descendants, we use an orchestrator
 
 ### End-to-end flow (reference)
 
-Legend: ✨ loaders · 🚧 orchestrator · ✅ schedule / stores
+Legend:
+- ✅ This is already provided
+- 🚧 Partly done, part of this exercise
+- ✨ New features, core of the exercise
 
 ```
 User / UI sets data-event-id on both loaders
