@@ -1,4 +1,4 @@
-import { expect } from '@esm-bundle/chai'
+import { expect } from 'chai'
 
 describe('smoke', () => {
   it('true is true', () => {

@@ -62,7 +62,7 @@ This repo uses **`events.js`**:
 
 - Event **type** (code wins): **`cfb-session-created`** (`EventTypes.SESSION_CREATED`).
 - **`cfbSessionCreated(data)`** builds a **`CustomEvent`** whose **`detail`** merges **`sessionDetails(data)`** from 
-  [`../step-2/lib/builds-session-details.js`](../step-2/lib/builds-session-details.js) with a **`_type`** field so the orchestrator can verify the payload.
+  [`lib/builds-session-details.js`](lib/builds-session-details.js) with a **`_type`** field so the orchestrator can verify the payload.
 
 The generator calls **`cfbSessionCreated(...)`** with the object from [`lib/generate-random-session.js`](./lib/generate-random-session.js). Shape 
 includes **`id`**, **`title`**, **`day`**, **`room`**, **`tags`**, **`attendees`**, etc. — normalized through **`sessionDetails`**.

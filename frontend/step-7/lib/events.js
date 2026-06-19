@@ -4,7 +4,7 @@ import {
   cfbSessionsLoadedToIDB,
   EventTypes as Step4EventTypes,
 } from '../../step-4/lib/events.js'
-import { sessionDetails } from '../../step-2/lib/builds-session-details.js'
+import { sessionDetails } from '../../step-3/lib/builds-session-details.js'
 
 export { cfbSessionCreated, cfbSessionRemoved, cfbSessionsLoadedToIDB }
 

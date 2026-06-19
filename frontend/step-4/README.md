@@ -146,7 +146,7 @@ Legend:
 
 Why **`data-latest-updated-at`** instead of pushing **`data-sessions`** JSON from the orchestrator? The orchestrator **does not ship the array** — it only signals **“re-read from IDB”**; **`cfb-schedule`** pulls **`getAllSessions()`** after the timestamp changes.
 
-Session rows still render as **`<cfb-session-card data-session-details='…'>`** using **`sessionDetails`** shape from [`../step-2/lib/builds-session-details.js`](../step-2/lib/builds-session-details.js).
+Session rows still render as **`<cfb-session-card data-session-details='…'>`** using **`sessionDetails`** shape from [`../step-3/lib/builds-session-details.js`](../step-3/lib/builds-session-details.js).
 
 ---
 
@@ -303,7 +303,7 @@ function getAllSessions() {
 
 ### Session shape
 
-[`sessionDetails`](../step-2/lib/builds-session-details.js) / Step 2 **`data-session-details`** JSON stay the **contract** for cards.
+[`sessionDetails`](../step-3/lib/builds-session-details.js) / Step 2 **`data-session-details`** JSON stay the **contract** for cards.
 
 ---
 

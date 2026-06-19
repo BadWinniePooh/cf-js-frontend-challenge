@@ -2,7 +2,7 @@ import { EventTypes } from './lib/events.js'
 
 export class CfbBoardOrchestrator extends HTMLElement {
   #sessions = [{
-    'title': 'Opening Keynote',
+    'title': 'Learn pub/sub with custom Web Components',
     'day': 'Wednesday',
     'tags': [{ 'label': 'Keynote', 'color': 'blue' }],
     'attendees': [{ 'name': 'Aino Korhonen', 'initials': 'AK' }, { 'name': 'Jukka Leinonen', 'initials': 'JL' }]

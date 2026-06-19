@@ -11,7 +11,10 @@ export class CfbSchedule extends HTMLElement {
     this.#render()
   }
 
-  attributeChangedCallback(name, _old, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
+    if( oldValue === newValue){
+      return
+    }
     if (name === 'data-sessions') {
       this.#sessions = JSON.parse(newValue ?? '[]')
       this.#render()

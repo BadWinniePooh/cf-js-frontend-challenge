@@ -1,5 +1,5 @@
 import { cfbSessionCreated } from './lib/events.js'
-import { sessionDetails } from '../step-2/lib/builds-session-details.js'
+import { sessionDetails } from '../step-3/lib/builds-session-details.js'
 import { isKnownTag, KNOWN_TAGS, labelToColor } from './lib/label-to-color.js'
 
 function parseSpeaker(raw) {
