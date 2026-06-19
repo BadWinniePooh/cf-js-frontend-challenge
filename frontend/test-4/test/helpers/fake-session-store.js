@@ -32,6 +32,14 @@ export async function saveSessions(sessions) {
   }
 }
 
+export async function updateSession(session) {
+  const idx = _store.findIndex(x => x.id === session.id)
+  if (idx < 0) {
+    throw new Error(`Session not found: ${session.id}`)
+  }
+  _store[idx] = session
+}
+
 export async function getAllSessions() {
   return [..._store]
 }

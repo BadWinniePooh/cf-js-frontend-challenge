@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { fixture, cleanup } from './helpers/fixture.js'
-import { sessionDetails } from '../../step-2/builds-session-details.js'
+import { sessionDetails } from '../../step-3/lib/builds-session-details.js'
 import { Randomizer as R } from '../../test-2/test/helpers/randomizer.js'
 import { CfbSchedule } from '../../step-3/cfb-schedule.js'
 

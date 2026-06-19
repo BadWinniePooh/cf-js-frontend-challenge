@@ -1,8 +1,13 @@
 flowchart TB
+  PAGE[Page load]
+
   subgraph store [cfb-session-store-updates]
     SL[cfb-session-loader]
     LIVE[cfb-live-session-updates]
   end
+
+  PAGE -->|on page load, it loads data| SL
+  PAGE -->|connect to WebSocket on page load| LIVE
 
   SL -->|sessionsFetched| store
   LIVE -->|liveSessionUpdated / liveSessionRemoved| store

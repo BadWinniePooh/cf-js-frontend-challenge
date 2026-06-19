@@ -8,6 +8,10 @@ This step uses **Training from the Back of the Room** ideas adapted for **solo /
 
 ---
 
+[← Back to README — 1) Connections](./README.md#1-connections)
+
+---
+
 <a id="step-7-connections-first-fetch"></a>
 
 ### Step 7 — Connections: First fetch (think → ink)
@@ -80,6 +84,10 @@ One line: how does MSW relate?
 
 ---
 
+[← Back to README — 2) Concepts](./README.md#2-concepts)
+
+---
+
 <a id="step-7-concepts-one-minute"></a>
 
 ### Step 7 — Concepts: One-minute review
@@ -133,6 +141,10 @@ Add **one short label** on each **arrow** (e.g. **`scheduleLoaded`**, **`data-la
 
 ---
 
+[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+
+---
+
 <a id="step-7-concrete-facilitator-question"></a>
 
 ### Step 7 — Concrete practice: Question for your facilitator
@@ -148,6 +160,10 @@ Ask **one** question about **`fetch`**, **MSW**, **loader vs orchestrator respon
 **Facilitator reply / notes**
 
 > 
+
+---
+
+[← Back to README — 4) Conclusions](./README.md#4-conclusions)
 
 ---
 

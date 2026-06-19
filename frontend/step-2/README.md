@@ -1,18 +1,18 @@
 # Step 2 — Composing a molecule: `<cfb-session-card>`
 
-In Step 1 you built an **atom** — `<cfb-tag>`. Now you **compose** atoms into a **molecule**: the session card used in 
+In Step 1 you built an **atom** — `<cfb-tag>`. Now you **compose** atoms into a **molecule**: the session card used in
 every column.
 
-A molecule wraps smaller pieces (tags, avatars) behind one tag name and one rendering boundary. 
-You will implement **`<cfb-session-card>`** — the finished markup, JSON attribute name, and **rich attendee** payload 
+A molecule wraps smaller pieces (tags, avatars) behind one tag name and one rendering boundary.
+You will implement **`<cfb-session-card>`** — the finished markup, JSON attribute name, and **rich attendee** payload
 shape are spelled out in **[Concrete practice](#3-concrete-practice)** (after Connections and Concepts).
 
 > **Before you start:** branch, HTTP server, console clean — see [getting-started.md](./getting-started.md).
 
 ### Async / solo
 
-These challenges are written for **async, often solo** work. Use [your Step 2 learning log](./learning-log.md), 
-a short message to your facilitator or team, or a brief sync when the README says “pair.” **Short timeboxes** matter 
+These challenges are written for **async, often solo** work. Use [your Step 2 learning log](./learning-log.md),
+a short message to your facilitator or team, or a brief sync when the README says “pair.” **Short timeboxes** matter
 more than the format.
 
 ---
@@ -23,7 +23,7 @@ By the end of this step, you can:
 
 - Build a **composite** custom element that outputs the same semantic card structure as [the static Step 0 board](../step-0/index.html).
 - **Compose** one or more `<cfb-tag>` atoms inside the card’s tags row.
-- Pass **structured session data** (including rich attendees) into the card and **re-render** when that input changes 
+- Pass **structured session data** (including rich attendees) into the card and **re-render** when that input changes
 
 ---
 
@@ -32,11 +32,11 @@ By the end of this step, you can:
 Do these **in order**; capture answers in [your Step 2 learning log](./learning-log.md).
 
 1. **Solo, ~2 min — Where does session data live?**  
-   Before Concepts: answer in [Where does session data live?](./learning-log.md#step-2-connections-where-data-lives). 
+   Before Concepts: answer in [Where does session data live?](./learning-log.md#step-2-connections-where-data-lives).
    *(You will revisit this in Conclusions.)*
 
 2. **Solo, ~3 min — Bridge from Step 1**  
-   In [Bridge from Step 1](./learning-log.md#step-2-bridge-step-1), relate one `<cfb-tag>` on your Step 1 page to the 
+   In [Bridge from Step 1](./learning-log.md#step-2-bridge-step-1), relate one `<cfb-tag>` on your Step 1 page to the
    tags row of the card.
 
 3. **Optional pair / async, ~3 min**  
@@ -51,18 +51,17 @@ Do these **in order**; capture answers in [your Step 2 learning log](./learning-
 
 ### Molecule vs atom
 
-- **`<cfb-session-card>`** owns the **card chrome**: layout regions (header, tags row, footer), the menu control, 
+- **`<cfb-session-card>`** owns the **card component**: layout regions (header, tags row, footer), the menu control,
   and **mapping** session data → child tags / avatars.
 - **`<cfb-tag>`** stays an atom: it only knows label + colour — the card passes those via attributes (and later might
   have some hover-over functionality, but that is the responsibility of that said **atom**).
 
 ### Data flow
 
-- **Parent → children:** the card parses JSON and sets **`data-label` / `data-color`** on each `<cfb-tag>` 
-  (or builds equivalent markup that sets those attributes).
+- **Parent → children:** the card parses JSON and sets **`data-label` / `data-color`** on each `<cfb-tag>`
 - **Structured input:** keep session data in one attribute (`data-session-details`) as JSON — same pattern used later on
   the full board. Keep payloads reasonably small. Later we will learn other ways to pass data from parent to child.
-  Passing throught attributes is not the only way, but the simplest
+  Passing through attributes is not the only way, but the simplest. And for now, we're learning the basics.
 
 ### Lifecycle
 
@@ -73,14 +72,15 @@ Do these **in order**; capture answers in [your Step 2 learning log](./learning-
 
 ### Rendering notes
 
-- **`innerHTML`** with strings that include `<cfb-tag>` is a common approach; the parser creates elements and custom 
+- **`innerHTML`** with strings that include `<cfb-tag>` is a common approach; the parser creates elements and custom
   elements **upgrade** like any other HTML. (Alternatives: `document.createElement`, templates — see Extras.)
-- **Slots** (`<slot>`) are an alternative way to project content without stuffing JSON into one attribute — optional 
+- **Slots** (`<slot>`) are an alternative way to project content without stuffing JSON into one attribute — optional
   deeper dive in Extras.
 
 ### One-minute review (~1 min)
 
-After you have read the Concepts sections above, capture a quick note in [your learning log — One-minute review](./learning-log.md#step-2-concepts-one-minute) (Training from the Back of the Room: land the ideas before Myth or fact).
+After you have read the Concepts sections above, capture a quick note in [your learning log — One-minute review](./learning-log.md#step-2-concepts-one-minute) 
+(Training from the Back of the Room: land the ideas before Myth or fact).
 
 ---
 
@@ -94,8 +94,8 @@ Complete [Myth or fact (composition + data)](./learning-log.md#step-2-myth-or-fa
 
 ### Reference — markup and session payload
 
-Use **`data-session-details`** with JSON that matches the shape below. **Rich attendee** objects include **`name`** 
-(full name, e.g. for `aria-label`) and **`initials`** (visible chip text).
+Use **`data-session-details`** with JSON that matches the shape below. **Rich attendee** objects include **`name`**
+(full name, e.g. for `aria-label`) and **`initials`** (visible text).
 
 ```html
 <cfb-session-card
@@ -105,13 +105,14 @@ Use **`data-session-details`** with JSON that matches the shape below. **Rich at
 
 Build `<cfb-session-card>` so you can **show** all of the following:
 
-- [ ] Create `cfb-session-card.js` and register **`cfb-session-card`** from `index.js` (alongside `<cfb-tag>` from
-      Step 1 — see `index.js` import pattern).
-- [ ] Render a card that visually matches the **static** session cards in [`../step-0/index.html`](../step-0/index.html): 
-      header with **title** and **`⋯` menu** control, **tags row** using **`<cfb-tag>`**, **footer** with attendee 
-      **initials** in `cfb-avatar` chips.
-- [ ] Hold session data in a **small internal structure** first if you like, then drive the UI from a parsed 
-      **`data-session-details`** JSON attribute.
+- [x] Create `cfb-session-card.js` and register **`cfb-session-card`** from `index.js` (alongside `<cfb-tag>` from
+  Step 1 — see `index.js` import pattern).
+- [ ] Render a card that visually matches the **static** session cards in [`../step-0/index.html`](../step-0/index.html):
+  header with **title** and **`⋯` menu** control, **tags row** using **`<cfb-tag>`**, **footer** with attendee
+  **initials** in `cfb-avatar` atoms.
+- [ ] A good pattern is to hard-code the HTML structure then starting to make it dynamic. (copy from the static board)
+- [ ] Hold session data in a **small internal structure** first if you like, then drive the UI from a parsed
+  **`data-session-details`** JSON attribute.
 - [ ] Use **`connectedCallback`** for initial render path.
 - [ ] Use **`observedAttributes` + `attributeChangedCallback`** so changing `data-session-details` **re-renders** the card.
 - [ ] Session JSON shape (minimum fields used in this step):
@@ -127,8 +128,6 @@ Build `<cfb-session-card>` so you can **show** all of the following:
 }
 ```
 
-- [ ] Replace static `<article class="cfb-card">…` placeholders in [`index.html`](./index.html) with your `<cfb-session-card>` elements.
-
 **Constraints**
 
 - HTML, JavaScript, and (optionally) CSS only — no frameworks.
@@ -136,34 +135,29 @@ Build `<cfb-session-card>` so you can **show** all of the following:
 
 **Definition of done**
 
-- Editing **`data-session-details`** in DevTools (or in HTML) updates the visible title, tags, and avatars without a full page reload.
-- At least **two** `<cfb-tag>` chips render from session `tags`.
-- Avatars use **`initials`** visibly and expose **`name`** where appropriate (e.g. `aria-label` on the chip).
+- Editing **`data-session-details`** in DevTools (or in HTML) updates the visible title, tags, and avatars without a 
+  full page reload.
+- At least **two** `<cfb-tag>` atoms render from session `tags`.
+- Avatars use **`initials`** visibly and expose **`name`** where appropriate (e.g. `aria-label` on the element).
 
-In [Concrete practice: myth or fact for the facilitator](./learning-log.md#step-2-concrete-facilitator-myth-fact), write one question of your own and **ask your facilitator**; capture the reply in the log.
+In [Concrete practice: myth or fact for the facilitator](./learning-log.md#step-2-concrete-facilitator-myth-fact), write one question of your own and 
+**ask your facilitator**; capture the reply in the log.
 
 ---
 
 ## 4) Conclusions
 
-### 1) Quick check
+Do the following checks in your learning log:
 
-- Where is `CfbSessionCard` defined, and where is `customElements.define` called?
-- In one line: who **owns** JSON parsing — the card or `<cfb-tag>`?
+### 1) Myth / Fact - composition
 
-### 2) True / False — composition
+Complete [True / False — duplicated markup](./learning-log.md#step-2--conclusions-myth-or-fact)
 
-Complete [True / False — duplicated markup](./learning-log.md#step-2-true-false-composition).
-
-### 3) Loop back
+### 2) Loop back
 
 Update [Where does session data live?](./learning-log.md#step-2-loop-back-data) if your answer changed.
 
-### 4) Commitment
-
-Complete [Commitment](./learning-log.md#step-2-commitment) in the log.
-
-### 5) Key takeaway (journey hub)
+### 3) Key takeaway (journey hub)
 
 Add **one or two sentences** in the [journey hub `learning-log.md`](../learning-log.md#step-2-key-takeaway).
 
@@ -180,13 +174,14 @@ Add **one or two sentences** in the [journey hub `learning-log.md`](../learning-
 
 ### Import `<cfb-tag>` from Step 1
 
-`index.js` should register **`cfb-tag`** before **`cfb-session-card`** so tags inside the card upgrade correctly. 
+`index.js` should register **`cfb-tag`** before **`cfb-session-card`** so tags inside the card upgrade correctly.
 This repo imports from [`../step-1/cfb-tag.js`](../step-1/cfb-tag.js) — keep `step-1/` beside `step-2/` or adjust the path.
 
 ### Skeleton `innerHTML`
 
-You can start from an `<article class="cfb-card">` shell matching Step 0 and fill header, `cfb-card__tags`, and footer 
-- same structure as the static board.
+A good practice is to hard-code the HTML structure then starting to make it dynamic.
+You can do this by copying the whole `article` from the static board - and then start making it dynamic by adding
+`<cfb-tag>` elements.
 
 ```js
 // Shape only — yours will call #render from lifecycle callbacks
@@ -200,11 +195,8 @@ const session = raw ? JSON.parse(raw) : {}
 
 If you finish early:
 
-- [ ] Name **2–3 other ways** to pass session data into the component (props object only in JS, separate attributes per
-      field, slots, etc.) — trade-offs in one short paragraph in your log.
+- [ ] if JSON is not valid, or is missing the title - do not render the component.
 - [ ] Try **named `<slot>`** elements instead of (or alongside) JSON — what changes in coupling?
-- [ ] Support **`data-variant="travel"`** → `cfb-card--travel` **modifier** on the article.
-- [ ] Experiment with **Shadow DOM** for the card vs light DOM — what breaks or improves?
 
 ---
 

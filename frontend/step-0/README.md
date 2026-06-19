@@ -1,23 +1,19 @@
 # Step 0 — The Static Board
 
-Welcome to the weekly frontend challenges: a gradual path toward a conference board using **modern HTML**, 
-**vanilla JavaScript**, and **Web Components**. Each step has a `README.md` with the same rhythm — learning goal, 
+Welcome to the weekly frontend challenges: a gradual path toward a conference board using **modern HTML**,
+**vanilla JavaScript**, and **Web Components**. Each step has a `README.md` with the same rhythm — learning goal,
 then **Connections → Concepts → Concrete practice → Conclusions** (Training from the Back of the Room style).
 
-This step is **structure only**: semantic HTML and the shared `cfb-` CSS. **No JavaScript** and no `<cfb-*>` 
-custom tags in your deliverable.
-
-```html
-<!-- Example: a tag chip is plain HTML + classes in Step 0 -->
-<span class="cfb-tag cfb-tag--blue">Keynote</span>
-```
+This step is **structure only**: semantic HTML and the shared `cfb-` CSS. There is **no JavaScript** and no `<cfb-*>`
+custom tags in your deliverable in this step. Actually, there is no deliverable except for getting to know the flow
+of the exercises.
 
 > **Before you start:** branch, local server, quick visual check — see [getting-started.md](./getting-started.md).
 
 ### Async / solo
 
-These challenges are written for **async, often solo** work. Where you see “discuss with a pair,” use 
-[your Step 0 learning log](./learning-log.md), a short post to your facilitator or team channel, or a 10-minute sync with a colleague. 
+These challenges are written for **async, often solo** work. Where you see “discuss with a pair,” use
+[your Step 0 learning log](./learning-log.md), a short post to your facilitator or team channel, or a 10-minute sync with a colleague.
 **Short timeboxes** beat perfect prose.
 
 ---
@@ -43,11 +39,12 @@ Do these **in order**; capture answers in [your Step 0 learning log](./learning-
    In [Top takeaways](./learning-log.md#step-0-top-takeaways), read the nine journey goals and mark **exactly two** with `[x]` — the most relevant for you *right now*.
 
 3. **Optional pair / async, ~3 min**  
-   If you have a peer: share which two goals you picked and one sentence why each. If solo: add one line in the log — 
+   If you have a peer: share which two goals you picked and one sentence why each. If solo: add one line in the log —
    *“The goal I’m most curious about later in the journey is ___.”*
 
 4. **Solo, ~2 min — Bridge toward Step 1**  
-   In [Bridge toward Step 1](./learning-log.md#step-0-bridge-step-1), pick one static tag chip and note why it could be a good first `<cfb-tag>` next step. 
+   In [Bridge toward Step 1](./learning-log.md#step-0-bridge-step-1), think of the static [index.html](./index.html) page.
+   What could be a simple enough structure to make the first custom web component of?
    **Do not** implement custom elements yet.
 
 ---
@@ -68,8 +65,8 @@ The smallest building blocks. They cannot be broken down further without losing 
 
 Examples in the board:
 
-- `<span class="cfb-tag">` — a single coloured badge
-- `<div class="cfb-avatar">` — a single person's initials chip
+- `<span class="cfb-tag">` — a single colored badge
+- `<div class="cfb-avatar">` — a single person's initials’ chip
 - CSS custom properties (`--color-background`, `--font-size-base`) — design tokens
 
 ### Molecules
@@ -93,7 +90,7 @@ Examples in the board:
 
 ### Templates
 
-Page-level skeletons that place organisms into a layout. In this project the template is the `<body>` and `<header>` / `<main>` 
+Page-level skeletons that place organisms into a layout. In this project the template is the `<body>` and `<header>` / `<main>`
 structure together with `cfb-layout.css`.
 
 ### Why it matters for this journey
@@ -115,7 +112,9 @@ boundaries and responsibilities.
 The table above is a **roadmap**; you are not building those custom tags until the matching step.
 
 Keeping this hierarchy in mind helps decide where a component lives, what it should know about, and what it should leave
-to its parent. A card should not know about the board; a tag should not know about the card.
+to its parent. For example:
+- A card should not know about the board
+- A tag should not know about the card.
 
 In short, Atomic Design can be **thought of** as:
 
@@ -124,14 +123,21 @@ In short, Atomic Design can be **thought of** as:
 - **Organisms**: larger sections (for example, day column, board region).
 - **Templates**: page-level structure (`body`, `header`, `main` layout).
 
-**BEM** appears in every `cfb-block__element` / `cfb-block--modifier` class name — structure and visual variants stay 
+### Together with atomic design, we use BEM as a naming convention for CSS classes.
+
+**BEM** appears in every `cfb-block__element` / `cfb-block--modifier` class name — structure and visual variants stay
 predictable as the board grows.
+
+Based on feedback and experience from earlier cohorts, towards the end of the journey, the BEM naming convention is
+becoming the standard, and you might be surprised to see how things just end up working with it.
+
+A lot of the CSS is already in place, but you can add more classes as you need them.
 
 ---
 
 ### Concept check — Myth or fact (~4 min)
 
-In [your learning log — Myth or fact](./learning-log.md#step-0-myth-or-fact), mark each line **M** or **F** *before* you change any code; then fix any 
+In [your learning log — Myth or fact](./learning-log.md#step-0-myth-or-fact), mark each line **M** or **F** *before* you change any code; then fix any
 you got wrong in one line each.
 
 ---
@@ -144,10 +150,10 @@ you got wrong in one line each.
    - header / navigation,
    - day columns,
    - session cards.
-4. In DevTools (or by reading the file), verify you can point to **one** example each of an **atom**, a **molecule**, 
+4. In DevTools (or by reading the file), verify you can point to **one** example each of an **atom**, a **molecule**,
    an **organism**, and **template**-level structure.
-5. In [your learning log — Concrete practice: your myth or fact](./learning-log.md#step-0-concrete-your-myth-fact), 
-   write **one** myth-or-fact style question of your own and **ask your facilitator** (PR, chat, or sync). 
+5. In [your learning log — Concrete practice: your myth or fact](./learning-log.md#step-0-concrete-your-myth-fact),
+   write **one** myth-or-fact style question of your own and **ask your facilitator** (PR, chat, or sync).
    Paste their reply or your notes in the log.
 
 **Constraints**
@@ -174,7 +180,7 @@ Before moving to Step 1, complete these closure checks.
 
 ### 2) Myth or Fact revisited — Atomic Design + BEM
 
-You already captured **Myth or fact** in the [learning log](./learning-log.md#step-0-myth-or-fact). Skim your answers: 
+You already captured **Myth or fact** in the [learning log](./learning-log.md#step-0-myth-or-fact). Skim your answers:
 did anything change after you mapped real HTML?
 
 ### 3) Learning log — wrap up
@@ -196,12 +202,12 @@ scan the whole journey without opening every detailed log.
 
 ### Structure map
 
-Use the comment block at the top of [`index.html`](./index.html) as a cheat sheet for which regions are atoms, molecules, 
+Use the comment block at the top of [`index.html`](./index.html) as a cheat sheet for which regions are atoms, molecules,
 organisms, and template-level layout.
 
 ### Local server
 
-Commands and folder paths live in [getting-started.md](./getting-started.md). Prefer serving from **`frontend/step-0`** so `../styles.css` 
+Commands and folder paths live in [getting-started.md](./getting-started.md). Prefer serving from **`frontend/step-0`** so `../styles.css`
 resolves correctly.
 
 ---

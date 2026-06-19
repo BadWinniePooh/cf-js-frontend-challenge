@@ -4,6 +4,10 @@ Use this file while you work through [Step 4 README](./README.md). When you fini
 
 ---
 
+[← Back to README — 1) Connections](./README.md#1-connections)
+
+---
+
 <a id="step-4-connections-refresh"></a>
 
 ### Step 4 — Connections: Refresh the page
@@ -78,6 +82,10 @@ _Solo, ~2 minutes. Answer **A** or **B** — not both._
 
 ---
 
+[← Back to README — 2) Concepts](./README.md#2-concepts)
+
+---
+
 <a id="step-4-concepts-one-minute"></a>
 
 ### Step 4 — Concepts: One-minute review
@@ -109,6 +117,10 @@ _Answer from memory first; then peek at [`session-store.js`](./session-store.js)
    *(See [`events.js`](./events.js).)*
 
    > 
+
+---
+
+[← Back to README — 4) Conclusions](./README.md#4-conclusions)
 
 ---
 
@@ -152,6 +164,10 @@ _Short reflection._
 _Look at your answer under “Refresh the page.” Update in one or two lines if needed._
 
 > 
+
+---
+
+[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
 
 ---
 

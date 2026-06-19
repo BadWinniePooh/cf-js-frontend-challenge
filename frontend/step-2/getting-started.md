@@ -15,7 +15,7 @@ From **`frontend`** (this allows you easily change between /step-1/index.html an
 **Option A — one-off:**
 
 ```bash
-cd frontend/step-2
+cd frontend
 npx http-server -o .
 ```
 
@@ -23,11 +23,11 @@ npx http-server -o .
 
 ```bash
 npm install -g http-server
-cd frontend/step-2
+cd frontend
 http-server . -o
 ```
 
-**Option C — VS Code:** [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) → right-click `index.html` → *Open with Live Server*.
+Then open `http://localhost:8080/ -> you have a direct link to the Step 2 folder.
 
 ## 3) Verify in the browser
 

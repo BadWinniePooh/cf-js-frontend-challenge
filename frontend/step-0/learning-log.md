@@ -1,6 +1,11 @@
 # Learning log — Step 0
 
-Use this file while you work through [Step 0 README](./README.md). When you finish the step, add your **key takeaway** in the [journey hub `learning-log.md`](../learning-log.md#step-0-key-takeaway).
+Use this file while you work through [Step 0 README](./README.md).
+When you finish the step, add your **key takeaway** in the [journey hub `learning-log.md`](../learning-log.md#step-0-key-takeaway).
+
+---
+
+[← Back to README — 1) Connections](./README.md#1-connections)
 
 ---
 
@@ -36,6 +41,10 @@ relevant for you right now. Mark those with `[x]` in the list below.
 - [ ] Treat architecture as replaceable boundaries: mock vs real backend (MSW), pull vs push updates (fetch/WebSocket) 
       without rewriting core components.
 
+*“The goal I’m most curious about later in the journey is ___.”*
+
+> ___ 
+
 ---
 
 <a id="step-0-bridge-step-1"></a>
@@ -44,15 +53,20 @@ relevant for you right now. Mark those with `[x]` in the list below.
 
 _Solo, ~2 minutes. You are **not** implementing custom elements yet — just noticing._
 
-Pick **one** `<span class="cfb-tag …">` chip on your board (or in [`./index.html`](./index.html) / the repo’s [`../index.html`](../index.html) reference board).
+Think of the static structure on the board (in [`./index.html`](./index.html)). What could be a simple enough structure
+to start learning about custom web components?
 
-**Which chip did you pick?** (e.g. label text + colour)
+**What did you pick?** (you can copy the example html tag here)
+
+> 
+
+**In one sentence: why might this be a good *first* atom to turn into a custom web component? in Step-1**
 
 > 
 
-**In one sentence: why might this be a good *first* atom to turn into `<cfb-tag>` in Step 1?**
+---
 
-> 
+[← Back to README — 2) Concepts](./README.md#2-concepts)
 
 ---
 
@@ -79,6 +93,10 @@ _Mark **M** (myth) or **F** (fact) first; then correct any mistakes in one line 
 
 ---
 
+[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+
+---
+
 <a id="step-0-concrete-your-myth-fact"></a>
 
 ### Step 0 — Concrete practice: your myth or fact for the facilitator
@@ -86,18 +104,22 @@ _Mark **M** (myth) or **F** (fact) first; then correct any mistakes in one line 
 _Solo, ~5 minutes._
 
 1. Write **one** short statement that could be read as **myth** or **fact** — about semantic HTML, Atomic Design, BEM,
-the `cfb-` naming in this board, or how structure relates to later JavaScript steps. Make it something *you* are 
-genuinely unsure about (not a trivia quiz).
+   the `cfb-` naming in this board, or how structure relates to later JavaScript steps. Make it something *you* are
+   genuinely unsure about (not a trivia quiz).
 
 2. **Ask your facilitator** that question explicitly — e.g. in a PR comment, chat message, or during a sync: *“Myth or fact: …?”*
 
 **My myth/fact question**
 
-> 
+>
 
 **Facilitator reply** _(or your own notes after you asked)_
 
-> 
+>
+
+---
+
+[← Back to README — 4) Conclusions](./README.md#4-conclusions)
 
 ---
 

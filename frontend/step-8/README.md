@@ -1,17 +1,20 @@
 # Step 8 — Live Updates · WebSocket + session store
 
 Step 7 taught **pull**: loaders **`fetch`** data, write IndexedDB, and the orchestrator refreshes the schedule. 
-Step 8 adds **push**: a **WebSocket** feed writes session changes into the **same** IndexedDB path, and the **same** 
-orchestrator signal refreshes the board — **no second render pipeline**.
+Step 8 adds **push**: a **WebSocket** feed (in backend) writes session changes into the **same** IndexedDB path, 
+and the **same** orchestrator signal refreshes the board — **no second render pipeline**. This way, you'll see how
+the chosen component structure supports **live updates**.
 
 A second idea: **one component owns IDB writes** for sessions (`<cfb-session-store-updates>`), while the 
 **loader only fetches** and the **live component only listens**. That separation of getting data from backend and 
-storing it in different component is the main architectural lesson.
+storing it in different component is the main architectural lesson from WebComponent point of view.
 
 Form add/edit/remove still goes through **`<cfb-updates-sessions>`** → HTTP — **unchanged** from Step 7.
 
-The backend (**[`step-8-be`](../step-8-be/README.md)**) is **already provided** — WebSocket broadcast, random session POST, and DELETE are
-running before you touch the frontend.
+The backend (**[`step-8-be`](../step-8-be/README.md)**) is **already provided**. It supports now (in addition to what step-7 backend):
+- WebSocket broadcast, 
+- Adding a random session
+- Deleting a session 
 
 > **Before you start:** branch, HTTP server from **`frontend/`**, **`step-8-be`** running — see [getting-started.md](./getting-started.md).
 
@@ -26,11 +29,11 @@ Use [your Step 8 learning log](./learning-log.md), a short note to your facilita
 By the end of this step, you can:
 
 - Open a **`WebSocket`**, parse **`message`** payloads, and **close** the socket in **`disconnectedCallback`**.
-- Explain why **`<cfb-live-session-updates>`** does **not** write IndexedDB directly — 
-  it dispatches **`liveSessionUpdated`** / **`liveSessionRemoved`** to **`<cfb-session-store-updates>`**.
+- Explain why **`<cfb-live-session-updates>`** does **not** write IndexedDB directly
 - Trace **`sessionsLoaded`** bubbling to **`<cfb-board-orchestrator>`** so **`cfb-schedule`** re-renders — the **same**
   path as Step 7’s initial load.
-- Contrast **pull** (loader / form → HTTP → reload) with **push** (WebSocket → store → schedule) without changing **`<cfb-updates-sessions>`**.
+- Contrast **pull** (loader / form → HTTP → reload) with **push** (WebSocket → store → schedule) while having the same
+  structure as in Step-7
 
 ---
 
@@ -54,18 +57,17 @@ Do these **in order**; capture answers in [your Step 8 learning log](./learning-
 
 ## 2) Concepts
 
-### Pull vs push of Data
+### Pull vs push in this app
 
-Data is served to the frontend in two ways: **fetch** and **listen**. This means that either the frontend
- - **fetches** data from the backend, or
- - **listens** to a **WebSocket** feed - and the backend pushes messages to frontend whenever relevand data changes.
+| Path                         | Trigger                               | Network                     | Who writes sessions IDB                                       | Schedule refresh                            |
+|------------------------------|---------------------------------------|-----------------------------|---------------------------------------------------------------|---------------------------------------------|
+| **Initial load**             | `data-event-id` / page load           | `GET` sessions              | **`<cfb-session-store-updates>`** (via **`sessionsFetched`**) | **`sessionsLoaded`** + **`scheduleLoaded`** |
+| **Form add / edit / remove** | User form or card menu                | `PUT` / `PATCH` / `DELETE`  | Loader refetch → store (via **`sessionsBackendUpdated`**)     | Same orchestrator path                      |
+| **Live / random**            | WebSocket message or colleague’s POST | WebSocket / `POST …/random` | **Store** (via **`liveSession*`** events)                     | **`sessionsLoaded`** only                   |
 
-In this app, we already have implemented the **fetch** path, and we have the backend implementation for **push**. So
-now we need to implement the fronted part for WebSockets.
+**`<cfb-updates-sessions>`** stays on the **HTTP** row only. That is intentional: you can add real-time features **without** rewriting the form layer.
 
 ### WebSocket lifecycle
-
-In this exercise, your job is to implement the 
 
 - **`new WebSocket(url)`** — URL includes **`eventId`**: `ws://localhost:3001/ws/sessions/codefreeze-2025`.
 - **`open`** — connection accepted; show status in the UI (`data-state="open"`).
@@ -91,31 +93,29 @@ Step 7 waited for **both** **`scheduleLoaded`** and **`sessionsLoaded`** before 
 a **solo** **`sessionsLoaded`** (live push or session reload) should still bump **`data-latest-updated-at`** on 
 **`.listens-schedule-updates`**. See [`cfb-board-orchestrator.js`](./cfb-board-orchestrator.js).
 
-
 ### End-to-end flow (reference)
 
-Legend: 
-- ✨ new / changed in Step 8 · 
-- ✅ unchanged from earlier steps
-
+Legend:
+- [ ] ✨ new / changed in Step 8 ·
+- [ ] ✅ unchanged from earlier steps
 ```
-                         ┌────────────┐
-                         │ Page load  │
-                         └─────┬──┬───┘
+                        ┌────────────┐
+                        │ Page load  │
+                        └─────┬──┬───┘
               on page load,   │  │   connect to WebSocket
               it loads data   │  │   on page load
                               ▼  ▼
-  ┌─────────────────────────────────────────────────────────────────────────┐
+  ┌──────────────────────────────────────────────────────────────────────────┐
   │              ✨ cfb-session-store-updates                                │
-  │  ┌──────────────────────────┐    ┌──────────────────────────────────┐  │
-  │  │ ✨ cfb-session-loader     │    │ ✨ cfb-live-session-updates       │  │
-  │  │    (fetch only)           │    │    (WebSocket listen only)       │  │
-  │  └────────────┬─────────────┘    └──────────────────┬───────────────┘  │
-  │               │ sessionsFetched                       │ liveSessionUpdated│
-  │               │                                       │ liveSessionRemoved│
-  │               └──────────────────┬────────────────────┘                  │
+  │  ┌──────────────────────────┐    ┌──────────────────────────────────┐    │
+  │  │ ✨ cfb-session-loader    │    │ ✨ cfb-live-session-updates      │    │
+  │  │    (fetch only)          │    │    (WebSocket listen only)       │    │
+  │  └────────────┬─────────────┘    └──────────────────┬───────────────┘    │
+  │               │ sessionsFetched                     │ liveSessionUpdated │
+  │               │                                     │ liveSessionRemoved │
+  │               └──────────────────┬──────────────────┘                    │
   │                                  ▼                                       │
-  │                         saveSessions / upsert / delete                 │
+  │                         saveSessions / upsert / delete                   │
   └──────────────────────────────────┬───────────────────────────────────────┘
                                      │
                                      ▼
@@ -157,7 +157,6 @@ Legend:
 
 A Mermaid version lives in [`images/flowchart`](./images/flowchart).
 
----
 ---
 
 ### One-minute review (~1 min)

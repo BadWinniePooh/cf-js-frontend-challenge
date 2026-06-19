@@ -1,7 +1,7 @@
 import { use, expect } from 'chai'
 import { schemaMatcher } from '../../testing-utils/src/chai-helpers.js'
-import { sessionDetailsSchema } from '../../test-2/contracts/session-details.schema.js'
-import { EventTypes } from '../../step-3/events.js'
+import { sessionDetailsSchema } from '../contracts/session-details.schema.js'
+import { EventTypes } from '../../step-3/lib/events.js'
 import { fixture, cleanup } from './helpers/fixture.js'
 import { CfbSessionGenerator } from '../../step-3/cfb-session-generator.js'
 

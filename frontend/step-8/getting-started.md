@@ -8,7 +8,8 @@ Work on a branch so feedback and history stay easy to follow.
 
 ## 2) Serve from the `frontend/` folder (important)
 
-[`index.html`](./index.html) links **`../styles.css`**. Serve the **`frontend`** directory as the site root (not only `step-8/`), then open **`step-8/index.html`**.
+[`index.html`](./index.html) links **`../styles.css`**. Serve the **`frontend`** directory as the site root (not only `step-8/`),
+then open **`step-8/index.html`**.
 
 From **`frontend/`**:
 
@@ -17,10 +18,6 @@ npx http-server -o .
 ```
 
 Then browse to **`/step-8/index.html`**.
-
-**`index.js`** loads ES modules from **`step-8/`** and imports earlier steps. Browsers block modules on **`file://`**.
-
-Open DevTools → **Console** and fix import errors before continuing.
 
 ## 3) Start the Step 8 backend (required)
 

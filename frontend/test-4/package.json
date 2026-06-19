@@ -4,9 +4,10 @@
   "description": "T-4: IndexedDB store contract + component tests for session-store, cfb-session-store, cfb-session-loader, cfb-board-orchestrator",
   "type": "module",
   "scripts": {
-    "test": "web-test-runner --node-resolve --config test/web-test-runner.config.mjs",
+    "test": "npm run test:store:fake && npm run test:store:real",
+    "test:store:real": "web-test-runner test/*.contract.test.js --config test/web-test-runner.store-real.config.mjs",
+    "test:store:fake": "web-test-runner --node-resolve --config test/web-test-runner.config.mjs",
     "test:watch": "web-test-runner \"test/**/*.test.js\" --node-resolve --watch --config test/web-test-runner.config.mjs",
-    "test:manual":   "web-test-runner \"test/**/*.test.js\" --node-resolve --config test/web-test-runner.config.mjs --manual",
     "test:specific": "web-test-runner --files=test/**/*${PATTERN:-*}*.test.js --node-resolve --config test/web-test-runner.config.mjs"
   },
   "devDependencies": {

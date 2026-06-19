@@ -6,6 +6,10 @@ This step uses **Training from the Back of the Room** ideas adapted for **solo /
 
 ---
 
+[← Back to README — 1) Connections](./README.md#1-connections)
+
+---
+
 <a id="step-6-connections-formdata-guess"></a>
 
 ### Step 6 — Connections: FormData guess (think → ink)
@@ -71,6 +75,10 @@ for it. One line: why is that similar to what **`setFormValue`** is trying to do
 
 ---
 
+[← Back to README — 2) Concepts](./README.md#2-concepts)
+
+---
+
 <a id="step-6-concepts-one-minute"></a>
 
 ### Step 6 — Concepts: One-minute review
@@ -118,6 +126,14 @@ Draw **six boxes** in a row: **user picks a tile** → **`<cfb-session-type>`** 
 Add **one short label** on each **arrow** (e.g. **`setFormValue`**, **`checkValidity`**, event name).
 
 > 
+
+---
+
+[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+
+---
+
+[← Back to README — 4) Conclusions](./README.md#4-conclusions)
 
 ---
 

@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { cleanup, fixture } from './helpers/fixture.js'
-import { cfbSessionCreated } from '../../step-3/events.js'
-import { sessionDetails } from '../../step-2/builds-session-details.js'
+import { cfbSessionCreated } from '../../step-3/lib/events.js'
+import { sessionDetails } from '../../step-3/lib/builds-session-details.js'
 import { Randomizer } from '../../test-2/test/helpers/randomizer.js'
 import { CfbBoardOrchestrator } from '../../step-3/cfb-board-orchestrator.js'
 

@@ -10,6 +10,10 @@ This step uses **Training from the Back of the Room** ideas adapted for **solo /
 
 ---
 
+[← Back to README — 1) Connections](./README.md#1-connections)
+
+---
+
 <a id="step-8-connections-push-vs-pull"></a>
 
 ### Step 8 — Connections: Push vs pull (think → ink)
@@ -18,9 +22,8 @@ _Solo, ~2 minutes. Answer **before** you read Concepts._
 
 A colleague clicks **“Add random session (via backend)”** while you watch the board.
 
-**In one or two sentences:** does the new card appear because **`cfb-schedule`** called **`fetch`**, 
-because a **WebSocket message** arrived, or because **`FormData`** submitted? 
-Name the **first** mechanism you think fires.
+**In one or two sentences:** What happens in the background? And why does the new session
+appear on 'your' schedule page?
 
 >
 
@@ -38,8 +41,8 @@ Step 7’s **`<cfb-session-loader>`** both **fetched** and **wrote** IndexedDB.
 
 **Two bullets:**
 
-1. **Why this might be a design smell**? 
-2. **How would you change it**? 
+1. **Why** are we changing this now? What might be the benefits?
+2. **What stays the same** for **`cfb-updates-sessions`** and the add/edit form?
 
 >
 
@@ -66,14 +69,19 @@ mostly **push**, **poll**, or **both**?
 
 _Solo, ~2 minutes. Answer **A** or **B** — not both._
 
-**A)** How can you make sure you only listen to the relevant stream of events (of relevant conference)?
+**A)** Why does the WebSocket URL include **`eventId`** (`/ws/sessions/codefreeze-2025`) instead of one global 
+feed for all conferences?
 
 >
 
-**B)** In one sentence: what is WebSocket and why do we use it? (wrong answers is also good - we'll get back
-to this at the end of the step) 
+**B)** In one sentence: what goes wrong if **`cfb-live-session-updates`** imports **`saveSessions`** directly instead 
+of dispatching an event to the store wrapper?
 
 >
+
+---
+
+[← Back to README — 2) Concepts](./README.md#2-concepts)
 
 ---
 
@@ -135,6 +143,10 @@ Label **one arrow** per lane with the key event or attribute (e.g. **`sessionsFe
 
 ---
 
+[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+
+---
+
 <a id="step-8-concrete-facilitator-question"></a>
 
 ### Step 8 — Concrete practice: Question for your facilitator
@@ -150,6 +162,10 @@ Ask **one** question about **WebSockets**, **the store wrapper pattern**, **orch
 **Facilitator reply / notes**
 
 >
+
+---
+
+[← Back to README — 4) Conclusions](./README.md#4-conclusions)
 
 ---
 

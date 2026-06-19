@@ -7,6 +7,10 @@ This step leans on **Training from the Back of the Room** ideas adapted for **so
 
 ---
 
+[← Back to README — 1) Connections](./README.md#1-connections)
+
+---
+
 <a id="step-5-connections-submit-guess"></a>
 
 ### Step 5 — Connections: Submit guess (think → ink)
@@ -83,6 +87,10 @@ _Solo, ~2 minutes. Answer **A** or **B** — not both. **Short** — one or two 
 
 ---
 
+[← Back to README — 2) Concepts](./README.md#2-concepts)
+
+---
+
 <a id="step-5-concepts-sketch"></a>
 
 ### Step 5 — Concepts: Sketch the signal path (**Images**)
@@ -139,6 +147,14 @@ _Answer **from memory first** (~5 minutes). Then peek at [`cfb-add-session-form.
 | __ | **`reportValidity()`** is mainly for showing the browser’s native error UI when constraints fail.      |
 
 > 
+
+---
+
+[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+
+---
+
+[← Back to README — 4) Conclusions](./README.md#4-conclusions)
 
 ---
 

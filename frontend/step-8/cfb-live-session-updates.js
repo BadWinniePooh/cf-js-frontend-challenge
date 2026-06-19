@@ -13,20 +13,19 @@ export class CfbLiveSessionUpdates extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // TODO: Implement a WebSocket disconnection
     this.#socket?.close()
     this.#socket = null
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return
+    if (name === 'data-reload-token') return
     if (name === 'data-event-id' || name === 'data-url') {
       this.#connect()
     }
   }
 
   #connect() {
-    // TODO: Implement a WebSocket connection
     this.#socket?.close()
     this.#socket = null
 
