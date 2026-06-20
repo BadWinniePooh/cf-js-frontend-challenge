@@ -18,6 +18,10 @@ export class CfbUpdatesSessions extends HTMLElement {
 
     const session = e.detail
     // TODO: Call backendApi to save session
+    /* code here */
+
+    // NOTE: This is important - because we want to notify the parent component that the session has been updated, so
+    // that it can update the UI.
     this.#notifySaved(eventId)
   }
 
@@ -28,10 +32,15 @@ export class CfbUpdatesSessions extends HTMLElement {
 
     const session = e.detail
     // TODO: Call backendApi to update session
+    /* code here */
+
+    // NOTE: This is important - because we want to notify the parent component that the session has been updated, so
+    // that it can update the UI.
     this.#notifySaved(eventId)
   }
 
   #notifySaved(eventId) {
-    this.dispatchEvent(cfbSessionStored({ eventId, updatedAt: Date.now() }))
+    // TODO: you should dispatch an event to notify the parent component that the sessions in backend has been updated
+    // this.dispatchEvent( /* make a custom event here */)
   }
 }
