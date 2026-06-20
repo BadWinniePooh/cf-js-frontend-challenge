@@ -4,7 +4,7 @@ import { saveSessions, deleteSession, getAllSessions, updateSession } from '../s
 // Step 5 variant: same as Step 4, plus explicit handling of SESSION_UPDATED
 // (edit flow) alongside SESSION_CREATED (add flow).
 //
-// Both mutation handlers end in saveSessions + sessionsLoaded — the
+// Both mutation handlers end in saveSessions + sessionsLoaded - the
 // orchestrator still only listens for sessionsLoaded.
 export class CfbSessionStore extends HTMLElement {
     static elementName = 'cfb-session-store'

@@ -1,7 +1,7 @@
-# Test Step T-2 — Molecule Behaviour · `<cfb-session-card>`
+# Test Step T-2 - Molecule Behaviour · `<cfb-session-card>`
 
 In T-1 you tested a single atom. Now the component under test is a **molecule**
-— `<cfb-session-card>` from Step 2 — which renders a full session card composed
+- `<cfb-session-card>` from Step 2 - which renders a full session card composed
 of a title, `<cfb-tag>` atoms, and attendee avatar chips.
 
 The testing approach shifts accordingly. Instead of asserting on exact HTML
@@ -10,7 +10,7 @@ the title in there, do the avatars match the attendee list? Tests written at
 this level survive component refactors; snapshot tests don't.
 
 **Goal**: Test the composite `<cfb-session-card>` from Step 2 by verifying
-*how many* child elements are rendered — not their exact markup.
+*how many* child elements are rendered - not their exact markup.
 Behaviour tests survive refactors; snapshot tests don't.
 
 ---
@@ -18,14 +18,14 @@ Behaviour tests survive refactors; snapshot tests don't.
 ## What to build
 
 - [ ] Copy `package.json` and `test/web-test-runner.config.mjs` from `test-1`
-  (or `test-0` — they're identical)
+  (or `test-0` - they're identical)
 - [ ] Copy `test/helpers/fixture.js` from `test-1`
 - [ ] Register `<cfb-tag>` (from `step-1`) and `<cfb-session-card>` (from `step-2`)
 - [ ] Write tests for title, tags, attendees, and attribute reactivity
 
 ## Constraints
 
-- No snapshot assertions — no `el.innerHTML ===`.
+- No snapshot assertions - no `el.innerHTML ===`.
 - Count elements, check text, verify presence. Max **30 minutes**.
 
 ---
@@ -107,7 +107,7 @@ expect(el.querySelectorAll('cfb-tag').length).to.equal(1)
 ## Extras
 
 - [ ] Test that each avatar chip displays the attendee's initials as text
-- [ ] Test graceful handling of malformed JSON in `data-session-details` — does
+- [ ] Test graceful handling of malformed JSON in `data-session-details` - does
   the component throw, or degrade quietly?
 - [ ] If you added Shadow DOM to `<cfb-session-card>`, query via
   `el.shadowRoot.querySelectorAll(...)` instead
@@ -135,7 +135,7 @@ After completing this step you will have learned:
 
 - How to test a **molecule** by counting and querying its child elements
 - Why asserting "how many?" is more durable than asserting "what does it
-  look like?" — counts survive markup refactors; snapshots don't
+  look like?" - counts survive markup refactors; snapshots don't
 - How tests can surface a bug (`connectedCallback` without a guard) that
   manual testing in the browser missed
 - How to pass structured JSON data through a DOM attribute in test code

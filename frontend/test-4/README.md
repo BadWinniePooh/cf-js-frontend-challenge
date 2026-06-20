@@ -1,4 +1,4 @@
-# Test Step T-4 — IndexedDB Store · Async Round-Trips
+# Test Step T-4 - IndexedDB Store · Async Round-Trips
 
 In T-3 you tested synchronous event flows. This step introduces a new challenge:
 **the store is asynchronous**. `session-store.js` wraps IndexedDB in Promises,
@@ -13,7 +13,7 @@ There are also three components with distinct responsibilities to test:
 | `<cfb-session-loader>`     | Read all sessions from IDB on connect, fire `sessionsLoaded`                |
 | `<cfb-board-orchestrator>` | Listen for `sessionsLoaded`, push `data-sessions` down to schedule elements |
 
-Notice that `<cfb-board-orchestrator>` has no IDB involvement — it is stateless.
+Notice that `<cfb-board-orchestrator>` has no IDB involvement - it is stateless.
 Only the loader and store components touch the database.
 
 ---
@@ -21,10 +21,10 @@ Only the loader and store components touch the database.
 ## What to build
 
 - [ ] Decide: test against **real IndexedDB** or a **fake in-memory store**?
-  (see Tips below — this is the most important design decision in this step)
-- [ ] Write `test/cfb-board-orchestrator.test.js` — no IDB, pure event wiring
-- [ ] Write `test/cfb-session-loader.test.js` — connect element, await `sessionsLoaded`
-- [ ] Write `test/cfb-session-store.test.js` — dispatch session events, await `sessionsLoaded`
+  (see Tips below - this is the most important design decision in this step)
+- [ ] Write `test/cfb-board-orchestrator.test.js` - no IDB, pure event wiring
+- [ ] Write `test/cfb-session-loader.test.js` - connect element, await `sessionsLoaded`
+- [ ] Write `test/cfb-session-store.test.js` - dispatch session events, await `sessionsLoaded`
 - [ ] Write tests for the indexedDB store functionality.
 
 ## Constraints
@@ -40,10 +40,10 @@ Only the loader and store components touch the database.
 
 ### Real IndexedDB or a fake store?
 
-This is the key design question for this step. Both approaches are valid — the
+This is the key design question for this step. Both approaches are valid - the
 right answer depends on what you want to test.
 
-**Option A — Test against the real IndexedDB**
+**Option A - Test against the real IndexedDB**
 
 Tests run against the actual browser database. Slow but high-fidelity.
 Each test must drop and recreate the database in `afterEach` to avoid bleed-over:
@@ -66,7 +66,7 @@ afterEach(async () => {
 If you choose this one, make sure you don't accidentally add the `dropDb` into the production code,
 but that only lies in the test code.
 
-**Option B — Swap the store for a fake via import map**
+**Option B - Swap the store for a fake via import map**
 
 Write a `test/helpers/fake-session-store.js` that exports the same functions as
 `session-store.js` (`saveSessions`, `getAllSessions`, `deleteSession`, …) but
@@ -80,14 +80,14 @@ const testImportMappings = {
 ```
 
 With the swap in place, every component that `import`s `session-store.js` gets
-the fake instead — no component code changes, no `if (test)` branches.
+the fake instead - no component code changes, no `if (test)` branches.
 
-**Option C — Test the store implementation against real DB, but use 'sinon' in all other test cases**
+**Option C - Test the store implementation against real DB, but use 'sinon' in all other test cases**
 
 Two-step approach. Test the actual store against real IndexedDB, and fake all the usages of the store.
 This
 
-**Option D — run store implementation test both against realDB and against fake implementation**
+**Option D - run store implementation test both against realDB and against fake implementation**
 
 This makes sure that we can trust on the fake implementation. But would require some other means of magic
 to be able to run the same test against both real store and the fake store.
@@ -97,9 +97,9 @@ to be able to run the same test against both real store and the fake store.
 |                         | Real IDB                     | Fake store                        | Mock / contract with fake              |
 |-------------------------|------------------------------|-----------------------------------|----------------------------------------|
 | Confidence              | Tests the real browser API   | Tests the component wiring only   | As long as mock data is ok, good       |
-| Speed                   | Slower — async DB operations | Instant — plain array             | One test slow, others fast             |
+| Speed                   | Slower - async DB operations | Instant - plain array             | One test slow, others fast             |
 | Isolation               | `dropDb()` teardown required | `resetForTests()` in-memory clear | can be made test specific              | 
-| What can break silently | Nothing — IDB bugs surface   | IDB bugs stay hidden              | if contract is not tested, many things |
+| What can break silently | Nothing - IDB bugs surface   | IDB bugs stay hidden              | if contract is not tested, many things |
 | Best for                | Store API correctness        | Component behaviour               | You define                             |
 
 A common approach: use the fake for most tests (fast, focused), and run a
@@ -107,8 +107,8 @@ separate contract test against the real IndexedDB to verify the store API itself
 That is the split used in this step's two npm scripts:
 
 ```bash
-npm run test:store:fake   # fast suite — all components, fake store
-npm run test:store:real   # slow suite — session-store.js vs real IDB only
+npm run test:store:fake   # fast suite - all components, fake store
+npm run test:store:real   # slow suite - session-store.js vs real IDB only
 ```
 
 ### Inspecting IndexedDB with `test:manual`
@@ -127,7 +127,7 @@ Application → IndexedDB**, and you can see exactly what is stored (or not
 stored) after each test run. This is particularly useful when `dropDb()`
 does not fire cleanly and sessions bleed from one test into the next.
 
-### `waitForEvent` — awaiting a future event on an element
+### `waitForEvent` - awaiting a future event on an element
 
 For components that fire events in response to a dispatched event (rather than
 on connect), a simpler helper works:
@@ -165,11 +165,11 @@ const { detail } = await sessionsLoaded
   Cover `saveSessions`, `getAllSessions`, `deleteSession`, `getSessionsByDay`. 
   Run it with a separate config that does not apply the import map swap so it hits real IDB.
 - [ ] **Implement a `fake-session-store.js`** that mirrors the `session-store.js`
-  API using a plain array — then flip between the two via the import map
+  API using a plain array - then flip between the two via the import map
   to experience the trade-off first-hand
-- [ ] Test `disconnectedCallback` — dispatch an event after removing the element
+- [ ] Test `disconnectedCallback` - dispatch an event after removing the element
   from the DOM and assert no `sessionsLoaded` is fired
-- [ ] Test that `seedIfEmpty` in `session-store.js` is idempotent — calling it
+- [ ] Test that `seedIfEmpty` in `session-store.js` is idempotent - calling it
   twice does not duplicate seed data
 
 ---
@@ -189,10 +189,10 @@ If you get stuck, note the problem here so we can discuss it together.
 
 After completing this step you will have learned:
 
-- Why async components need a different mounting helper than synchronous ones —
+- Why async components need a different mounting helper than synchronous ones -
   `connectedCallback` can fire an event before your listener is attached
 - How **import map swapping** replaces a real dependency with a test fake without
-  touching any component code — a browser-native alternative to `jest.mock()`
+  touching any component code - a browser-native alternative to `jest.mock()`
 - The trade-off between testing against **real IndexedDB** (high confidence, slower,
   needs teardown) and a **fake in-memory store** (fast, isolated, but cannot
   catch IDB-specific bugs)

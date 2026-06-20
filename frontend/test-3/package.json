@@ -1,7 +1,7 @@
 {
   "name": "cfb-test-3",
   "version": "1.0.0",
-  "description": "T-3: Pub/Sub tests — sessionAdded flow through session-generator → orchestrator → schedule",
+  "description": "T-3: Pub/Sub tests - sessionAdded flow through session-generator → orchestrator → schedule",
   "type": "module",
   "scripts": {
     "test":          "web-test-runner \"test/**/*.test.js\" --node-resolve --config test/web-test-runner.config.mjs",

@@ -1,5 +1,5 @@
 // Promise-based IndexedDB wrapper for session data.
-// Single responsibility: all IDB access lives here — no UI, no events.
+// Single responsibility: all IDB access lives here - no UI, no events.
 // Same DB_NAME as step-4/session-store.js so schedule reads this DB.
 // DB_NAME is exported so tests can delete the database between runs.
 

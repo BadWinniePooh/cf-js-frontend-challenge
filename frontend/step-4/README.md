@@ -1,12 +1,12 @@
-# Step 4 — Load from IndexedDB
+# Step 4 - Load from IndexedDB
 
 In Steps 1–3 you built UI and **in-memory** flows. Refreshing the page dropped session state. Now sessions **persist in 
-the browser** using **IndexedDB** — same origin as your app — while keeping **storage code separate** from components.
+the browser** using **IndexedDB** - same origin as your app - while keeping **storage code separate** from components.
 
 The **full wiring** (database name, event type strings, loader vs store) lives in **Concepts** and in 
-**`session-store.js`/ `events.js`** — after **Connections** — so your first guesses in the learning log stay honest.
+**`session-store.js`/ `events.js`** - after **Connections** - so your first guesses in the learning log stay honest.
 
-> **Before you start:** branch, HTTP server, **same origin** for IDB — see [getting-started.md](./getting-started.md).
+> **Before you start:** branch, HTTP server, **same origin** for IDB - see [getting-started.md](./getting-started.md).
 
 ### Async / solo
 
@@ -30,19 +30,19 @@ By the end of this step, you can:
 
 Do these **in order**; capture answers in [your Step 4 learning log](./learning-log.md).
 
-1. **Solo, ~2 min — Refresh the page**  
+1. **Solo, ~2 min - Refresh the page**  
    [Refresh the page](./learning-log.md#step-4-connections-refresh) *(revisit in Conclusions).*
 
-2. **Solo, ~5 min — Orchestrator vs Step 3**  
+2. **Solo, ~5 min - Orchestrator vs Step 3**  
    [Orchestrator from Step 3](./learning-log.md#step-4-connections-orchestrator-step3).
 
-3. **Solo, ~3 min — Bridge from Step 3**  
+3. **Solo, ~3 min - Bridge from Step 3**  
    [Bridge from Step 3](./learning-log.md#step-4-bridge-step-3).
 
 4. **Optional pair / async, ~3 min**  
    [Surprise / compare](./learning-log.md#step-4-connections-surprise).
 
-5. **Solo, ~2 min — Topic link**  
+5. **Solo, ~2 min - Topic link**  
    [Topic link](./learning-log.md#step-4-topic-link): **A** or **B**.
 
 ---
@@ -57,11 +57,11 @@ inside **transactions**. This repo wraps those callbacks in **`Promise`**s insid
 
 ### Storage vs UI (`session-store.js`)
 
-**Rule of thumb:** **`session-store.js`** owns **`indexedDB`** only — **no** DOM, **no** `CustomEvent`. Components 
+**Rule of thumb:** **`session-store.js`** owns **`indexedDB`** only - **no** DOM, **no** `CustomEvent`. Components 
 **call** `getAllSessions()`, `saveSessions()`, `deleteSession()`, etc., and decide what to render or dispatch.
 
 The database **name** used in code is the exported **`DB_NAME`** in [`session-store.js`](./session-store.js) (in this repo 
-**`cfb-db-test`** so tests can isolate DBs — adjust only if you know why).
+**`cfb-db-test`** so tests can isolate DBs - adjust only if you know why).
 
 ### Events (`events.js`)
 
@@ -69,7 +69,7 @@ The database **name** used in code is the exported **`DB_NAME`** in [`session-st
 
 | Constant                | String                           | Typical use                                                               |
 |-------------------------|----------------------------------|---------------------------------------------------------------------------|
-| `SESSION_CREATED`       | **`cfb-session-created`**        | Re-exported from Step 3 — generator → store                               |
+| `SESSION_CREATED`       | **`cfb-session-created`**        | Re-exported from Step 3 - generator → store                               |
 | `SESSION_REMOVED`       | **`cfb-session-removed`**        | Remove menu → store                                                       |
 | `SESSION_LOADED_TO_IDB` | **`cfb-sessions-loaded-to-idb`** | Loader finished seeding **or** store finished mutating IDB → orchestrator |
 
@@ -103,7 +103,7 @@ Legend:
 **Initial load**
 
 ```
-✅ index.js — registers custom elements on **page load**
+✅ index.js - registers custom elements on **page load**
     │
     ▼
 ✨ cfb-session-loader
@@ -144,7 +144,7 @@ Legend:
 🚧 cfb-board-orchestrator (same as initial load) ◄┘
 ```
 
-Why **`data-latest-updated-at`** instead of pushing **`data-sessions`** JSON from the orchestrator? The orchestrator **does not ship the array** — it only signals **“re-read from IDB”**; **`cfb-schedule`** pulls **`getAllSessions()`** after the timestamp changes.
+Why **`data-latest-updated-at`** instead of pushing **`data-sessions`** JSON from the orchestrator? The orchestrator **does not ship the array** - it only signals **“re-read from IDB”**; **`cfb-schedule`** pulls **`getAllSessions()`** after the timestamp changes.
 
 Session rows still render as **`<cfb-session-card data-session-details='…'>`** using **`sessionDetails`** shape from [`../step-3/lib/builds-session-details.js`](../step-3/lib/builds-session-details.js).
 
@@ -156,11 +156,11 @@ Complete [One-minute review](./learning-log.md#step-4-concepts-one-minute) in yo
 
 ---
 
-### Concept check — two parts
+### Concept check - two parts
 
 Do this in your [learning log](./learning-log.md):
 
-1. **[Mini quiz](./learning-log.md#step-4-concept-quiz)** — three short questions *before* you lean only on copy-paste.
+1. **[Mini quiz](./learning-log.md#step-4-concept-quiz)** - three short questions *before* you lean only on copy-paste.
 
 Then continue to **Concrete practice**.
 
@@ -181,33 +181,33 @@ Work **in reading order** (matches [`index.html`](./index.html) comment block):
 
 **Below is step-by-step guidance for each file.**
 
-### ✨ `session-store.js` — Promise-based IDB wrapper
+### ✨ `session-store.js` - Promise-based IDB wrapper
 
 This is the main part of this exercise. The goal is to learn how to write an IndexedDB connection
 
-- [ ] `openDb()` — open (or create) a database named `cfb-db` at version 1
+- [ ] `openDb()` - open (or create) a database named `cfb-db` at version 1
 - [ ] On `onupgradeneeded`: create a `sessions` object store keyed on `id`
-- [ ] `saveSessions(sessions[])` — write (or overwrite) a batch of sessions
-- [ ] `getAllSessions()` — return all sessions as an array
+- [ ] `saveSessions(sessions[])` - write (or overwrite) a batch of sessions
+- [ ] `getAllSessions()` - return all sessions as an array
 
-### 🚧 `cfb-session-loader.js` — Organism
+### 🚧 `cfb-session-loader.js` - Organism
 
 - [ ] when attached to dom, seed the IndexedDB with initial data (if it has no data)
 - [ ] Dispatches an event to inform that 'there is data in IndexedDB'
 
-### 🚧 `cfb-board-orchestrator.js` — Organism
+### 🚧 `cfb-board-orchestrator.js` - Organism
 
 - [ ] when attached to dom, register event listeners
 - [ ] listen to 'there is data in IndexedDB'
 - [ ] informs the relevant children that 'btw, new data in IndexedDB'
    - Might use a `data-latest-updated-at` attribure with timestamp
 
-### 🚧 `cfb-schedule.js` — Organism
+### 🚧 `cfb-schedule.js` - Organism
 
 - [ ] change listening from 'data-session-details' to 'data-latest-updated-at'
 - [ ] read sessions from IDB, and re-render
 
-### 🚧 `cfb-session-store.js` — Organism
+### 🚧 `cfb-session-store.js` - Organism
 
 - [ ] listen to 'session generated'/'session removed' events
 - [ ] update (save or delete) data in IDB
@@ -221,7 +221,7 @@ This is the main part of this exercise. The goal is to learn how to write an Ind
 
 **Constraints**
 
-- HTML, JavaScript, and CSS only — no frameworks.
+- HTML, JavaScript, and CSS only - no frameworks.
 - Aim for about **30–45 minutes** on the core challenge.
 
 **Definition of done**
@@ -237,7 +237,7 @@ In [Question for your facilitator](./learning-log.md#step-4-facilitator-question
 
 ### 1) Quick check
 
-Answer in [your learning log — Quick check](./learning-log.md#step-4-conclusions-quick-check).
+Answer in [your learning log - Quick check](./learning-log.md#step-4-conclusions-quick-check).
 
 ### 2) Ticket out
 
@@ -314,7 +314,7 @@ If you finish early:
 - [ ] Ensure **every** new random session is **persisted** (trace **`cfb-session-created`** → store → IDB).
 - [ ] Add **`getSessionsByDay(day)`** usage per column (index **`by-day`** already exists in **`session-store.js`**).
 - [ ] Cursor / sorted **`getAll`** variants for title order.
-- [ ] **Remove session path** *(wired in this repo)* — You can add a flow to remove session (see below)
+- [ ] **Remove session path** *(wired in this repo)* - You can add a flow to remove session (see below)
 
 ### remove session
 - Each session card has a `⋯` menu with a **Remove** button.

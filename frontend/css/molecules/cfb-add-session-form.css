@@ -1,9 +1,9 @@
 /* ── <cfb-add-session-form> ──────────────────────────────────── */
 cfb-add-session-form {
-    display: contents; /* invisible host — trigger is fixed, dialog is in the layer */
+    display: contents; /* invisible host - trigger is fixed, dialog is in the layer */
 }
 
-/* ── Trigger button — fixed top-right corner ─────────────────── */
+/* ── Trigger button - fixed top-right corner ─────────────────── */
 .cfb-add-session-form__trigger {
     position:      fixed;
     top:           calc(var(--cfb-step-nav-block-size, 0px) + var(--space-2));
@@ -112,7 +112,7 @@ cfb-add-session-form {
     padding:     0 var(--space-half);
 }
 
-/* ── Labels — stacked above their control ────────────────────── */
+/* ── Labels - stacked above their control ────────────────────── */
 .cfb-add-session-form__group label:not(.cfb-add-session-form__radio) {
     display:       block;
     font-size:     var(--text-sm);
@@ -132,7 +132,7 @@ cfb-add-session-form {
     color:   #d73a49;
 }
 
-/* ── Text inputs, time, selects — full width ─────────────────── */
+/* ── Text inputs, time, selects - full width ─────────────────── */
 .cfb-add-session-form__group input[type="text"],
 .cfb-add-session-form__group input[type="time"],
 .cfb-add-session-form__group select {
@@ -213,12 +213,12 @@ cfb-add-session-form {
     border-color:   var(--cfb-bg-brand);
 }
 
-/* Chips row — wraps naturally inside the picker */
+/* Chips row - wraps naturally inside the picker */
 .cfb-add-session-form__tag-chips {
     display:    contents; /* chips flow directly into the picker flex container */
 }
 
-/* The text input inside the picker — grows to fill remaining space */
+/* The text input inside the picker - grows to fill remaining space */
 .cfb-add-session-form__tag-input {
     flex:        1 1 8rem;
     min-width:   6rem;

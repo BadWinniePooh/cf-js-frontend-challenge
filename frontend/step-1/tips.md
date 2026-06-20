@@ -20,7 +20,7 @@ export class CfbTag extends HTMLElement {
 }
 ```
 
-*(Alternatively `import './cfb-tag.js'` if the module self-registers — pick one style and stay consistent.)*
+*(Alternatively `import './cfb-tag.js'` if the module self-registers - pick one style and stay consistent.)*
 
 ## Fake it until you make it.
 

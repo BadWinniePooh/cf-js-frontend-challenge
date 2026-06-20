@@ -5,8 +5,8 @@
  * drop-in substitute in tests that don't need a real IndexedDB.
  *
  * Extra exports (prefixed _) are test-only helpers:
- *   resetForTests() — wipe state between tests (equivalent to dropping the real DB)
- *   _seed(sessions) — pre-populate state without going through the event pipeline
+ *   resetForTests() - wipe state between tests (equivalent to dropping the real DB)
+ *   _seed(sessions) - pre-populate state without going through the event pipeline
  */
 
 export const DB_NAME = 'fake-db'

@@ -1,9 +1,9 @@
-# Test Step T-0 — Setup · Mocha + Web Test Runner
+# Test Step T-0 - Setup · Mocha + Web Test Runner
 
 Welcome to the testing track of the CodeFreeze Board challenges!
 
 While the main weekly steps focus on *building* components, this track focuses
-on *testing* them. The two tracks are designed to go hand-in-hand — you can
+on *testing* them. The two tracks are designed to go hand-in-hand - you can
 run them in parallel or come back to add tests after each step.
 
 Before you can test anything, you need a test runner. This step is all about
@@ -14,14 +14,14 @@ getting one green dot on the screen.
 ## Why not JSDOM / Jest?
 
 You might be used to running component tests with **Jest** + **JSDOM** or a
-similar setup. JSDOM is a JavaScript re-implementation of the DOM — it is
+similar setup. JSDOM is a JavaScript re-implementation of the DOM - it is
 fast and portable, but it does **not** support Custom Elements or Shadow DOM.
 That means `customElements.define()`, `connectedCallback`, and
 `this.attachShadow()` simply do not work there.
 
 `@web/test-runner` solves this by running your tests inside a **real browser
 engine**. Your component code runs in the exact same environment as production
-— because it literally is.
+- because it literally is.
 
 ```
 Jest + JSDOM          @web/test-runner
@@ -50,7 +50,7 @@ having a tool that runs mocha and uses sinon and chai, is only a plus.
 
 ## Constraints
 
-- Max **20 minutes** — this is pure tooling setup, not component work yet.
+- Max **20 minutes** - this is pure tooling setup, not component work yet.
 - No component code in this step.
 
 ---
@@ -87,7 +87,7 @@ Add these scripts to `package.json`:
 |--------|-------------|
 | `npm test` | Run the full suite once and exit |
 | `npm run test:watch` | Re-run on every file save (great during active development) |
-| `npm run test:manual` | Open the WTR debug UI in the browser — useful when you want to step through a test with DevTools |
+| `npm run test:manual` | Open the WTR debug UI in the browser - useful when you want to step through a test with DevTools |
 | `npm run test:specific` | Run only files matching a pattern, e.g. `PATTERN=cfb-tag npm run test:specific` |
 
 The `--node-resolve` flag lets the runner resolve bare `import` specifiers
@@ -95,7 +95,7 @@ The `--node-resolve` flag lets the runner resolve bare `import` specifiers
 
 ### The config file
 
-Create the config at `test/web-test-runner.config.mjs` — notice it lives
+Create the config at `test/web-test-runner.config.mjs` - notice it lives
 **inside** the `test/` folder, which is why the scripts pass
 `--config test/web-test-runner.config.mjs` explicitly.
 
@@ -132,7 +132,7 @@ export default {
 ### Why `importMapsPlugin`?
 
 An **import map** is a browser standard that lets you remap bare module
-specifiers — `import './my-module.js'` — to a different URL at load time,
+specifiers - `import './my-module.js'` - to a different URL at load time,
 without touching the source file.
 
 In a test context this is extremely useful: you can swap a real dependency for
@@ -172,7 +172,7 @@ engines specifically.
 
 ### Your first test
 
-Create `test/example/smoke.test.js`. Keep it trivially simple — the goal is
+Create `test/example/smoke.test.js`. Keep it trivially simple - the goal is
 only to verify the toolchain works end-to-end. Run it and see it fail:
 
 ```js
@@ -206,12 +206,12 @@ Chrome: |███████████████████████�
 
 Should you finish early, here are some ideas to go deeper:
 
-- [ ] **Second browser** — add `firefoxLauncher` or `webkitLauncher` from
+- [ ] **Second browser** - add `firefoxLauncher` or `webkitLauncher` from
       `@web/test-runner-playwright` to the `browsers` array and run tests in
       multiple engines at once
-- [ ] **Coverage** — add `--coverage` to the test script and open the generated
+- [ ] **Coverage** - add `--coverage` to the test script and open the generated
       `coverage/` report in a browser
-- [ ] **Import map swap** — add a fake module to `testImportMappings` and
+- [ ] **Import map swap** - add a fake module to `testImportMappings` and
       verify a test can import the fake instead of the real thing
 
 ---
@@ -233,10 +233,10 @@ After completing this step you will have learned:
 
 - Why **browser-native test runners** matter for Web Components
 - How `@web/test-runner` drives a real Chrome instance via **CDP** without
-  Playwright — and when you would bring Playwright back
+  Playwright - and when you would bring Playwright back
 - How **import maps** let you swap a real module for a test fake without
-  touching component code — a clean browser-native alternative to `jest.mock()`
-- The role of `chai` — Chai compiled as an ES module so it loads
+  touching component code - a clean browser-native alternative to `jest.mock()`
+- The role of `chai` - Chai compiled as an ES module so it loads
   directly in the browser without a build step
 - Mocha's `describe` / `it` structure running **inside** a browser context
 - The four `npm` scripts and when to reach for each one

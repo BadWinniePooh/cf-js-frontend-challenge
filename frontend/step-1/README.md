@@ -1,14 +1,14 @@
-# Step 1 — Your First Board Atom: `<cfb-tag>`
+# Step 1 - Your First Board Atom: `<cfb-tag>`
 
 One cornerstone of the W3C Web Components approach is **custom elements**: HTML whose behaviour is defined in
-JavaScript. In this step you build `<cfb-tag>` — an example of the smallest building blocks (**atom**) of the CodeFreeze
+JavaScript. In this step you build `<cfb-tag>` - an example of the smallest building blocks (**atom**) of the CodeFreeze
 Board: the colored badge on every session card.
 
 ```html
 <cfb-tag data-label="Keynote" data-color="blue"></cfb-tag>
 ```
 
-> **Before you start:** make sure the page loads over HTTP — see [getting-started.md](./getting-started.md).
+> **Before you start:** make sure the page loads over HTTP - see [getting-started.md](./getting-started.md).
 
 ### Async / solo
 
@@ -31,33 +31,33 @@ By the end of this step, you can:
 
 Do these in order; capture answers in [your Step 1 learning log](./learning-log.md).
 
-1. **Solo, ~2 min — “What runs first?”**  
+1. **Solo, ~2 min - “What runs first?”**  
    Before reading the Concepts section, write one guess: if you create an element with
-   `document.createElement('cfb-tag')`, set `data-label`, then append it to the body, which runs first —
+   `document.createElement('cfb-tag')`, set `data-label`, then append it to the body, which runs first -
    `connectedCallback` or `attributeChangedCallback`? (You will revisit this in Conclusions.)
 
-2. **Solo + log, ~3 min — Framework lifecycles**  
+2. **Solo + log, ~3 min - Framework lifecycles**  
    In the learning log, compare **React / Vue / Angular** lifecycle ideas to **custom elements**: how do “mount /
    update” style hooks map to `connectedCallback` and `attributeChangedCallback`?
 
-3. **Solo, ~3 min — Bridge from Step 0**  
+3. **Solo, ~3 min - Bridge from Step 0**  
    Open **your** Step 0 board (`step-0/index.html` or wherever you finished Step 0). Find **one** tag atom written as
    `<span class="cfb-tag …">…</span>`.
-   In [your learning log — Bridge from Step 0](./learning-log.md#step-1-bridge-step-0), write:
+   In [your learning log - Bridge from Step 0](./learning-log.md#step-1-bridge-step-0), write:
     - the **visible label text** on that atom;
     - the **full `class` value** on that `<span>` (including the colour modifier, if any);
     - one line: what moves from “classes + inner text” into **`<cfb-tag data-label="…" data-color="…">`** in this step?
       If you skipped Step 0, use the shared static board in [`../step-0/index.html`](../step-0/index.html) (or [
       `../index.html`](../index.html)) and pick any `<span class="cfb-tag …">` atom there instead.
 
-5. **Solo, ~2 min — Topic link (you, not the abstract “learner”)**  
-   In [your learning log — Topic link](./learning-log.md#step-1-topic-link), answer **one** of these (whichever is
+5. **Solo, ~2 min - Topic link (you, not the abstract “learner”)**  
+   In [your learning log - Topic link](./learning-log.md#step-1-topic-link), answer **one** of these (whichever is
    easier):
     - **A)** Name a small presentational piece of UI you have built before (badge, atom, tag, pill, status dot, etc.)
       and what stack it lived in (React, Vue, Svelte, plain HTML/CSS, design system, …). One sentence: what did *that*
       component “own”?
-    - **B)** If nothing comes to mind: open [Step 0 — Top takeaways](../step-0/learning-log.md#step-0-top-takeaways).
-      Which goal you marked is **most** served by learning `<cfb-tag>` now — and why, in one sentence?
+    - **B)** If nothing comes to mind: open [Step 0 - Top takeaways](../step-0/learning-log.md#step-0-top-takeaways).
+      Which goal you marked is **most** served by learning `<cfb-tag>` now - and why, in one sentence?
 
 ---
 
@@ -65,14 +65,14 @@ Do these in order; capture answers in [your Step 1 learning log](./learning-log.
 
 Custom elements expose lifecycle callbacks you hook into at key moments:
 
-1. **`connectedCallback`** — the custom element was inserted into the document
+1. **`connectedCallback`** - the custom element was inserted into the document
    (use to initialise, render, subscribe to events).
-2. **`disconnectedCallback`** — the element is removed from the document
+2. **`disconnectedCallback`** - the element is removed from the document
    (use to clean up listeners, timers, etc.).
-3. **`attributeChangedCallback`** — an **observed** attribute was added, removed, or changed. Declare which attributes
+3. **`attributeChangedCallback`** - an **observed** attribute was added, removed, or changed. Declare which attributes
    count via static **`observedAttributes`**.
    (use to track changes to the data)
-4. **`adoptedCallback`** — moved to another document (e.g. `adoptNode`).
+4. **`adoptedCallback`** - moved to another document (e.g. `adoptNode`).
    (Not used in these challenges.)
 
 These callbacks can run in **different orders** depending on whether you set attributes before or after the element
@@ -114,7 +114,7 @@ executed.
 ### Key takeaways
 
 - Order depends on **when** the element is connected **relative to** when observed attributes change.
-- **Scenario 1:** connect only — typical for static markup with no post-connect attribute updates;
+- **Scenario 1:** connect only - typical for static markup with no post-connect attribute updates;
   `attributeChangedCallback` may never run.
 - **Scenario 2:** connect, then attribute updates while in the document.
 - **Scenario 3:** attribute updates on a disconnected node, then connect. Typical scenario when building dynamically
@@ -122,7 +122,7 @@ executed.
 
 ---
 
-### Concept check — Myth or fact (~4 min)
+### Concept check - Myth or fact (~4 min)
 
 In [your learning log](./learning-log.md#step-1-myth-or-fact), mark each **M** (myth) or **F** (fact) *before* you peek
 at any docs; later, fix any you got
@@ -134,15 +134,15 @@ wrong in one line each.
 
 To show the newly built custom web component, we'll do all the following steps;
 
-- **Custom element lifecycle** — defining `connectedCallback` to render the whole tag as a static element.
-- **Reactive attributes** — using `observedAttributes` + `attributeChangedCallback` to make UI adaptive to
+- **Custom element lifecycle** - defining `connectedCallback` to render the whole tag as a static element.
+- **Reactive attributes** - using `observedAttributes` + `attributeChangedCallback` to make UI adaptive to
   changes when when `data-label` or `data-color` changes.
-- **Data → presentation** — use `data-color` to map it to existing CSS modifier `cfb-tag--{color}`
+- **Data → presentation** - use `data-color` to map it to existing CSS modifier `cfb-tag--{color}`
   (supported colors: `red | orange | green | blue | purple`).
-- **Registration** — Register the custom web component for DOM by calling `customElements.define('cfb-tag', CfbTag)`.
+- **Registration** - Register the custom web component for DOM by calling `customElements.define('cfb-tag', CfbTag)`.
   This tells the browser to link the web component behavior to the said html tag.
 
-**Atomic Design** — `<cfb-tag>` is an **atom**: it should not know about cards, columns, or the board.
+**Atomic Design** - `<cfb-tag>` is an **atom**: it should not know about cards, columns, or the board.
 
 ---
 
@@ -164,7 +164,7 @@ Build `<cfb-tag>` so that you can **show** all of the following:
 
 **Constraints**
 
-- HTML, JavaScript, and (optionally) CSS only — no frameworks or libraries.
+- HTML, JavaScript, and (optionally) CSS only - no frameworks or libraries.
 - Aim for about **30 minutes** on the core challenge.
 
 **Extras** (if you finish early)
@@ -186,7 +186,7 @@ web component in CFB board?
 
 Before moving to Step 2, use [your Step 1 learning log](./learning-log.md).
 
-### 1) Component ownership — learning log
+### 1) Component ownership - learning log
 
 Write **one or two sentences**:
 

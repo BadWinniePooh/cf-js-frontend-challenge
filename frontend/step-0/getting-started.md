@@ -1,4 +1,4 @@
-# Getting started — Step 0
+# Getting started - Step 0
 
 Run these steps once **before** the [Step 0 README](./README.md) (Connections and onward).
 
@@ -8,19 +8,19 @@ Create a branch for your work so feedback and history stay easy to follow.
 
 ## 2) Serve this folder (recommended)
 
-This step is **HTML and CSS only** — no JavaScript. Some browsers still render `index.html` reasonably well from 
+This step is **HTML and CSS only** - no JavaScript. Some browsers still render `index.html` reasonably well from 
 `file://`, but a tiny local server matches how you will work from Step 1 onward and avoids odd `file://` quirks with assets.
 
 From **`frontend/step-0`** (or your copy of this folder):
 
-**Option A — one-off:**
+**Option A - one-off:**
 
 ```bash
 cd frontend/step-0
 npx http-server -o .
 ```
 
-**Option B — global `http-server`:**
+**Option B - global `http-server`:**
 
 ```bash
 npm install -g http-server
@@ -28,7 +28,7 @@ cd frontend/step-0
 http-server . -o
 ```
 
-**Option C — VS Code:** [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) → right-click `index.html` → *Open with Live Server*.
+**Option C - VS Code:** [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) → right-click `index.html` → *Open with Live Server*.
 
 ## 3) Verify in the browser
 

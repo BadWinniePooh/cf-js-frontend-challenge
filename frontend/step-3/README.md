@@ -1,13 +1,13 @@
-# Step 3 — `<cfb-board-orchestrator>` · Pub/Sub
+# Step 3 - `<cfb-board-orchestrator>` · Pub/Sub
 
 In Step 2 you rendered one **molecule** (`<cfb-session-card>`) from session data. Now the board becomes **live**: a
-control can announce “new session” and **other** components update — **without** importing each other’s classes.
+control can announce “new session” and **other** components update - **without** importing each other’s classes.
 
 This step is about **events bubbling up** and **state pushed down** through attributes. The exact event name, payload
-shape, and wiring live in **Concepts** and **`events.js`** — after you’ve done **Connections** — so your first guesses
+shape, and wiring live in **Concepts** and **`events.js`** - after you’ve done **Connections** - so your first guesses
 in the learning log stay honest.
 
-> **Before you start:** branch, HTTP server, clean console — see [getting-started.md](./getting-started.md).
+> **Before you start:** branch, HTTP server, clean console - see [getting-started.md](./getting-started.md).
 
 ### Async / solo
 
@@ -33,16 +33,16 @@ By the end of this step, you can:
 
 Do these **in order**; capture answers in [your Step 3 learning log](./learning-log.md).
 
-1. **Solo, ~2 min — How does the button reach the board?**
+1. **Solo, ~2 min - How does the button reach the board?**
    [How does the button reach the board?](./learning-log.md#step-3-connections-how-notify) *(Revisit in Conclusions.)*
 
-2. **Solo, ~3 min — Bridge from Step 2**  
+2. **Solo, ~3 min - Bridge from Step 2**  
    [Bridge from Step 2](./learning-log.md#step-3-bridge-step-2): single card vs dynamic list.
 
 3. **Optional pair / async, ~3 min**  
    [Surprise / compare](./learning-log.md#step-3-compare-surprise):
 
-4. **Solo, ~2 min — Topic link**  
+4. **Solo, ~2 min - Topic link**  
    [Topic link](./learning-log.md#step-3-topic-link): **A** or **B**.
 
 ---
@@ -192,9 +192,9 @@ learning log.
 
 Do **two** short activities in your [learning log](./learning-log.md).
 
-1. **Mini quiz** — Open [Mini quiz](./learning-log.md#step-3-concept-quiz) and answer the three questions there *before*
+1. **Mini quiz** - Open [Mini quiz](./learning-log.md#step-3-concept-quiz) and answer the three questions there *before*
    you rely on copy-paste from the source files.
-2. **Flow sketch** — Then open [Flow sketch](./learning-log.md#step-3-concept-flow-sketch) and draw the four-step
+2. **Flow sketch** - Then open [Flow sketch](./learning-log.md#step-3-concept-flow-sketch) and draw the four-step
    pipeline
    (boxes + arrow labels). Paper is fine; paste a photo or ASCII into the log if you like.
 
@@ -227,7 +227,7 @@ Build so you can **show**:
 
 **Constraints**
 
-- HTML, JavaScript, and (optionally) CSS only — no frameworks.
+- HTML, JavaScript, and (optionally) CSS only - no frameworks.
 - Aim for about **30–45 minutes** on the core challenge.
 
 **Definition of done**
@@ -249,7 +249,7 @@ Now you've learned how the pub/sub system works in HTML pages. Time for a **shor
 
 ### 1) Quick check
 
-Answer in [your learning log — Quick check](./learning-log.md#step-3-conclusions-quick-check):
+Answer in [your learning log - Quick check](./learning-log.md#step-3-conclusions-quick-check):
 
 - Where is **`cfb-session-created`** defined, and who **dispatches** it?
 - In one line: what travels **up** vs **down** in this step?
@@ -280,7 +280,7 @@ If you finish early:
 - [ ] A small **session count** badge elsewhere: listen for **`cfb-session-created`** without importing the
   orchestrator.
 - [ ] Compare this in-memory list with **Step 4** (IndexedDB): what does persistence buy you?
-- [ ] **Self-study (optional, not part of this step’s scope):** Dig into how **`this`** is bound in JavaScript — plain
+- [ ] **Self-study (optional, not part of this step’s scope):** Dig into how **`this`** is bound in JavaScript - plain
   functions vs **arrow functions**, **`.bind(this)`**, and object methods. It explains why **`removeEventListener`**
   must receive the **same** function reference you passed to **`addEventListener`
   ** ([listener hygiene above](#stable-listener-references)). [MDN:
@@ -291,7 +291,7 @@ If you finish early:
 ### End result (skills you can demonstrate)
 
 - **`CustomEvent`** + **`cfb-session-created`** with **`bubbles: true`** / **`composed: true`**
-- **Orchestrator / mediator** — coordinate without coupling class names
+- **Orchestrator / mediator** - coordinate without coupling class names
 - **Push state down** via **`data-sessions`** + **`attributeChangedCallback`**
-- **Clean teardown** — **`removeEventListener`** in **`disconnectedCallback`**
+- **Clean teardown** - **`removeEventListener`** in **`disconnectedCallback`**
 - **`sessionDetails`** as the shared session shape from **`events.js`**

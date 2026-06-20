@@ -1,4 +1,4 @@
-# Step 7 — Load from Backend · `fetch` + MSW
+# Step 7 - Load from Backend · `fetch` + MSW
 
 In earlier steps the board got data from **generators**, **forms**, and **IndexedDB** seeded in-page. Real products load
 **schedule metadata** and **sessions** over **HTTP**, persist them, then render. This step keeps 
@@ -8,7 +8,7 @@ save to **IDB**, and signal completion with **bubbling `CustomEvent`s**.
 We also learn of a mockServiceWorker (MSW) that intercepts **`fetch`** and **responds** with **JSON** data. This is useful 
 sometimes for frontend development, but especially useful in testing -> that's another learning goal altogether.
 
-> **Before you start:** branch, HTTP server from **`frontend/`**, MSW or **`step-7-be`** — see [getting-started.md](./getting-started.md).
+> **Before you start:** branch, HTTP server from **`frontend/`**, MSW or **`step-7-be`** - see [getting-started.md](./getting-started.md).
 
 ### Async / solo
 
@@ -34,16 +34,16 @@ By the end of this step, you can:
 
 Do these **in order**; capture answers in [your Step 7 learning log](./learning-log.md).
 
-1. **Solo, ~2 min — Think → ink (first fetch)**  
+1. **Solo, ~2 min - Think → ink (first fetch)**  
    [First fetch](./learning-log.md#step-7-connections-first-fetch) *(revisit in [Loop back](./learning-log.md#step-7-loop-back-first-fetch)).*
 
-2. **Solo, ~4 min — Bridge from Step 4–6**  
+2. **Solo, ~4 min - Bridge from Step 4–6**  
    [Bridge from Step 4–6](./learning-log.md#step-7-bridge-step-4-6).
 
 3. **Optional pair / async, ~3 min**  
    [Surprise / compare](./learning-log.md#step-7-connections-surprise).
 
-4. **Solo, ~2 min — Topic link**  
+4. **Solo, ~2 min - Topic link**  
    [Topic link](./learning-log.md#step-7-topic-link): answer **A** or **B**.
 
 ---
@@ -68,7 +68,7 @@ injection mechanism, called ImportMaps. But that's a topic of testing, here I ho
 
 when fetching data from backend, there are 2 things to await for: first the fetch, then the JSON parsing. 
 
-- Check **`res.ok`** (or **`res.status`**) before **`res.json()`** — otherwise you parse **HTML error pages** as 
+- Check **`res.ok`** (or **`res.status`**) before **`res.json()`** - otherwise you parse **HTML error pages** as 
   JSON and get confusing exceptions.
 - Centralising **`fetch`** in **`backend-api.js`** keeps URLs, **`baseUrl`**, and JSON parsing in **one** place; 
   loaders call **`getBackendApi().getSchedule(eventId)`** / **`getSessions(eventId)`** so they stay small. This is 
@@ -107,16 +107,16 @@ And because the loaders and schedule are not descendants, we use an orchestrator
   **`<cfb-board-orchestrator>`** can listen on **self** and **not** import loader classes. The change is that it's not listening
   to 'SESSION_LOADED_TO_IDB', but a new event type.
 - When **both** have fired for the **same** **`eventId`**, the orchestrator sets **`data-latest-updated-at`** on elements
-  matching **`.listens-schedule-updates`** — a **pull** trigger for the schedule.
+  matching **`.listens-schedule-updates`** - a **pull** trigger for the schedule.
 - Use **stable** listener references and **`removeEventListener`** in **`disconnectedCallback`** on the orchestrator.
 
 ### MSW at the boundary
 
-- **`mocks/handlers.js`** defines **`http.get(`${root}/api/schedule/:eventId`, …)`** and sessions route — same paths
+- **`mocks/handlers.js`** defines **`http.get(`${root}/api/schedule/:eventId`, …)`** and sessions route - same paths
   **`backend-api`** calls.
 - **`mocks/browser.js`** starts the worker; **`index.js`** should call **`await worker.start(…)`** **before** defining
   elements that **`fetch`** on connect (see commented block in [`index.js`](./index.js)).
-- **Components** never **`import`** from **`msw`** — only the app entry does. That is the decoupling PLAN calls out.
+- **Components** never **`import`** from **`msw`** - only the app entry does. That is the decoupling PLAN calls out.
 
 ### End-to-end flow (reference)
 
@@ -147,7 +147,7 @@ User / UI sets data-event-id on both loaders
 ### Extension in this checkout
 
 [`cfb-board-orchestrator.js`](./cfb-board-orchestrator.js) also listens for **`sessionsBackendUpdated`** and bumps **`.listens-session-reloads`**
-with **`data-reload-token`** so only **sessions** refetch after an API update — **schedule** is treated as already fresh.
+with **`data-reload-token`** so only **sessions** refetch after an API update - **schedule** is treated as already fresh.
 Trace this **after** you understand the initial dual-loader path.
 
 ---
@@ -162,8 +162,8 @@ Complete [One-minute review](./learning-log.md#step-7-concepts-one-minute) in yo
 
 Do **two** short activities in your [learning log](./learning-log.md).
 
-1. **Mini quiz** — [Mini quiz](./learning-log.md#step-7-concept-quiz): answer from memory first.
-2. **Flow sketch** — [Flow sketch](./learning-log.md#step-7-concept-flow-sketch): boxes + arrow labels.
+1. **Mini quiz** - [Mini quiz](./learning-log.md#step-7-concept-quiz): answer from memory first.
+2. **Flow sketch** - [Flow sketch](./learning-log.md#step-7-concept-flow-sketch): boxes + arrow labels.
 
 When both are done, move on to **Concrete practice**.
 
@@ -185,7 +185,7 @@ When both are done, move on to **Concrete practice**.
 | [`index.js`](./index.js)                                                                                                      | **`configureBackendApi`**, optional **`worker.start()`**, element registration                      |
 | [`index.html`](./index.html)                                                                                                  | Loader markup, **`.listens-schedule-updates`**, event switcher buttons                              |
 
-This folder ships as a **reference implementation** — your job is to **understand and demo** the pipeline, then adapt or rebuild in your own branch if your facilitator assigns implementation from scratch.
+This folder ships as a **reference implementation** - your job is to **understand and demo** the pipeline, then adapt or rebuild in your own branch if your facilitator assigns implementation from scratch.
 
 **Build / trace until you can show:**
 
@@ -196,7 +196,7 @@ This folder ships as a **reference implementation** — your job is to **underst
 
 **Constraints**
 
-- HTML, JavaScript, and CSS only — **no** frameworks inside the custom elements.
+- HTML, JavaScript, and CSS only - **no** frameworks inside the custom elements.
 - **MSW** is the only **mock** dependency for the browser path; **`step-7-be`** is optional real HTTP.
 - Target about **45 minutes** for core tracing + log activities.
 
@@ -211,7 +211,7 @@ This folder ships as a **reference implementation** — your job is to **underst
 
 ### 1) Quick check
 
-Answer in [your learning log — Quick check](./learning-log.md#step-7-conclusions-quick-check).
+Answer in [your learning log - Quick check](./learning-log.md#step-7-conclusions-quick-check).
 
 ### 2) Loop back
 
@@ -220,8 +220,8 @@ Update [First fetch](./learning-log.md#step-7-loop-back-first-fetch).
 ### 3) PLAN prompts
 
 - [MSW outside components](./learning-log.md#step-7-conclusions-msw-benefit)  
-- [True / False — coordination](./learning-log.md#step-7-conclusions-tf-coordination)  
-- [True / False — mocks removed](./learning-log.md#step-7-conclusions-tf-mocks-removed)
+- [True / False - coordination](./learning-log.md#step-7-conclusions-tf-coordination)  
+- [True / False - mocks removed](./learning-log.md#step-7-conclusions-tf-mocks-removed)
 
 ### 4) Key takeaway (journey hub)
 
@@ -277,7 +277,7 @@ this.dispatchEvent(new CustomEvent('sessionsLoaded', {
 </cfb-board-orchestrator>
 ```
 
-This repo adds **header**, **updates** wrapper, and **loader status** UI around that idea — see [`index.html`](./index.html).
+This repo adds **header**, **updates** wrapper, and **loader status** UI around that idea - see [`index.html`](./index.html).
 
 ---
 
@@ -285,7 +285,7 @@ This repo adds **header**, **updates** wrapper, and **loader status** UI around 
 
 If you finish early:
 
-- [ ] Add **`<cfb-loader-status>`** driven only by **`scheduleLoaded`** / **`sessionsLoaded`** / **`loaderError`** — no direct imports of loader classes.
+- [ ] Add **`<cfb-loader-status>`** driven only by **`scheduleLoaded`** / **`sessionsLoaded`** / **`loaderError`** - no direct imports of loader classes.
 - [ ] **`http.get`** **`passthrough`** for one **`eventId`** so it hits a real server; keep others mocked.
 - [ ] Return **500** from one handler; prove **`loaderError`** surfaces in the UI.
 - [ ] Cache **`updatedAt`** in IDB and **skip** **`fetch`** when data is fresher than **60** seconds.

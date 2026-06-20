@@ -1,21 +1,21 @@
 
-# Learning log — Step 5
+# Learning log - Step 5
 
 Use this file while you work through [Step 5 README](./README.md). When you finish the step, add your **key takeaway** in the [journey hub `learning-log.md`](../learning-log.md#step-5-key-takeaway).
 
-This step leans on **Training from the Back of the Room** ideas adapted for **solo / async**: **different** kinds of prompts (not only prose), **writing** and **drawing**, and **shorter** timeboxes. You will not do every “6 trumps” activity in one sitting — pick what fits your energy; the README lists the **minimum** order.
+This step leans on **Training from the Back of the Room** ideas adapted for **solo / async**: **different** kinds of prompts (not only prose), **writing** and **drawing**, and **shorter** timeboxes. You will not do every “6 trumps” activity in one sitting - pick what fits your energy; the README lists the **minimum** order.
 
 ---
 
-[← Back to README — 1) Connections](./README.md#1-connections)
+[← Back to README - 1) Connections](./README.md#1-connections)
 
 ---
 
 <a id="step-5-connections-submit-guess"></a>
 
-### Step 5 — Connections: Submit guess (think → ink)
+### Step 5 - Connections: Submit guess (think → ink)
 
-_Solo, ~2 minutes. **Writing.** Answer **before** you read Concepts — a wrong guess is useful._
+_Solo, ~2 minutes. **Writing.** Answer **before** you read Concepts - a wrong guess is useful._
 
 You click **+ Add Session**, leave **Title** empty (or under 5 characters), and press **Add session**.
 
@@ -29,7 +29,7 @@ _(You will [loop back](#step-5-loop-back-submit-guess) in Conclusions.)_
 
 <a id="step-5-connections-bridge-step4"></a>
 
-### Step 5 — Connections: Bridge from Step 4
+### Step 5 - Connections: Bridge from Step 4
 
 _Solo, ~3 minutes._
 
@@ -45,7 +45,7 @@ that chain stay unchanged?** List them as a short bullet list.
 
 <a id="step-5-connections-id-owner"></a>
 
-### Step 5 — Connections: Who owns the `id`?
+### Step 5 - Connections: Who owns the `id`?
 
 _Solo, ~1 minute. One sentence._
 
@@ -57,14 +57,14 @@ Who should define the Id of the session? Frontend or Backend? Why?
 
 <a id="step-5-connections-surprise"></a>
 
-### Step 5 — Connections: Surprise or compare
+### Step 5 - Connections: Surprise or compare
 
-_~3 minutes. **Different** mode — pick one._
+_~3 minutes. **Different** mode - pick one._
 
 **Solo:** One thing about **HTML constraint validation** or **`FormData`** that surprised you in the past 
 (or that you expect might surprise you this week). One line.
 
-**If you later compare with a peer:** What will each of you watch first in DevTools on submit —**Console**, **Network**, or **Elements**?
+**If you later compare with a peer:** What will each of you watch first in DevTools on submit -**Console**, **Network**, or **Elements**?
 
 > 
 
@@ -72,12 +72,12 @@ _~3 minutes. **Different** mode — pick one._
 
 <a id="step-5-connections-where-stand"></a>
 
-### Step 5 — Connections: Where do you stand (topic link)
+### Step 5 - Connections: Where do you stand (topic link)
 
-_Solo, ~2 minutes. Answer **A** or **B** — not both. **Short** — one or two lines._
+_Solo, ~2 minutes. Answer **A** or **B** - not both. **Short** - one or two lines._
 
 **A)** In a framework you know, how does form state usually relate to the DOM? One line: *more in JS state*, 
-*more in the DOM*, or *mixed* — and why you said so.
+*more in the DOM*, or *mixed* - and why you said so.
 
 > 
 
@@ -87,18 +87,18 @@ _Solo, ~2 minutes. Answer **A** or **B** — not both. **Short** — one or two 
 
 ---
 
-[← Back to README — 2) Concepts](./README.md#2-concepts)
+[← Back to README - 2) Concepts](./README.md#2-concepts)
 
 ---
 
 <a id="step-5-concepts-sketch"></a>
 
-### Step 5 — Concepts: Sketch the signal path (**Images**)
+### Step 5 - Concepts: Sketch the signal path (**Images**)
 
-_Solo, ~3 minutes. **Different** format — no perfect art._
+_Solo, ~3 minutes. **Different** format - no perfect art._
 
 On paper or in this log, draw **boxes and arrows** from: **user submit** → **`<cfb-add-session-form>`** → **event** → **store** → **IDB** → **orchestrator** → **schedule**.  
-Label **only** the **event name(s)** and **attribute** the schedule watches (peek at the README Concepts if you are stuck — then note *what you had wrong*).
+Label **only** the **event name(s)** and **attribute** the schedule watches (peek at the README Concepts if you are stuck - then note *what you had wrong*).
 
 _(Optional: snap a photo into your notes elsewhere; here, ASCII is enough.)_
 
@@ -108,9 +108,9 @@ _(Optional: snap a photo into your notes elsewhere; here, ASCII is enough.)_
 
 <a id="step-5-concepts-one-minute"></a>
 
-### Step 5 — Concepts: One-minute review
+### Step 5 - Concepts: One-minute review
 
-_After reading README Concepts — ~1 minute. **Shorter** is better than complete._
+_After reading README Concepts - ~1 minute. **Shorter** is better than complete._
 
 Two bullets:
 
@@ -124,7 +124,7 @@ Two bullets:
 
 <a id="step-5-concept-quiz"></a>
 
-### Step 5 — Concept check: Mini quiz + myth or fact
+### Step 5 - Concept check: Mini quiz + myth or fact
 
 _Answer **from memory first** (~5 minutes). Then peek at [`cfb-add-session-form.js`](./cfb-add-session-form.js) if needed._
 
@@ -138,7 +138,7 @@ _Answer **from memory first** (~5 minutes). Then peek at [`cfb-add-session-form.
 
    > 
 
-**Myth or fact** — write **M** or **F** next to each line.
+**Myth or fact** - write **M** or **F** next to each line.
 
 |    | Statement                                                                                              |
 |----|--------------------------------------------------------------------------------------------------------|
@@ -150,17 +150,17 @@ _Answer **from memory first** (~5 minutes). Then peek at [`cfb-add-session-form.
 
 ---
 
-[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+[← Back to README - 3) Concrete practice](./README.md#3-concrete-practice)
 
 ---
 
-[← Back to README — 4) Conclusions](./README.md#4-conclusions)
+[← Back to README - 4) Conclusions](./README.md#4-conclusions)
 
 ---
 
 <a id="step-5-conclusions-quick-check"></a>
 
-### Step 5 — Conclusions: Quick check
+### Step 5 - Conclusions: Quick check
 
 _~5 minutes._
 
@@ -168,11 +168,11 @@ _~5 minutes._
 
    > 
 
-2. **True or false:** “`FormData` can read selected radio values when fields are named.” — **One sentence** justification.
+2. **True or false:** “`FormData` can read selected radio values when fields are named.” - **One sentence** justification.
 
    > 
 
-3. **True or false:** “Session ID should be entered manually by users.” — **One sentence** justification.
+3. **True or false:** “Session ID should be entered manually by users.” - **One sentence** justification.
 
    > 
 
@@ -180,7 +180,7 @@ _~5 minutes._
 
 <a id="step-5-loop-back-submit-guess"></a>
 
-### Step 5 — Conclusions: Loop back — submit guess
+### Step 5 - Conclusions: Loop back - submit guess
 
 _Look at your answer under [Submit guess](#step-5-connections-submit-guess). Update in one or two lines: what actually 
 happened when you tried an invalid submit?_
@@ -191,7 +191,7 @@ happened when you tried an invalid submit?_
 
 <a id="step-5-myth-fact-facilitator"></a>
 
-### Step 5 — Conclusions: Myth & fact → facilitator
+### Step 5 - Conclusions: Myth & fact → facilitator
 
 _From the **Activity catalogue** in [`../PLAN.md`](../PLAN.md) (“Myth&Fact revisited…”): bring **one** myth-or-fact style question to your facilitator._
 
@@ -209,9 +209,9 @@ Write the **question** you asked (or will ask), then **their answer or your note
 
 <a id="step-5-facilitator-question"></a>
 
-### Step 5 — Question for your facilitator
+### Step 5 - Question for your facilitator
 
-_Solo, ~5 minutes. **Different** from the myth/fact item above — this one is open._
+_Solo, ~5 minutes. **Different** from the myth/fact item above - this one is open._
 
 Ask **one** question about **forms in web components**, **`FormData`**, **`dialog`**, or **keeping add vs edit flows separate**. Paste their reply (or your notes) below.
 

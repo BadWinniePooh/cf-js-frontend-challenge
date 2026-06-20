@@ -1,4 +1,4 @@
-// Step 3 — <cfb-board-orchestrator> · Pub/Sub
+// Step 3 - <cfb-board-orchestrator> · Pub/Sub
 
 import { CfbTag } from '../step-1/cfb-tag.js'
 import { CfbSessionCard } from '../step-2/cfb-session-card.js'

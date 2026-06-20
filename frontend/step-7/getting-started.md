@@ -1,4 +1,4 @@
-# Getting started — Step 7
+# Getting started - Step 7
 
 Run these steps once **before** the [Step 7 README](./README.md) (Connections and onward).
 
@@ -26,7 +26,7 @@ Open DevTools → **Console** and fix import errors before continuing.
 
 Pick **one** path for this week (you can try the other later):
 
-### Option A — Real API (`step-7-be`)
+### Option A - Real API (`step-7-be`)
 
 The app’s default base URL is **`http://localhost:3001`** (see [`lib/api/backend-api.js`](./lib/api/backend-api.js)).
 
@@ -39,12 +39,12 @@ npm start
 
 Leave **MSW** commented out in [`index.js`](./index.js) (as in this repo by default). **`fetch`** hits the real server.
 
-### Option B — MSW in the browser (no backend process)
+### Option B - MSW in the browser (no backend process)
 
 This is a bit messy - because now the app requires some node modules installed, so you need to start by making a 
 package.json file, and all relevant dependencies.
 
-1. In **`frontend/step-7/`**, install MSW (use **`npm`** or **`yarn`** — a lockfile may already exist):
+1. In **`frontend/step-7/`**, install MSW (use **`npm`** or **`yarn`** - a lockfile may already exist):
 
    ```bash
    npm init -y
@@ -60,7 +60,7 @@ package.json file, and all relevant dependencies.
    You should have **`mockServiceWorker.js`** next to **`index.html`** (or adjust paths per [MSW docs](https://mswjs.io/docs/integrations/browser)).
 
 3. In [`index.js`](./index.js), **uncomment** the MSW bootstrap so **`worker.start()`** runs **before** custom elements
-   load — the first **`fetch`** must already be intercepted.
+   load - the first **`fetch`** must already be intercepted.
 
 4. Keep **`configureBackendApi({ baseUrl: 'http://localhost:3001' })`** aligned with the origin passed into 
    [`mocks/handlers.js`](./mocks/handlers.js) / [`mocks/browser.js`](./mocks/browser.js) so handler URLs match.

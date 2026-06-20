@@ -1,5 +1,5 @@
 /* =============================================================
-   Card Flip — external styles for elements that live in the
+   Card Flip - external styles for elements that live in the
    *light* DOM alongside <cfb-flip-card>.
 
    The flip animation itself (perspective, transform-style,
@@ -22,7 +22,7 @@
 }
 
 /* =============================================================
-   Edit form — lives in the "back" slot of <cfb-flip-card>
+   Edit form - lives in the "back" slot of <cfb-flip-card>
    ============================================================= */
 
 cfb-edit-session-form {

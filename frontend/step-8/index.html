@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeFreeze Board — Step 8: Live Updates</title>
+    <title>CodeFreeze Board - Step 8: Live Updates</title>
     <link rel="stylesheet" href="../styles.css">
 
     <script type="module" src="index.js"></script>
@@ -111,22 +111,22 @@
         <input type="checkbox" id="cfb-step-nav-menu-8" class="cfb-step-nav__toggle">
         <label for="cfb-step-nav-menu-8" class="cfb-step-nav__menu-btn">☰ All steps</label>
         <ul class="cfb-step-nav__dropdown">
-            <li><a href="../step-0/index.html">Step 0 — Static Board</a></li>
-            <li><a href="../step-1/index.html">Step 1 — &lt;cfb-tag&gt;</a></li>
-            <li><a href="../step-2/index.html">Step 2 — Session card</a></li>
-            <li><a href="../step-3/index.html">Step 3 — Orchestrator</a></li>
-            <li><a href="../step-4/index.html">Step 4 — IndexedDB</a></li>
-            <li><a href="../step-5/index.html">Step 5 — Add session form</a></li>
-            <li><a href="../step-6/index.html">Step 6 — Session type</a></li>
-            <li><a href="../step-7/index.html">Step 7 — Load from backend</a></li>
-            <li><a href="../step-8/index.html" aria-current="page">Step 8 — Live updates</a></li>
+            <li><a href="../step-0/index.html">Step 0 - Static Board</a></li>
+            <li><a href="../step-1/index.html">Step 1 - &lt;cfb-tag&gt;</a></li>
+            <li><a href="../step-2/index.html">Step 2 - Session card</a></li>
+            <li><a href="../step-3/index.html">Step 3 - Orchestrator</a></li>
+            <li><a href="../step-4/index.html">Step 4 - IndexedDB</a></li>
+            <li><a href="../step-5/index.html">Step 5 - Add session form</a></li>
+            <li><a href="../step-6/index.html">Step 6 - Session type</a></li>
+            <li><a href="../step-7/index.html">Step 7 - Load from backend</a></li>
+            <li><a href="../step-8/index.html" aria-current="page">Step 8 - Live updates</a></li>
         </ul>
     </div>
     <span class="cfb-step-nav__arrow cfb-step-nav__arrow--next" aria-disabled="true">→</span>
 </nav>
 
 <header class="page-header">
-    <h1>Step 8 — Live Updates</h1>
+    <h1>Step 8 - Live Updates</h1>
     <p>fetch + WebSocket → IndexedDB → orchestrate → render</p>
 </header>
 
@@ -145,14 +145,14 @@
      ORCHESTRATOR
      This is the component tree you are building. Read through the source files:
 
-       cfb-board-orchestrator.js        — coordinates without fetching
-       cfb-schedule-loader.js           — fetches schedule metadata
-       cfb-session-store-updates.js     — writes session data to IndexedDB
-       cfb-session-loader.js            — fetches sessions (no IDB)
-       cfb-live-session-updates.js      — WebSocket push → store events
-       cfb-initiate-a-random-session-creation.js — POST random session
-       cfb-updates-sessions.js          — form add/edit/remove → backend
-       cfb-schedule.js                  — reads IndexedDB and renders
+       cfb-board-orchestrator.js        - coordinates without fetching
+       cfb-schedule-loader.js           - fetches schedule metadata
+       cfb-session-store-updates.js     - writes session data to IndexedDB
+       cfb-session-loader.js            - fetches sessions (no IDB)
+       cfb-live-session-updates.js      - WebSocket push → store events
+       cfb-initiate-a-random-session-creation.js - POST random session
+       cfb-updates-sessions.js          - form add/edit/remove → backend
+       cfb-schedule.js                  - reads IndexedDB and renders
      ═══════════════════════════════════════════════════════════════════════════ -->
 <cfb-board-orchestrator>
 

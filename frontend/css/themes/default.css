@@ -1,5 +1,5 @@
 /* =============================================================
-   Theme — Default (light)
+   Theme - Default (light)
    Semantic tokens that map primitive values to role-based names.
    Components reference only these --cfb-* tokens, never raw values.
 
@@ -11,7 +11,7 @@
    │  <link rel="stylesheet" href="../css/themes/brand.css">   │
    │                                                            │
    │  Your brand file only needs to redefine the tokens it     │
-   │  wants to change — the rest fall back to this file.       │
+   │  wants to change - the rest fall back to this file.       │
    └────────────────────────────────────────────────────────────┘
    ============================================================= */
 

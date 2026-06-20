@@ -1,4 +1,4 @@
-# Getting started — Step 3
+# Getting started - Step 3
 
 Run these steps once **before** the [Step 3 README](./README.md) (Connections and onward).
 
@@ -10,20 +10,20 @@ Work on a branch so feedback and history stay easy to follow.
 
 From **`frontend/`**:
 
-**Option A — one-off:**
+**Option A - one-off:**
 
 ```bash
 npx http-server -o .
 ```
 
-**Option B — global `http-server`:**
+**Option B - global `http-server`:**
 
 ```bash
 npm install -g http-server
 http-server . -o
 ```
 
-**Option C — VS Code:** [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) → right-click `index.html` → *Open with Live Server*.
+**Option C - VS Code:** [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) → right-click `index.html` → *Open with Live Server*.
 
 ## 3) Verify in the browser
 

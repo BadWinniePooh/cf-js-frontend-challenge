@@ -1,4 +1,4 @@
-// Step 8 — Live updates from backend (WebSocket + random session)
+// Step 8 - Live updates from backend (WebSocket + random session)
 
 import { CfbTag } from '../step-1/cfb-tag.js'
 import { CfbMenu } from '../step-4/cfb-menu.js'

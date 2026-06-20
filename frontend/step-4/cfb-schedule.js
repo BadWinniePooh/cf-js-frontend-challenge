@@ -68,7 +68,7 @@ export class CfbSchedule extends HTMLElement {
   #renderPlaceholder() {
     this.innerHTML = `
             <p class="cfb-schedule__placeholder">
-                No sessions yet — click the button to add one.
+                No sessions yet - click the button to add one.
             </p>
         `
   }

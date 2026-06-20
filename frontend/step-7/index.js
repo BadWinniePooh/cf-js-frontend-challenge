@@ -1,4 +1,4 @@
-// Step 7 — Load from Backend
+// Step 7 - Load from Backend
 
 
 /*
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Mark the active button
       buttons.forEach((b) => b.classList.toggle('active', b === btn))
 
-      // Update all three elements — loaders will re-fetch, orchestrator
+      // Update all three elements - loaders will re-fetch, orchestrator
       // will wait for both to complete, then notify cfb-schedule.
       const loaders = document.querySelectorAll(
         'cfb-schedule-loader, cfb-session-loader'

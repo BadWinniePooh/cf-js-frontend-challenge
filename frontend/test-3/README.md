@@ -1,4 +1,4 @@
-# Test Step T-3 — Pub/Sub · `sessionAdded` Event Flow
+# Test Step T-3 - Pub/Sub · `sessionAdded` Event Flow
 
 In T-2 you tested a molecule by querying its rendered output. This step goes further:
 the three components under test **communicate through DOM events** without holding
@@ -10,7 +10,7 @@ The challenge is to verify the *contracts* between them:
 - `<cfb-board-orchestrator>` accumulates sessions and updates `<cfb-schedule>` via
   a `data-sessions` attribute on each event
 
-**Goal**: Test the custom event flow from Step 3 — verify that
+**Goal**: Test the custom event flow from Step 3 - verify that
 `<cfb-session-generator>` fires the right event, that
 `<cfb-board-orchestrator>` accumulates sessions and pushes them down, and
 that `<cfb-schedule>` renders correctly from its `data-sessions` attribute (this 
@@ -33,8 +33,8 @@ cfb-schedule  re-renders session cards
 
 ## What to build
 
-- [ ] Write `test/cfb-session-generator.test.js` — publisher contract
-- [ ] Write `test/cfb-board-orchestrator.test.js` — orchestrator contract
+- [ ] Write `test/cfb-session-generator.test.js` - publisher contract
+- [ ] Write `test/cfb-board-orchestrator.test.js` - orchestrator contract
 - [ ] Consider how to verify that the data sent by the random generator 
       provides valid and sound data.
 
@@ -89,7 +89,7 @@ el.querySelector('button').click()
 ### Dispatching events to test the orchestrator
 
 You do not need to click a real button to test `<cfb-board-orchestrator>`. Dispatch
-the event directly onto the orchestrator element — it only needs to receive the event:
+the event directly onto the orchestrator element - it only needs to receive the event:
 
 ```js
 const el = await fixture(`
@@ -136,7 +136,7 @@ If you get stuck, note the problem here so we can discuss it together.
 
 After completing this step you will have learned:
 
-- How to test an event **contract** — type, `bubbles`, and `detail` shape — in isolation
+- How to test an event **contract** - type, `bubbles`, and `detail` shape - in isolation
 - How to dispatch synthetic events onto an element to drive an orchestrator test
   without needing the full component tree
 - Why testing through observable output (attributes, DOM counts) is more durable

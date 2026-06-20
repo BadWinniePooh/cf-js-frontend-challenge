@@ -1,17 +1,17 @@
-# Learning log — Step 0
+# Learning log - Step 0
 
 Use this file while you work through [Step 0 README](./README.md).
 When you finish the step, add your **key takeaway** in the [journey hub `learning-log.md`](../learning-log.md#step-0-key-takeaway).
 
 ---
 
-[← Back to README — 1) Connections](./README.md#1-connections)
+[← Back to README - 1) Connections](./README.md#1-connections)
 
 ---
 
 <a id="step-0-think-it-and-ink-it"></a>
 
-### Step 0 — Think it and ink it
+### Step 0 - Think it and ink it
 
 _Solo, ~1 minute._
 
@@ -25,7 +25,7 @@ A: ______
 
 <a id="step-0-top-takeaways"></a>
 
-### Step 0 — Top takeaways
+### Step 0 - Top takeaways
 
 There are **9** learning goals this journey is aiming to give you. Read through them, and select the **two** most
 relevant for you right now. Mark those with `[x]` in the list below.
@@ -49,9 +49,9 @@ relevant for you right now. Mark those with `[x]` in the list below.
 
 <a id="step-0-bridge-step-1"></a>
 
-### Step 0 — Bridge toward Step 1
+### Step 0 - Bridge toward Step 1
 
-_Solo, ~2 minutes. You are **not** implementing custom elements yet — just noticing._
+_Solo, ~2 minutes. You are **not** implementing custom elements yet - just noticing._
 
 Think of the static structure on the board (in [`./index.html`](./index.html)). What could be a simple enough structure
 to start learning about custom web components?
@@ -66,13 +66,13 @@ to start learning about custom web components?
 
 ---
 
-[← Back to README — 2) Concepts](./README.md#2-concepts)
+[← Back to README - 2) Concepts](./README.md#2-concepts)
 
 ---
 
 <a id="step-0-myth-or-fact"></a>
 
-### Step 0 — Myth or fact (Atomic Design + structure)
+### Step 0 - Myth or fact (Atomic Design + structure)
 
 _Mark **M** (myth) or **F** (fact) first; then correct any mistakes in one line each._
 
@@ -93,21 +93,21 @@ _Mark **M** (myth) or **F** (fact) first; then correct any mistakes in one line 
 
 ---
 
-[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+[← Back to README - 3) Concrete practice](./README.md#3-concrete-practice)
 
 ---
 
 <a id="step-0-concrete-your-myth-fact"></a>
 
-### Step 0 — Concrete practice: your myth or fact for the facilitator
+### Step 0 - Concrete practice: your myth or fact for the facilitator
 
 _Solo, ~5 minutes._
 
-1. Write **one** short statement that could be read as **myth** or **fact** — about semantic HTML, Atomic Design, BEM,
+1. Write **one** short statement that could be read as **myth** or **fact** - about semantic HTML, Atomic Design, BEM,
    the `cfb-` naming in this board, or how structure relates to later JavaScript steps. Make it something *you* are
    genuinely unsure about (not a trivia quiz).
 
-2. **Ask your facilitator** that question explicitly — e.g. in a PR comment, chat message, or during a sync: *“Myth or fact: …?”*
+2. **Ask your facilitator** that question explicitly - e.g. in a PR comment, chat message, or during a sync: *“Myth or fact: …?”*
 
 **My myth/fact question**
 
@@ -119,11 +119,11 @@ _Solo, ~5 minutes._
 
 ---
 
-[← Back to README — 4) Conclusions](./README.md#4-conclusions)
+[← Back to README - 4) Conclusions](./README.md#4-conclusions)
 
 ---
 
-### Step 0 — Atomic Design notes
+### Step 0 - Atomic Design notes
 
 Q: Write 3 key points you want to remember about Atomic Design.
 

@@ -1,15 +1,15 @@
-# Test Step T-1 — Atom Behaviour · `<cfb-tag>`
+# Test Step T-1 - Atom Behaviour · `<cfb-tag>`
 
 In T-0 you got the toolchain running. Now it is time to write tests that
 actually mean something.
 
 This step tests the `<cfb-tag>` atom from Step 1. The goal is **not** to assert
-on HTML strings or implementation details — it is to verify observable DOM
+on HTML strings or implementation details - it is to verify observable DOM
 behaviour: the text that appears, the CSS classes that are applied, and how the
 element reacts when its attributes change.
 
 **Goal**: Test the rendered output and attribute-reactivity of the `<cfb-tag>`
-atom from Step 1, focusing on observable DOM behaviour — not implementation
+atom from Step 1, focusing on observable DOM behaviour - not implementation
 details.
 
 ---
@@ -50,18 +50,18 @@ container and remove just that container in cleanup.
 Even though you import and register the element at the top of the test file, the
 Promise-based API gives you a safe hook to wait until the browser has finished
 upgrading. When the element is already registered it resolves on the next
-microtask, so there is no real cost — but without it you can hit a race where
+microtask, so there is no real cost - but without it you can hit a race where
 your assertion runs before `connectedCallback` fires.
 
 **Why `afterEach(cleanup)` and not `afterEach(() => document.body.innerHTML = '')`?**  
-Same reason as above — nuking `body.innerHTML` removes WTR's injected scripts.
+Same reason as above - nuking `body.innerHTML` removes WTR's injected scripts.
 
 ---
 
 ## What to test
 
 - [ ] Copy the `package.json`, `test/web-test-runner.config.mjs` from `test-0`
-  (or share them — they're identical)
+  (or share them - they're identical)
 - [ ] Create `test/helpers/fixture.js`
 - [ ] Register `<cfb-tag>` at the top of the test file
 - [ ] Write tests for rendering and attribute reactivity
@@ -79,7 +79,7 @@ Same reason as above — nuking `body.innerHTML` removes WTR's injected scripts.
 ### Registering the element
 
 `cfb-tag.js` exports `CfbTag` but does not call `customElements.define` itself
-— that is intentional, so the component stays reusable across steps. Register
+- that is intentional, so the component stays reusable across steps. Register
 it once at the top of your test file:
 
 ```js
@@ -111,7 +111,7 @@ expect(el.querySelector('span').classList.contains('cfb-tag--green')).to.be.true
 ```
 
 This is a good example of why you should read the implementation *once* before
-writing the tests — not to copy it, but to know where in the DOM to look.
+writing the tests - not to copy it, but to know where in the DOM to look.
 
 ### Flushing attribute changes
 
@@ -122,7 +122,7 @@ the minimal one-microtask flush:
 
 ```js
 el.setAttribute('data-label', 'After')
-await Promise.resolve() // flush microtask queue — not required here, but a good habit
+await Promise.resolve() // flush microtask queue - not required here, but a good habit
 expect(el.textContent.trim()).to.equal('After')
 ```
 
@@ -163,9 +163,9 @@ If you get stuck, note the problem here so we can discuss it together.
 After completing this step you will have learned:
 
 - How to mount a custom element into the live `document` from a test
-- Why `cleanup()` must remove a specific container — not wipe `body.innerHTML`
+- Why `cleanup()` must remove a specific container - not wipe `body.innerHTML`
 - How `customElements.whenDefined()` safely awaits element registration
-- That `attributeChangedCallback` fires during HTML parsing — before
+- That `attributeChangedCallback` fires during HTML parsing - before
   `connectedCallback`
 - How to find where a CSS class actually lands in the DOM before asserting on it
 - The difference between testing the element's **observable output** and testing

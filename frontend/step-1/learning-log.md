@@ -1,16 +1,16 @@
-# Learning log — Step 1
+# Learning log - Step 1
 
 Use this file while you work through [Step 1 README](./README.md). When you finish the step, add your **key takeaway**
 in the [journey hub `learning-log.md`](../learning-log.md#step-1-key-takeaway).
 
 ---
 
-### Step 1 — Connections: What runs first?
+### Step 1 - Connections: What runs first?
 
 _Solo, ~2 minutes. Before you read the Concepts section in the README._
 
 If I `document.createElement('cfb-tag')`, set `data-label`, then `appendChild` to the body, which callback runs first
-— `connectedCallback` or `attributeChangedCallback`? Why do you think so?
+- `connectedCallback` or `attributeChangedCallback`? Why do you think so?
 
 >
 
@@ -18,7 +18,7 @@ _(You will revisit this in Conclusions.)_
 
 ---
 
-### Step 1 — Connections: Framework lifecycles
+### Step 1 - Connections: Framework lifecycles
 
 _Solo, ~3 minutes._
 
@@ -31,7 +31,7 @@ elements?
 
 <a id="step-1-bridge-step-0"></a>
 
-### Step 1 — Connections: Bridge from Step 0
+### Step 1 - Connections: Bridge from Step 0
 
 _Solo, ~3 minutes. Open **your**  [`step-0/index.html`](../step-0/index.html). Find **one** tag atom written as
 `<span class="cfb-tag …">…</span>`.
@@ -52,16 +52,16 @@ _Solo, ~3 minutes. Open **your**  [`step-0/index.html`](../step-0/index.html). F
 
 <a id="step-1-topic-link"></a>
 
-### Step 1 — Connections: Topic link
+### Step 1 - Connections: Topic link
 
-_Solo, ~2 minutes. Answer **A** or **B** — not both._
+_Solo, ~2 minutes. Answer **A** or **B** - not both._
 
-**A) An atom/badge/tag I built before — where, and what it “owned”**
+**A) An atom/badge/tag I built before - where, and what it “owned”**
 
 >
 
 **B) Or: which Step 0 takeaway goal does `<cfb-tag>` serve most, and why?**  
-_(See [Step 0 — Top takeaways](../step-0/learning-log.md#step-0-top-takeaways).)_
+_(See [Step 0 - Top takeaways](../step-0/learning-log.md#step-0-top-takeaways).)_
 
 >
 
@@ -69,7 +69,7 @@ _(See [Step 0 — Top takeaways](../step-0/learning-log.md#step-0-top-takeaways)
 
 <a id="step-1-myth-or-fact"></a>
 
-### Step 1 — Concepts: Myth or fact
+### Step 1 - Concepts: Myth or fact
 
 _Mark **M** or **F** first; then correct any mistakes in one line each._
 
@@ -92,13 +92,13 @@ _Mark **M** or **F** first; then correct any mistakes in one line each._
 
 ---
 
-[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+[← Back to README - 3) Concrete practice](./README.md#3-concrete-practice)
 
 ---
 
 <a id="step-1-one-minute-review"></a>
 
-### Step 1 — Concrete Practice: One minute review
+### Step 1 - Concrete Practice: One minute review
 
 _Solo, 3 minutes: What Surprised you in building your first component? What struggles you had?
 
@@ -106,11 +106,11 @@ _Solo, 3 minutes: What Surprised you in building your first component? What stru
 
 ---
 
-[← Back to README — 4) Conclusions](./README.md#4-conclusions)
+[← Back to README - 4) Conclusions](./README.md#4-conclusions)
 
 ---
 
-### Step 1 — Conclusions: What this component owns
+### Step 1 - Conclusions: What this component owns
 
 _One or two sentences._
 
@@ -120,7 +120,7 @@ What does `<cfb-tag>` own? What happens on connect and when attributes change?
 
 ---
 
-### Step 1 — Conclusions: Quick check
+### Step 1 - Conclusions: Quick check
 
 _One or two sentences._
 
@@ -130,7 +130,7 @@ What is one difference between “static span + classes” and “`<cfb-tag>` + 
 
 ---
 
-### Step 1 — Conclusions: Loop back — what runs first?
+### Step 1 - Conclusions: Loop back - what runs first?
 
 _Look at your answer under “What runs first?” above. Update in one line if needed._
 
@@ -138,7 +138,7 @@ _Look at your answer under “What runs first?” above. Update in one line if n
 
 ---
 
-### Step 1 — Conclusions: Commitment
+### Step 1 - Conclusions: Commitment
 
 _Complete the sentence._
 

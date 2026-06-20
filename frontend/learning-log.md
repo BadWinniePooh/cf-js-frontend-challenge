@@ -1,4 +1,4 @@
-# Learning log — journey hub
+# Learning log - journey hub
 
 Keep **full** session notes in each step’s own file: [`step-0/learning-log.md`](./step-0/learning-log.md) through
 [`step-8/learning-log.md`](./step-8/learning-log.md).  
@@ -28,9 +28,9 @@ finish a step.
 
 <a id="step-0-key-takeaway"></a>
 
-## Step 0 — The Static Board
+## Step 0 - The Static Board
 
-**Key takeaway** _(after you finish Step 0 — what will you remember in one month?)_
+**Key takeaway** _(after you finish Step 0 - what will you remember in one month?)_
 
 > 
 
@@ -40,7 +40,7 @@ finish a step.
 
 <a id="step-1-key-takeaway"></a>
 
-## Step 1 — Basic Web Component
+## Step 1 - Basic Web Component
 
 **Key takeaway**
 
@@ -52,7 +52,7 @@ finish a step.
 
 <a id="step-2-key-takeaway"></a>
 
-## Step 2 — Molecule
+## Step 2 - Molecule
 
 **Key takeaway**
 
@@ -64,7 +64,7 @@ finish a step.
 
 <a id="step-3-key-takeaway"></a>
 
-## Step 3 — Pub/Sub
+## Step 3 - Pub/Sub
 
 **Key takeaway**
 
@@ -76,7 +76,7 @@ finish a step.
 
 <a id="step-4-key-takeaway"></a>
 
-## Step 4 — Load from IndexedDB
+## Step 4 - Load from IndexedDB
 
 **Key takeaway**
 
@@ -88,7 +88,7 @@ finish a step.
 
 <a id="step-5-key-takeaway"></a>
 
-## Step 5 — HTML Form Elements
+## Step 5 - HTML Form Elements
 
 **Key takeaway**
 
@@ -100,7 +100,7 @@ finish a step.
 
 <a id="step-6-key-takeaway"></a>
 
-## Step 6 — Custom Form Element
+## Step 6 - Custom Form Element
 
 **Key takeaway**
 
@@ -112,7 +112,7 @@ finish a step.
 
 <a id="step-7-key-takeaway"></a>
 
-## Step 7 — Load from Backend
+## Step 7 - Load from Backend
 
 **Key takeaway**
 
@@ -124,7 +124,7 @@ finish a step.
 
 <a id="step-8-key-takeaway"></a>
 
-## Step 8 — Live Updates: WebSocket + MSW
+## Step 8 - Live Updates: WebSocket + MSW
 
 **Key takeaway**
 

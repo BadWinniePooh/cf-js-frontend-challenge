@@ -1,13 +1,13 @@
-# Step 6 — `<cfb-session-type>` · Form-associated custom element
+# Step 6 - `<cfb-session-type>` · Form-associated custom element
 
 In Step 5 you built add/edit forms with **native** controls and **`FormData`**. This week you replace **only** the
-**session-type** radio group with **`<cfb-session-type>`** — a **form-associated** custom element — so the **same**
+**session-type** radio group with **`<cfb-session-type>`** - a **form-associated** custom element - so the **same**
 submit path, validation, and **`cfb-session-created`** / update pipeline stay intact.
 
 The field must still **`name="session-type"`**, honour **`required`**, show up in **`FormData`**, and work in **both**
-add and edit dialogs — without a **hidden** native radio as a cheat; the value is carried through **`ElementInternals`**.
+add and edit dialogs - without a **hidden** native radio as a cheat; the value is carried through **`ElementInternals`**.
 
-> **Before you start:** branch, HTTP server, console clean — see [getting-started.md](./getting-started.md).
+> **Before you start:** branch, HTTP server, console clean - see [getting-started.md](./getting-started.md).
 
 ### Async / solo
 
@@ -34,16 +34,16 @@ By the end of this step, you can:
 
 Do these **in order**; capture answers in [your Step 6 learning log](./learning-log.md).
 
-1. **Solo, ~2 min — Think → ink (FormData guess)**  
+1. **Solo, ~2 min - Think → ink (FormData guess)**  
    [FormData guess](./learning-log.md#step-6-connections-formdata-guess) *(revisit in [Loop back](./learning-log.md#step-6-loop-back-formdata-guess)).*
 
-2. **Solo, ~3 min — Bridge from Step 5**  
+2. **Solo, ~3 min - Bridge from Step 5**  
    [Bridge from Step 5](./learning-log.md#step-6-bridge-step-5).
 
 3. **Optional pair / async, ~3 min**  
    [Surprise / compare](./learning-log.md#step-6-connections-surprise).
 
-4. **Solo, ~2 min — Topic link**  
+4. **Solo, ~2 min - Topic link**  
    [Topic link](./learning-log.md#step-6-topic-link): answer **A** or **B**.
 
 ---
@@ -57,7 +57,7 @@ Making custom elements for a form is possible with WebComponents. What we'll lea
 
 - **`static formAssociated = true`** tells the browser this element can participate in **form submission**, **reset**,
   and **constraint validation** like a built-in control.
-- **`this.attachInternals()`** returns **`ElementInternals`** — the bridge for **`setFormValue`**, **`setValidity`**,
+- **`this.attachInternals()`** returns **`ElementInternals`** - the bridge for **`setFormValue`**, **`setValidity`**,
   **`reportValidity`**, and **form callback** hooks.
 
 ### Value and `FormData`
@@ -66,7 +66,7 @@ Setting value for the form (for FormData) is done with **`ElementInternals`**
 
 - Call **`internals.setFormValue(value)`** when the user selects a tile; use **`null`** (or clear appropriately) when
   there is **no** value so the field behaves like an empty control in **`FormData`**.
-- The **`name`** attribute on **`<cfb-session-type>`** is what **`FormData`** uses as the key — same contract as the old
+- The **`name`** attribute on **`<cfb-session-type>`** is what **`FormData`** uses as the key - same contract as the old
   radios.
 
 ### Validation
@@ -77,7 +77,7 @@ For built-in browser validation, you must use **`setValidity`** and **`reportVal
   browser’s validation model matches native controls.
 - Clear validity with **`setValidity({})`** when a selection is valid.
 - **`reportValidity()`** on the **internals** (or coordination with the **form**’s **`reportValidity()`**) surfaces the
-  native error UI — keep one clear path so users are not double-spammed.
+  native error UI - keep one clear path so users are not double-spammed.
 
 ### Reset, disabled, edit
 
@@ -88,7 +88,7 @@ For built-in browser validation, you must use **`setValidity`** and **`reportVal
 
 ### No hidden radio fallback
 
-- The **session-type** value must come from **`setFormValue`** on your custom element — **not** from a shadowed
+- The **session-type** value must come from **`setFormValue`** on your custom element - **not** from a shadowed
   **`<input type="hidden">`** pretending to be the control. That keeps the learning goal honest.
 
 ### End-to-end flow (reference)
@@ -134,9 +134,9 @@ learning log.
 
 Do **two** short activities in your [learning log](./learning-log.md).
 
-1. **Mini quiz** — Open [Mini quiz](./learning-log.md#step-6-concept-quiz) and answer the three questions **before** you
+1. **Mini quiz** - Open [Mini quiz](./learning-log.md#step-6-concept-quiz) and answer the three questions **before** you
    lean on copy-paste from source.
-2. **Flow sketch** — Open [Flow sketch](./learning-log.md#step-6-concept-flow-sketch) and draw the pipeline (boxes +
+2. **Flow sketch** - Open [Flow sketch](./learning-log.md#step-6-concept-flow-sketch) and draw the pipeline (boxes +
    arrow labels). Paper is fine; ASCII or a photo pasted elsewhere is fine.
 
 When both are done, move on to **Concrete practice**.
@@ -157,7 +157,7 @@ To finish this exercise, you need to (detailed help below the table)
 | ✅ [`index.js`](./index.js)                                  | registers elements as before                                                               |
 | ✅ [`index.html`](./index.html)                              | no changes from Step-5                                                                     |
 
-### ✨ `cfb-session-type.js` — new custom element
+### ✨ `cfb-session-type.js` - new custom element
 
 - [ ] Create `<cfb-session-type>` with `static formAssociated = true`
 - [ ] Call `this.attachInternals()` in the constructor and store internals
@@ -187,7 +187,7 @@ To finish this exercise, you need to (detailed help below the table)
 ### **After building these, you can show:**
 
 - [ ] **`<cfb-session-type>`** with **`static formAssociated = true`** and **`attachInternals()`** early in the instance
-  lifecycle (e.g. **class field** or **`constructor`** — match one style on your team).
+  lifecycle (e.g. **class field** or **`constructor`** - match one style on your team).
 - [ ] **Tiles** for **Talk**, **Workshop**, **Keynote**, **Lightning Talk** (emoji or icons) with a clear **selected**
   state.
 - [ ] **`internals.setFormValue(...)`** updates when the user selects a tile; empty / unselected state omits or clears
@@ -200,8 +200,8 @@ To finish this exercise, you need to (detailed help below the table)
 
 **Constraints**
 
-- HTML, JavaScript, and (optionally) CSS only — no frameworks.
-- **No** hidden native **`<input>`** as the real carrier for session type — **`ElementInternals`** owns the value.
+- HTML, JavaScript, and (optionally) CSS only - no frameworks.
+- **No** hidden native **`<input>`** as the real carrier for session type - **`ElementInternals`** owns the value.
 - Aim for about **30–45 minutes** on the core challenge.
 
 **Definition of done**
@@ -219,7 +219,7 @@ and capture the answer.
 
 ### 1) Quick check
 
-Answer in [your learning log — Quick check](./learning-log.md#step-6-conclusions-quick-check).
+Answer in [your learning log - Quick check](./learning-log.md#step-6-conclusions-quick-check).
 
 ### 2) Loop back
 

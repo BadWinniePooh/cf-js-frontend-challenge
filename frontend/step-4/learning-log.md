@@ -1,18 +1,18 @@
-# Learning log — Step 4
+# Learning log - Step 4
 
 Use this file while you work through [Step 4 README](./README.md). When you finish the step, add your **key takeaway** in the [journey hub `learning-log.md`](../learning-log.md#step-4-key-takeaway).
 
 ---
 
-[← Back to README — 1) Connections](./README.md#1-connections)
+[← Back to README - 1) Connections](./README.md#1-connections)
 
 ---
 
 <a id="step-4-connections-refresh"></a>
 
-### Step 4 — Connections: Refresh the page
+### Step 4 - Connections: Refresh the page
 
-_Solo, ~2 minutes. Answer **before** you read Concepts — a gut guess is fine._
+_Solo, ~2 minutes. Answer **before** you read Concepts - a gut guess is fine._
 
 After Step 3, sessions lived in memory on the orchestrator. **What happens to the board if you refresh the page?**
 Why would putting sessions in **IndexedDB** change that?
@@ -25,7 +25,7 @@ _(You will revisit this in Conclusions.)_
 
 <a id="step-4-connections-orchestrator-step3"></a>
 
-### Step 4 — Connections: Orchestrator from Step 3
+### Step 4 - Connections: Orchestrator from Step 3
 
 _Solo, ~5 minutes._
 
@@ -41,7 +41,7 @@ the orchestrator in a larger app? (One short paragraph.)
 
 <a id="step-4-bridge-step-3"></a>
 
-### Step 4 — Connections: Bridge from Step 3
+### Step 4 - Connections: Bridge from Step 3
 
 _Solo, ~3 minutes._
 
@@ -54,7 +54,7 @@ what changed now that **IndexedDB** exists?
 
 <a id="step-4-connections-surprise"></a>
 
-### Step 4 — Connections: Surprise (solo) or compare (pair)
+### Step 4 - Connections: Surprise (solo) or compare (pair)
 
 _~3 minutes._
 
@@ -68,9 +68,9 @@ If you discussed with a peer: what will each of you try first in DevTools (**App
 
 <a id="step-4-topic-link"></a>
 
-### Step 4 — Connections: Topic link
+### Step 4 - Connections: Topic link
 
-_Solo, ~2 minutes. Answer **A** or **B** — not both._
+_Solo, ~2 minutes. Answer **A** or **B** - not both._
 
 **A)** Where else have you seen **client-side persistence** (mobile, desktop, another web app)? One line.
 
@@ -82,17 +82,17 @@ _Solo, ~2 minutes. Answer **A** or **B** — not both._
 
 ---
 
-[← Back to README — 2) Concepts](./README.md#2-concepts)
+[← Back to README - 2) Concepts](./README.md#2-concepts)
 
 ---
 
 <a id="step-4-concepts-one-minute"></a>
 
-### Step 4 — Concepts: One-minute review
+### Step 4 - Concepts: One-minute review
 
-_After reading the README Concepts sections — ~1 minute._
+_After reading the README Concepts sections - ~1 minute._
 
-In two bullets: **who reads IndexedDB** in this step’s architecture — and **who must not** mix UI and raw IDB calls?
+In two bullets: **who reads IndexedDB** in this step’s architecture - and **who must not** mix UI and raw IDB calls?
 
 > 
 
@@ -100,7 +100,7 @@ In two bullets: **who reads IndexedDB** in this step’s architecture — and **
 
 <a id="step-4-concept-quiz"></a>
 
-### Step 4 — Concept check: Mini quiz
+### Step 4 - Concept check: Mini quiz
 
 _Answer from memory first; then peek at [`session-store.js`](./session-store.js) or [`events.js`](./events.js) if needed._
 
@@ -120,15 +120,15 @@ _Answer from memory first; then peek at [`session-store.js`](./session-store.js)
 
 ---
 
-[← Back to README — 4) Conclusions](./README.md#4-conclusions)
+[← Back to README - 4) Conclusions](./README.md#4-conclusions)
 
 ---
 
 <a id="step-4-conclusions-quick-check"></a>
 
-### Step 4 — Conclusions: Quick check
+### Step 4 - Conclusions: Quick check
 
-_Answer in your log — short phrases are enough._
+_Answer in your log - short phrases are enough._
 
 1. Name **two files** that **import** from **`session-store.js`** (or list two consumers of **`getAllSessions`**).
 
@@ -143,7 +143,7 @@ _Answer in your log — short phrases are enough._
 
 <a id="step-4-conclusions-ticket-out"></a>
 
-### Step 4 — Conclusions: Ticket out
+### Step 4 - Conclusions: Ticket out
 
 _Short reflection._
 
@@ -159,7 +159,7 @@ _Short reflection._
 
 <a id="step-4-loop-back-refresh"></a>
 
-### Step 4 — Conclusions: Loop back — refresh the page
+### Step 4 - Conclusions: Loop back - refresh the page
 
 _Look at your answer under “Refresh the page.” Update in one or two lines if needed._
 
@@ -167,13 +167,13 @@ _Look at your answer under “Refresh the page.” Update in one or two lines if
 
 ---
 
-[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+[← Back to README - 3) Concrete practice](./README.md#3-concrete-practice)
 
 ---
 
 <a id="step-4-facilitator-question"></a>
 
-### Step 4 — Question for your facilitator
+### Step 4 - Question for your facilitator
 
 _Solo, ~5 minutes._
 

@@ -1,6 +1,6 @@
 # How to use README.md and learning-log.md
 
-Each weekly step in `step-N/` follows **Training from the Back of the Room (TBR)** — adapted for **solo, async** work. 
+Each weekly step in `step-N/` follows **Training from the Back of the Room (TBR)** - adapted for **solo, async** work. 
 You move through the same four phases in every step:
 
 | Phase                    | What it is for                                                                                         |
@@ -11,13 +11,13 @@ You move through the same four phases in every step:
 | **3) Concrete practice** | Build or change code; check off deliverables in the README.                                            |
 | **4) Conclusions**       | Reflect, loop back to your earlier guesses, write a key takeaway.                                      |
 
-Two files carry that rhythm. **You alternate between them** — the README tells you *what to do*; the learning log is *where you write*.
+Two files carry that rhythm. **You alternate between them** - the README tells you *what to do*; the learning log is *where you write*.
 
 ---
 
 ## The two files
 
-### `step-N/README.md` — your guide
+### `step-N/README.md` - your guide
 
 - Learning goal and constraints for the week
 - **Teaching content** (explanations, code samples, diagrams)
@@ -29,16 +29,16 @@ Two files carry that rhythm. **You alternate between them** — the README tells
 
 **Start here** when you open a new step.
 
-### `step-N/learning-log.md` — your workbook
+### `step-N/learning-log.md` - your workbook
 
 - Short prompts you answer in place (quotes, sketches, myth/fact, facilitator questions)
 - Anchor IDs (e.g. `#step-3-connections-how-notify`) so the README can link directly to a blank
-- **`[← Back to README — …]`** links at each phase boundary — jump back to the matching section when you are ready for the next part
+- **`[← Back to README - …]`** links at each phase boundary - jump back to the matching section when you are ready for the next part
 - Footer link to the [journey hub `learning-log.md`](./learning-log.md)
 
 **Open this in a second tab or split pane** and keep it open while you work.
 
-### `frontend/learning-log.md` — journey hub (optional but recommended)
+### `frontend/learning-log.md` - journey hub (optional but recommended)
 
 - One **key takeaway** per step (one or two sentences)
 - Links to each step’s full log
@@ -54,21 +54,21 @@ Add your hub takeaway when you finish **Conclusions** for that step.
 flowchart LR
   A[Open step-N/README.md] --> B[1 Connections]
   B --> C[Write in learning-log.md]
-  C --> D[Back to README — 2 Concepts]
+  C --> D[Back to README - 2 Concepts]
   D --> E[Read concepts]
   E --> F[Log prompts if any]
-  F --> G[Back to README — 3 Concrete practice]
+  F --> G[Back to README - 3 Concrete practice]
   G --> H[Code + checklists]
-  H --> I[Back to README — 4 Conclusions]
+  H --> I[Back to README - 4 Conclusions]
   I --> J[Finish log + hub takeaway]
 ```
 
 1. **Open** `step-N/README.md` and skim the learning goal.
 2. Make sure the **getting started** instructions are complete.
-3. **Connections** — README lists prompts in order; each points to a section in `learning-log.md`. Write your answers *before* reading Concepts where the README says so (honest guesses matter).
-4. **Concepts** — use the `[← Back to README — 2) Concepts]` link in the log, or scroll the README to `## 2) Concepts`. Read the material; complete any log prompts (quizzes, sketches, myth/fact).
-5. **Concrete practice** — follow `[← Back to README — 3) Concrete practice]`. Build the deliverable; tick checkboxes in the README. Some steps also have log prompts during or after coding (e.g. a facilitator question).
-6. **Conclusions** — follow `[← Back to README — 4) Conclusions]`. Loop back to earlier log answers, write reflections, then add your **key takeaway** in [`frontend/learning-log.md`](./learning-log.md).
+3. **Connections** - README lists prompts in order; each points to a section in `learning-log.md`. Write your answers *before* reading Concepts where the README says so (honest guesses matter).
+4. **Concepts** - use the `[← Back to README - 2) Concepts]` link in the log, or scroll the README to `## 2) Concepts`. Read the material; complete any log prompts (quizzes, sketches, myth/fact).
+5. **Concrete practice** - follow `[← Back to README - 3) Concrete practice]`. Build the deliverable; tick checkboxes in the README. Some steps also have log prompts during or after coding (e.g. a facilitator question).
+6. **Conclusions** - follow `[← Back to README - 4) Conclusions]`. Loop back to earlier log answers, write reflections, then add your **key takeaway** in [`frontend/learning-log.md`](./learning-log.md).
 
 **Rule of thumb:** if the README says *“in your learning log”*, switch files. If it says *“create …”* or *“implement …”*,
 stay in the README (and your editor) for Concrete practice.
@@ -92,7 +92,7 @@ Short **timeboxes** in the README (~1–5 minutes per prompt) beat perfect prose
 ```
 frontend/
 ├── README.md              ← series overview (not the weekly guide)
-├── learning-log.md        ← journey hub — one takeaway per step
+├── learning-log.md        ← journey hub - one takeaway per step
 ├── how-to.md              ← this file
 ├── PLAN.md                ← facilitator specs + activity catalogue
 └── step-N/
@@ -104,7 +104,7 @@ frontend/
 
 ---
 
-## Quick reference — anchor links
+## Quick reference - anchor links
 
 Each step README uses the same section headings; the learning log links to:
 
@@ -115,7 +115,7 @@ Each step README uses the same section headings; the learning log links to:
 | 3) Concrete practice | `#3-concrete-practice` |
 | 4) Conclusions       | `#4-conclusions`       |
 
-Example: from `step-5/learning-log.md`, `[← Back to README — 2) Concepts](./README.md#2-concepts)` opens Step 5’s Concepts section.
+Example: from `step-5/learning-log.md`, `[← Back to README - 2) Concepts](./README.md#2-concepts)` opens Step 5’s Concepts section.
 
 ---
 

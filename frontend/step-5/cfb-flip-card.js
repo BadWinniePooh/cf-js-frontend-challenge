@@ -1,13 +1,13 @@
 // Generic two-sided card with a 3-D flip animation.
-// Knows nothing about sessions — only about geometry and timing.
+// Knows nothing about sessions - only about geometry and timing.
 //
 // Slots:
-//   <* slot="front">  — visible face in resting state
-//   <* slot="back">   — visible face when flipped
+//   <* slot="front">  - visible face in resting state
+//   <* slot="back">   - visible face when flipped
 //
 // Public API:
-//   flip()              — expand to center and rotate to back face
-//   unflip(callback?)   — rotate back and shrink; callback fires after animation
+//   flip()              - expand to center and rotate to back face
+//   unflip(callback?)   - rotate back and shrink; callback fires after animation
 
 const SHADOW_CSS = `
     :host {
@@ -94,7 +94,7 @@ export class CfbFlipCard extends HTMLElement {
         this.#savedRect = this.getBoundingClientRect()
         const { top, left, width, height } = this.#savedRect
 
-        // Backdrop — lives in the light DOM so external CSS can style it.
+        // Backdrop - lives in the light DOM so external CSS can style it.
         this.#backdrop = document.createElement('div')
         this.#backdrop.className = 'cfb-card-flip__backdrop'
         document.body.appendChild(this.#backdrop)
@@ -144,7 +144,7 @@ export class CfbFlipCard extends HTMLElement {
             })
         }
 
-        // Listen directly on the inner element — it owns the transform transition.
+        // Listen directly on the inner element - it owns the transform transition.
         const inner = this.shadowRoot.querySelector('.inner')
         const onDone = () => {
             inner.removeEventListener('transitionend', onDone)

@@ -1,4 +1,4 @@
-# Step 8 Backend — live session feed
+# Step 8 Backend - live session feed
 
 Extends [step-7-be](../step-7-be) with WebSocket push notifications and a random-session endpoint.
 
@@ -8,8 +8,8 @@ Reuses step-7-be modules for routing, HTTP helpers, schedules, and session CRUD.
 
 All step-7 routes, plus:
 
-- `DELETE /api/sessions/:eventId/:sessionId` — remove a session (also available in step-7-be)
-- `POST /api/sessions/:eventId/random` — add a random session (simulates another user adding one)
+- `DELETE /api/sessions/:eventId/:sessionId` - remove a session (also available in step-7-be)
+- `POST /api/sessions/:eventId/random` - add a random session (simulates another user adding one)
 
 ## WebSocket
 

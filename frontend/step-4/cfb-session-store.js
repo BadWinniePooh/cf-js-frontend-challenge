@@ -9,7 +9,7 @@ import { saveSessions, deleteSession, getAllSessions } from './session-store.js'
 // cfb-session-removed (bubbling up from session cards inside the schedule)
 // pass through this element before reaching the orchestrator.
 //
-// After each mutation it re-reads IDB and dispatches cfbSessionsLoadedToIDB (cfb-sessions-loaded-to-idb) —
+// After each mutation it re-reads IDB and dispatches cfbSessionsLoadedToIDB (cfb-sessions-loaded-to-idb) -
 // the orchestrator only ever hears that single, uniform event.
 export class CfbSessionStore extends HTMLElement {
   connectedCallback() {

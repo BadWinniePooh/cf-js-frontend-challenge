@@ -1,12 +1,12 @@
-// Step 4 — Load from IndexedDB
+// Step 4 - Load from IndexedDB
 //
 // Most of Steps 1–3 is reused unchanged.
 // Four things are new:
-//   1. <cfb-session-loader>     — poplulates IDB with seed data (if IDB is empty)
-//   2. <cfb-session-store>      — catches cfb-session-created + cfb-session-removed
+//   1. <cfb-session-loader>     - poplulates IDB with seed data (if IDB is empty)
+//   2. <cfb-session-store>      - catches cfb-session-created + cfb-session-removed
 //                                 → mutates IDB → fires cfbSessionsLoadedToIDB (cfb-sessions-loaded-to-idb)
-//   3. <cfb-session-card>       — Implements a 'menu' behavior for the session card
-//   4. <cfb-menu>               — fires cfb-session-removed using step-4 events.js
+//   3. <cfb-session-card>       - Implements a 'menu' behavior for the session card
+//   4. <cfb-menu>               - fires cfb-session-removed using step-4 events.js
 
 import { CfbTag } from '../step-1/cfb-tag.js' // ✅
 import { CfbSessionCard } from './cfb-session-card.js' // ✅ rewritten from step-2

@@ -1,4 +1,4 @@
-/* ── <cfb-session-type> — form-associated tile picker ─────────── */
+/* ── <cfb-session-type> - form-associated tile picker ─────────── */
 cfb-session-type {
     display: block;
     margin-top: var(--space-half);

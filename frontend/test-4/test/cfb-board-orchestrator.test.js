@@ -9,7 +9,7 @@ if (!customElements.get('cfb-board-orchestrator')) {
   customElements.define('cfb-board-orchestrator', CfbBoardOrchestrator)
 }
 
-// No IDB involved — the step-4 orchestrator is stateless:
+// No IDB involved - the step-4 orchestrator is stateless:
 // it only listens to sessionsLoaded and writes data-sessions to .cfb-updates-schedule.
 
 describe('<cfb-board-orchestrator>', () => {

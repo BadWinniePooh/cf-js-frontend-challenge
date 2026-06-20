@@ -1,4 +1,4 @@
-# Getting started — Step 1
+# Getting started - Step 1
 
 Run these steps once **before** the [Step 1 README](./README.md) (Connections and onward).
 
@@ -10,14 +10,14 @@ Create a branch (or continue same from step-0) for your work so feedback and his
 
 `index.html` loads `index.js` as an ES module (`type="module"`). Browsers block that on `file://`, so use a local server from **`frontend/step-1`** (or your copy of this folder).
 
-**Option A — one-off:**
+**Option A - one-off:**
 
 ```bash
 cd frontend/step-1
 npx http-server -o .
 ```
 
-**Option B — global `http-server`:**
+**Option B - global `http-server`:**
 
 ```bash
 npm install -g http-server
@@ -25,7 +25,7 @@ cd frontend/step-1
 http-server . -o
 ```
 
-**Option C — VS Code:** [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) → right-click `index.html` → *Open with Live Server*.
+**Option C - VS Code:** [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) → right-click `index.html` → *Open with Live Server*.
 
 ## 3) Verify in the browser
 

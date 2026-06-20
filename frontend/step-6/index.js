@@ -1,4 +1,4 @@
-// Step 6 — Step 5 + <cfb-session-type> (form-associated custom element)
+// Step 6 - Step 5 + <cfb-session-type> (form-associated custom element)
 
 import { CfbTag }               from '../step-1/cfb-tag.js'
 import { CfbSchedule }          from '../step-4/cfb-schedule.js'

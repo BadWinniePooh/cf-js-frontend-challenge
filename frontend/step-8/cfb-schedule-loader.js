@@ -25,7 +25,7 @@ export class CfbScheduleLoader extends HTMLElement {
     try {
       const schedule = await getBackendApi().getSchedule(eventId)
       await scheduleStore.saveSchedule(schedule)
-      this.#setStatus('done', `schedule ready — ${schedule.name}`)
+      this.#setStatus('done', `schedule ready - ${schedule.name}`)
 
       this.dispatchEvent(
         new CustomEvent('scheduleLoaded', {

@@ -9,7 +9,7 @@ use(schemaMatcher)
 
 customElements.define('cfb-session-generator', CfbSessionGenerator)
 
-describe('<cfb-session-generator> — event dispatch', () => {
+describe('<cfb-session-generator> - event dispatch', () => {
   afterEach(cleanup)
 
   it('dispatches the event with bubbles: true', async () => {

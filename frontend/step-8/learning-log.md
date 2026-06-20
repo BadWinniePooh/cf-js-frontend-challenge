@@ -1,4 +1,4 @@
-# Learning log — Step 8
+# Learning log - Step 8
 
 Use this file while you work through [Step 8 README](./README.md). When you finish the step, add your **key takeaway** in the
 [journey hub `learning-log.md`](../learning-log.md#step-8-key-takeaway).
@@ -10,13 +10,13 @@ This step uses **Training from the Back of the Room** ideas adapted for **solo /
 
 ---
 
-[← Back to README — 1) Connections](./README.md#1-connections)
+[← Back to README - 1) Connections](./README.md#1-connections)
 
 ---
 
 <a id="step-8-connections-push-vs-pull"></a>
 
-### Step 8 — Connections: Push vs pull (think → ink)
+### Step 8 - Connections: Push vs pull (think → ink)
 
 _Solo, ~2 minutes. Answer **before** you read Concepts._
 
@@ -33,7 +33,7 @@ _(You will [loop back](#step-8-loop-back-push-vs-pull) in Conclusions.)_
 
 <a id="step-8-bridge-step-7"></a>
 
-### Step 8 — Connections: Bridge from Step 7
+### Step 8 - Connections: Bridge from Step 7
 
 _Solo, ~4 minutes._
 
@@ -50,14 +50,14 @@ Step 7’s **`<cfb-session-loader>`** both **fetched** and **wrote** IndexedDB.
 
 <a id="step-8-connections-surprise"></a>
 
-### Step 8 — Connections: Surprise (solo) or compare (pair)
+### Step 8 - Connections: Surprise (solo) or compare (pair)
 
 _~3 minutes._
 
-**Solo:** One real-time product you use (chat, Figma, sports scoreboard, …) — one line: is it 
+**Solo:** One real-time product you use (chat, Figma, sports scoreboard, …) - one line: is it 
 mostly **push**, **poll**, or **both**?
 
-**If you compare later:** what broke first when you tested — **HTTP**, **WebSocket**, or **IndexedDB**?
+**If you compare later:** what broke first when you tested - **HTTP**, **WebSocket**, or **IndexedDB**?
 
 >
 
@@ -65,9 +65,9 @@ mostly **push**, **poll**, or **both**?
 
 <a id="step-8-topic-link"></a>
 
-### Step 8 — Connections: Topic link
+### Step 8 - Connections: Topic link
 
-_Solo, ~2 minutes. Answer **A** or **B** — not both._
+_Solo, ~2 minutes. Answer **A** or **B** - not both._
 
 **A)** Why does the WebSocket URL include **`eventId`** (`/ws/sessions/codefreeze-2025`) instead of one global 
 feed for all conferences?
@@ -81,19 +81,19 @@ of dispatching an event to the store wrapper?
 
 ---
 
-[← Back to README — 2) Concepts](./README.md#2-concepts)
+[← Back to README - 2) Concepts](./README.md#2-concepts)
 
 ---
 
 <a id="step-8-concepts-one-minute"></a>
 
-### Step 8 — Concepts: One-minute review
+### Step 8 - Concepts: One-minute review
 
-_After reading the README Concepts sections — ~1 minute._
+_After reading the README Concepts sections - ~1 minute._
 
 **Two bullets:**
 
-1. Who should **own** closing the WebSocket — the live component, the orchestrator, or **`cfb-schedule`**?
+1. Who should **own** closing the WebSocket - the live component, the orchestrator, or **`cfb-schedule`**?
 2. After a **`sessionUpdated`** message, which **one** event type does the store emit so the orchestrator can 
    refresh the schedule (same as Step 7’s loader completion)?
 
@@ -103,7 +103,7 @@ _After reading the README Concepts sections — ~1 minute._
 
 <a id="step-8-concept-quiz"></a>
 
-### Step 8 — Concept check: Mini quiz
+### Step 8 - Concept check: Mini quiz
 
 _Answer **from memory first** (~4 minutes). Then peek at the README or source if needed._
 
@@ -127,9 +127,9 @@ _Answer **from memory first** (~4 minutes). Then peek at the README or source if
 
 <a id="step-8-concept-two-path-sketch"></a>
 
-### Step 8 — Concept check: Two-path sketch (visual)
+### Step 8 - Concept check: Two-path sketch (visual)
 
-_Solo, ~5 minutes. Training from the Back of the Room — “images / different activity.”_
+_Solo, ~5 minutes. Training from the Back of the Room - “images / different activity.”_
 
 Draw **two** parallel swimlanes labelled **PULL** and **PUSH**.
 
@@ -143,13 +143,13 @@ Label **one arrow** per lane with the key event or attribute (e.g. **`sessionsFe
 
 ---
 
-[← Back to README — 3) Concrete practice](./README.md#3-concrete-practice)
+[← Back to README - 3) Concrete practice](./README.md#3-concrete-practice)
 
 ---
 
 <a id="step-8-concrete-facilitator-question"></a>
 
-### Step 8 — Concrete practice: Question for your facilitator
+### Step 8 - Concrete practice: Question for your facilitator
 
 _Solo, ~5 minutes._
 
@@ -165,13 +165,13 @@ Ask **one** question about **WebSockets**, **the store wrapper pattern**, **orch
 
 ---
 
-[← Back to README — 4) Conclusions](./README.md#4-conclusions)
+[← Back to README - 4) Conclusions](./README.md#4-conclusions)
 
 ---
 
 <a id="step-8-conclusions-quick-check"></a>
 
-### Step 8 — Conclusions: Quick check
+### Step 8 - Conclusions: Quick check
 
 _~4 minutes._
 
@@ -179,7 +179,7 @@ _~4 minutes._
 
    >
 
-2. Open **two tabs** on the same event. Click **random session** in tab A. What do you observe in tab B — and which message **`type`** did the socket deliver?
+2. Open **two tabs** on the same event. Click **random session** in tab A. What do you observe in tab B - and which message **`type`** did the socket deliver?
 
    >
 
@@ -191,7 +191,7 @@ _~4 minutes._
 
 <a id="step-8-loop-back-push-vs-pull"></a>
 
-### Step 8 — Conclusions: Loop back — push vs pull
+### Step 8 - Conclusions: Loop back - push vs pull
 
 _Look at your answer under [Push vs pull](#step-8-connections-push-vs-pull). Correct it in one line: what was wrong?_
 
@@ -201,9 +201,9 @@ _Look at your answer under [Push vs pull](#step-8-connections-push-vs-pull). Cor
 
 <a id="step-8-conclusions-pull-vs-push"></a>
 
-### Step 8 — Conclusions: Pull vs push in this app
+### Step 8 - Conclusions: Pull vs push in this app
 
-_From [`../PLAN.md`](../PLAN.md) — two sentences._
+_From [`../PLAN.md`](../PLAN.md) - two sentences._
 
 Describe the **pull** path (loader or form → … → schedule) and the **push** path (WebSocket → … → schedule) in **your own words**.
 
@@ -213,7 +213,7 @@ Describe the **pull** path (loader or form → … → schedule) and the **push*
 
 <a id="step-8-conclusions-tf-close-socket"></a>
 
-### Step 8 — Conclusions: True / False — close socket
+### Step 8 - Conclusions: True / False - close socket
 
 **Statement:** “A live component should close its WebSocket in **`disconnectedCallback`** when it is removed from the DOM.”
 
@@ -225,7 +225,7 @@ Describe the **pull** path (loader or form → … → schedule) and the **push*
 
 <a id="step-8-conclusions-tf-render-path"></a>
 
-### Step 8 — Conclusions: True / False — separate render path
+### Step 8 - Conclusions: True / False - separate render path
 
 **Statement:** “Real-time updates in this step require a **separate** rendering path from the Step 7 schedule.”
 

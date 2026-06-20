@@ -1,10 +1,10 @@
-// Step 5 — Add a Session via a Form + Edit via card flip
+// Step 5 - Add a Session via a Form + Edit via card flip
 //
 // Everything from Step 4 carries over unchanged.
 // Three new pieces:
-//   <cfb-flip-card>          — generic 2-sided card (Shadow DOM); exposes flip()/unflip()
-//   <cfb-add-session-form>   — fixed trigger button → <dialog> overlay to add a session
-//   <cfb-edit-session-form>  — lives in the "back" slot of <cfb-flip-card>
+//   <cfb-flip-card>          - generic 2-sided card (Shadow DOM); exposes flip()/unflip()
+//   <cfb-add-session-form>   - fixed trigger button → <dialog> overlay to add a session
+//   <cfb-edit-session-form>  - lives in the "back" slot of <cfb-flip-card>
 
 import { CfbTag }               from '../step-1/cfb-tag.js'
 import { CfbMenu }              from '../step-4/cfb-menu.js'

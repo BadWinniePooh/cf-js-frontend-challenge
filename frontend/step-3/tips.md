@@ -25,14 +25,14 @@ export class CfbBoardOrchestrator extends HTMLElement {
 }
 ```
 
-If you use **`.bind(this)`**, you must **remove** the **same** function reference — otherwise **`removeEventListener`**
+If you use **`.bind(this)`**, you must **remove** the **same** function reference - otherwise **`removeEventListener`**
 won’t match.
 
-Curious why? See **Extras** at the end of the README — optional self-study on **`this`** binding.
+Curious why? See **Extras** at the end of the README - optional self-study on **`this`** binding.
 
 ## Schedule attribute
 
-`cfb-schedule` listens for **`data-sessions`** — a **JSON array** of session objects (each compatible with *
+`cfb-schedule` listens for **`data-sessions`** - a **JSON array** of session objects (each compatible with *
 *`sessionDetails`** / card **`data-session-details`**).
 
 ```javascript

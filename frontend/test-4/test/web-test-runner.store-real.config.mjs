@@ -1,4 +1,4 @@
-// Contract test against the real IndexedDB — no import map needed.
+// Contract test against the real IndexedDB - no import map needed.
 export default {
   nodeResolve: true,
   browserStartTimeout: 60000,
