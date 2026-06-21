@@ -6,8 +6,8 @@ import { CfbSessionGenerator } from './cfb-session-generator.js'
 import { CfbBoardOrchestrator } from './cfb-board-orchestrator.js'
 import { CfbSchedule } from './cfb-schedule.js'
 
-customElements.define('cfb-session-card', CfbSessionCard)
 customElements.define('cfb-tag', CfbTag)
-customElements.define('cfb-session-generator', CfbSessionGenerator)
-customElements.define('cfb-board-orchestrator', CfbBoardOrchestrator)
-customElements.define('cfb-schedule', CfbSchedule)
+customElements.define(CfbSessionCard.elementName, CfbSessionCard)
+customElements.define(CfbSessionGenerator.elementName, CfbSessionGenerator)
+customElements.define(CfbBoardOrchestrator.elementName, CfbBoardOrchestrator)
+customElements.define(CfbSchedule.elementName, CfbSchedule)

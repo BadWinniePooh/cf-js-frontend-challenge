@@ -6,6 +6,8 @@ import { cfbSessionsLoadedToIDB } from './lib/events.js'
 // only load new sessions if the last update was newer than the last time it
 // loaded.
 export class CfbSessionLoader extends HTMLElement {
+  static elementName = 'cfb-session-loader'
+
   async connectedCallback() {
     // ✨ mimic loading all sessions from Backend, and storing them to IndexedDB!
     // Hint: you can use the `SEED_SESSIONS` below to store the data.

@@ -12,6 +12,8 @@ import { saveSessions, deleteSession, getAllSessions } from './session-store.js'
 // After each mutation it re-reads IDB and dispatches cfbSessionsLoadedToIDB (cfb-sessions-loaded-to-idb) -
 // the orchestrator only ever hears that single, uniform event.
 export class CfbSessionStore extends HTMLElement {
+  static elementName = 'cfb-session-store'
+
   connectedCallback() {
     this.addEventListener(EventTypes.SESSION_CREATED, this.#onSessionCreated)
     this.addEventListener(EventTypes.SESSION_REMOVED, this.#onSessionRemoved)

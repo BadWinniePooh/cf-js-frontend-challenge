@@ -3,6 +3,8 @@ import createScheduleStore from './lib/store/schedule-store.js'
 const scheduleStore = createScheduleStore()
 
 export class CfbHeader extends HTMLElement {
+    static elementName = 'cfb-header'
+
     static get observedAttributes() {
         return ['data-event-id']
     }

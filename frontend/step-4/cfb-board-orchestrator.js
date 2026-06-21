@@ -3,6 +3,7 @@
 import { EventTypes } from './lib/events.js'
 
 export class CfbBoardOrchestrator extends HTMLElement {
+  static elementName = 'cfb-board-orchestrator'
 
   connectedCallback() {
     this.addEventListener(EventTypes.SESSION_LOADED_TO_IDB, this.#onSessionsLoaded)

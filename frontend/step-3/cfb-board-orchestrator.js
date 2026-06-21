@@ -1,6 +1,8 @@
 import { EventTypes } from './lib/events.js'
 
 export class CfbBoardOrchestrator extends HTMLElement {
+  static elementName = 'cfb-board-orchestrator'
+
   #sessions = [{
     'title': 'Learn pub/sub with custom Web Components',
     'day': 'Wednesday',

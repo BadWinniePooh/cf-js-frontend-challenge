@@ -1,4 +1,6 @@
 export class CfbSchedule extends HTMLElement {
+  static elementName = 'cfb-schedule'
+
   // This is an existing Molecule, so we're not going to change it.'
   // This requires one data attribute: 'data-sessions' that contains a JSON array of sessions.
   #sessions = []

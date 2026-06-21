@@ -6,7 +6,7 @@ Run these steps once **before** the [Step 8 README](./README.md) (Connections an
 
 Work on a branch so feedback and history stay easy to follow.
 
-## 2) Serve from the `frontend/` folder (important)
+## 2) Serve from the `frontend/` folder 
 
 [`index.html`](./index.html) links **`../styles.css`**. Serve the **`frontend`** directory as the site root (not only `step-8/`),
 then open **`step-8/index.html`**.
@@ -39,11 +39,11 @@ Leave **`configureBackendApi({ baseUrl: 'http://localhost:3001' })`** in [`index
 ## 4) Quick smoke test
 
 1. Open **`step-8/index.html`** in the browser.
-2. Confirm the **live-updates** pill shows **`open`** (green styling).
+2. Confirm the **live-updates** element shows **`open`** (green styling).
 3. Click **“Add random session (via backend)”** - a new card should appear **without** reloading the page.
 4. Open the same URL in a **second tab** - click the button in one tab; the other tab should update too.
 
-If the WebSocket pill stays **`error`** or **`closed`**, check that **`step-8-be`** is running and that nothing else is bound to port **3001**.
+If the WebSocket element stays **`error`** or **`closed`**, check that **`step-8-be`** is running and that nothing else is bound to port **3001**.
 
 ---
 

@@ -6,10 +6,10 @@ import { Router } from '../../step-7-be/src/router.js'
 import { json, sendNoContent } from '../../step-7-be/src/http-utils.js'
 import { handleGetSchedule } from '../../step-7-be/src/schedules/route-handlers.js'
 import {
-  handleDeleteSession,
-  handleGetSessions,
-  handlePatchSession,
-  handlePutSession,
+  deleteSession,
+  getSessions,
+  updateSessionDetails,
+  addNewSession,
 } from '../../step-7-be/src/sessions/route-handlers.js'
 import { schedules } from '../../step-7-be/src/fake-data/schedules.js'
 import { handlePostRandomSession } from './sessions/route-handlers.js'
@@ -24,22 +24,22 @@ export function createStep8Backend() {
   const router = new Router()
 
   router.get('/api/schedule/:eventId', handleGetSchedule)
-  router.get('/api/sessions/:eventId', handleGetSessions)
+  router.get('/api/sessions/:eventId', getSessions)
   router.put(
     '/api/sessions/:eventId/:sessionId',
-    wrapHandler(handlePutSession, ({ body }) => {
+    wrapHandler(addNewSession, ({ body }) => {
       if (body?.id) broadcaster.sessionUpdated(body)
     })
   )
   router.patch(
     '/api/sessions/:eventId/:sessionId',
-    wrapHandler(handlePatchSession, ({ body }) => {
+    wrapHandler(updateSessionDetails, ({ body }) => {
       if (body?.id) broadcaster.sessionUpdated(body)
     })
   )
   router.delete(
     '/api/sessions/:eventId/:sessionId',
-    wrapHandler(handleDeleteSession, ({ params }) => {
+    wrapHandler(deleteSession, ({ params }) => {
       broadcaster.sessionRemoved(params.eventId, params.sessionId)
     })
   )

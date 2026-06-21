@@ -1,6 +1,9 @@
 import { getBackendApi } from './lib/api/backend-api.js'
+import { cfbInitialSessionData } from './lib/events.js'
 
 export class CfbSessionLoader extends HTMLElement {
+  static elementName = 'cfb-session-loader'
+
   static get observedAttributes() {
     return ['data-event-id', 'data-reload-token']
   }
@@ -31,13 +34,8 @@ export class CfbSessionLoader extends HTMLElement {
       const sessions = await getBackendApi().getSessions(eventId)
       this.#setStatus('done', `${sessions.length} sessions fetched`)
 
-      this.dispatchEvent(
-        new CustomEvent('sessionsFetched', {
-          bubbles: true,
-          composed: true,
-          detail: { eventId, sessions },
-        })
-      )
+      // Change from step-7 is that this no longer stores data to IndexedDB, but sends a custom event to
+      this.dispatchEvent(cfbInitialSessionData(eventId, sessions))
     } catch (err) {
       this.#setStatus('error', `failed: ${err.message}`)
 

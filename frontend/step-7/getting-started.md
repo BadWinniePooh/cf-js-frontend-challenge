@@ -6,7 +6,7 @@ Run these steps once **before** the [Step 7 README](./README.md) (Connections an
 
 Work on a branch so feedback and history stay easy to follow.
 
-## 2) Serve from the `frontend/` folder (important)
+## 2) Serve from the `frontend/` folder
 
 [`index.html`](./index.html) links **`../styles.css`**. Serve the **`frontend`** directory as the site root (not only `step-7/`), then open **`step-7/index.html`**.
 
@@ -16,7 +16,7 @@ From **`frontend/`**:
 npx http-server -o .
 ```
 
-Then browse to **`/step-7/index.html`** (exact path depends on the tool; with `-o` you may need to navigate once).
+Then browse to **`/step-7/index.html`** 
 
 **`index.js`** loads ES modules from **`step-7/`** and imports **`../step-1/`** … **`../step-6/`**. Browsers block modules on **`file://`**.
 

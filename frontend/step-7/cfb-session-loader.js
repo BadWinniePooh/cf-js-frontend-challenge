@@ -1,6 +1,8 @@
 import { getBackendApi } from './lib/api/backend-api.js'
 
 export class CfbSessionLoader extends HTMLElement {
+  static elementName = 'cfb-session-loader'
+
   static get observedAttributes() {
     // TODO: have some attribute(s) for reacting to changes triggered by the orchestrator / choosing the eventId
     return []
@@ -8,8 +10,6 @@ export class CfbSessionLoader extends HTMLElement {
 
   connectedCallback() {
     this.#setStatus('initialized', `fetching sessions for "${this.dataset.eventId}"…`)
-    // TODO: Load sessions for initial eventId
-
   }
 
   attributeChangedCallback(name, oldValue, newValue) {

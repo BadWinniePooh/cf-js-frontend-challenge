@@ -4,6 +4,8 @@ import { getBackendApi } from './lib/api/backend-api.js'
 const scheduleStore = createScheduleStore()
 
 export class CfbScheduleLoader extends HTMLElement {
+  static elementName = 'cfb-schedule-loader'
+
   static get observedAttributes() {
     return ['data-event-id']
   }

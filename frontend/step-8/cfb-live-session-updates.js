@@ -1,89 +1,63 @@
+import { cfbSessionRemoved, cfbSessionUpdated } from './lib/events.js'
+
 export class CfbLiveSessionUpdates extends HTMLElement {
   static elementName = 'cfb-live-session-updates'
 
-  /** @type {WebSocket | null} */
-  #socket = null
+  #socket = null // This is the websocket
+  #wsBaseUrl = null
+  #eventId = null
 
   static get observedAttributes() {
-    return ['data-event-id', 'data-url', 'data-reload-token']
+    return ['data-event-id', 'data-url']
   }
 
   connectedCallback() {
     this.#connect()
+    this.#wsBaseUrl = this.dataset.url.replace(/\/+$/, '') // to remove trailing slash
+    this.#eventId = this.dataset.eventId
+    if(this.#eventId && this.#wsBaseUrl) {
+      // Connect if you know both
+      this.#connect()
+    }
   }
 
   disconnectedCallback() {
-    this.#socket?.close()
-    this.#socket = null
+    // TODO: close WebSocket connection
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return
-    if (name === 'data-reload-token') return
-    if (name === 'data-event-id' || name === 'data-url') {
+    if (name === 'data-url' && newValue) {
+      this.#wsBaseUrl = newValue.replace(/\/+$/, '')
+    }
+    if (name === 'data-event-id') {
+      this.#eventId = newValue
+    }
+    if(this.#eventId && this.#wsBaseUrl) {
+      // Connect if you know both
       this.#connect()
     }
   }
 
   #connect() {
-    this.#socket?.close()
-    this.#socket = null
 
-    const eventId = this.dataset.eventId
-    const baseUrl = this.dataset.url
-    if (!eventId || !baseUrl) {
-      this.#setStatus('error', 'missing data-event-id or data-url')
-      return
-    }
+    // TODO: connect to WebSocket
 
-    const wsUrl = `${String(baseUrl).replace(/\/+$/, '')}/${encodeURIComponent(eventId)}`
-    this.#setStatus('connecting', `connecting to ${wsUrl}…`)
-
-    const socket = new WebSocket(wsUrl)
-    this.#socket = socket
-
-    socket.addEventListener('open', () => {
-      this.#setStatus('open', `live feed open for "${eventId}"`)
-    })
-
-    socket.addEventListener('message', (e) => {
-      this.#onMessage(e)
-    })
-
-    socket.addEventListener('close', () => {
-      this.#setStatus('closed', `live feed closed for "${eventId}"`)
-    })
-
-    socket.addEventListener('error', () => {
-      this.#setStatus('error', `live feed error for "${eventId}"`)
-    })
+    // TODO: implement the 4 lifecycle event handlers of WebSocket
   }
 
   #onMessage(event) {
     const { type, session, sessionId, eventId } = JSON.parse(event.data)
 
-    if (type === 'sessionUpdated' && session) {
-      this.dispatchEvent(
-        new CustomEvent('liveSessionUpdated', {
-          bubbles: true,
-          composed: true,
-          detail: { eventId: session.eventId, session },
-        })
-      )
-      return
-    }
+    // TODO: Here your job is to send the event up the DOM, based on the type of the event received:
+    // So, either send
+    // this.dispatchEvent(cfbSessionUpdated(session.eventId, session))
 
-    if (type === 'sessionRemoved' && sessionId && eventId) {
-      this.dispatchEvent(
-        new CustomEvent('liveSessionRemoved', {
-          bubbles: true,
-          composed: true,
-          detail: { eventId, sessionId },
-        })
-      )
-    }
+    // or
+    // this.dispatchEvent(cfbSessionRemoved(eventId, sessionId))
   }
 
+  // Helper method for UI to see what's happening
   #setStatus(state, message) {
     this.dataset.state = state
     this.textContent = `[live-updates] ${message}`

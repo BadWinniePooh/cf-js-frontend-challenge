@@ -2,6 +2,8 @@ import { cfbSessionCreated } from './lib/events.js'
 import { generateRandomSession } from './lib/generate-random-session.js'
 
 export class CfbSessionGenerator extends HTMLElement {
+  static elementName = 'cfb-session-generator'
+
   connectedCallback() {
     this.innerHTML = `
             <button class="cfb-session-generator__btn">

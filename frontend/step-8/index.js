@@ -8,13 +8,13 @@ import { CfbSessionCard } from '../step-5/cfb-session-card.js'
 import { CfbSessionType } from '../step-6/cfb-session-type.js'
 import { CfbEditSessionForm } from '../step-6/cfb-edit-session-form.js'
 import { CfbAddSessionForm } from '../step-6/cfb-add-session-form.js'
+import { CfbHeader } from '../step-7/cfb-header.js'
+import { CfbScheduleLoader } from '../step-7/cfb-schedule-loader.js'
 import { CfbBoardOrchestrator } from './cfb-board-orchestrator.js'
-import { CfbScheduleLoader } from './cfb-schedule-loader.js'
 import { CfbSessionLoader } from './cfb-session-loader.js'
 import { CfbSessionStoreUpdates } from './cfb-session-store-updates.js'
 import { CfbLiveSessionUpdates } from './cfb-live-session-updates.js'
 import { CfbInitiateARandomSessionCreation } from './cfb-initiate-a-random-session-creation.js'
-import { CfbHeader } from './cfb-header.js'
 import { CfbUpdatesSessions } from './cfb-updates-sessions.js'
 import { configureBackendApi } from './lib/api/backend-api.js'
 
@@ -28,16 +28,16 @@ customElements.define(CfbSessionCard.elementName, CfbSessionCard)
 customElements.define(CfbEditSessionForm.elementName, CfbEditSessionForm)
 customElements.define(CfbSessionType.elementName, CfbSessionType)
 customElements.define(CfbAddSessionForm.elementName, CfbAddSessionForm)
-customElements.define('cfb-board-orchestrator', CfbBoardOrchestrator)
-customElements.define('cfb-schedule-loader', CfbScheduleLoader)
-customElements.define('cfb-session-loader', CfbSessionLoader)
+customElements.define(CfbBoardOrchestrator.elementName, CfbBoardOrchestrator)
+customElements.define(CfbScheduleLoader.elementName, CfbScheduleLoader)
+customElements.define(CfbSessionLoader.elementName, CfbSessionLoader)
 customElements.define(CfbSessionStoreUpdates.elementName, CfbSessionStoreUpdates)
 customElements.define(CfbLiveSessionUpdates.elementName, CfbLiveSessionUpdates)
 customElements.define(
   CfbInitiateARandomSessionCreation.elementName,
   CfbInitiateARandomSessionCreation
 )
-customElements.define('cfb-header', CfbHeader)
+customElements.define(CfbHeader.elementName, CfbHeader)
 customElements.define('cfb-updates-sessions', CfbUpdatesSessions)
 
 document.addEventListener('DOMContentLoaded', () => {

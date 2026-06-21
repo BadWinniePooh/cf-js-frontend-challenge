@@ -1,4 +1,6 @@
 export class CfbBoardOrchestrator extends HTMLElement {
+  static elementName = 'cfb-board-orchestrator'
+
   /** @type {Set<string>} */
   #loaded = new Set()
   #currentEventId = null
@@ -46,16 +48,8 @@ export class CfbBoardOrchestrator extends HTMLElement {
 
   #onSessionsBackendUpdated = (e) => {
     const { eventId, updatedAt } = e.detail
-    this.#notifySessionReloaders(eventId, updatedAt)
-    this.#currentEventId = eventId
-    this.#loaded.add('scheduleLoaded')
-  }
-
-  #notifySessionReloaders(eventId, updatedAt) {
-    this.querySelectorAll('.listens-session-reloads').forEach((el) => {
-      el.dataset.eventId = eventId
-      el.setAttribute('data-reload-token', String(updatedAt))
-    })
+    console.log('sessionsBackendUpdated', eventId, updatedAt)
+    console.log('this could show a toast or something')
   }
 
   #notifyScheduleOnly(eventId, updatedAt) {
