@@ -173,17 +173,18 @@ When both are done, move on to **Concrete practice**.
 
 ### Files to read (and trace or implement)
 
-| File                                                                                                                          | Role                                                                                                |
-|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| [`cfb-schedule-loader.js`](./cfb-schedule-loader.js)                                                                          | Schedule **`fetch`** path, IDB write, **`scheduleLoaded`** / **`loaderError`**                      |
-| [`cfb-session-loader.js`](./cfb-session-loader.js)                                                                            | Sessions **`fetch`** path, **`data-reload-token`**, **`sessionsLoaded`**                            |
-| [`cfb-board-orchestrator.js`](./cfb-board-orchestrator.js)                                                                    | Waits for loader events; sets **`data-latest-updated-at`**; extension: **`sessionsBackendUpdated`** |
-| [`../step-4/cfb-schedule.js`](../step-4/cfb-schedule.js)                                                                      | **`data-latest-updated-at`** → pull sessions from IDB → render                                      |
-| [`lib/api/backend-api.js`](./lib/api/backend-api.js)                                                                          | **`fetch`** + **`res.ok`** + JSON                                                                   |
-| [`lib/store/session-store.js`](./lib/store/session-store.js) / [`lib/store/schedule-store.js`](./lib/store/schedule-store.js) | Persistence helpers loaders call                                                                    |
-| [`mocks/handlers.js`](./mocks/handlers.js)                                                                                    | MSW **`http.get`** handlers keyed by **`eventId`**                                                  |
-| [`index.js`](./index.js)                                                                                                      | **`configureBackendApi`**, optional **`worker.start()`**, element registration                      |
-| [`index.html`](./index.html)                                                                                                  | Loader markup, **`.listens-schedule-updates`**, event switcher buttons                              |
+| File                                                           | Role                                                                                                |
+|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| [`cfb-schedule-loader.js`](./cfb-schedule-loader.js)           | Schedule **`fetch`** path, IDB write, **`scheduleLoaded`** / **`loaderError`**                      |
+| [`cfb-session-loader.js`](./cfb-session-loader.js)             | Sessions **`fetch`** path, **`data-reload-token`**, **`sessionsLoaded`**                            |
+| [`cfb-board-orchestrator.js`](./cfb-board-orchestrator.js)     | Waits for loader events; sets **`data-latest-updated-at`**; extension: **`sessionsBackendUpdated`** |
+| [`lib/api/backend-api.js`](./lib/api/backend-api.js)           | implement the backend calls here.                                                                   |
+| [`lib/store/schedule-store.js`](./lib/store/schedule-store.js) | IndexedDB for schedule (it's not actually used in this)                                             |
+| [`../step-4/cfb-schedule.js`](../step-4/cfb-schedule.js)       | **`data-latest-updated-at`** → pull sessions from IDB → render                                      |
+| [`../step-4/session-store.js`](../step-4/session-store.js)     | IndexedDB for sessions                                                                              |
+| [`../step-4/scheule.js`](./step-4/schedule.js)                 | Schedule implementation                                                                             |
+| [`index.js`](./index.js)                                       | **`configureBackendApi`**, element registration                                                     |
+| [`index.html`](./index.html)                                   | Loader markup, **`.listens-schedule-updates`**, event switcher buttons                              |
 
 This folder ships as a **reference implementation** - your job is to **understand and demo** the pipeline, then adapt or rebuild in your own branch if your facilitator assigns implementation from scratch.
 
