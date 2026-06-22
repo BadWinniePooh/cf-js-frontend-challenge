@@ -25,17 +25,12 @@ export class CfbSessionStore extends HTMLElement {
   }
 
   #onSessionCreated = async (e) => {
-    await saveSessions([e.detail])
-    await this.#broadcastSessions()
+    // TODO: Save session into IndexedDB
+    // TODO: Dispatch cfbSessionsLoadedToIDB
   }
 
   #onSessionRemoved = async (e) => {
-    await deleteSession(e.detail.sessionId)
-    await this.#broadcastSessions()
-  }
-
-  async #broadcastSessions() {
-    const sessions = await getAllSessions()
-    this.dispatchEvent(cfbSessionsLoadedToIDB())
+    // TODO: Delete session from IndexedDB
+    // TODO: Dispatch cfbSessionsLoadedToIDB
   }
 }
