@@ -19,10 +19,9 @@ export class CfbSchedule extends HTMLElement {
   async attributeChangedCallback(name, oldValue, newValue) {
     if(oldValue === newValue) return
 
-    if (name === CfbSchedule.definedAttributes.latestUpdatedAt) {
-      this.#sessions = await getAllSessions()
-      this.#render()
-    }
+    // TODO: If the attribute name is 'data-latest-updated-at',
+    //       - retrieve all sessions from IndexedDB
+    //       - render the schedule
   }
 
   #render() {

@@ -17,8 +17,7 @@ export class CfbBoardOrchestrator extends HTMLElement {
     // 🚧 Instead of passing the data around, we just inform the elements that they need to update.
     // ✨ Here: you should update the data-latest-updated-at attribute on all cfb-updates-schedule elements.
     const now = Date.now()
-    this.querySelectorAll('.listens-schedule-updates').forEach(schedule => {
-      schedule.setAttribute('data-latest-updated-at', now)
-    })
+    // HINT: use select element(s) with class 'listens-schedule-updates', and set the 'data-latest-updated-at'
+    //       attribute. for said element(s)
   }
 }

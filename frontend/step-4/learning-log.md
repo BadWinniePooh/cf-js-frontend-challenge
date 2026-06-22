@@ -1,6 +1,7 @@
 # Learning log - Step 4
 
-Use this file while you work through [Step 4 README](./README.md). When you finish the step, add your **key takeaway** in the [journey hub `learning-log.md`](../learning-log.md#step-4-key-takeaway).
+Use this file while you work through [Step 4 README](./README.md). When you finish the step, add your **key takeaway**
+in the [journey hub `learning-log.md`](../learning-log.md#step-4-key-takeaway).
 
 ---
 
@@ -17,7 +18,7 @@ _Solo, ~2 minutes. Answer **before** you read Concepts - a gut guess is fine._
 After Step 3, sessions lived in memory on the orchestrator. **What happens to the board if you refresh the page?**
 Why would putting sessions in **IndexedDB** change that?
 
-> 
+> ___ 
 
 _(You will revisit this in Conclusions.)_
 
@@ -35,7 +36,7 @@ step it **does not** hold session rows that way.
 **List what the orchestrator still does here vs Step 3.** Then answer: **what would be “too much” responsibility** for
 the orchestrator in a larger app? (One short paragraph.)
 
-> 
+> ___
 
 ---
 
@@ -45,24 +46,12 @@ the orchestrator in a larger app? (One short paragraph.)
 
 _Solo, ~3 minutes._
 
-In one or two sentences: what stayed the same in the **event-up / attribute-down** idea from Step 3, and 
-what changed now that **IndexedDB** exists?
+What do you think: In one or two sentences: what stayed the same in the **event-up / attribute-down** idea from Step 3,
+and what changes now that **IndexedDB** exists?
 
-> 
+> ___
 
----
-
-<a id="step-4-connections-surprise"></a>
-
-### Step 4 - Connections: Surprise (solo) or compare (pair)
-
-_~3 minutes._
-
-If solo: *The IndexedDB API detail that surprised me most was ___.*
-
-If you discussed with a peer: what will each of you try first in DevTools (**Application** tab)?
-
-> 
+_(You will revisit this in Conclusions.)_
 
 ---
 
@@ -72,13 +61,13 @@ If you discussed with a peer: what will each of you try first in DevTools (**App
 
 _Solo, ~2 minutes. Answer **A** or **B** - not both._
 
-**A)** Where else have you seen **client-side persistence** (mobile, desktop, another web app)? One line.
+**A)** Where else have you seen used for **client-side persistence** (mobile, desktop, another web app)? One line.
 
-> 
+>
 
 **B)** When is **localStorage** enough, and when would you reach for **IndexedDB** instead? One or two sentences.
 
-> 
+>
 
 ---
 
@@ -94,7 +83,7 @@ _After reading the README Concepts sections - ~1 minute._
 
 In two bullets: **who reads IndexedDB** in this step’s architecture - and **who must not** mix UI and raw IDB calls?
 
-> 
+> ___
 
 ---
 
@@ -102,21 +91,42 @@ In two bullets: **who reads IndexedDB** in this step’s architecture - and **wh
 
 ### Step 4 - Concept check: Mini quiz
 
-_Answer from memory first; then peek at [`session-store.js`](./session-store.js) or [`events.js`](./events.js) if needed._
+_Answer from memory first; then peek at [`session-store.js`](./session-store.js) or [`events.js`](./events.js) if
+needed._
 
-1. In this repo, what **`DB_NAME`** constant does [`session-store.js`](./session-store.js) use when opening the database?
+1. In this repo, what **`DB_NAME`** constant does [`session-store.js`](./session-store.js) use when opening the
+   database?
 
-   > 
+   > ___
 
-2. Why keep **`openDb` / `saveSessions` / `getAllSessions`** in **`session-store.js`** instead of calling 
+2. Why keep **`openDb` / `saveSessions` / `getAllSessions`** in **`session-store.js`** instead of calling
    **`indexedDB.open`** directly inside **`cfb-schedule`**?
 
-   > 
+   > ___
 
-3. After data is ready in IndexedDB, **`cfb-session-loader`** dispatches which **event type string**? 
+3. After data is ready in IndexedDB, **`cfb-session-loader`** dispatches which **event type string**?
    *(See [`events.js`](./events.js).)*
 
-   > 
+   > ___
+
+---
+
+[← Back to README - 3) Concrete practice](./README.md#3-concrete-practice)
+
+---
+
+### Step 3 - One minute review
+
+_Solo, ~5 minutes._
+
+Make 3 questions about the IndexDB architecture, event flow and the responsibilities of components - and how those
+relate to Atomic Design. Ask the questions from your team / facilitator.
+
+**My questions**
+
+1. ___ 
+2. ___ 
+3. ___ 
 
 ---
 
@@ -130,14 +140,14 @@ _Answer from memory first; then peek at [`session-store.js`](./session-store.js)
 
 _Answer in your log - short phrases are enough._
 
-1. Name **two files** that **import** from **`session-store.js`** (or list two consumers of **`getAllSessions`**).
+1. Name **two files** that **import** from **`session-store.js`**
 
-   > 
+   > ___
 
 2. What attribute does **`cfb-board-orchestrator`** set on **`listens-schedule-updates`** schedules, and why is it a
-  **timestamp** rather than the full session array?
+   **timestamp** rather than the full session array?
 
-   > 
+   > ___
 
 ---
 
@@ -149,11 +159,11 @@ _Short reflection._
 
 1. **Best thing so far in this journey** (one sentence):
 
-   > 
+   > ___
 
 2. **What could be improved** how can the whole journey be better (we're half-way):
 
-   > 
+   > ___
 
 ---
 
@@ -163,30 +173,10 @@ _Short reflection._
 
 _Look at your answer under “Refresh the page.” Update in one or two lines if needed._
 
-> 
+>
 
 ---
 
-[← Back to README - 3) Concrete practice](./README.md#3-concrete-practice)
+### Step 4 - Conclusions: Key takeaways
 
----
-
-<a id="step-4-facilitator-question"></a>
-
-### Step 4 - Question for your facilitator
-
-_Solo, ~5 minutes._
-
-Ask **one** question about **IndexedDB**, **Promises + IDB**, or **splitting storage from UI**. Paste their reply (or your notes) below.
-
-**My question**
-
-> 
-
-**Facilitator reply / notes**
-
-> 
-
----
-
-[← Journey hub (key takeaways)](../learning-log.md)
+Go to your journey hub and add your **key takeaways** from this step: [← Journey hub (key takeaways)](../learning-log.md)

@@ -12,7 +12,7 @@ in the learning log stay honest.
 ### Async / solo
 
 These challenges are written for **async, often solo** work. Use [your Step 3 learning log](./learning-log.md), a short
-message to your facilitator or team, or a brief sync when the README says “pair.” **Short timeboxes** matter more than 
+message to your facilitator or team, or a brief sync when the README says “pair.” **Short timeboxes** matter more than
 the format.
 
 ---
@@ -26,6 +26,7 @@ By the end of this step, you can:
   **`data-sessions`** down to `<cfb-schedule>`.
 - Explain why **`observedAttributes` + `attributeChangedCallback`** act like simple **parent → child** data binding for
   the schedule.
+- Implement event-driven pub/sub with bubbling events and orchestrator coordinating state changes based on the events.
 
 ---
 
@@ -240,6 +241,14 @@ Build so you can **show**:
 
 In [Question for your facilitator](./learning-log.md#step-3-concrete-facilitator-question), ask one real question and
 capture the answer.
+
+---
+
+### Question to your Facilitator
+
+In [your learning log](./learning-log.md#step-3---concrete-practice-question-to-your-facilitator), ask a question about
+the
+concrete challenge from your facilitator. Log the answer in your learning log.
 
 ---
 

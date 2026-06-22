@@ -32,6 +32,10 @@ export class CfbSessionCard extends HTMLElement {
       this.#sessionDetails = JSON.parse(newValue)
       this.#render(this.#sessionDetails)
     }
+
+    this.querySelectorAll('[data-action="remove"]').forEach(
+      it => it.addEventListener('click', this.#removeSession)//.bind(this))
+    )
   }
 
   disconnectedCallback() {
@@ -41,6 +45,10 @@ export class CfbSessionCard extends HTMLElement {
   // ── Render ────────────────────────────────────────────────────
 
   #render(sessionDetails) {
+    this.querySelectorAll('[data-action="remove"]').forEach(
+      it => it.removeEventListener('click', this.#removeSession.bind(this))
+    )
+
     const tags = sessionDetails.tags
       .map(tag => `<cfb-tag data-label="${tag.label}" data-color="${tag.color}"></cfb-tag>`)
 
@@ -89,6 +97,10 @@ export class CfbSessionCard extends HTMLElement {
     this.querySelector('[data-action="remove"]').addEventListener('click', () => {
       this.dispatchEvent(cfbSessionRemoved(this.#sessionDetails.id))
     })
+  }
+
+  #removeSession = (evt) => {
+    this.dispatchEvent(cfbSessionRemoved(this.#sessionDetails.id))
   }
 
   // ── Edit outcome handlers ─────────────────────────────────────

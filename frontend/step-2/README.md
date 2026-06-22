@@ -21,7 +21,8 @@ more than the format.
 
 By the end of this step, you can:
 
-- Build a **composite** custom element that outputs the same semantic card structure as [the static Step 0 board](../step-0/index.html).
+- Build a **composite** custom element that outputs the same semantic card structure
+  as [the static Step 0 board](../step-0/index.html).
 - **Compose** one or more `<cfb-tag>` atoms inside the card’s tags row.
 - Pass **structured session data** (including rich attendees) into the card and **re-render** when that input changes
 
@@ -40,7 +41,8 @@ Do these **in order**; capture answers in [your Step 2 learning log](./learning-
    tags row of the card.
 
 3. **Optional pair / async, ~3 min**  
-   [Surprise / compare](./learning-log.md#step-2-connections-surprise): hardest part of composing components - one sentence.
+   [Surprise / compare](./learning-log.md#step-2-connections-surprise): hardest part of composing components - one
+   sentence.
 
 4. **Solo, ~2 min - Topic link**  
    [Topic link](./learning-log.md#step-2-topic-link): answer **A** or **B**.
@@ -79,14 +81,16 @@ Do these **in order**; capture answers in [your Step 2 learning log](./learning-
 
 ### One-minute review (~1 min)
 
-After you have read the Concepts sections above, capture a quick note in [your learning log - One-minute review](./learning-log.md#step-2-concepts-one-minute) 
+After you have read the Concepts sections above, capture a quick note
+in [your learning log - One-minute review](./learning-log.md#step-2-concepts-one-minute)
 (Training from the Back of the Room: land the ideas before Myth or fact).
 
 ---
 
 ### Concept check - Myth or fact (~4 min)
 
-Complete [Myth or fact (composition + data)](./learning-log.md#step-2-myth-or-fact) in your learning log **before** you assume your implementation is done.
+Complete [Myth or fact (composition + data)](./learning-log.md#step-2-myth-or-fact) in your learning log **before** you
+assume your implementation is done.
 
 ---
 
@@ -98,8 +102,9 @@ Use **`data-session-details`** with JSON that matches the shape below. **Rich at
 (full name, e.g. for `aria-label`) and **`initials`** (visible text).
 
 ```html
+
 <cfb-session-card
-  data-session-details='{"title":"Opening Keynote","tags":[{"label":"Keynote","color":"blue"}],"attendees":[{"name":"Aino Korhonen","initials":"AK"},{"name":"Jess Smith","initials":"JS"}]}'>
+        data-session-details='{"title":"Opening Keynote","tags":[{"label":"Keynote","color":"blue"}],"attendees":[{"name":"Aino Korhonen","initials":"AK"},{"name":"Jess Smith","initials":"JS"}]}'>
 </cfb-session-card>
 ```
 
@@ -107,23 +112,35 @@ Build `<cfb-session-card>` so you can **show** all of the following:
 
 - [x] Create `cfb-session-card.js` and register **`cfb-session-card`** from `index.js` (alongside `<cfb-tag>` from
   Step 1 - see `index.js` import pattern).
-- [ ] Render a card that visually matches the **static** session cards in [`../step-0/index.html`](../step-0/index.html):
-  header with **title** and **`⋯` menu** control, **tags row** using **`<cfb-tag>`**, **footer** with attendee
-  **initials** in `cfb-avatar` atoms.
+- [ ] Render a card that visually matches the **static** session cards in
+  [`../step-0/index.html`](../step-0/index.html): header with **title** and **`⋯` menu** control, **tags row** using
+  **`<cfb-tag>`**, **footer** with attendee **initials** in `cfb-avatar` atoms.
 - [ ] A good pattern is to hard-code the HTML structure then starting to make it dynamic. (copy from the static board)
 - [ ] Hold session data in a **small internal structure** first if you like, then drive the UI from a parsed
   **`data-session-details`** JSON attribute.
 - [ ] Use **`connectedCallback`** for initial render path.
-- [ ] Use **`observedAttributes` + `attributeChangedCallback`** so changing `data-session-details` **re-renders** the card.
+- [ ] Use **`observedAttributes` + `attributeChangedCallback`** so changing `data-session-details` **re-renders** the
+  card.
 - [ ] Session JSON shape (minimum fields used in this step):
 
 ```json
 {
   "title": "Opening Keynote",
-  "tags": [{ "label": "Keynote", "color": "blue" }],
+  "tags": [
+    {
+      "label": "Keynote",
+      "color": "blue"
+    }
+  ],
   "attendees": [
-    { "name": "Aino Korhonen", "initials": "AK" },
-    { "name": "Jess Smith", "initials": "JS" }
+    {
+      "name": "Aino Korhonen",
+      "initials": "AK"
+    },
+    {
+      "name": "Jess Smith",
+      "initials": "JS"
+    }
   ]
 }
 ```
@@ -135,13 +152,20 @@ Build `<cfb-session-card>` so you can **show** all of the following:
 
 **Definition of done**
 
-- Editing **`data-session-details`** in DevTools (or in HTML) updates the visible title, tags, and avatars without a 
+- Editing **`data-session-details`** in DevTools (or in HTML) updates the visible title, tags, and avatars without a
   full page reload.
 - At least **two** `<cfb-tag>` atoms render from session `tags`.
 - Avatars use **`initials`** visibly and expose **`name`** where appropriate (e.g. `aria-label` on the element).
 
-In [Concrete practice: myth or fact for the facilitator](./learning-log.md#step-2-concrete-facilitator-myth-fact), write one question of your own and 
-**ask your facilitator**; capture the reply in the log.
+In [Concrete practice: myth or fact for the facilitator](./learning-log.md#step-2-concrete-facilitator-myth-fact), write
+one question of your own and **ask your facilitator**; capture the reply in the log.
+
+---
+
+### One minute review
+
+In [your learning log](./learning-log.md#step-2-one-minute-review), review what surprised you on building your first
+molecule
 
 ---
 
@@ -175,7 +199,8 @@ Add **one or two sentences** in the [journey hub `learning-log.md`](../learning-
 ### Import `<cfb-tag>` from Step 1
 
 `index.js` should register **`cfb-tag`** before **`cfb-session-card`** so tags inside the card upgrade correctly.
-This repo imports from [`../step-1/cfb-tag.js`](../step-1/cfb-tag.js) - keep `step-1/` beside `step-2/` or adjust the path.
+This repo imports from [`../step-1/cfb-tag.js`](../step-1/cfb-tag.js) - keep `step-1/` beside `step-2/` or adjust the
+path.
 
 ### Skeleton `innerHTML`
 

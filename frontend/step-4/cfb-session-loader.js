@@ -1,4 +1,4 @@
-import { getAllSessions, saveSessions } from './session-store.js'
+import { getAllSessions, saveSessions, SEED_SESSIONS } from './session-store.js'
 import { cfbSessionsLoadedToIDB } from './lib/events.js'
 
 // Single responsibility: load all sessions from the server - store to IndexedDB.
