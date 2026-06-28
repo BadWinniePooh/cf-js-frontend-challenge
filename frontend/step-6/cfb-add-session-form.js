@@ -2,6 +2,7 @@ export class CfbAddSessionForm extends HTMLElement {
   static elementName = 'cfb-add-session-form'
 
   connectedCallback() {
+    console.log('Copy cfb-add-session-form.js from step-5!!!')
     this.#render()
   }
 
@@ -15,7 +16,7 @@ export class CfbAddSessionForm extends HTMLElement {
             </button>
             <dialog class="cfb-add-session-form__dialog" aria-label="Add a new session">
                 <div class="cfb-add-session-form__card">
-                    <p>Add Form here</p>
+                    <p>Copy this whole page from Step-5</p>
                 </div>
             </dialog>
 `

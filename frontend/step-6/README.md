@@ -4,16 +4,21 @@ In Step 5 you built add/edit forms with **native** controls and **`FormData`**. 
 **session-type** radio group with **`<cfb-session-type>`** - a **form-associated** custom element - so the **same**
 submit path, validation, and **`cfb-session-created`** / update pipeline stay intact.
 
+We do this to generate a custom html element that looks like a form control.
+
 The field must still **`name="session-type"`**, honour **`required`**, show up in **`FormData`**, and work in **both**
-add and edit dialogs - without a **hidden** native radio as a cheat; the value is carried through **`ElementInternals`**.
+add and edit dialogs - without a **hidden** native radio as a cheat; the value is carried through
+**`ElementInternals`**.
+
+To begin with, copy your add/edit session froms from [step-5](../step-5).
 
 > **Before you start:** branch, HTTP server, console clean - see [getting-started.md](./getting-started.md).
 
 ### Async / solo
 
 These challenges are written for **async, often solo** work. Use [your Step 6 learning log](./learning-log.md), a short
-message to your facilitator or team, or a brief sync when the README says “compare.” **Short timeboxes** matter more than
-the format.
+message to your facilitator or team, or a brief sync when the README says “compare.” **Short timeboxes** matter more
+than the format.
 
 ---
 
@@ -21,12 +26,11 @@ the format.
 
 By the end of this step, you can:
 
-- Build **`<cfb-session-type>`** with **`static formAssociated = true`** and **`attachInternals()`** so it participates
-  in **parent** **`<form>`** lifecycle and **`FormData`**.
-- Drive **`required`** / **`valueMissing`** through **`setValidity`** and surface errors with **`reportValidity`** in line
-  with the parent form’s **`checkValidity()`** / **`reportValidity()`** flow.
-- **Preselect** session type in **edit** (attribute or property) and clear correctly on **reset** / **`formResetCallback`**.
-- Explain how **one** swapped field keeps Step 5’s **store → schedule** behaviour unchanged.
+- Explain the lifecycle of submitting form (from cliking 'submit' to dispatching the custom element)
+- Build a custom form element
+- Demonstrate how custom form element can be validated, errors reported to the user and follow the natural flow of form
+  submission
+- Reset the form on form close
 
 ---
 
@@ -35,7 +39,7 @@ By the end of this step, you can:
 Do these **in order**; capture answers in [your Step 6 learning log](./learning-log.md).
 
 1. **Solo, ~2 min - Think → ink (FormData guess)**  
-   [FormData guess](./learning-log.md#step-6-connections-formdata-guess) *(revisit in [Loop back](./learning-log.md#step-6-loop-back-formdata-guess)).*
+   [FormData guess](./learning-log.md#step-6-connections-formdata-guess)
 
 2. **Solo, ~3 min - Bridge from Step 5**  
    [Bridge from Step 5](./learning-log.md#step-6-bridge-step-5).
@@ -50,50 +54,153 @@ Do these **in order**; capture answers in [your Step 6 learning log](./learning-
 
 ## 2) Concepts
 
+### Using form-associated custom elements
+
+The change for this step is to change the radio button group of 'session-type's, into a custom element that takes the
+logic to itself. The `CfbSessionType` is partly impelmented to show a bit more styling, just to showcase how this could
+be used.
+
+The change we want to showcase is change
+
+```HTML
+
+<fieldset class="cfb-add-session-form__group">
+    <legend>Session type *</legend>
+    <label class="cfb-add-session-form__radio">
+        <input type="radio" name="session-type" value="Talk" required/> Talk
+    </label>
+    <label class="cfb-add-session-form__radio">
+        <input type="radio" name="session-type" value="Workshop"/> Workshop
+    </label>
+    <label class="cfb-add-session-form__radio">
+        <input type="radio" name="session-type" value="Keynote"/> Keynote
+    </label>
+    <label class="cfb-add-session-form__radio">
+        <input type="radio" name="session-type" value="Lightning Talk"/> Lightning Talk
+    </label>
+</fieldset>
+```
+
+to
+
+```HTML
+
+<fieldset class="cfb-add-session-form__group">
+    <legend>Session type *</legend>
+    <cfb-session-type name="session-type" required></cfb-session-type>
+</fieldset>
+```
+
+To do this, we need to learn the concept of form-associated custom elements.
+
 ### Form-associated custom elements
 
-Making custom elements for a form is possible with WebComponents. What we'll learn now is how that is done. It requires
+Making custom elements for a form is possible with Web Components. What we'll learn now is how that is done. It requires
 **two** things:
+
+- The element must be made to _act like a form element_ in the browser. This is done by setting a static attribute
+  `formAssociated` to be `true`.
+- and you need to call `this.attachInernals()` as the bridge between the data and the form behavior.
+
+When these things are done, you can introduce element-specific logic (validation, reporting, and setting the value) by
+using methods like `setFormValue`, `setValidity` and `reportValidity`
 
 - **`static formAssociated = true`** tells the browser this element can participate in **form submission**, **reset**,
   and **constraint validation** like a built-in control.
 - **`this.attachInternals()`** returns **`ElementInternals`** - the bridge for **`setFormValue`**, **`setValidity`**,
   **`reportValidity`**, and **form callback** hooks.
 
-### Value and `FormData`
+### `Value` and `FormData`
 
-Setting value for the form (for FormData) is done with **`ElementInternals`**
+When calling `this.attachInternals()`, it returns a concept of **`ElementInternals`**, which makes you able to:
 
-- Call **`internals.setFormValue(value)`** when the user selects a tile; use **`null`** (or clear appropriately) when
-  there is **no** value so the field behaves like an empty control in **`FormData`**.
-- The **`name`** attribute on **`<cfb-session-type>`** is what **`FormData`** uses as the key - same contract as the old
-  radios.
+- set the value of the custom form element with `internals.setFormValue(value)`, where value is the value of
+  `data-value` of the button.
+- set the value to **`null`** if none is selected.
+- See also, that the `name` attribute of the form is defined for the `cfb-session-type` element, and not within this
+  component. This is how **`FormData`** maps the value of the element to the collection of Form Data elements.
+
+### Inner HTML of the new component
+
+The inner HTML of the form element is:
+
+```HTML
+
+<div class="cfb-session-type__group" role="radiogroup" aria-label="Session type">
+    ${OPTIONS.map(t => `
+    <button type="button" role="radio" class="cfb-session-type__tile"
+            data-value="${escapeAttr(t.value)}"
+            aria-checked="false"
+            tabindex="-1">
+        <span class="cfb-session-type__emoji" aria-hidden="true">${t.emoji}</span>
+        <span class="cfb-session-type__label">${t.label}</span>
+    </button>
+    `).join('')}
+</div>
+```
+
+What needs to be implemented is an event listener for 'click' when a user 'clicks' any of the buttons. As usual, this
+can be done on the `button` level, or it can also be registerd for the `cfb-session-type` element (when the handler only
+needs to find which _tile_ was actually clicked.
+
+After finding the element, it only needs to set the value to `buttonElement.dataset.value`.
 
 ### Validation
 
-For built-in browser validation, you must use **`setValidity`** and **`reportValidity`**:
+One of the core learnings for this session is to learn how to integrate into the 'submit' flow of browsers.
 
-- When **`required`** is set and nothing is selected, use **`setValidity({ valueMissing: true }, '…message…')`** so the
-  browser’s validation model matches native controls.
-- Clear validity with **`setValidity({})`** when a selection is valid.
-- **`reportValidity()`** on the **internals** (or coordination with the **form**’s **`reportValidity()`**) surfaces the
-  native error UI - keep one clear path so users are not double-spammed.
+### What happens when you submit.
 
-### Reset, disabled, edit
+In [Step 5 tips](../step-5/tips.md#what-happens-when-user-presses-submit), we learned a simplified version of the '
+submit' flow of forms. It is accurate in many cases, but there are exceptions to the rule. For example validation step
+is not run at all if:
 
-- Implement **`formResetCallback()`** (and **`formDisabledCallback(disabled)`** if you support disabled forms) so dialog
-  close / **`form.reset()`** does not leave stale tiles or validity.
-- For **edit**, mirror **`<input>`**: reflect **`value`** from an attribute or property so the correct tile is selected
-  before the user interacts.
+- if form has `novalidate` attribute
+- if form has a `button type="button"` (instead of `type="submit""`) - and there is custom JS that calls
+  `form.submit()` -> then no implicit validation happens.
+- `form.submit()` in general bypasses validation - but `form.requestSubmit()` does work like a real click, running
+  validations etc.
+
+In short - if the flow from 'clicking submit' follows the 'default' flow, the validations are run. This is crucial for
+the custom form elements: If the custom element sets the validity of the element, that validation is part of the
+_validation flow_ of the submit flor.
+
+**Meaning**: If the custom component defines:
+
+```javascript
+this.#internals.setValidity({ valueMissing: true }, "Please select the type")
+```
+
+, then on the validation phase, if the set first parameter is not `{}`, it will show the custom error defined in this
+line.
+
+To make sure the the validation always happens, in the `#submit` handler of the form, you can have the following piece
+of code, then the validation logic is guaranteed to run.
+
+```javascript
+if (!form.checkValidity()) {
+  form.reportValidity()
+  return
+}
+```
+
+### Integrate the custom element to basic form behavior.
+
+The steps needed to be done for this step are:
+
+- validate the validity of `cfb-session-type` and explicity set that with `setValidity()` function
+- define `get value()` for `cfb-session-type` so that FormData integration works
+- explicity check validity & report validity in the form.
 
 ### No hidden radio fallback
 
-- The **session-type** value must come from **`setFormValue`** on your custom element - **not** from a shadowed
-  **`<input type="hidden">`** pretending to be the control. That keeps the learning goal honest.
+- The **session-type** value must come from **`this.#internals.setFormValue()`** on your custom element - **not** from a
+  shadowed **`<input type="hidden">`** pretending to be the control. That keeps the learning goal honest.
 
 ### End-to-end flow (reference)
 
 Legend:
+
 - ✅ This is already provided
 - 🚧 Partly done, part of this exercise
 - ✨ New features, core of the exercise
@@ -215,6 +322,10 @@ and capture the answer.
 
 ---
 
+Go to [Learning Log](./learning-log.md#step-5---concrete-practice-think-it-and-ink-it) and do the few reflections.
+
+---
+
 ## 4) Conclusions
 
 ### 1) Quick check
@@ -242,71 +353,18 @@ Add **one or two sentences** in the [journey hub `learning-log.md`](../learning-
 
 ---
 
-## Tips
-
-### Make the element form-associated
-
-```js
-class CfbSessionType extends HTMLElement {
-  static formAssociated = true
-
-  constructor() {
-    super()
-    this._internals = this.attachInternals()
-  }
-}
-```
-
-Without **`formAssociated`** + **`attachInternals()`**, the element is invisible to the form.
-
-### Write value to `FormData`
-
-```js
-this._internals.setFormValue(this._value ?? null)
-```
-
-Use **`null`** when no value is selected so the field is omitted or empty in the form’s model, matching how you treat
-“no selection”.
-
-### Required validation with a custom message
-
-```js
-if (this.required && !this._value) {
-  this._internals.setValidity(
-    { valueMissing: true },
-    'Please select a session type.'
-  )
-} else {
-  this._internals.setValidity({})
-}
-```
-
-Pair this with the parent **`form.checkValidity()`** / **`form.reportValidity()`** so submit behaviour matches native
-controls.
-
-### Reset behaviour
-
-```js
-formResetCallback()
-{
-  this._value = ''
-  this._internals.setFormValue(null)
-  this._internals.setValidity({})
-  this.render()
-}
-```
-
-Implement lifecycle callbacks early; they prevent subtle bugs in edit/reset flows.
-
----
-
 ## Extras
 
 If you finish early:
 
+### Reset, disabled, edit
+
+- [ ] Implement `formResetCallback` to empty the form when closing the dialog.
+- [ ] Implement the same custom component for the 'edit flow'
 - [ ] React to **`required`** dynamically in **`attributeChangedCallback`** and re-sync validity.
 - [ ] Custom validation copy via **`setValidity`** for more than **`valueMissing`**.
-- [ ] **Keyboard**: **`tabIndex`**, **arrow** keys between tiles, **Enter** / **Space** to select; expose **`aria-selected`** / roles appropriately.
+- [ ] **Keyboard**: **`tabIndex`**, **arrow** keys between tiles, **Enter** / **Space** to select; expose *
+  *`aria-selected`** / roles appropriately.
 - [ ] Extract **tags** UI into its own form-associated or composite control and compare coupling trade-offs.
 - [ ] Add lightweight tests for keyboard + validation (see other steps’ test folders for patterns).
 
