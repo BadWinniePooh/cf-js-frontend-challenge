@@ -21,7 +21,6 @@ export class CfbAddSessionForm extends HTMLElement {
         this.#render()
         this.addEventListener('submit', this.#onSubmit)
         this.#trigger().addEventListener('click',  this.#onTriggerClick)
-        this.#dialog().addEventListener('click',   this.#onBackdropClick) // closes the dialog when clicking outside
         this.#dialog().addEventListener('close', this.#onDialogClose) // empties the form when closed
         // ✨ Add event listeners here,
     }
@@ -29,7 +28,6 @@ export class CfbAddSessionForm extends HTMLElement {
     disconnectedCallback() {
         this.removeEventListener('submit', this.#onSubmit)
         this.#trigger().removeEventListener('click',  this.#onTriggerClick)
-        this.#dialog().removeEventListener('click',   this.#onBackdropClick)
         this.#dialog().removeEventListener('close', this.#onDialogClose)
         // ✨ Remove event listeners here,
     }
@@ -42,13 +40,6 @@ export class CfbAddSessionForm extends HTMLElement {
     // ── Dialog open / close ───────────────────────────────────────
 
     #onTriggerClick = () => this.#dialog().showModal()
-
-    #onBackdropClick = (evt) => {
-        // closes the dialog when clicking outside
-        if (evt.target === this.#dialog()) this.#dialog().close()
-    }
-
-    #onClose = () => this.#dialog().close()
 
     #onDialogClose = () => {
         // ✨ empty the form
@@ -68,10 +59,10 @@ export class CfbAddSessionForm extends HTMLElement {
 
     #render() {
         this.innerHTML = `
-            <button class="cfb-add-session-form__trigger" aria-haspopup="dialog">
+            <button class="cfb-add-session-form__trigger" aria-haspopup="dialog" >
                 + Add Session
             </button>
-            <dialog class="cfb-add-session-form__dialog" aria-label="Add a new session">
+            <dialog class="cfb-add-session-form__dialog" aria-label="Add a new session" closedby="any">
                 <div class="cfb-add-session-form__card">
                     <p>Add Form here</p>
                 </div>
